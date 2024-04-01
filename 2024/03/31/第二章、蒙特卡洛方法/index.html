@@ -19,21 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="随机变量记作$X$,观测值记作$x$,观测值只是数字而已，没有随机性,如$P(X&#x3D;0)&#x3D;\frac{1}{2}$中为大写； 给定随机变量$X$,它的累积分布函数（即概率分布函数）（CDF）是函数$F_X:R\to[0,1]$,定义为：$$F_X(x)&#x3D;P(X\le x)$$  对于离散概率分布，有概率质量函数$p(x)$,假设随机变量$X$取值范围是集合$\chi$">
+    <meta name="description" content="随机变量记作\(X\),观测值记作\(x\),观测值只是数字而已，没有随机性,如\(P(X&#x3D;0)&#x3D;\frac{1}{2}\)中为大写； 给定随机变量\(X\),它的累积分布函数（即概率分布函数）（CDF）是函数\(F_X:R\to[0,1]\),定义为： \[F_X(x)&#x3D;P(X\le x)\] 对于离散概率分布，有概率质量函数\(p(x)\),假设随机变量\(X\)取值范围是集合\(\c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第二章、蒙特卡洛方法">
 <meta property="og:url" content="https://acoder123wew.github.io/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="LiWell&#39;s BLOG">
-<meta property="og:description" content="随机变量记作$X$,观测值记作$x$,观测值只是数字而已，没有随机性,如$P(X&#x3D;0)&#x3D;\frac{1}{2}$中为大写； 给定随机变量$X$,它的累积分布函数（即概率分布函数）（CDF）是函数$F_X:R\to[0,1]$,定义为：$$F_X(x)&#x3D;P(X\le x)$$  对于离散概率分布，有概率质量函数$p(x)$,假设随机变量$X$取值范围是集合$\chi$">
+<meta property="og:description" content="随机变量记作\(X\),观测值记作\(x\),观测值只是数字而已，没有随机性,如\(P(X&#x3D;0)&#x3D;\frac{1}{2}\)中为大写； 给定随机变量\(X\),它的累积分布函数（即概率分布函数）（CDF）是函数\(F_X:R\to[0,1]\),定义为： \[F_X(x)&#x3D;P(X\le x)\] 对于离散概率分布，有概率质量函数\(p(x)\),假设随机变量\(X\)取值范围是集合\(\c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/a575381d855e463fb9b2abdac543d2c0.jpeg">
 <meta property="article:published_time" content="2024-03-31T14:37:33.000Z">
 <meta property="article:modified_time" content="2024-03-31T14:53:03.571Z">
 <meta property="article:author" content="LiWell">
 <meta property="article:tag" content="人工智能、强化学习">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png">
 
 
 <link rel="canonical" href="https://acoder123wew.github.io/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/">
@@ -143,12 +140,14 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%B8%80%E3%80%81%E8%BF%91%E4%BC%BC-pi-%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">例一、近似$\pi$值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%BA%8C%E3%80%81%E8%AE%A1%E7%AE%97%E9%98%B4%E5%BD%B1%E9%83%A8%E5%88%86%E9%9D%A2%E7%A7%AF"><span class="nav-number">2.</span> <span class="nav-text">例二、计算阴影部分面积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%B8%89%E3%80%81%E8%AE%A1%E7%AE%97%E8%BF%91%E4%BC%BC%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.</span> <span class="nav-text">例三、计算近似期望</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E4%B9%A0%E9%A2%982-2"><span class="nav-number">4.</span> <span class="nav-text">第二章习题2.2</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%B8%80%E8%BF%91%E4%BC%BCpi%E5%80%BC"><span class="nav-number">1.</span> <span class="nav-text">例一、近似\(\pi\)值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%BA%8C%E8%AE%A1%E7%AE%97%E9%98%B4%E5%BD%B1%E9%83%A8%E5%88%86%E9%9D%A2%E7%A7%AF"><span class="nav-number">2.</span> <span class="nav-text">例二、计算阴影部分面积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E4%B8%89%E8%AE%A1%E7%AE%97%E8%BF%91%E4%BC%BC%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.</span> <span class="nav-text">例三、计算近似期望</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%E4%B9%A0%E9%A2%982.2"><span class="nav-number">4.</span> <span class="nav-text">第二章习题2.2</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LiWell"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">LiWell</p>
   <div class="site-description" itemprop="description">keep learning</div>
 </div>
@@ -195,7 +194,7 @@
     <link itemprop="mainEntityOfPage" href="https://acoder123wew.github.io/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="LiWell">
     </span>
 
@@ -250,24 +249,68 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><ol>
-<li><strong>随机变量</strong>记作$X$,<strong>观测值</strong>记作$x$,观测值只是数字而已，没有随机性,如$P(X&#x3D;0)&#x3D;\frac{1}{2}$中为大写；</li>
-<li>给定随机变量$X$,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数$F_X:R\to[0,1]$,定义为：<br>$$F_X(x)&#x3D;P(X\le x)$$ </li>
-<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong>$p(x)$,假设随机变量$X$取值范围是集合$\chi$<br>则有： $$\sum_{x\in \chi}^{} p(x)&#x3D;1$$ ,$X$的概率质量函数为$p(\cdot)$,则函数$h(X)$关于变量$X$的期望是<br>$$E_{X\sim p(\cdot)}[h(X)]&#x3D;\sum_{x\in \chi}^{}p(x)\cdot h(x)$$</li>
-<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong>$p(x)$,随机变量$X$的取值范围$\chi$是连续集合，则有：$$\int_{-\infty }^{x} p(u)du&#x3D;F_X(x)&#x3D;P(X\le x)$$$$\int_{-\infty }^{+\infty} p(u)du&#x3D;1$$,$X$的概率密度函数为$p(\cdot)$,则函数$h(X)$关于变量$X$的期望是<br>$$E_{X\sim p(\cdot)}[h(X)]&#x3D;\int_{\chi}p(x)\cdot h(x)dx$$<br>![在这里插入图片描述](<a target="_blank" rel="noopener" href="https://img-blog.csdnimg.cn/a5e55ee3d9294d6e9f8ca1a8365e5cf1.jpeg#pic_center">https://img-blog.csdnimg.cn/a5e55ee3d9294d6e9f8ca1a8365e5cf1.jpeg#pic_center</a> &#x3D;600x300)</li>
+    <div class="post-body" itemprop="articleBody"><ol type="1">
+<li><strong>随机变量</strong>记作<span
+class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
+class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
+class="math inline">\(P(X=0)=\frac{1}{2}\)</span>中为大写；</li>
+<li>给定随机变量<span
+class="math inline">\(X\)</span>,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数<span
+class="math inline">\(F_X:R\to[0,1]\)</span>,定义为： <span
+class="math display">\[F_X(x)=P(X\le x)\]</span></li>
+<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong><span
+class="math inline">\(p(x)\)</span>,假设随机变量<span
+class="math inline">\(X\)</span>取值范围是集合<span
+class="math inline">\(\chi\)</span> 则有： <span
+class="math display">\[\sum_{x\in \chi}^{} p(x)=1\]</span> ,<span
+class="math inline">\(X\)</span>的概率质量函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\sum_{x\in
+\chi}^{}p(x)\cdot h(x)\]</span></li>
+<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong><span
+class="math inline">\(p(x)\)</span>,随机变量<span
+class="math inline">\(X\)</span>的取值范围<span
+class="math inline">\(\chi\)</span>是连续集合，则有：<span
+class="math display">\[\int_{-\infty }^{x} p(u)du=F_X(x)=P(X\le
+x)\]</span><span class="math display">\[\int_{-\infty }^{+\infty}
+p(u)du=1\]</span>,<span
+class="math inline">\(X\)</span>的概率密度函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
+h(x)dx\]</span> <img
+src="https://img-blog.csdnimg.cn/a5e55ee3d9294d6e9f8ca1a8365e5cf1.jpeg#pic_center%20=600x300"
+alt="在这里插入图片描述" /></li>
 </ol>
-<h3 id="例一、近似-pi-值"><a href="#例一、近似-pi-值" class="headerlink" title="例一、近似$\pi$值"></a>例一、近似$\pi$值</h3><p><img src="C:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png" alt="image-20240331224007977"></p>
+<h3 id="例一近似pi值">例一、近似<span
+class="math inline">\(\pi\)</span>值</h3>
+<figure>
+<img
+src="C:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png"
+alt="image-20240331224007977" />
+<figcaption aria-hidden="true">image-20240331224007977</figcaption>
+</figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
-<p>输出：3.13528</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>输出：100个点近似的圆周率： 3.08<br>10000个点近似的圆周率： 3.1352<br>1000000个点近似的圆周率： 3.141</p>
-<h3 id="例二、计算阴影部分面积"><a href="#例二、计算阴影部分面积" class="headerlink" title="例二、计算阴影部分面积"></a>例二、计算阴影部分面积</h3><p><img src="https://img-blog.csdnimg.cn/a575381d855e463fb9b2abdac543d2c0.jpeg" alt="在这里插入图片描述"></p>
+<p>输出：3.13528 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
+10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
+<h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
+<figure>
+<img
+src="https://img-blog.csdnimg.cn/a575381d855e463fb9b2abdac543d2c0.jpeg"
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
 <p>输出：0.59632</p>
-<h3 id="例三、计算近似期望"><a href="#例三、计算近似期望" class="headerlink" title="例三、计算近似期望"></a>例三、计算近似期望</h3><p>假设用期望计算$\int_{0}^{3}x^\frac{2}{3}dx$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
-<p>输出：tensor([1.2374])</p>
-<h3 id="第二章习题2-2"><a href="#第二章习题2-2" class="headerlink" title="第二章习题2.2"></a>第二章习题2.2</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
+<h3 id="例三计算近似期望">例三、计算近似期望</h3>
+<p>假设用期望计算<span
+class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
+输出：tensor([1.2374])</p>
+<h3 id="第二章习题2.2">第二章习题2.2</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
 <p>输出：tensor([17.3412])</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
 <p>输出：tensor([17.3020])</p>
@@ -375,6 +418,12 @@
   <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
