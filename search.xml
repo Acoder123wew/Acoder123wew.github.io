@@ -33,6 +33,113 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
       </categories>
   </entry>
   <entry>
+    <title>第三章、强化学习基本概念</title>
+    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
+<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
+Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
+<strong>环境</strong>：与智能体交互的对象；</p>
+<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
+<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
+class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
+<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
+class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
+<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
+<strong>动作空间</strong>：所有可能动作的集合，记作<span
+class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
+<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
+class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
+class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
+class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
+class="math inline">\(s_t,s_{t+1}\)</span>,有<span
+class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
+<h3 id="状态转移">3.状态转移</h3>
+<p><strong>状态转移</strong>：智能体从当前<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s\)</span>转移到下一刻的状态<span
+class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
+<span
+class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
+表示发生下述事件的概率：在当前状态<span
+class="math inline">\(s\)</span>,智能体执行动作<span
+class="math inline">\(a\)</span>,下一刻环境的状态变成<span
+class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因此状态转移存在随机性。
+<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
+class="math inline">\(s&#39;\)</span>完全由<span
+class="math inline">\(s,a\)</span>决定： <span
+class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
+  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
+  &amp; \text{ 0 , otherwise }
+\end{cases}\]</span>
+<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
+<h3 id="策略">4.策略</h3>
+<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
+<strong>随机性策略</strong>：<span
+class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
+<strong>确定性策略</strong>：记作<span
+class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
+class="math inline">\(a\)</span>完全由状态<span
+class="math inline">\(s\)</span>决定:<span
+class="math inline">\(a=\mu(s)\)</span> ### 5.马尔可夫性质（Markov
+property） 马尔可夫性，即下一时刻状态<span
+class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
+class="math inline">\(S_t\)</span>和动作<span
+class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
+class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
+<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
+class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span>
+### 6.回报与折扣回报
+<strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
+class="math inline">\(n\)</span>结束，则<span
+class="math inline">\(t\)</span>时刻的回报定义为： <span
+class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
+<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
+class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
+class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
+R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
+class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span> ###
+7.价值函数 价值函数是回报的期望，价值函数值越大，说明现状越有利；
+<strong>动作价值函数</strong>： <span
+class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
+表示已经观测到了<span
+class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
+class="math inline">\(s_t\)</span>,选中动作<span
+class="math inline">\(a_t\)</span>，原来<span
+class="math inline">\(U_t\)</span>中的随机性来自<span
+class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
+class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
+class="math inline">\(\qquad\)</span><span
+class="math inline">\(t\)</span>时刻的动作价值函数<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
+（1）当前状态<span
+class="math inline">\(s_t\)</span>：当前状态越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
+class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
+class="math inline">\(\pi\)</span>：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
+<strong>最优动作价值函数</strong>： 为了排除策略<span
+class="math inline">\(\pi\)</span>的影响，可以使： <span
+class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
+Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
+这样策略就确定了，也就排除了策略<span
+class="math inline">\(\pi\)</span>的影响，<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
+<strong>状态价值函数</strong>: <span
+class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
+\cdot Q_\pi(s_t,a)\]</span> 它消除了动作的影响，只依赖于策略函数<span
+class="math inline">\(\pi\)</span>和状态<span
+class="math inline">\(s_t\)</span>的好坏</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<ol type="1">
