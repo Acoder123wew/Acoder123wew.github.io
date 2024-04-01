@@ -32,7 +32,8 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
   <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<ol type="1">
+    <content><![CDATA[<span id="more"></span>
+<ol type="1">
 <li><strong>随机变量</strong>记作<span
 class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
 class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
