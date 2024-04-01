@@ -214,9 +214,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-03-31 22:37:33 / 修改时间：22:53:03" itemprop="dateCreated datePublished" datetime="2024-03-31T22:37:33+08:00">2024-03-31</time>
+      <time title="创建时间：2024-03-31 22:37:33" itemprop="dateCreated datePublished" datetime="2024-03-31T22:37:33+08:00">2024-03-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-01 13:46:57" itemprop="dateModified" datetime="2024-04-01T13:46:57+08:00">2024-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -270,28 +276,16 @@ class="math inline">\(p(\cdot)\)</span>,则函数<span
 class="math inline">\(h(X)\)</span>关于变量<span
 class="math inline">\(X\)</span>的期望是 <span
 class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
-h(x)dx\]</span> <img
-src="https://img-blog.csdnimg.cn/a5e55ee3d9294d6e9f8ca1a8365e5cf1.jpeg#pic_center%20=600x300"
-alt="在这里插入图片描述" /></li>
+h(x)dx\]</span> </li>
 </ol>
 <h3 id="例一近似pi值">例一、近似<span
 class="math inline">\(\pi\)</span>值</h3>
-<figure>
-<img
-src="C:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png"
-alt="image-20240331224007977" />
-<figcaption aria-hidden="true">image-20240331224007977</figcaption>
-</figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
 <p>输出：3.13528 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
 10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
 <h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
-<figure>
-<img
-src="https://img-blog.csdnimg.cn/a575381d855e463fb9b2abdac543d2c0.jpeg"
-alt="在这里插入图片描述" />
-<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
+
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
 <p>输出：0.59632</p>
 <h3 id="例三计算近似期望">例三、计算近似期望</h3>

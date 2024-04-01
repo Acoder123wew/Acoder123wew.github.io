@@ -1,35 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/03/31/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="hello-hexo">Hello Hexo</h2>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<ol type="1">
@@ -64,28 +35,16 @@ class="math inline">\(p(\cdot)\)</span>,则函数<span
 class="math inline">\(h(X)\)</span>关于变量<span
 class="math inline">\(X\)</span>的期望是 <span
 class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
-h(x)dx\]</span> <img
-src="https://img-blog.csdnimg.cn/a5e55ee3d9294d6e9f8ca1a8365e5cf1.jpeg#pic_center%20=600x300"
-alt="在这里插入图片描述" /></li>
+h(x)dx\]</span> </li>
 </ol>
 <h3 id="例一近似pi值">例一、近似<span
 class="math inline">\(\pi\)</span>值</h3>
-<figure>
-<img
-src="C:\Users\liwei\AppData\Roaming\Typora\typora-user-images\image-20240331224007977.png"
-alt="image-20240331224007977" />
-<figcaption aria-hidden="true">image-20240331224007977</figcaption>
-</figure>
+
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
 <p>输出：3.13528 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
 10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
 <h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
-<figure>
-<img
-src="https://img-blog.csdnimg.cn/a575381d855e463fb9b2abdac543d2c0.jpeg"
-alt="在这里插入图片描述" />
-<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
-</figure>
+
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
 <p>输出：0.59632</p>
 <h3 id="例三计算近似期望">例三、计算近似期望</h3>
@@ -104,5 +63,34 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
       <tags>
         <tag>人工智能、强化学习</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/03/31/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="hello-hexo">Hello Hexo</h2>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>
