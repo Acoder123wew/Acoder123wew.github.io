@@ -142,21 +142,19 @@ class="math inline">\(A\)</span>即可.</p>
 class="math inline">\(O(logn)\)</span>,空间复杂度为<span
 class="math inline">\(O(1)\)</span></p>
 <h3 id="总结">总结</h3>
-<ul>
-<li>（1)朴素递归：<span
+<p>（1)朴素递归：<span
 class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
 (\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
 ])=O((\frac{1+\sqrt[]{5} }{2} )^{n})\)</span>,<span
-class="math inline">\(S(n)=O(n)\)</span></li>
-</ul></li>
-<li><ol start="2" type="1">
+class="math inline">\(S(n)=O(n)\)</span></p>
+<ol start="2" type="1">
 <li>尾递归：<span class="math inline">\(T(n)=O(n)\)</span>,<span
 class="math inline">\(S(n)=O(1)\)</span></li>
-</ol></li>
-<li><p>(3)非递归（迭代）：<span
+</ol>
+<p>(3)非递归（迭代）：<span
 class="math inline">\(T(n)=O(n)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></p></li>
-<li><p>（4) 矩阵快速幂：<span
+class="math inline">\(S(n)=O(1)\)</span></p>
+<p>（4) 矩阵快速幂：<span
 class="math inline">\(T(n)=O(logn)\)</span>,<span
 class="math inline">\(S(n)=O(1)\)</span></p></li>
 </ul>
