@@ -424,16 +424,20 @@ class="math inline">\(\pi\)</span>值</h3>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
 <p>输出：0.59632</p>
 <h3 id="例三计算近似定积分期望">例三、计算近似定积分、期望</h3>
-<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即<span
-class="math inline">\(I=\int_{a}^{b}f(x)dx \approx
-q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)\)</span></p>
-<p><strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即<span
-class="math inline">\(I=\int_{\Omega }^{}f(x)dx \approx
+<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即
+<span class="math display">\[
+I=\int_{a}^{b}f(x)dx \approx
+q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span>
+<strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即
+<span class="math display">\[
+I=\int_{\Omega }^{}f(x)dx \approx
 q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
-\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)\)</span></p>
-<p>求<strong>期望</strong>：计算$E_{Xp()}[f(X)]=_{}^{}p(x)f(x)dx <span
-class="math inline">\(，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，吧其中的\)</span>f(x_i)<span
-class="math inline">\(换成\)</span>p(x_i)f(x_i)$即可</p>
+\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span> 求<strong>期望</strong>：计算$E_{Xp()}[f(X)]=_{}^{}p(x)f(x)dx
+<span
+class="math inline">\(，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的\)</span>f(x_i)<span
+class="math inline">\(换成\)</span>p(x_i)f(x_i)$即可；</p>
 <p>假设用期望计算<span
 class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
 输出：</p>
