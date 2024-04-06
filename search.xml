@@ -434,10 +434,11 @@ q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
 I=\int_{\Omega }^{}f(x)dx \approx
 q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
 \cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
-\]</span> 求<strong>期望</strong>：计算$E_{Xp()}[f(X)]=_{}^{}p(x)f(x)dx
-<span
-class="math inline">\(，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的\)</span>f(x_i)<span
-class="math inline">\(换成\)</span>p(x_i)f(x_i)$即可；</p>
+\]</span> 求<strong>期望</strong>：计算<span
+class="math inline">\(E_{X\sim p(\cdot)}[f(X)]=\int_{\Omega}^{}p(x)\cdot
+f(x)dx\)</span>，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的<span
+class="math inline">\(f(x_i)\)</span>换成<span
+class="math inline">\(p(x_i)\cdot f(x_i)\)</span>即可；</p>
 <p>假设用期望计算<span
 class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
 输出：</p>
