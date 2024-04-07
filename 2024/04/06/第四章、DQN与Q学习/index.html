@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://acoder123wew.github.io/2024/04/06/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81DQN%E4%B8%8EQ%E5%AD%A6%E4%B9%A0/image-20240407110019564.png">
 <meta property="og:image" content="http://acoder123wew.github.io/2024/04/06/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81DQN%E4%B8%8EQ%E5%AD%A6%E4%B9%A0/image-20240407152338113.png">
 <meta property="article:published_time" content="2024-04-06T09:19:25.000Z">
-<meta property="article:modified_time" content="2024-04-07T11:30:04.889Z">
+<meta property="article:modified_time" content="2024-04-07T11:42:13.455Z">
 <meta property="article:author" content="LiWell">
 <meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
@@ -233,7 +233,7 @@ difference）算法</span></a></li><li class="nav-item nav-level-4"><a class="na
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-07 19:30:04" itemprop="dateModified" datetime="2024-04-07T19:30:04+08:00">2024-04-07</time>
+      <time title="修改时间：2024-04-07 19:42:13" itemprop="dateModified" datetime="2024-04-07T19:42:13+08:00">2024-04-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -279,7 +279,7 @@ class="math inline">\(Q(s,a;w)\)</span></p>
 class="math inline">\(Q_*(s,a)\)</span>;DQN的输入是状态<span
 class="math inline">\(s\)</span>,输出是<span
 class="math inline">\(|\mathcal{A}
-|\)</span>维的向量，元素为动作空间中每个动作的<span
+|\)</span>维的向量，每一个元素对应动作空间中每个动作的<span
 class="math inline">\(Q\)</span>值；</p>
 <p><img src="/2024/04/06/第四章、DQN与Q学习/image-20240407110019564.png"  alt="image-20240407110019564" style="zoom:50%;" /></p>
 <h4 id="时间差分tdtemporal-difference算法">时间差分（TD，temporal
@@ -310,8 +310,9 @@ U_{t+1} = R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-t-1}R_n
 \]</span></p>
 <p>故 <span class="math display">\[
 U_t=R_t+\gamma U_{t+1}
-\]</span> 又因为最优动作价值函数$Q_*(s_t,a_t)= E[U_t|S_t=s_t,A_t=a_t]
-$</p>
+\]</span> 又因为最优动作价值函数<span
+class="math inline">\(Q_*(s_t,a_t)=\underset{\pi }{max}\
+E[U_t|S_t=s_t,A_t=a_t]\)</span></p>
 <p>经过一系列数学推导： <span class="math display">\[
 Q_*(s_t,a_t)=E_{S_{t+1}\sim
 p(\cdot|s_t,a_t)}[R_t+\gamma\cdot\underset{A\in\mathcal A}{max}\
@@ -383,8 +384,9 @@ w_{new}=w_{now}-\alpha\cdot\delta_j\cdot g_j
 class="math inline">\(\mathcal S\)</span>和动作集合<span
 class="math inline">\(\mathcal A\)</span>都有限的情况。</p>
 <p><img src="/2024/04/06/第四章、DQN与Q学习/image-20240407152338113.png"  alt="image-20240407152338113" style="zoom:50%;" /></p>
-<p>传统Q学习理解就是，不断更新如上图所示的表格，每次更新表格中一个元素值，使得其中的元素值$
-<span class="math inline">\(不断趋近于\)</span>Q_*$</p>
+<p>传统Q学习理解就是，不断更新如上图所示的表格，每次更新表格中一个元素值，使得其中的元素值<span
+class="math inline">\(\widetilde{Q}\)</span>不断趋近于<span
+class="math inline">\(Q_*\)</span></p>
 <ul>
 <li><p><strong>第一步：使用行为策略收集训练数据</strong></p>
 <p>行为策略可以是任何策略，常用的为<span
