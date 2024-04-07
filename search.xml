@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>C++初级知识</title>
+    <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<ul>
+<li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
+<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，<code>void</code>表示不返回信息或不接受参数；</li>
+<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略;</li>
+<li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
+<li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
+<li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
+<li>变量声明：1.分配指定数据类型的内存
+2.指定存储在这个内存中的数据的名称；</li>
+<li>声明包括定义声明、引用声明；</li>
+<li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
+Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
+<li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+      <tags>
+        <tag>编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2024/03/31/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -31,6 +57,107 @@ href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
       <categories>
         <category>Hexo</category>
       </categories>
+  </entry>
+  <entry>
+    <title>第一章、机器学习基础</title>
+    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
+<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
+Regression）</h4>
+<p>线性回归简单理解即”拟合一条曲线“，可通过<span
+class="math inline">\(x\)</span>的值预测<span
+class="math inline">\(y\)</span>值 <span class="math display">\[
+\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
+\]</span></p>
+<ul>
+<li><p>训练集：用于优化模型参数</p></li>
+<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
+<li><p>测试集：用于评估模型性能</p>
+<p><strong>线性回归从零开始实现</strong>，<a
+href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
+Regression)</h4>
+<p>逻辑斯蒂回归=线性回归+<span
+class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
+class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
+class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
+class="math display">\[
+f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
+\]</span></p>
+<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
+交叉熵损失函数(Cross Entropy Loss Function)</h4>
+<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
+class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
+class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
+<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
+<span class="math display">\[
+KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
+\]</span> 其中交叉熵<span
+class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
+<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
+lnp_j\)</span></p>
+<p>当概率分布<span
+class="math inline">\(p\)</span>固定时，也就是说我们要让<span
+class="math inline">\(q\)</span>尽量接近<span
+class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
+<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
+<p>softmax分类=线性函数+softmax激活函数</p>
+<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
+<span class="math display">\[
+\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
+R^{d\times1})+b\in R^{k\times1}
+\]</span> 其中<span
+class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
+<p>通常情况下，需要对矩阵<span
+class="math inline">\(W\)</span>和向量<span
+class="math inline">\(b\)</span>做规范化，使得<span
+class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
+class="math inline">\(w_j\)</span>为矩阵<span
+class="math inline">\(W\)</span>的第<span
+class="math inline">\(j\)</span>行，即矩阵<span
+class="math inline">\(W\)</span>的每列和为0，向量<span
+class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
+<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
+<ul>
+<li><p><span class="math inline">\(min\_max\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p><span class="math inline">\(z\_score\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
+<li><p>正数归一化： <span
+class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p>中心化： <span
+class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
+</ul>
+<h3 id="神经网络简介">1.2 神经网络简介</h3>
+<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
+<p><span class="math display">\[
+{x}’=\sigma(z)=\sigma(Wx+b)
+\]</span></p>
+<p>即线性函数+激活函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
+<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
+<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
+<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
+descent）</h3>
+<ul>
+<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
+<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
+<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
+<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
+<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
+<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>机器学习、强化学习、人工智能</tag>
+      </tags>
   </entry>
   <entry>
     <title>斐波那契数列算法总结</title>
@@ -170,107 +297,6 @@ class="math inline">\(S(n)=O(1)\)</span></p></li>
       </tags>
   </entry>
   <entry>
-    <title>第一章、机器学习基础</title>
-    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
-<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
-Regression）</h4>
-<p>线性回归简单理解即”拟合一条曲线“，可通过<span
-class="math inline">\(x\)</span>的值预测<span
-class="math inline">\(y\)</span>值 <span class="math display">\[
-\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
-\]</span></p>
-<ul>
-<li><p>训练集：用于优化模型参数</p></li>
-<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
-<li><p>测试集：用于评估模型性能</p>
-<p><strong>线性回归从零开始实现</strong>，<a
-href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
-Regression)</h4>
-<p>逻辑斯蒂回归=线性回归+<span
-class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
-class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
-class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
-class="math display">\[
-f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
-\]</span></p>
-<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
-交叉熵损失函数(Cross Entropy Loss Function)</h4>
-<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
-class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
-class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
-<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
-<span class="math display">\[
-KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
-\]</span> 其中交叉熵<span
-class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
-<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
-lnp_j\)</span></p>
-<p>当概率分布<span
-class="math inline">\(p\)</span>固定时，也就是说我们要让<span
-class="math inline">\(q\)</span>尽量接近<span
-class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
-<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
-<p>softmax分类=线性函数+softmax激活函数</p>
-<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
-<span class="math display">\[
-\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
-R^{d\times1})+b\in R^{k\times1}
-\]</span> 其中<span
-class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
-<p>通常情况下，需要对矩阵<span
-class="math inline">\(W\)</span>和向量<span
-class="math inline">\(b\)</span>做规范化，使得<span
-class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
-class="math inline">\(w_j\)</span>为矩阵<span
-class="math inline">\(W\)</span>的第<span
-class="math inline">\(j\)</span>行，即矩阵<span
-class="math inline">\(W\)</span>的每列和为0，向量<span
-class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
-<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
-<ul>
-<li><p><span class="math inline">\(min\_max\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p><span class="math inline">\(z\_score\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
-<li><p>正数归一化： <span
-class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p>中心化： <span
-class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
-</ul>
-<h3 id="神经网络简介">1.2 神经网络简介</h3>
-<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
-<p><span class="math display">\[
-{x}’=\sigma(z)=\sigma(Wx+b)
-\]</span></p>
-<p>即线性函数+激活函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
-<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
-<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
-<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
-descent）</h3>
-<ul>
-<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
-<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
-<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
-<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
-<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
-<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>机器学习、强化学习、人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第三章、强化学习基本概念</title>
     <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
@@ -398,6 +424,195 @@ V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
       </categories>
       <tags>
         <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第四章、DQN与Q学习</title>
+    <url>/2024/04/06/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81DQN%E4%B8%8EQ%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<hr />
+<p>前面我们知道最优动作价值函数<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>可以预知选取<span
+class="math inline">\(a_t\)</span>这个动作后回报<span
+class="math inline">\(U_t\)</span>的期望的上限，但在实践中我们并不知道<span
+class="math inline">\(Q_*\)</span>的函数表达式，因此DQN使用神经网络对其进行近似。</p>
+<h4 id="dqndeep-q-network">DQN(Deep Q Network)</h4>
+<p>深度Q网络DQN记作<span
+class="math inline">\(Q(s,a;w)\)</span>,其结构如图所示，其中<span
+class="math inline">\(w\)</span>代表神经网络的参数，学习的目标是对于所有的<span
+class="math inline">\(s\)</span>和<span
+class="math inline">\(a\)</span>, DQN的预测<span
+class="math inline">\(Q(s,a;w)\)</span></p>
+<p>尽量接近<span
+class="math inline">\(Q_*(s,a)\)</span>;DQN的输入是状态<span
+class="math inline">\(s\)</span>,输出是<span
+class="math inline">\(|\mathcal{A}
+|\)</span>维的向量，元素为动作空间中每个动作的<span
+class="math inline">\(Q\)</span>值；</p>
+<p><img src="/2024/04/06/第四章、DQN与Q学习/image-20240407110019564.png"  alt="image-20240407110019564" style="zoom:50%;" /></p>
+<h4 id="时间差分tdtemporal-difference算法">时间差分（TD，temporal
+difference）算法</h4>
+<p>训练DQN常使用TD算法，因此先了解TD算法；</p>
+<p>假设原预测为<span
+class="math inline">\(\hat{q}\)</span>,部分观测为<span
+class="math inline">\(r\)</span>，补充预测为<span
+class="math inline">\(\hat{q}’\)</span>，那么<strong>TD目标</strong><span
+class="math inline">\(\hat{y}=r+\hat{q}’\)</span>,两者之间的差值<span
+class="math inline">\(\delta=(\hat{q}-\hat{y})\)</span>称为<strong>TD误差</strong>，</p>
+<p>令损失函数为<span
+class="math inline">\(L(w)=\frac{1}{2}\delta^2=\frac{1}{2}(\hat{q}-\hat{y})^2\)</span>,虽然<span
+class="math inline">\(\hat{y}=r+\hat{q}’\)</span>的<span
+class="math inline">\(\hat{q}’\)</span>包含神经网络参数<span
+class="math inline">\(w\)</span>，是<span
+class="math inline">\(w\)</span>的函数，但通常情况下对损失函数求参数的梯度时将<span
+class="math inline">\(\hat{y}\)</span>看作常数，因此，<span
+class="math inline">\(w=w-\alpha\cdot\delta\cdot\nabla
+_{w}\hat{q}=w-\alpha\cdot(\hat{q}-\hat{y}{})\cdot\nabla
+_{w}\hat{q}\)</span></p>
+<h4 id="用td算法之q学习算法训练dqn">用TD算法之Q学习算法训练DQN</h4>
+<p><span class="math display">\[
+U_t = R_t+\gamma R_{t+1}+...+\gamma^{n-t}R_n
+\]</span></p>
+<p><span class="math display">\[
+U_{t+1} = R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-t-1}R_n
+\]</span></p>
+<p>故 <span class="math display">\[
+U_t=R_t+\gamma U_{t+1}
+\]</span> 又因为最优动作价值函数$Q_*(s_t,a_t)= E[U_t|S_t=s_t,A_t=a_t]
+$</p>
+<p>经过一系列数学推导： <span class="math display">\[
+Q_*(s_t,a_t)=E_{S_{t+1}\sim
+p(\cdot|s_t,a_t)}[R_t+\gamma\cdot\underset{A\in\mathcal A}{max}\
+Q_*(S_{t+1},A)|S_t=s_t,A_t=a_t ]
+\]</span>
+通过采样的方法可以对这个期望做蒙特卡洛近似，采样的目的是为了收集四元组<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1})\)</span>,这个<strong>四元组</strong>产生的流程是：</p>
+<p>在当前状态<span class="math inline">\(s_t\)</span>下执行动作<span
+class="math inline">\(a_t\)</span>,这是已知的两个数据，然后环境通过状态转移函数<span
+class="math inline">\(p(s_{t+1}|s_t,a_t)\)</span>计算出新的状态<span
+class="math inline">\(s_{t+1}\)</span>,(这本质上就是蒙特卡洛近似的过程)，这样，奖励<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span>,至此得到四元组<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1})\)</span>；</p>
+<p>于是有： <span class="math display">\[
+Q_*(s_t,a_t)\approx r_t+\gamma\cdot\underset{a\in\mathcal A}{max}\
+Q_*(s_{t+1},a)
+\]</span> 我们并不知道<span
+class="math inline">\(Q_*\)</span>的值，因此用前面所讲的DQN神经网络对其进行近似：
+<span class="math display">\[
+Q(s_t,a_t;w)\approx r_t+\gamma\cdot\underset{a\in\mathcal A}{max}\
+Q(s_{t+1},a;w)
+\]</span> 左边即前面所说的原预测<span
+class="math inline">\(\hat{q}\)</span>,右边两项分别为部分观测<span
+class="math inline">\(r\)</span>,补充预测<span
+class="math inline">\(\hat{q}’\)</span>，两项之和为<strong>TD目标</strong><span
+class="math inline">\(\hat{y}=r+\hat{q}’\)</span>，左边减右边即<strong>TD误差</strong>，训练DQN的目的是尽量使得左边趋近右边；</p>
+<h4 id="dqn训练的基本流程">DQN训练的基本流程</h4>
+<p>首先需要明确的是，训练DQN只需要四元组<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1})\)</span>，DQN属于异策略，即控制智能体与环境交互以收集用于训练的四元组数据的<strong>策略</strong>和我们正在优化的<strong>策略</strong>可以不同（DQN中并没有”显式“的要优化的策略，实际上，我们要优化的<span
+class="math inline">\(Q(s,a;w)\)</span>可以看成”策略“），前者称为<strong>行为策略</strong>，后者称为<strong>目标策略</strong>；</p>
+<ul>
+<li><p><strong>第一步：使用行为策略收集训练数据</strong></p>
+<p>行为策略可以是任何策略，常用的为<span
+class="math inline">\(\epsilon-\)</span>策略： <span
+class="math display">\[
+\begin{cases}
+  argmax_a\ Q(s_t,a;w)&amp; \text{  } 以概率(1-\epsilon)  \\
+  均匀抽取\mathcal A中的每一个动作&amp; \text{  } 以概率\epsilon
+\end{cases}
+\]</span></p></li>
+</ul>
+<p>把收集到的一条条四元组<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1})\)</span>存入缓存，称为”经验回放缓存“；</p>
+<ul>
+<li><p><strong>第二步：更新参数w</strong></p>
+<p>从经验回放缓存中随机抽取一个四元组，记作<span
+class="math inline">\((s_j,a_j,r_j,s_{j+1})\)</span>,原参数为<span
+class="math inline">\(w_{now}\)</span>,更新后为<span
+class="math inline">\(w_{new}\)</span></p>
+<p>（1）对DQN神经网络做正向传播，得到Q值，即原预测<span
+class="math inline">\(\hat{q_j}=Q(s_j,a_j;w_{now})\)</span>和补充预测<span
+class="math inline">\(\hat{q}_{j+1}=\underset{a\in\mathcal
+A}{max}Q(s_{j+1},a;w_{now})\)</span>；</p></li>
+</ul>
+<p>​ (2) 计算TD目标和TD误差： <span class="math display">\[
+\hat{y_j}=r_j+\gamma\cdot\hat{q}_{j+1}
+\]</span></p>
+<p><span class="math display">\[
+\delta_j=\hat{q_j}-\hat{y_j}
+\]</span></p>
+<p>​ （3）对DQN做反向传播，计算梯度 <span class="math display">\[
+g_j=\nabla_wQ(s_j,a_j;w_{now})
+\]</span> ​ 梯度的形状和<span class="math inline">\(w\)</span>相同；</p>
+<p>（4）通过梯度下降更新DQN的参数w <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_j\cdot g_j
+\]</span></p>
+<h4 id="传统表格形式的q学习">传统表格形式的Q学习</h4>
+<p>DQN其实是神经网络形式的Q学习，现在我们介绍传统的表格形式的Q学习，它只适用于状态集合<span
+class="math inline">\(\mathcal S\)</span>和动作集合<span
+class="math inline">\(\mathcal A\)</span>都有限的情况。</p>
+<p><img src="/2024/04/06/第四章、DQN与Q学习/image-20240407152338113.png"  alt="image-20240407152338113" style="zoom:50%;" /></p>
+<p>传统Q学习理解就是，不断更新如上图所示的表格，每次更新表格中一个元素值，使得其中的元素值$
+<span class="math inline">\(不断趋近于\)</span>Q_*$</p>
+<ul>
+<li><p><strong>第一步：使用行为策略收集训练数据</strong></p>
+<p>行为策略可以是任何策略，常用的为<span
+class="math inline">\(\epsilon-\)</span>策略： <span
+class="math display">\[
+\begin{cases}
+  argmax_a\ \widetilde{Q}(s_t,a)&amp; \text{  } 以概率(1-\epsilon)  \\
+  均匀抽取\mathcal A中的每一个动作&amp; \text{  } 以概率\epsilon
+\end{cases}
+\]</span></p></li>
+</ul>
+<p>把收集到的一条条四元组<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1})\)</span>存入缓存，称为”经验回放缓存“；</p>
+<ul>
+<li><p><strong>第二步：更新参数w</strong></p>
+<p>从经验回放缓存中随机抽取一个四元组，记作<span
+class="math inline">\((s_j,a_j,r_j,s_{j+1})\)</span>,设当前表格为<span
+class="math inline">\(\widetilde{Q}_{now}\)</span>,这样的一条四元组可以更新表格中的一个”格子“</p>
+<p>即：<span
+class="math inline">\(\widetilde{Q}_{now}(s_j,a_j)\)</span>更新为<span
+class="math inline">\(\widetilde{Q}_{new}(s_j,a_j)\)</span>,更新过程如下：</p>
+<p>（1）旧表格<span
+class="math inline">\(\widetilde{Q}_{now}\)</span>中<span
+class="math inline">\((s_j,a_j)\)</span>位置上数据为<span
+class="math inline">\(\hat{q_j}=\widetilde{Q}_{now}(s_j,a_j)\)</span></p>
+<p>第<span class="math inline">\(s_{j+1}\)</span>行中最大值为<span
+class="math inline">\(\hat{q}_{j+1}=\underset{a\in\mathcal A}{max}\
+\widetilde{Q}_{now}(s_{j+1},a)\)</span>；</p></li>
+</ul>
+<p>​ (2) 计算TD目标和TD误差： <span class="math display">\[
+\hat{y_j}=r_j+\gamma\cdot\hat{q}_{j+1}
+\]</span></p>
+<p><span class="math display">\[
+\delta_j=\hat{q_j}-\hat{y_j}
+\]</span></p>
+<p>​ （3）更新表格中<span
+class="math inline">\((s_j,a_j)\)</span>位置上的元素： <span
+class="math display">\[
+\widetilde{Q}_{new}(s_j,a_j)=(1-\alpha)\cdot\widetilde{Q}_{now}(s_j,a_j)+\alpha\cdot\hat{y_j}=\widetilde{Q}_{now}(s_j,a_j)-\alpha\cdot\delta_{j}
+\]</span>
+可以看到传统的表格形式的Q学习在算出各个值之后就直接以简单的比例形式去更新Q值，这种简单的更新方法的效果注定比较一般。</p>
+<h4
+id="同策略on-policy与异策略off-policy">同策略(on-policy)与异策略(off-policy)</h4>
+<ul>
+<li><p>行为策略(behavior
+policy):控制智能体与环境交互，收集经验数据；</p></li>
+<li><p>目标策略(target
+policy):我们正在优化的策略；比如在DQN中，目标策略为： <span
+class="math display">\[
+a_t=\underset{a}{argmax}\ Q(s_t,a;w)
+\]</span></p></li>
+</ul>
+<h4 id="经验回放">经验回放</h4>
+<p>将智能体与环境交互的记录暂时保存，然后从中采样和学习的训练方式称为<strong>经验回放</strong>，需要注意的是，经验回放只适用于异策略，如DQN；不适用于同策略，为什么呢，这就像是尝试在当前的工作项目上使用你几年前旧工作的解决方案。</p>
+<p><a href="https://Acoder123wew.github.io/">DQN代码实现</a></p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
       </tags>
   </entry>
   <entry>
