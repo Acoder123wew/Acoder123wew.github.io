@@ -43,6 +43,20 @@
 <li><p>torch.cat([a,b,c],dim=n),按照第n维度连接张量a,b,c,维度为0表示按行连接，维度为1表示按列连接</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t1 = torch.cat([tensor, tensor, tensor], dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(t1)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure></li>
+<li><p>torch.mul(A,B)和torch.mul(A,number)分别表示相同形状的矩阵按元素相乘和矩阵乘以常数,*运算符可实现相同的功能；</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.mul(tensor,tensor),torch.mul(tensor,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">         [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>),</span><br><span class="line"> tensor([[<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>],</span><br><span class="line">         [<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>相应地，矩阵乘法为torch.matmul(A,B),A@B</p></li>
+<li><p>带有<code>_</code>后缀的操作为原地操作</p></li>
+<li><p>.numpy()可以将torch.Tensor类型转换为numpy.ndarray类型</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = tensor.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor.numpy()))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;torch.Tensor&#x27;</span>&gt;</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用t =
+torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化会影响到t</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n = np.ones(<span class="number">5</span>)</span><br><span class="line">t = torch.from_numpy(n)</span><br><span class="line">np.add(n, <span class="number">1</span>, out=n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;t: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;n: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t: tensor([<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>], dtype=torch.float64)</span><br><span class="line">n: [<span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -57,8 +71,8 @@
     <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<ul>
 <li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
-<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，<code>void</code>表示不返回信息或不接受参数；</li>
-<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略;</li>
+<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，也就是说，主函数main()的返回值返回给操作系统，<code>void</code>表示不返回信息或不接受参数；</li>
+<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略名称空间，直接使用<code>cout</code>;</li>
 <li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
 <li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
 <li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
@@ -68,7 +82,9 @@
 <li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
 Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
 <li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
-<li></li>
+<li><strong>函数原型</strong>：在调用某个函数之前，应提供其原型，要么在源代码文件中main()函数前输入函数原型，要么<code>#include</code>该函数所在的头文件；</li>
+<li>C++不允许将函数定义嵌套在另一个函数定义中，每个函数的定义都是独立的；</li>
+<li>在任何一门编程语言中，对变量、函数、对象等，都需要尽可能使用一目了然的命名，推荐使用”驼峰命名法“；</li>
 </ul>
 ]]></content>
       <categories>
@@ -479,91 +495,6 @@ V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
       </tags>
   </entry>
   <entry>
-    <title>第二章、蒙特卡洛方法</title>
-    <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<ol type="1">
-<li><strong>随机变量</strong>记作<span
-class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
-class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
-class="math inline">\(P(X=0)=\frac{1}{2}\)</span>中的<span
-class="math inline">\(X\)</span>为大写；</li>
-<li>给定随机变量<span
-class="math inline">\(X\)</span>,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数<span
-class="math inline">\(F_X:R\to[0,1]\)</span>,定义为： <span
-class="math display">\[F_X(x)=P(X\le x)\]</span></li>
-<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong><span
-class="math inline">\(p(x)\)</span>,假设随机变量<span
-class="math inline">\(X\)</span>取值范围是集合<span
-class="math inline">\(\chi\)</span> 则有： <span
-class="math display">\[\sum_{x\in \chi}^{} p(x)=1\]</span> ,<span
-class="math inline">\(X\)</span>的概率质量函数为<span
-class="math inline">\(p(\cdot)\)</span>,则函数<span
-class="math inline">\(h(X)\)</span>关于变量<span
-class="math inline">\(X\)</span>的期望是 <span
-class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\sum_{x\in
-\chi}^{}p(x)\cdot h(x)\]</span></li>
-<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong><span
-class="math inline">\(p(x)\)</span>,随机变量<span
-class="math inline">\(X\)</span>的取值范围<span
-class="math inline">\(\chi\)</span>是连续集合，则有：<span
-class="math display">\[\int_{-\infty }^{x} p(u)du=F_X(x)=P(X\le
-x)\]</span><span class="math display">\[\int_{-\infty }^{+\infty}
-p(u)du=1\]</span>,<span
-class="math inline">\(X\)</span>的概率密度函数为<span
-class="math inline">\(p(\cdot)\)</span>,则函数<span
-class="math inline">\(h(X)\)</span>关于变量<span
-class="math inline">\(X\)</span>的期望是 <span
-class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
-h(x)dx\]</span>
-<img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134538137.png"  alt="image-20240401134538137" style="zoom: 33%;" /></li>
-</ol>
-<p>总的来说，就是<span
-class="math inline">\(\frac{抽中次数}{总抽样数}=精确的理论概率\)</span></p>
-<h3 id="例一近似pi值">例一、近似<span
-class="math inline">\(\pi\)</span>值</h3>
-<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134618614.png"  alt="image-20240401134618614" style="zoom:33%;" /></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
-<p>输出：3.13528 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
-10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
-<h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
-<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134642296.png"  alt="image-20240401134642296" style="zoom:33%;" /></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-<p>输出：0.59632</p>
-<h3 id="例三计算近似定积分期望">例三、计算近似定积分、期望</h3>
-<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即
-<span class="math display">\[
-I=\int_{a}^{b}f(x)dx \approx
-q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
-\]</span>
-<strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即
-<span class="math display">\[
-I=\int_{\Omega }^{}f(x)dx \approx
-q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
-\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
-\]</span> 求<strong>期望</strong>：计算 <span class="math display">\[
-E_{X\sim p(\cdot)}[f(X)]=\int_{\Omega}^{}p(x)\cdot f(x)dx
-\]</span>
-，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的<span
-class="math inline">\(f(x_i)\)</span>换成<span
-class="math inline">\(p(x_i)\cdot f(x_i)\)</span>即可；</p>
-<p>假设用期望计算<span
-class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
-输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">期望 tensor([1.2539])</span><br><span class="line">积分 tensor([3.7617])</span><br><span class="line">3.744150881493428</span><br></pre></td></tr></table></figure>
-<h3 id="第二章习题2.2">第二章习题2.2</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
-<p>输出：tensor([17.3412])</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
-<p>输出：tensor([17.3020])</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>人工智能、强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第四章、DQN与Q学习</title>
     <url>/2024/04/06/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81DQN%E4%B8%8EQ%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<hr />
@@ -752,6 +683,91 @@ a_t=\underset{a}{argmax}\ Q(s_t,a;w)
       </categories>
       <tags>
         <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第二章、蒙特卡洛方法</title>
+    <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<ol type="1">
+<li><strong>随机变量</strong>记作<span
+class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
+class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
+class="math inline">\(P(X=0)=\frac{1}{2}\)</span>中的<span
+class="math inline">\(X\)</span>为大写；</li>
+<li>给定随机变量<span
+class="math inline">\(X\)</span>,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数<span
+class="math inline">\(F_X:R\to[0,1]\)</span>,定义为： <span
+class="math display">\[F_X(x)=P(X\le x)\]</span></li>
+<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong><span
+class="math inline">\(p(x)\)</span>,假设随机变量<span
+class="math inline">\(X\)</span>取值范围是集合<span
+class="math inline">\(\chi\)</span> 则有： <span
+class="math display">\[\sum_{x\in \chi}^{} p(x)=1\]</span> ,<span
+class="math inline">\(X\)</span>的概率质量函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\sum_{x\in
+\chi}^{}p(x)\cdot h(x)\]</span></li>
+<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong><span
+class="math inline">\(p(x)\)</span>,随机变量<span
+class="math inline">\(X\)</span>的取值范围<span
+class="math inline">\(\chi\)</span>是连续集合，则有：<span
+class="math display">\[\int_{-\infty }^{x} p(u)du=F_X(x)=P(X\le
+x)\]</span><span class="math display">\[\int_{-\infty }^{+\infty}
+p(u)du=1\]</span>,<span
+class="math inline">\(X\)</span>的概率密度函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
+h(x)dx\]</span>
+<img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134538137.png"  alt="image-20240401134538137" style="zoom: 33%;" /></li>
+</ol>
+<p>总的来说，就是<span
+class="math inline">\(\frac{抽中次数}{总抽样数}=精确的理论概率\)</span></p>
+<h3 id="例一近似pi值">例一、近似<span
+class="math inline">\(\pi\)</span>值</h3>
+<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134618614.png"  alt="image-20240401134618614" style="zoom:33%;" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
+<p>输出：3.13528 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
+10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
+<h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
+<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134642296.png"  alt="image-20240401134642296" style="zoom:33%;" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+<p>输出：0.59632</p>
+<h3 id="例三计算近似定积分期望">例三、计算近似定积分、期望</h3>
+<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即
+<span class="math display">\[
+I=\int_{a}^{b}f(x)dx \approx
+q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span>
+<strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即
+<span class="math display">\[
+I=\int_{\Omega }^{}f(x)dx \approx
+q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
+\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span> 求<strong>期望</strong>：计算 <span class="math display">\[
+E_{X\sim p(\cdot)}[f(X)]=\int_{\Omega}^{}p(x)\cdot f(x)dx
+\]</span>
+，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的<span
+class="math inline">\(f(x_i)\)</span>换成<span
+class="math inline">\(p(x_i)\cdot f(x_i)\)</span>即可；</p>
+<p>假设用期望计算<span
+class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
+输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">期望 tensor([1.2539])</span><br><span class="line">积分 tensor([3.7617])</span><br><span class="line">3.744150881493428</span><br></pre></td></tr></table></figure>
+<h3 id="第二章习题2.2">第二章习题2.2</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
+<p>输出：tensor([17.3412])</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
+<p>输出：tensor([17.3020])</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>人工智能、强化学习</tag>
       </tags>
   </entry>
 </search>
