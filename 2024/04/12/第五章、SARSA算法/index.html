@@ -19,25 +19,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="keep learning">
-<meta property="og:type" content="website">
-<meta property="og:title" content="LiWell&#39;s BLOG">
-<meta property="og:url" content="http://acoder123wew.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/index.html">
+    <meta name="description" content="王树森《深度强化学习》第五章学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第五章、SARSA算法">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="LiWell&#39;s BLOG">
-<meta property="og:description" content="keep learning">
+<meta property="og:description" content="王树森《深度强化学习》第五章学习笔记">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/image-20240412114045675.png">
+<meta property="article:published_time" content="2024-04-12T01:36:04.000Z">
+<meta property="article:modified_time" content="2024-04-12T07:48:02.819Z">
 <meta property="article:author" content="LiWell">
+<meta property="article:tag" content="强化学习、人工智能">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/image-20240412114045675.png">
 
 
-<link rel="canonical" href="http://acoder123wew.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">
+<link rel="canonical" href="http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/人工智能、强化学习/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/","path":"2024/04/12/第五章、SARSA算法/","title":"第五章、SARSA算法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: 人工智能、强化学习 | LiWell's BLOG</title>
+<title>第五章、SARSA算法 | LiWell's BLOG</title>
   
 
 
@@ -124,7 +129,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -137,6 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E6%A0%BC%E5%BD%A2%E5%BC%8F%E7%9A%84sarsa%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">1.表格形式的SARSA算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%BD%A2%E5%BC%8F%E7%9A%84sarsa%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.神经网络形式的SARSA算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%AD%A5td%E7%9B%AE%E6%A0%87"><span class="nav-number">3.</span> <span class="nav-text">3.多步TD目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-number">4.</span> <span class="nav-text">4.对比</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -178,70 +184,167 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">人工智能、强化学习
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="LiWell">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiWell's BLOG">
+      <meta itemprop="description" content="keep learning">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第五章、SARSA算法 | LiWell's BLOG">
+      <meta itemprop="description" content="王树森《深度强化学习》第五章学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第五章、SARSA算法
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2024</span>
+
+      <time title="创建时间：2024-04-12 09:36:04 / 修改时间：15:48:02" itemprop="dateCreated datePublished" datetime="2024-04-12T09:36:04+08:00">2024-04-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">深度强化学习读书笔记</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">王树森《深度强化学习》第五章学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
+class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
+class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
+<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
+<p>贝尔曼方程 <span class="math display">\[
+Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
+Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
+\]</span> 训练所用的<strong>五元组</strong>数据<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
+<p>观测到当前状态为<span
+class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
+class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
+class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
+<p>再根据当前策略做抽样得到<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
+<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
+q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
+\]</span>
+等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
+class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
+q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
+<p>更新公式： <span class="math display">\[
+q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
+\]</span></p>
+<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
+<p>用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,即<span
+class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
+S,a\in\mathcal A\)</span></p>
+<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
+<span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
+\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span></p>
+<p><span class="math display">\[
+损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
+,\delta_t=\hat{q}_t-\hat{y}_t
+\]</span></p>
+<p>更新价值网络参数 <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
+\]</span></p>
+<h4 id="多步td目标">3.多步TD目标</h4>
+<p><span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+q(s_{t+m},a_{t+m};w_{now})
+\]</span></p>
+<ul>
+<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
+class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
+</ul>
+<h4 id="对比">4.对比</h4>
+<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
+<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
+class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
+class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-04-01T15:18:56+08:00"
-              content="2024-04-01">
-          04-01
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" itemprop="url">
-          <span itemprop="name">第三章、强化学习基本概念</span>
-        </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 强化学习、人工智能</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/08/C-%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/" rel="prev" title="C++处理数据">
+                  <i class="fa fa-angle-left"></i> C++处理数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-03-31T22:37:33+08:00"
-              content="2024-03-31">
-          03-31
-        </time>
-      </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" itemprop="url">
-          <span itemprop="name">第二章、蒙特卡洛方法</span>
-        </a>
-      </div>
 
-      
-    </header>
-  </article>
 
-    </div>
-  </div>
-  
-  
-  
+
 
 </div>
   </main>
