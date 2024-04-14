@@ -403,6 +403,147 @@ descent）</h3>
       </tags>
   </entry>
   <entry>
+    <title>第七章、策略梯度方法</title>
+    <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<h4 id="策略网络">1. 策略网络</h4>
+<p>神经网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>称为策略网络，输入状态<span
+class="math inline">\(s\)</span>,输出<span
+class="math inline">\(\mathcal{A}\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
+<h4 id="策略学习的目标函数">2.策略学习的目标函数</h4>
+<p>首先还是复习相关的基本概念：</p>
+<ul>
+<li><p>回报：<span class="math inline">\(U_t=R_t+\gamma\cdot
+R_{t+1}+...+\gamma^{n-t}\cdot R_n\)</span>,由于<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span>,故<span
+class="math inline">\(U_t\)</span>依赖于<span
+class="math inline">\(t\)</span>时刻之后的所有状态和动作：<span
+class="math inline">\(S_t,A_t,S_{t+1},A_{t+1},...,\)</span></p></li>
+<li><p>动作价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>和动作<span
+class="math inline">\(a_t\)</span>看成已知观测值，然后将<span
+class="math inline">\(U_t\)</span>对之后的状态和动作求期望： <span
+class="math display">\[
+Q_{\pi}(s_t,a_t)=E[U_t|S_t=s_t,A_t=a_t]
+\]</span></p></li>
+<li><p>状态价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>看成已知观测值，将<span
+class="math inline">\(Q_{\pi}(s_t,A_t)\)</span>对使用策略网络<span
+class="math inline">\(\pi(\cdot|s_t;\theta)\)</span>决策后的<span
+class="math inline">\(A_t\)</span>求期望： <span class="math display">\[
+V_{\pi}(s_t)=E_{A_t\sim\pi(\cdot|s_t;\theta)}[Q_{\pi}(s_t,A_t)]
+\]</span> 状态价值取决于当前状态<span
+class="math inline">\(s_t\)</span>以及策略网络参数<span
+class="math inline">\(\theta\)</span>(因为策略网络的结构已经固定)</p></li>
+</ul>
+<p>为了使得目标函数排除当前状态<span
+class="math inline">\(s_t\)</span>的影响，可对其求期望，即我们定义目标函数为：
+<span class="math display">\[
+J(\theta)=E_S(V_\pi(S))
+\]</span> 优化问题为： <span class="math display">\[
+\underset{\theta}{max}\ J(\theta)
+\]</span> 可通过梯度上升来最大化<span
+class="math inline">\(J(\theta)\)</span>,即 <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot \nabla_{\theta}J(\theta_{now})
+\]</span>
+其中的梯度部分，可以通过以下展示的<strong>策略梯度定理</strong>来计算：</p>
+<ul>
+<li>策略梯度定理：设目标函数为<span
+class="math inline">\(J(\theta)=E_{S\sim
+d(\cdot)}[V_{\pi}(S)]\)</span>,设<span
+class="math inline">\(d(s)\)</span>为马尔可夫链稳态发布的概率质量（密度）函数，那么
+<span class="math display">\[
+\frac{\partial J(\theta)}{\partial \theta}
+=(1+\gamma+\gamma^2+...+\gamma^{n-1})\cdot E_{S\sim d(\cdot)}[E_{A\sim
+\pi(\cdot|S;\theta)}[\frac{\partial\
+ln\pi(A|S;\theta)}{\partial\theta}\cdot Q_{\pi}(S,A)]]
+\]</span>
+前面的系数无关紧要，可以省略，因为做梯度下降时前面都要乘以学习率<span
+class="math inline">\(\beta\)</span>.</li>
+</ul>
+<h4 id="reinforce">3.REINFORCE</h4>
+<p>首先使用蒙特卡洛方法对策略梯度进行近似， <span
+class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi(S,A)}\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 每当要做梯度下降时，从环境中观测出一个状态<span
+class="math inline">\(s\)</span>,根据当前最新的策略网络，随机抽样得出一个动作<span
+class="math inline">\(a\sim\pi(\cdot|s;\theta)\)</span></p>
+<p>计算梯度： <span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span>
+它是第一个式子的无偏估计，但在实际应用中依然不知道式中第一项<span
+class="math inline">\(Q_\pi(s,a)\)</span>的值，要么用实际观测到的回报<span
+class="math inline">\(u_t\)</span>代替（即REINFORCE)；要么像SARSA一样使用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算；</p>
+<p><strong>REINFORCE训练流程</strong>：</p>
+<p>（1）REINFORCE属于同策略，用策略网络<span
+class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
+<span class="math display">\[
+s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
+\]</span> (2) 计算所有回报： <span class="math display">\[
+u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
+\]</span> (3)用<span
+class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
+<span class="math display">\[
+\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
+\]</span> (4)做随机梯度上升更新策略网络参数： <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
+u_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
+\]</span></p>
+<h4 id="actor-critic">4.actor-critic</h4>
+<p><span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span></p>
+<p>actor-critic方法使用神经网络近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,这个神经网络称为“价值网络”，记作<span
+class="math inline">\(q(s,a;w)\)</span>,价值网络的输入是状态，输出是<span
+class="math inline">\(\mathcal{A}\)</span>维向量，它的每个元素代表每个动作的价值。actor-critic方法中，策略网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>基于状态<span
+class="math inline">\(s\)</span>做出动作<span
+class="math inline">\(a\)</span>,相当于演员；价值网络<span
+class="math inline">\(q(s,a;w)\)</span>评价在状态<span
+class="math inline">\(s\)</span>下做出动作<span
+class="math inline">\(a\)</span>的评分。如图所示：</p>
+<p><img src="/2024/04/14/第七章、策略梯度方法/image-20240414202442043.png"  alt="image-20240414202442043" style="zoom:50%;" /></p>
+<p><strong>actor-critic的训练流程</strong>:</p>
+<p>训练价值网络的目的是让其输出更接近于动作价值函数，使用损失函数的梯度下降；而训练策略网络的目的是最大化<span
+class="math inline">\(J(\theta)\)</span>,使用目标函数的梯度上升；</p>
+<p>(1)观测到当前状态<span
+class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
+class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
+class="math inline">\(a_t\)</span></strong>;</p>
+<p>(2)从环境中观测到新的状态<span
+class="math inline">\(s_{t+1}\)</span>和奖励<span
+class="math inline">\(r_t\)</span>;</p>
+<p>(3)根据新的状态再次做决策：<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi(\cdot|s_{t+1};\theta_{now})\)</span>,<strong>但不让智能体执行动作</strong><span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>,因为算出<span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>只是为了计算出训练价值网络时要用到的TD目标；</p>
+<p>(4)让价值网络打分： <span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now}),\hat{q}_{t+1}=q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span> (5)计算TD目标和TD误差： <span class="math display">\[
+\hat{y}_t=r_t+\gamma\cdot \hat{q}_{t+1},\delta_t=\hat{q}_t-\hat{y}_t
+\]</span> (6)更新价值网络： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wq(s_t,a_t;w_{now})
+\]</span> (7)更新策略网络： <span class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\hat{q}_t\cdot\nabla_\theta
+ln\pi(a_t|s_t;\theta_{now})
+\]</span> 注：actor-critic的价值网络存在自举问题，对于<span
+class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第三章、强化学习基本概念</title>
     <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
@@ -533,77 +674,6 @@ V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
       </tags>
   </entry>
   <entry>
-    <title>第五章、SARSA算法</title>
-    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<hr />
-<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
-class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
-class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
-<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
-<p>贝尔曼方程 <span class="math display">\[
-Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
-Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
-\]</span> 训练所用的<strong>五元组</strong>数据<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
-<p>观测到当前状态为<span
-class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
-class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
-class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
-class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
-<p>再根据当前策略做抽样得到<span
-class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
-<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
-q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
-\]</span>
-等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
-class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
-q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
-<p>更新公式： <span class="math display">\[
-q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
-\]</span></p>
-<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
-<p>用神经网络<span
-class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
-class="math inline">\(Q_\pi(s,a)\)</span>,即<span
-class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
-S,a\in\mathcal A\)</span></p>
-<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
-<span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
-\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
-\]</span></p>
-<p><span class="math display">\[
-损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
-,\delta_t=\hat{q}_t-\hat{y}_t
-\]</span></p>
-<p>更新价值网络参数 <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
-\]</span></p>
-<h4 id="多步td目标">3.多步TD目标</h4>
-<p><span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-q(s_{t+m},a_{t+m};w_{now})
-\]</span></p>
-<ul>
-<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
-class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
-</ul>
-<h4 id="对比">4.对比</h4>
-<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
-<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
-class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
-class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习、人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<ol type="1">
@@ -686,6 +756,77 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
       </categories>
       <tags>
         <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第五章、SARSA算法</title>
+    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
+class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
+class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
+<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
+<p>贝尔曼方程 <span class="math display">\[
+Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
+Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
+\]</span> 训练所用的<strong>五元组</strong>数据<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
+<p>观测到当前状态为<span
+class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
+class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
+class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
+<p>再根据当前策略做抽样得到<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
+<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
+q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
+\]</span>
+等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
+class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
+q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
+<p>更新公式： <span class="math display">\[
+q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
+\]</span></p>
+<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
+<p>用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,即<span
+class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
+S,a\in\mathcal A\)</span></p>
+<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
+<span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
+\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span></p>
+<p><span class="math display">\[
+损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
+,\delta_t=\hat{q}_t-\hat{y}_t
+\]</span></p>
+<p>更新价值网络参数 <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
+\]</span></p>
+<h4 id="多步td目标">3.多步TD目标</h4>
+<p><span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+q(s_{t+m},a_{t+m};w_{now})
+\]</span></p>
+<ul>
+<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
+class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
+</ul>
+<h4 id="对比">4.对比</h4>
+<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
+<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
+class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
+class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习、人工智能</tag>
       </tags>
   </entry>
   <entry>
@@ -1014,6 +1155,53 @@ a_t=\underset{a}{argmax}\ Q(s_t,a;w)
       </categories>
       <tags>
         <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性表</title>
+    <url>/2024/04/13/%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[<hr />
+<h3 id="线性表的基本概念">1.线性表的基本概念</h3>
+<ul>
+<li>线性表的定义：线性表是具有相同数据类型的n个数据元素的有限序列；</li>
+<li>线性表按存储结构可分为顺序表和链表；</li>
+</ul>
+<h3 id="顺序表">2.顺序表</h3>
+<p>线性表的顺序存储称为顺序表，其逻辑上相邻的两个元素在物理位置上也相邻，即逻辑顺序和物理顺序相同，可以随机存取，但插入操作需要将其后元素后移，删除操作需要将其后元素前移；</p>
+<ul>
+<li>顺序表插入操作的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+<li>顺序表删除操作的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+<li>顺序表按值查找的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">struct</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> * data;</span><br><span class="line">    <span class="type">int</span> MaxSize,length;</span><br><span class="line">&#125;SeqList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListInsert</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span> || i&gt;L.length+<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (L.length&gt;=L.MaxSize) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=L.length;j&gt;=i;j--)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j] = L.data[j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    L.data[i<span class="number">-1</span>] = e;</span><br><span class="line">    L.length++;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListDelete</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> &amp;e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>||i&gt;L.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    e = L.data[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=i;j&lt;L.length;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j<span class="number">-1</span>]=L.data[j];</span><br><span class="line">    &#125;</span><br><span class="line">    L.length--;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">LocateElem</span><span class="params">(SeqList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.data[i]==e)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    SeqList L;</span><br><span class="line">    L.MaxSize = <span class="number">50</span>;</span><br><span class="line">    L.data = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];</span><br><span class="line">    L.length = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[i]=i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">ListInsert</span>(L,<span class="number">5</span>,<span class="number">999</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> s = <span class="built_in">LocateElem</span>(L,<span class="number">999</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;999的次序是&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> e;</span><br><span class="line">    <span class="built_in">ListDelete</span>(L,<span class="number">5</span>,e);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;返回 &quot;</span> &lt;&lt; e &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="链表">3.链表</h3>
+<h4 id="单链表">3.1 单链表</h4>
+<p>线性表的链式存储称为单链表，对每个链表结点，除存放元素自身的信息外，还需要存放一个指向其后继结点的指针；链表的插入和删除不需要移动元素，时间复杂度为<span
+class="math inline">\(O(1)\)</span>,但无法随机存取，存取的时间复杂度为<span
+class="math inline">\(O(n)\)</span>。</p>
+<ul>
+<li><p>头插法建立单链表</p>
+<p>若带头结点，操作为<code>s-&gt;data=x;s-&gt;next=L-&gt;next;L-&gt;next=s;</code>;</p>
+<p>若不带头结点，操作为<code>s-&gt;next=L;L=s;</code>;</p>
+<p>单个结点的插入时间为<span
+class="math inline">\(O(1)\)</span>,建立表长为n的单链表总时间复杂度为<span
+class="math inline">\(O(n)\)</span>;</p></li>
+<li><p>尾插法建立单链表</p>
+<p>需要尾指针的帮助<code>s-&gt;data=x;r-&gt;next=s;r=s;</code></p></li>
+<li><p>按序号查找结点，按值查找结点，求表长，使用while循环<code>p=p-&gt;next</code>遍历即可；</p></li>
+<li><p>插入结点，删除结点，同理注意指针的变动顺序即可；</p></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表结点及链表定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LNode</span> * next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（不带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert_nohead</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next=L;</span><br><span class="line">        L = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾插法建立单链表</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_TailInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    LNode *s,*r=L;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        </span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        r-&gt;next = s;</span><br><span class="line">        r = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    r-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按序号查找结点值</span></span><br><span class="line"><span class="function">LNode *<span class="title">GetElem</span><span class="params">(LinkList L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j =<span class="number">1</span>;</span><br><span class="line">    LNode *p=L-&gt;next;</span><br><span class="line">    <span class="keyword">if</span> (i==<span class="number">0</span>) <span class="keyword">return</span> L;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;j&lt;i)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按值查找结点</span></span><br><span class="line"><span class="function">LNode *<span class="title">LocateElem</span><span class="params">(LinkList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;p-&gt;data!=e)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">InsertNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i,LNode *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = <span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    s-&gt;next = p-&gt;next;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DeleteNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *p=<span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    LNode * q = p-&gt;next;</span><br><span class="line">    p-&gt;next = q-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求表长</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">List_Length</span><span class="params">(LinkList L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">    LNode *p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        length++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//头插法（带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L;</span></span><br><span class="line"><span class="comment">    List_HeadInsert(L);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        L = L-&gt;next;</span></span><br><span class="line"><span class="comment">        if(L)</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L-&gt;data &lt;&lt;&quot;\t&quot;;      </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//头插法（不带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L_1;</span></span><br><span class="line"><span class="comment">    List_HeadInsert_nohead(L_1);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L_1)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        </span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L_1-&gt;data &lt;&lt;&quot;\t&quot;;     </span></span><br><span class="line"><span class="comment">        L_1 = L_1-&gt;next; </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//尾插法（带头结点）</span></span><br><span class="line">    LinkList L;</span><br><span class="line">    <span class="built_in">List_TailInsert</span>(L);</span><br><span class="line">    LNode * L_ = L;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按序号查找结点</span></span><br><span class="line">    LNode * L_GetElem =<span class="built_in">GetElem</span>(L,<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_GetElem) cout &lt;&lt; L_GetElem-&gt;data &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按值查找结点</span></span><br><span class="line">    LNode * L_LocateElem =<span class="built_in">LocateElem</span>(L,<span class="number">444</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_LocateElem&amp;&amp;L_LocateElem-&gt;data==<span class="number">444</span>) cout &lt;&lt; <span class="string">&quot;成功啦&quot;</span> &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入结点</span></span><br><span class="line">    LNode * s;</span><br><span class="line">    s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    s-&gt;data = <span class="number">88888</span>;</span><br><span class="line">    s-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">InsertNode</span>(L,<span class="number">3</span>,s);</span><br><span class="line"></span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除结点</span></span><br><span class="line">    <span class="built_in">DeleteNode</span>(L,<span class="number">3</span>);</span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;length=&quot;</span> &lt;&lt; <span class="built_in">List_Length</span>(L);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="双链表">3.2 双链表</h4>
+]]></content>
+      <categories>
+        <category>重温数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
 </search>

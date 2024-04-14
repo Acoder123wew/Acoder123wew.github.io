@@ -19,27 +19,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Hello Hexo">
+    <meta name="description" content="王树森《深度强化学习》第七章、策略梯度方法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://acoder123wew.github.io/2024/03/31/hello-world/index.html">
+<meta property="og:title" content="第七章、策略梯度方法">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="LiWell&#39;s BLOG">
-<meta property="og:description" content="Hello Hexo">
+<meta property="og:description" content="王树森《深度强化学习》第七章、策略梯度方法">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-31T11:09:46.676Z">
-<meta property="article:modified_time" content="2024-04-01T06:46:01.922Z">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/image-20240414202442043.png">
+<meta property="article:published_time" content="2024-04-14T04:52:53.000Z">
+<meta property="article:modified_time" content="2024-04-14T13:06:05.767Z">
 <meta property="article:author" content="LiWell">
+<meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/image-20240414202442043.png">
 
 
-<link rel="canonical" href="http://acoder123wew.github.io/2024/03/31/hello-world/">
+<link rel="canonical" href="http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/03/31/hello-world/","path":"2024/03/31/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/","path":"2024/04/14/第七章、策略梯度方法/","title":"第七章、策略梯度方法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | LiWell's BLOG</title>
+<title>第七章、策略梯度方法 | LiWell's BLOG</title>
   
 
 
@@ -139,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-hexo"><span class="nav-number">1.</span> <span class="nav-text">Hello Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">2.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">2.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">2.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">2.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">2.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C"><span class="nav-number">1.</span> <span class="nav-text">1. 策略网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E7%9A%84%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">2.策略学习的目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reinforce"><span class="nav-number">3.</span> <span class="nav-text">3.REINFORCE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#actor-critic"><span class="nav-number">4.</span> <span class="nav-text">4.actor-critic</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/03/31/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | LiWell's BLOG">
-      <meta itemprop="description" content="Hello Hexo">
+      <meta itemprop="name" content="第七章、策略梯度方法 | LiWell's BLOG">
+      <meta itemprop="description" content="王树森《深度强化学习》第七章、策略梯度方法">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          第七章、策略梯度方法
         </h1>
 
         <div class="post-meta-container">
@@ -220,15 +223,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-03-31 19:09:46" itemprop="dateCreated datePublished" datetime="2024-03-31T19:09:46+08:00">2024-03-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-01 14:46:01" itemprop="dateModified" datetime="2024-04-01T14:46:01+08:00">2024-04-01</time>
+      <time title="创建时间：2024-04-14 12:52:53 / 修改时间：21:06:05" itemprop="dateCreated datePublished" datetime="2024-04-14T12:52:53+08:00">2024-04-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,7 +233,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+          <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">深度强化学习读书笔记</span></a>
         </span>
     </span>
 
@@ -250,37 +247,143 @@
     </span>
 </div>
 
-            <div class="post-description">Hello Hexo</div>
+            <div class="post-description">王树森《深度强化学习》第七章、策略梯度方法</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="hello-hexo">Hello Hexo</h2>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <div class="post-body" itemprop="articleBody"><hr />
+<h4 id="策略网络">1. 策略网络</h4>
+<p>神经网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>称为策略网络，输入状态<span
+class="math inline">\(s\)</span>,输出<span
+class="math inline">\(\mathcal{A}\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
+<h4 id="策略学习的目标函数">2.策略学习的目标函数</h4>
+<p>首先还是复习相关的基本概念：</p>
+<ul>
+<li><p>回报：<span class="math inline">\(U_t=R_t+\gamma\cdot
+R_{t+1}+...+\gamma^{n-t}\cdot R_n\)</span>,由于<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span>,故<span
+class="math inline">\(U_t\)</span>依赖于<span
+class="math inline">\(t\)</span>时刻之后的所有状态和动作：<span
+class="math inline">\(S_t,A_t,S_{t+1},A_{t+1},...,\)</span></p></li>
+<li><p>动作价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>和动作<span
+class="math inline">\(a_t\)</span>看成已知观测值，然后将<span
+class="math inline">\(U_t\)</span>对之后的状态和动作求期望： <span
+class="math display">\[
+Q_{\pi}(s_t,a_t)=E[U_t|S_t=s_t,A_t=a_t]
+\]</span></p></li>
+<li><p>状态价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>看成已知观测值，将<span
+class="math inline">\(Q_{\pi}(s_t,A_t)\)</span>对使用策略网络<span
+class="math inline">\(\pi(\cdot|s_t;\theta)\)</span>决策后的<span
+class="math inline">\(A_t\)</span>求期望： <span class="math display">\[
+V_{\pi}(s_t)=E_{A_t\sim\pi(\cdot|s_t;\theta)}[Q_{\pi}(s_t,A_t)]
+\]</span> 状态价值取决于当前状态<span
+class="math inline">\(s_t\)</span>以及策略网络参数<span
+class="math inline">\(\theta\)</span>(因为策略网络的结构已经固定)</p></li>
+</ul>
+<p>为了使得目标函数排除当前状态<span
+class="math inline">\(s_t\)</span>的影响，可对其求期望，即我们定义目标函数为：
+<span class="math display">\[
+J(\theta)=E_S(V_\pi(S))
+\]</span> 优化问题为： <span class="math display">\[
+\underset{\theta}{max}\ J(\theta)
+\]</span> 可通过梯度上升来最大化<span
+class="math inline">\(J(\theta)\)</span>,即 <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot \nabla_{\theta}J(\theta_{now})
+\]</span>
+其中的梯度部分，可以通过以下展示的<strong>策略梯度定理</strong>来计算：</p>
+<ul>
+<li>策略梯度定理：设目标函数为<span
+class="math inline">\(J(\theta)=E_{S\sim
+d(\cdot)}[V_{\pi}(S)]\)</span>,设<span
+class="math inline">\(d(s)\)</span>为马尔可夫链稳态发布的概率质量（密度）函数，那么
+<span class="math display">\[
+\frac{\partial J(\theta)}{\partial \theta}
+=(1+\gamma+\gamma^2+...+\gamma^{n-1})\cdot E_{S\sim d(\cdot)}[E_{A\sim
+\pi(\cdot|S;\theta)}[\frac{\partial\
+ln\pi(A|S;\theta)}{\partial\theta}\cdot Q_{\pi}(S,A)]]
+\]</span>
+前面的系数无关紧要，可以省略，因为做梯度下降时前面都要乘以学习率<span
+class="math inline">\(\beta\)</span>.</li>
+</ul>
+<h4 id="reinforce">3.REINFORCE</h4>
+<p>首先使用蒙特卡洛方法对策略梯度进行近似， <span
+class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi(S,A)}\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 每当要做梯度下降时，从环境中观测出一个状态<span
+class="math inline">\(s\)</span>,根据当前最新的策略网络，随机抽样得出一个动作<span
+class="math inline">\(a\sim\pi(\cdot|s;\theta)\)</span></p>
+<p>计算梯度： <span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span>
+它是第一个式子的无偏估计，但在实际应用中依然不知道式中第一项<span
+class="math inline">\(Q_\pi(s,a)\)</span>的值，要么用实际观测到的回报<span
+class="math inline">\(u_t\)</span>代替（即REINFORCE)；要么像SARSA一样使用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算；</p>
+<p><strong>REINFORCE训练流程</strong>：</p>
+<p>（1）REINFORCE属于同策略，用策略网络<span
+class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
+<span class="math display">\[
+s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
+\]</span> (2) 计算所有回报： <span class="math display">\[
+u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
+\]</span> (3)用<span
+class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
+<span class="math display">\[
+\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
+\]</span> (4)做随机梯度上升更新策略网络参数： <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
+u_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
+\]</span></p>
+<h4 id="actor-critic">4.actor-critic</h4>
+<p><span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span></p>
+<p>actor-critic方法使用神经网络近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,这个神经网络称为“价值网络”，记作<span
+class="math inline">\(q(s,a;w)\)</span>,价值网络的输入是状态，输出是<span
+class="math inline">\(\mathcal{A}\)</span>维向量，它的每个元素代表每个动作的价值。actor-critic方法中，策略网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>基于状态<span
+class="math inline">\(s\)</span>做出动作<span
+class="math inline">\(a\)</span>,相当于演员；价值网络<span
+class="math inline">\(q(s,a;w)\)</span>评价在状态<span
+class="math inline">\(s\)</span>下做出动作<span
+class="math inline">\(a\)</span>的评分。如图所示：</p>
+<p><img src="/2024/04/14/第七章、策略梯度方法/image-20240414202442043.png"  alt="image-20240414202442043" style="zoom:50%;" /></p>
+<p><strong>actor-critic的训练流程</strong>:</p>
+<p>训练价值网络的目的是让其输出更接近于动作价值函数，使用损失函数的梯度下降；而训练策略网络的目的是最大化<span
+class="math inline">\(J(\theta)\)</span>,使用目标函数的梯度上升；</p>
+<p>(1)观测到当前状态<span
+class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
+class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
+class="math inline">\(a_t\)</span></strong>;</p>
+<p>(2)从环境中观测到新的状态<span
+class="math inline">\(s_{t+1}\)</span>和奖励<span
+class="math inline">\(r_t\)</span>;</p>
+<p>(3)根据新的状态再次做决策：<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi(\cdot|s_{t+1};\theta_{now})\)</span>,<strong>但不让智能体执行动作</strong><span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>,因为算出<span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>只是为了计算出训练价值网络时要用到的TD目标；</p>
+<p>(4)让价值网络打分： <span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now}),\hat{q}_{t+1}=q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span> (5)计算TD目标和TD误差： <span class="math display">\[
+\hat{y}_t=r_t+\gamma\cdot \hat{q}_{t+1},\delta_t=\hat{q}_t-\hat{y}_t
+\]</span> (6)更新价值网络： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wq(s_t,a_t;w_{now})
+\]</span> (7)更新策略网络： <span class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\hat{q}_t\cdot\nabla_\theta
+ln\pi(a_t|s_t;\theta_{now})
+\]</span> 注：actor-critic的价值网络存在自举问题，对于<span
+class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p>
 
     </div>
 
@@ -289,16 +392,19 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2024/04/13/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="prev" title="线性表">
+                  <i class="fa fa-angle-left"></i> 线性表
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" rel="next" title="第二章、蒙特卡洛方法">
-                  第二章、蒙特卡洛方法 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
