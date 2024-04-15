@@ -67,34 +67,6 @@ torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化�
       </tags>
   </entry>
   <entry>
-    <title>C++初级知识</title>
-    <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<ul>
-<li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
-<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，也就是说，主函数main()的返回值返回给操作系统，<code>void</code>表示不返回信息或不接受参数；</li>
-<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略名称空间，直接使用<code>cout</code>;</li>
-<li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
-<li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
-<li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
-<li>变量声明：1.分配指定数据类型的内存
-2.指定存储在这个内存中的数据的名称；</li>
-<li>声明包括定义声明、引用声明；</li>
-<li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
-Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
-<li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
-<li><strong>函数原型</strong>：在调用某个函数之前，应提供其原型，要么在源代码文件中main()函数前输入函数原型，要么<code>#include</code>该函数所在的头文件；</li>
-<li>C++不允许将函数定义嵌套在另一个函数定义中，每个函数的定义都是独立的；</li>
-<li>在任何一门编程语言中，对变量、函数、对象等，都需要尽可能使用一目了然的命名，推荐使用”驼峰命名法“；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>C++学习</category>
-      </categories>
-      <tags>
-        <tag>编程语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>C++处理数据</title>
     <url>/2024/04/08/C-%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE/</url>
     <content><![CDATA[<p>ccc</p>
@@ -130,6 +102,304 @@ long类型；若无后缀且能存的下，则默认使用int类型存储；</p>
       </categories>
       <tags>
         <tag>编程语言、C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++初级知识</title>
+    <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<ul>
+<li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
+<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，也就是说，主函数main()的返回值返回给操作系统，<code>void</code>表示不返回信息或不接受参数；</li>
+<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略名称空间，直接使用<code>cout</code>;</li>
+<li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
+<li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
+<li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
+<li>变量声明：1.分配指定数据类型的内存
+2.指定存储在这个内存中的数据的名称；</li>
+<li>声明包括定义声明、引用声明；</li>
+<li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
+Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
+<li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
+<li><strong>函数原型</strong>：在调用某个函数之前，应提供其原型，要么在源代码文件中main()函数前输入函数原型，要么<code>#include</code>该函数所在的头文件；</li>
+<li>C++不允许将函数定义嵌套在另一个函数定义中，每个函数的定义都是独立的；</li>
+<li>在任何一门编程语言中，对变量、函数、对象等，都需要尽可能使用一目了然的命名，推荐使用”驼峰命名法“；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+      <tags>
+        <tag>编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/03/31/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
+first post. Check <a href="https://hexo.io/docs/">documentation</a> for
+more info. If you get any problems when using Hexo, you can find the
+answer in <a
+href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
+you can ask me on <a
+href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="hello-hexo">Hello Hexo</h2>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a
+href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>斐波那契数列算法总结</title>
+    <url>/2024/04/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h3 id="斐波那契数列">斐波那契数列：</h3>
+<p><span class="math inline">\(\begin{cases}
+0, &amp; \text{  } n=0 \\
+1,&amp; \text{  } n=1,2 \\
+f(n-1)+f(n-2), &amp; \text{  } n&gt;2
+\end{cases}\)</span></p>
+<h4 id="方法一朴素递归">方法一、朴素递归</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>) + <span class="built_in">fib</span>(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>斐波那契数列的通项公式为： <span class="math display">\[
+f(n)=\frac{1}{\sqrt{5}} \left [ (\frac{1+\sqrt[]{5} }{2} )^{n}-
+(\frac{1-\sqrt[]{5} }{2} )^{n}\right ]
+\]</span></p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240401221016279.png"  alt="image-20240401221016279" style="zoom: 55%;" /></p>
+<p>如图所示，递归计算的终点都是<span
+class="math inline">\(fib(1)\)</span>和<span
+class="math inline">\(fib(2)\)</span>，因为它们是直接返回的，因此计算<span
+class="math inline">\(fib(n)\)</span>的时间复杂度为计算<span
+class="math inline">\(fib(1)\)</span>和<span
+class="math inline">\(fib(2)\)</span>的次数，同时也等于<span
+class="math inline">\(fib(n)\)</span>本身，因此<span
+class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
+(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
+])=O((\frac{1+\sqrt[]{5} }{2}
+)^{n})\)</span>，第二项绝对值小于1，为<span
+class="math inline">\(n\)</span>阶无穷小，可舍去，空间复杂度为函数调用栈的高度<span
+class="math inline">\(n\)</span>,即<span
+class="math inline">\(S(n)=O(n)\)</span>。</p>
+<h4 id="方法二尾递归">方法二、尾递归</h4>
+<p>首先需要清楚递归和尾递归的区别：</p>
+<ul>
+<li>1.递归：在调用函数自身后还有事要做，需要保存当前轮次的环境，以供后续返回时使用；</li>
+</ul>
+<p>如计算自然数前<span class="math inline">\(n\)</span>项和的函数<span
+class="math inline">\(sum(n)\)</span>,递归实现方式如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> n + <span class="built_in">sum</span>(n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的“+",即前面所说”还要做的事“，其计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>)</span><br><span class="line"><span class="number">5</span> + <span class="built_in">sum</span>(<span class="number">4</span>)</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="built_in">sum</span>(<span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="built_in">sum</span>(<span class="number">2</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="built_in">sum</span>(<span class="number">1</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="built_in">sum</span>(<span class="number">0</span>)))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="number">0</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="number">1</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="number">6</span>)</span><br><span class="line"><span class="number">5</span> + <span class="number">10</span></span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>2.尾递归：每轮直接return，不需要保存当前环境供后续处理。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> total = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(n<span class="number">-1</span>,total+n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">3</span>, <span class="number">9</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">2</span>, <span class="number">12</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">1</span>, <span class="number">14</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">0</span>, <span class="number">15</span>)</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>利用尾递归求斐波那契数列：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> x1,<span class="type">int</span> x2,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x1+x2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(x2,x1+x2,n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fib</span>(<span class="number">6</span>)=<span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>观察变量<span
+class="math inline">\(n\)</span>的变化可知，时间复杂度<span
+class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
+class="math inline">\(x1,x2\)</span>,因此空间复杂度<span
+class="math inline">\(S(n)=O(1)\)</span>.</p>
+<h4 id="方法三非递归迭代">方法三、非递归(迭代)</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> x=<span class="number">1</span>,y=<span class="number">1</span>;<span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-2</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = x+y;</span><br><span class="line">            x = y;</span><br><span class="line">            y = tmp;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察变量<span
+class="math inline">\(n\)</span>的变化可知，时间复杂度<span
+class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
+class="math inline">\(x,y,i,tmp\)</span>,因此空间复杂度<span
+class="math inline">\(S(n)=O(1)\)</span>.</p>
+<h4 id="方法四矩阵快速幂">方法四、矩阵快速幂</h4>
+<ul>
+<li><h5 id="快速幂">快速幂：</h5>
+<p>在计算<span class="math inline">\(a^n\)</span>时，若使用<span
+class="math inline">\(a^n=a\ \cdot a \ \cdot a...a
+(n个)\)</span>方法，则时间复杂度为<span
+class="math inline">\(O(n)\)</span>;快速幂的思想是，将<span
+class="math inline">\(n\)</span>写成二进制形式</p>
+<p><span
+class="math inline">\((n_tn_{t-1}...n_1n_0)_2\)</span>,那么<span
+class="math inline">\(a^n = a^{n_t\cdot 2^t}*a^{n_{t-1}\cdot
+2^{t-1}}*...*a^{n_0\cdot 2^0}\)</span>,其中<span
+class="math inline">\(n_i\in\{0,1\}\)</span></p>
+<p>因此我们只需要将<span class="math inline">\(2^0\ 2^1....2^{\left
+\lfloor log_{2}{n} \right
+\rfloor}\)</span>算出，再将二进制位为1对应的幂运算结果相乘即可，时间复杂度为<span
+class="math inline">\(O(log n)\)</span>。</p>
+<p>比如：<img src="/2024/04/01/斐波那契数列算法总结/image-20240403132154215.png"  alt="image-20240403132154215" style="zoom:67%;" /><img src="/2024/04/01/斐波那契数列算法总结/image-20240403132250525.png"  alt="image-20240403132250525" style="zoom:67%;" /></p>
+<p>快速幂分为递归和迭代两种实现方式，两者理论时间复杂度都为<span
+class="math inline">\(O(logn)\)</span>,通常情况下，迭代性能较好。</p>
+<h5 id="递归版本">(1)递归版本</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">double</span> a,<span class="type">long</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1.0</span>/<span class="built_in">quickPow</span>(a,-n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> res = <span class="built_in">quickPow</span>(a,n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res *a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如：计算<span
+class="math inline">\(2^5\)</span>的调用及计算过程如下：</p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403135754758.png"  alt="image-20240403135754758" style="zoom: 25%;" /></p></li>
+</ul>
+<h5 id="迭代版本">(2)迭代版本</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span>  n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">quickPow</span>(a,-n);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)<span class="comment">//相当于b%2==1</span></span><br><span class="line">        &#123;</span><br><span class="line">            res = res * a;</span><br><span class="line">        &#125;</span><br><span class="line">        a = a * a;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;<span class="comment">//右移一位相当于b=b/2;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>如计算<span class="math inline">\(2^{10}\)</span>的迭代过程如下：</p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403142939144.png"  alt="image-20240403142939144" style="zoom: 33%;" /></p>
+<ul>
+<li><h3 id="快速矩阵幂">快速矩阵幂</h3>
+<p>由斐波那契数列的递推公式可知：</p>
+<p><span
+class="math inline">\(\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}=\cdot
+\cdot \cdot =\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}f(1)\\f(0)\end{bmatrix}=\cdot
+\cdot \cdot =\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}
+1\\0\end{bmatrix}\)</span></p>
+<p>故，令<span class="math inline">\(A=\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\)</span>，则<span
+class="math inline">\(f(n)=A[0][0]\)</span></p>
+<p>矩阵快速幂和快速幂的方法和思想一致，都是将先前的计算结果保存下来以供后续使用，减小计算量，只需将<span
+class="math inline">\(1\)</span>换为单位矩阵，将常熟换为矩阵<span
+class="math inline">\(A\)</span>即可.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩阵乘法函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">multiply</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> b[<span class="number">2</span>][<span class="number">2</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mul[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            mul[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                mul[i][j] += a[i][k] * b[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将乘法结果复制回a矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            a[i][j] = mul[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速矩阵幂算法</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">matrixPower</span><span class="params">(<span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;; <span class="comment">// 单位矩阵</span></span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">multiply</span>(result, matrix);</span><br><span class="line">        <span class="built_in">multiply</span>(matrix, matrix);</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算斐波那契数</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fibonacci</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">matrixPower</span>(matrix, n - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    cout &lt;&lt;<span class="built_in">fibonacci</span>(<span class="number">7</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析程序知时间复杂度为<span
+class="math inline">\(O(logn)\)</span>,空间复杂度为<span
+class="math inline">\(O(1)\)</span></p>
+<h3 id="总结">总结</h3>
+<p>（1)朴素递归：<span
+class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
+(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
+])=O((\frac{1+\sqrt[]{5} }{2} )^{n})\)</span>,<span
+class="math inline">\(S(n)=O(n)\)</span></p>
+<ol start="2" type="1">
+<li>尾递归：<span class="math inline">\(T(n)=O(n)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></li>
+</ol>
+<p>(3)非递归（迭代）：<span
+class="math inline">\(T(n)=O(n)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></p>
+<p>（4) 矩阵快速幂：<span
+class="math inline">\(T(n)=O(logn)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程算法</category>
+      </categories>
+      <tags>
+        <tag>算法、数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一章、机器学习基础</title>
+    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
+<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
+Regression）</h4>
+<p>线性回归简单理解即”拟合一条曲线“，可通过<span
+class="math inline">\(x\)</span>的值预测<span
+class="math inline">\(y\)</span>值 <span class="math display">\[
+\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
+\]</span></p>
+<ul>
+<li><p>训练集：用于优化模型参数</p></li>
+<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
+<li><p>测试集：用于评估模型性能</p>
+<p><strong>线性回归从零开始实现</strong>，<a
+href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
+Regression)</h4>
+<p>逻辑斯蒂回归=线性回归+<span
+class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
+class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
+class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
+class="math display">\[
+f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
+\]</span></p>
+<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
+交叉熵损失函数(Cross Entropy Loss Function)</h4>
+<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
+class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
+class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
+<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
+<span class="math display">\[
+KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
+\]</span> 其中交叉熵<span
+class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
+<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
+lnp_j\)</span></p>
+<p>当概率分布<span
+class="math inline">\(p\)</span>固定时，也就是说我们要让<span
+class="math inline">\(q\)</span>尽量接近<span
+class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
+<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
+<p>softmax分类=线性函数+softmax激活函数</p>
+<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
+<span class="math display">\[
+\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
+R^{d\times1})+b\in R^{k\times1}
+\]</span> 其中<span
+class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
+<p>通常情况下，需要对矩阵<span
+class="math inline">\(W\)</span>和向量<span
+class="math inline">\(b\)</span>做规范化，使得<span
+class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
+class="math inline">\(w_j\)</span>为矩阵<span
+class="math inline">\(W\)</span>的第<span
+class="math inline">\(j\)</span>行，即矩阵<span
+class="math inline">\(W\)</span>的每列和为0，向量<span
+class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
+<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
+<ul>
+<li><p><span class="math inline">\(min\_max\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p><span class="math inline">\(z\_score\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
+<li><p>正数归一化： <span
+class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p>中心化： <span
+class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
+</ul>
+<h3 id="神经网络简介">1.2 神经网络简介</h3>
+<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
+<p><span class="math display">\[
+{x}’=\sigma(z)=\sigma(Wx+b)
+\]</span></p>
+<p>即线性函数+激活函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
+<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
+<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
+<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
+descent）</h3>
+<ul>
+<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
+<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
+<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
+<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
+<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
+<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>机器学习、强化学习、人工智能</tag>
       </tags>
   </entry>
   <entry>
@@ -274,276 +544,6 @@ class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p
       </tags>
   </entry>
   <entry>
-    <title>斐波那契数列算法总结</title>
-    <url>/2024/04/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h3 id="斐波那契数列">斐波那契数列：</h3>
-<p><span class="math inline">\(\begin{cases}
-0, &amp; \text{  } n=0 \\
-1,&amp; \text{  } n=1,2 \\
-f(n-1)+f(n-2), &amp; \text{  } n&gt;2
-\end{cases}\)</span></p>
-<h4 id="方法一朴素递归">方法一、朴素递归</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>) + <span class="built_in">fib</span>(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>斐波那契数列的通项公式为： <span class="math display">\[
-f(n)=\frac{1}{\sqrt{5}} \left [ (\frac{1+\sqrt[]{5} }{2} )^{n}-
-(\frac{1-\sqrt[]{5} }{2} )^{n}\right ]
-\]</span></p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240401221016279.png"  alt="image-20240401221016279" style="zoom: 55%;" /></p>
-<p>如图所示，递归计算的终点都是<span
-class="math inline">\(fib(1)\)</span>和<span
-class="math inline">\(fib(2)\)</span>，因为它们是直接返回的，因此计算<span
-class="math inline">\(fib(n)\)</span>的时间复杂度为计算<span
-class="math inline">\(fib(1)\)</span>和<span
-class="math inline">\(fib(2)\)</span>的次数，同时也等于<span
-class="math inline">\(fib(n)\)</span>本身，因此<span
-class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
-(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
-])=O((\frac{1+\sqrt[]{5} }{2}
-)^{n})\)</span>，第二项绝对值小于1，为<span
-class="math inline">\(n\)</span>阶无穷小，可舍去，空间复杂度为函数调用栈的高度<span
-class="math inline">\(n\)</span>,即<span
-class="math inline">\(S(n)=O(n)\)</span>。</p>
-<h4 id="方法二尾递归">方法二、尾递归</h4>
-<p>首先需要清楚递归和尾递归的区别：</p>
-<ul>
-<li>1.递归：在调用函数自身后还有事要做，需要保存当前轮次的环境，以供后续返回时使用；</li>
-</ul>
-<p>如计算自然数前<span class="math inline">\(n\)</span>项和的函数<span
-class="math inline">\(sum(n)\)</span>,递归实现方式如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> n + <span class="built_in">sum</span>(n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里的“+",即前面所说”还要做的事“，其计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>)</span><br><span class="line"><span class="number">5</span> + <span class="built_in">sum</span>(<span class="number">4</span>)</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="built_in">sum</span>(<span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="built_in">sum</span>(<span class="number">2</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="built_in">sum</span>(<span class="number">1</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="built_in">sum</span>(<span class="number">0</span>)))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="number">0</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="number">1</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="number">6</span>)</span><br><span class="line"><span class="number">5</span> + <span class="number">10</span></span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>2.尾递归：每轮直接return，不需要保存当前环境供后续处理。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> total = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(n<span class="number">-1</span>,total+n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">3</span>, <span class="number">9</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">2</span>, <span class="number">12</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">1</span>, <span class="number">14</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">0</span>, <span class="number">15</span>)</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
-<p>利用尾递归求斐波那契数列：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> x1,<span class="type">int</span> x2,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x1+x2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(x2,x1+x2,n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fib</span>(<span class="number">6</span>)=<span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
-<p>观察变量<span
-class="math inline">\(n\)</span>的变化可知，时间复杂度<span
-class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
-class="math inline">\(x1,x2\)</span>,因此空间复杂度<span
-class="math inline">\(S(n)=O(1)\)</span>.</p>
-<h4 id="方法三非递归迭代">方法三、非递归(迭代)</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> x=<span class="number">1</span>,y=<span class="number">1</span>;<span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-2</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = x+y;</span><br><span class="line">            x = y;</span><br><span class="line">            y = tmp;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>观察变量<span
-class="math inline">\(n\)</span>的变化可知，时间复杂度<span
-class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
-class="math inline">\(x,y,i,tmp\)</span>,因此空间复杂度<span
-class="math inline">\(S(n)=O(1)\)</span>.</p>
-<h4 id="方法四矩阵快速幂">方法四、矩阵快速幂</h4>
-<ul>
-<li><h5 id="快速幂">快速幂：</h5>
-<p>在计算<span class="math inline">\(a^n\)</span>时，若使用<span
-class="math inline">\(a^n=a\ \cdot a \ \cdot a...a
-(n个)\)</span>方法，则时间复杂度为<span
-class="math inline">\(O(n)\)</span>;快速幂的思想是，将<span
-class="math inline">\(n\)</span>写成二进制形式</p>
-<p><span
-class="math inline">\((n_tn_{t-1}...n_1n_0)_2\)</span>,那么<span
-class="math inline">\(a^n = a^{n_t\cdot 2^t}*a^{n_{t-1}\cdot
-2^{t-1}}*...*a^{n_0\cdot 2^0}\)</span>,其中<span
-class="math inline">\(n_i\in\{0,1\}\)</span></p>
-<p>因此我们只需要将<span class="math inline">\(2^0\ 2^1....2^{\left
-\lfloor log_{2}{n} \right
-\rfloor}\)</span>算出，再将二进制位为1对应的幂运算结果相乘即可，时间复杂度为<span
-class="math inline">\(O(log n)\)</span>。</p>
-<p>比如：<img src="/2024/04/01/斐波那契数列算法总结/image-20240403132154215.png"  alt="image-20240403132154215" style="zoom:67%;" /><img src="/2024/04/01/斐波那契数列算法总结/image-20240403132250525.png"  alt="image-20240403132250525" style="zoom:67%;" /></p>
-<p>快速幂分为递归和迭代两种实现方式，两者理论时间复杂度都为<span
-class="math inline">\(O(logn)\)</span>,通常情况下，迭代性能较好。</p>
-<h5 id="递归版本">(1)递归版本</h5>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">double</span> a,<span class="type">long</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1.0</span>/<span class="built_in">quickPow</span>(a,-n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> res = <span class="built_in">quickPow</span>(a,n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res *a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如：计算<span
-class="math inline">\(2^5\)</span>的调用及计算过程如下：</p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403135754758.png"  alt="image-20240403135754758" style="zoom: 25%;" /></p></li>
-</ul>
-<h5 id="迭代版本">(2)迭代版本</h5>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span>  n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">quickPow</span>(a,-n);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)<span class="comment">//相当于b%2==1</span></span><br><span class="line">        &#123;</span><br><span class="line">            res = res * a;</span><br><span class="line">        &#125;</span><br><span class="line">        a = a * a;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;<span class="comment">//右移一位相当于b=b/2;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>如计算<span class="math inline">\(2^{10}\)</span>的迭代过程如下：</p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403142939144.png"  alt="image-20240403142939144" style="zoom: 33%;" /></p>
-<ul>
-<li><h3 id="快速矩阵幂">快速矩阵幂</h3>
-<p>由斐波那契数列的递推公式可知：</p>
-<p><span
-class="math inline">\(\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}=\cdot
-\cdot \cdot =\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}f(1)\\f(0)\end{bmatrix}=\cdot
-\cdot \cdot =\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}
-1\\0\end{bmatrix}\)</span></p>
-<p>故，令<span class="math inline">\(A=\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\)</span>，则<span
-class="math inline">\(f(n)=A[0][0]\)</span></p>
-<p>矩阵快速幂和快速幂的方法和思想一致，都是将先前的计算结果保存下来以供后续使用，减小计算量，只需将<span
-class="math inline">\(1\)</span>换为单位矩阵，将常熟换为矩阵<span
-class="math inline">\(A\)</span>即可.</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩阵乘法函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">multiply</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> b[<span class="number">2</span>][<span class="number">2</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mul[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            mul[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                mul[i][j] += a[i][k] * b[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将乘法结果复制回a矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            a[i][j] = mul[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速矩阵幂算法</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">matrixPower</span><span class="params">(<span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;; <span class="comment">// 单位矩阵</span></span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">multiply</span>(result, matrix);</span><br><span class="line">        <span class="built_in">multiply</span>(matrix, matrix);</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算斐波那契数</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fibonacci</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">matrixPower</span>(matrix, n - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    cout &lt;&lt;<span class="built_in">fibonacci</span>(<span class="number">7</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>分析程序知时间复杂度为<span
-class="math inline">\(O(logn)\)</span>,空间复杂度为<span
-class="math inline">\(O(1)\)</span></p>
-<h3 id="总结">总结</h3>
-<p>（1)朴素递归：<span
-class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
-(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
-])=O((\frac{1+\sqrt[]{5} }{2} )^{n})\)</span>,<span
-class="math inline">\(S(n)=O(n)\)</span></p>
-<ol start="2" type="1">
-<li>尾递归：<span class="math inline">\(T(n)=O(n)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></li>
-</ol>
-<p>(3)非递归（迭代）：<span
-class="math inline">\(T(n)=O(n)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></p>
-<p>（4) 矩阵快速幂：<span
-class="math inline">\(T(n)=O(logn)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></p></li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程算法</category>
-      </categories>
-      <tags>
-        <tag>算法、数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2024/03/31/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="hello-hexo">Hello Hexo</h2>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>第一章、机器学习基础</title>
-    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
-<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
-Regression）</h4>
-<p>线性回归简单理解即”拟合一条曲线“，可通过<span
-class="math inline">\(x\)</span>的值预测<span
-class="math inline">\(y\)</span>值 <span class="math display">\[
-\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
-\]</span></p>
-<ul>
-<li><p>训练集：用于优化模型参数</p></li>
-<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
-<li><p>测试集：用于评估模型性能</p>
-<p><strong>线性回归从零开始实现</strong>，<a
-href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
-Regression)</h4>
-<p>逻辑斯蒂回归=线性回归+<span
-class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
-class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
-class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
-class="math display">\[
-f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
-\]</span></p>
-<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
-交叉熵损失函数(Cross Entropy Loss Function)</h4>
-<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
-class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
-class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
-<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
-<span class="math display">\[
-KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
-\]</span> 其中交叉熵<span
-class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
-<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
-lnp_j\)</span></p>
-<p>当概率分布<span
-class="math inline">\(p\)</span>固定时，也就是说我们要让<span
-class="math inline">\(q\)</span>尽量接近<span
-class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
-<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
-<p>softmax分类=线性函数+softmax激活函数</p>
-<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
-<span class="math display">\[
-\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
-R^{d\times1})+b\in R^{k\times1}
-\]</span> 其中<span
-class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
-<p>通常情况下，需要对矩阵<span
-class="math inline">\(W\)</span>和向量<span
-class="math inline">\(b\)</span>做规范化，使得<span
-class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
-class="math inline">\(w_j\)</span>为矩阵<span
-class="math inline">\(W\)</span>的第<span
-class="math inline">\(j\)</span>行，即矩阵<span
-class="math inline">\(W\)</span>的每列和为0，向量<span
-class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
-<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
-<ul>
-<li><p><span class="math inline">\(min\_max\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p><span class="math inline">\(z\_score\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
-<li><p>正数归一化： <span
-class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p>中心化： <span
-class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
-</ul>
-<h3 id="神经网络简介">1.2 神经网络简介</h3>
-<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
-<p><span class="math display">\[
-{x}’=\sigma(z)=\sigma(Wx+b)
-\]</span></p>
-<p>即线性函数+激活函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
-<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
-<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
-<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
-descent）</h3>
-<ul>
-<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
-<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
-<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
-<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
-<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
-<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>机器学习、强化学习、人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第三章、强化学习基本概念</title>
     <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
     <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
@@ -674,77 +674,6 @@ V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
       </tags>
   </entry>
   <entry>
-    <title>第五章、SARSA算法</title>
-    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<hr />
-<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
-class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
-class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
-<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
-<p>贝尔曼方程 <span class="math display">\[
-Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
-Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
-\]</span> 训练所用的<strong>五元组</strong>数据<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
-<p>观测到当前状态为<span
-class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
-class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
-class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
-class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
-<p>再根据当前策略做抽样得到<span
-class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
-<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
-q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
-\]</span>
-等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
-class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
-q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
-<p>更新公式： <span class="math display">\[
-q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
-\]</span></p>
-<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
-<p>用神经网络<span
-class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
-class="math inline">\(Q_\pi(s,a)\)</span>,即<span
-class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
-S,a\in\mathcal A\)</span></p>
-<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
-<span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
-\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
-\]</span></p>
-<p><span class="math display">\[
-损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
-,\delta_t=\hat{q}_t-\hat{y}_t
-\]</span></p>
-<p>更新价值网络参数 <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
-\]</span></p>
-<h4 id="多步td目标">3.多步TD目标</h4>
-<p><span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-q(s_{t+m},a_{t+m};w_{now})
-\]</span></p>
-<ul>
-<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
-class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
-</ul>
-<h4 id="对比">4.对比</h4>
-<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
-<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
-class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
-class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习、人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<ol type="1">
@@ -827,6 +756,180 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
       </categories>
       <tags>
         <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第五章、SARSA算法</title>
+    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
+class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
+class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
+<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
+<p>贝尔曼方程 <span class="math display">\[
+Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
+Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
+\]</span> 训练所用的<strong>五元组</strong>数据<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
+<p>观测到当前状态为<span
+class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
+class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
+class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
+<p>再根据当前策略做抽样得到<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
+<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
+q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
+\]</span>
+等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
+class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
+q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
+<p>更新公式： <span class="math display">\[
+q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
+\]</span></p>
+<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
+<p>用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,即<span
+class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
+S,a\in\mathcal A\)</span></p>
+<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
+<span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
+\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span></p>
+<p><span class="math display">\[
+损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
+,\delta_t=\hat{q}_t-\hat{y}_t
+\]</span></p>
+<p>更新价值网络参数 <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
+\]</span></p>
+<h4 id="多步td目标">3.多步TD目标</h4>
+<p><span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+q(s_{t+m},a_{t+m};w_{now})
+\]</span></p>
+<ul>
+<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
+class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
+</ul>
+<h4 id="对比">4.对比</h4>
+<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
+<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
+class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
+class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习、人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第八章、带基线的策略梯度方法</title>
+    <url>/2024/04/15/%E7%AC%AC%E5%85%AB%E7%AB%A0%E3%80%81%E5%B8%A6%E5%9F%BA%E7%BA%BF%E7%9A%84%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<h4 id="基线的引入">1.基线的引入</h4>
+<p>策略梯度定理： <span class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi}(S,A)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 设<span class="math inline">\(b\)</span>为不依赖于动作<span
+class="math inline">\(A\)</span>的任意函数，则有： <span
+class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 其原因在于： <span class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]=0
+\]</span> 本质上是：对于任意的<span
+class="math inline">\(s\)</span>,有<span
+class="math inline">\(E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]=0\)</span></p>
+<p>下面证明：</p>
+<p><strong>证明</strong>： <span class="math display">\[
+E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]\\
+=b\cdot E_{A\sim\pi(\cdot|s;\theta)}[\frac{\partial\
+ln\pi(A|s;\theta)}{\partial\theta}]\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{\partial\
+ln\pi(A|s;\theta)}{\partial\theta}\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{1}{\pi(a|s;\theta)}\cdot\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
+=b\cdot\frac{\partial}{\partial\theta}\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\\
+=b\cdot\frac{\partial1}{\partial\theta}\\
+=0
+\]</span></p>
+<h4 id="带基线的reinforce算法">2.带基线的REINFORCE算法</h4>
+<p>带基线的策略梯度定理 <span class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]\\
+\]</span> 使用状态价值函数<span
+class="math inline">\(V_\pi(s)\)</span>作为基线，并且对其做蒙特卡罗方法近似：
+<span class="math display">\[
+g(s,a;\theta)=(Q_{\pi}(s,a)-V_\pi(s))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
+\]</span> 带基线的REINFORCE进一步用实际观测的回报<span
+class="math inline">\(u\)</span>代替<span
+class="math inline">\(Q_\pi(s,a)\)</span>,并使用神经网络<span
+class="math inline">\(v(s;w)\)</span>近似<span
+class="math inline">\(V_\pi(s)\)</span>,得到： <span
+class="math display">\[
+\widetilde{g}(s,a;\theta)=(u-v(s;w))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
+\]</span> <strong>REINFORCE with baseline训练流程</strong>：</p>
+<p>（1）REINFORCE属于同策略，用策略网络<span
+class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
+<span class="math display">\[
+s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
+\]</span> (2) 计算所有回报： <span class="math display">\[
+u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
+\]</span> (3)让价值网络<span
+class="math inline">\(v(s;w)\)</span>做出预测 <span
+class="math display">\[
+\hat{v}_t=v(s_t;w_{now}),\forall t=1,2...,n
+\]</span> (4)计算价值网络的预测和观测到的回报之间的误差： <span
+class="math display">\[
+\delta_t=\hat{v}_t-u_t,\forall t=1,2...,n
+\]</span> (5)用<span
+class="math inline">\(\{s_t\}^n_{t=1}\)</span>作为价值网络的输入，做反向传播计算梯度：
+<span class="math display">\[
+\nabla_{w}v(s_t;w_{now}),\forall t=1,2,...,n.
+\]</span> (6)更新价值网络参数： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\sum\limits_{t=1}^{n}\delta_t\cdot\nabla_wv(s_t;w_{now})
+\]</span> (7)用<span
+class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
+<span class="math display">\[
+\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
+\]</span> (8)做随机梯度上升更新策略网络参数： <span
+class="math display">\[
+\theta_{new}=\theta_{now}-\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
+\delta_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
+\]</span></p>
+<p>减号是因为<span
+class="math inline">\(\delta_t=\hat{v}_t-u_t\)</span>的形式和原策略梯度定理中的形式<span
+class="math inline">\(u_t-\hat{v}_t\)</span>差个负号，其实上式依然是随机梯度上升。</p>
+<h4 id="advantage-actor-critica2c">4.advantage actor-critic(A2C)</h4>
+<p>(1)观测到当前状态<span
+class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
+class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
+class="math inline">\(a_t\)</span></strong>;</p>
+<p>(2)从环境中观测到新的状态<span
+class="math inline">\(s_{t+1}\)</span>和奖励<span
+class="math inline">\(r_t\)</span>;</p>
+<p>(3)让价值网络打分： <span class="math display">\[
+\hat{v}_t=v(s_t;w_{now}),\hat{v}_{t+1}=v(s_{t+1};w_{now})
+\]</span> (4)计算TD目标和TD误差： <span class="math display">\[
+\hat{y}_t=r_t+\gamma\cdot \hat{v}_{t+1},\delta_t=\hat{v}_t-\hat{y}_t
+\]</span> (6)更新价值网络： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wv(s_t;w_{now})
+\]</span> (7)更新策略网络： <span class="math display">\[
+\theta_{new}=\theta_{now}-\beta\cdot\delta_t\cdot\nabla_\theta
+ln\pi(a_t|s_t;\theta_{now})
+\]</span> 注：A2C的价值网络存在自举问题，对于<span
+class="math inline">\(\hat{v}_{t+1}\)</span>，可通过目标网络<span
+class="math inline">\(v(s;w^-)\)</span>近似；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
       </tags>
   </entry>
   <entry>
@@ -964,6 +1067,77 @@ class="math inline">\(Q(s,a;\mu)\)</span>做决策即可。</p></li>
       </categories>
       <tags>
         <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性表</title>
+    <url>/2024/04/13/%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
+    <content><![CDATA[<hr />
+<h3 id="线性表的基本概念">1.线性表的基本概念</h3>
+<ul>
+<li>线性表的定义：线性表是具有相同数据类型的n个数据元素的有限序列；</li>
+<li>线性表按存储结构可分为顺序表和链表；</li>
+</ul>
+<h3 id="顺序表">2.顺序表</h3>
+<p>线性表的顺序存储称为顺序表，其逻辑上相邻的两个元素在物理位置上也相邻，即逻辑顺序和物理顺序相同，可以随机存取，但插入操作需要将其后元素后移，删除操作需要将其后元素前移；</p>
+<ul>
+<li>顺序表插入操作的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+<li>顺序表删除操作的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+<li>顺序表按值查找的平均时间复杂度为：<span
+class="math inline">\(O(n)\)</span></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">struct</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> * data;</span><br><span class="line">    <span class="type">int</span> MaxSize,length;</span><br><span class="line">&#125;SeqList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListInsert</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span> || i&gt;L.length+<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (L.length&gt;=L.MaxSize) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=L.length;j&gt;=i;j--)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j] = L.data[j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    L.data[i<span class="number">-1</span>] = e;</span><br><span class="line">    L.length++;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListDelete</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> &amp;e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>||i&gt;L.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    e = L.data[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=i;j&lt;L.length;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j<span class="number">-1</span>]=L.data[j];</span><br><span class="line">    &#125;</span><br><span class="line">    L.length--;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">LocateElem</span><span class="params">(SeqList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.data[i]==e)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    SeqList L;</span><br><span class="line">    L.MaxSize = <span class="number">50</span>;</span><br><span class="line">    L.data = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];</span><br><span class="line">    L.length = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[i]=i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">ListInsert</span>(L,<span class="number">5</span>,<span class="number">999</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> s = <span class="built_in">LocateElem</span>(L,<span class="number">999</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;999的次序是&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> e;</span><br><span class="line">    <span class="built_in">ListDelete</span>(L,<span class="number">5</span>,e);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;返回 &quot;</span> &lt;&lt; e &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="链表">3.链表</h3>
+<h4 id="单链表">3.1 单链表</h4>
+<p>线性表的链式存储称为单链表，对每个链表结点，除存放元素自身的信息外，还需要存放一个指向其后继结点的指针；链表的插入和删除不需要移动元素，时间复杂度为<span
+class="math inline">\(O(1)\)</span>,但无法随机存取，存取的时间复杂度为<span
+class="math inline">\(O(n)\)</span>。</p>
+<ul>
+<li><p>头插法建立单链表</p>
+<p>若带头结点，操作为<code>s-&gt;data=x;s-&gt;next=L-&gt;next;L-&gt;next=s;</code>;</p>
+<p>若不带头结点，操作为<code>s-&gt;next=L;L=s;</code>;</p>
+<p>单个结点的插入时间为<span
+class="math inline">\(O(1)\)</span>,建立表长为n的单链表总时间复杂度为<span
+class="math inline">\(O(n)\)</span>;</p></li>
+<li><p>尾插法建立单链表</p>
+<p>需要尾指针的帮助<code>s-&gt;data=x;r-&gt;next=s;r=s;</code>时间复杂度为<span
+class="math inline">\(O(n)\)</span>;</p></li>
+<li><p>按序号查找结点，按值查找结点，求表长，使用while循环<code>p=p-&gt;next</code>遍历即可；时间复杂度为<span
+class="math inline">\(O(n)\)</span>;</p></li>
+<li><p>插入结点，删除结点，同理注意指针的变动顺序即可；时间复杂度为<span
+class="math inline">\(O(n)\)</span>;</p></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表结点及链表定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LNode</span> * next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（不带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert_nohead</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next=L;</span><br><span class="line">        L = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾插法建立单链表</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_TailInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    LNode *s,*r=L;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        </span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        r-&gt;next = s;</span><br><span class="line">        r = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    r-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按序号查找结点值</span></span><br><span class="line"><span class="function">LNode *<span class="title">GetElem</span><span class="params">(LinkList L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j =<span class="number">1</span>;</span><br><span class="line">    LNode *p=L-&gt;next;</span><br><span class="line">    <span class="keyword">if</span> (i==<span class="number">0</span>) <span class="keyword">return</span> L;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;j&lt;i)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按值查找结点</span></span><br><span class="line"><span class="function">LNode *<span class="title">LocateElem</span><span class="params">(LinkList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;p-&gt;data!=e)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">InsertNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i,LNode *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = <span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    s-&gt;next = p-&gt;next;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DeleteNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *p=<span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    LNode * q = p-&gt;next;</span><br><span class="line">    p-&gt;next = q-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求表长</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">List_Length</span><span class="params">(LinkList L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">    LNode *p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        length++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//头插法（带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L;</span></span><br><span class="line"><span class="comment">    List_HeadInsert(L);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        L = L-&gt;next;</span></span><br><span class="line"><span class="comment">        if(L)</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L-&gt;data &lt;&lt;&quot;\t&quot;;      </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//头插法（不带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L_1;</span></span><br><span class="line"><span class="comment">    List_HeadInsert_nohead(L_1);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L_1)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        </span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L_1-&gt;data &lt;&lt;&quot;\t&quot;;     </span></span><br><span class="line"><span class="comment">        L_1 = L_1-&gt;next; </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//尾插法（带头结点）</span></span><br><span class="line">    LinkList L;</span><br><span class="line">    <span class="built_in">List_TailInsert</span>(L);</span><br><span class="line">    LNode * L_ = L;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按序号查找结点</span></span><br><span class="line">    LNode * L_GetElem =<span class="built_in">GetElem</span>(L,<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_GetElem) cout &lt;&lt; L_GetElem-&gt;data &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按值查找结点</span></span><br><span class="line">    LNode * L_LocateElem =<span class="built_in">LocateElem</span>(L,<span class="number">444</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_LocateElem&amp;&amp;L_LocateElem-&gt;data==<span class="number">444</span>) cout &lt;&lt; <span class="string">&quot;成功啦&quot;</span> &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入结点</span></span><br><span class="line">    LNode * s;</span><br><span class="line">    s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    s-&gt;data = <span class="number">88888</span>;</span><br><span class="line">    s-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">InsertNode</span>(L,<span class="number">3</span>,s);</span><br><span class="line"></span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除结点</span></span><br><span class="line">    <span class="built_in">DeleteNode</span>(L,<span class="number">3</span>);</span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;length=&quot;</span> &lt;&lt; <span class="built_in">List_Length</span>(L);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="双链表">3.2 双链表</h4>
+<p>双链表结点中有两个指针prior和next，分别指向其前驱结点和后继结点；双链表插入和删除结点的时间复杂度为<span
+class="math inline">\(O(1)\)</span>;</p>
+<p><strong>插入结点</strong></p>
+<p>(1)将结点s插入到结点p之后</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">S-&gt;next=p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior=s;</span><br><span class="line">s-&gt;prior=p;</span><br><span class="line">p-&gt;next=s;</span><br></pre></td></tr></table></figure>
+<p>1和2必须在4之前；</p>
+<p>(2)将结点s插入结点p之前</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s-&gt;next=p;</span><br><span class="line">s-&gt;prior=p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next=s;</span><br><span class="line">p-&gt;prior=s;</span><br></pre></td></tr></table></figure>
+<p>2和3必须在4之前；</p>
+<p><strong>删除结点</strong></p>
+<p>（1）删除结点p的后继结点q</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p-&gt;next=q-&gt;next;</span><br><span class="line">q-&gt;next-&gt;prior=p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>删除结点q的前驱结点p</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p-&gt;prior-&gt;next=q;</span><br><span class="line">q-&gt;prior=p-&gt;prior;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
+<h4 id="循环链表">3.3 循环链表</h4>
+<ul>
+<li><p>循环单链表：最后一个结点的指针指向头结点，判空操作<code>L-&gt;next==L;</code>,一般设尾指针；</p></li>
+<li><p>循环双链表：尾结点的next指向头结点，头结点的prior指向尾结点；判空操作<code>p-&gt;prior==p-&gt;next==L;</code></p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>重温数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -1155,77 +1329,6 @@ a_t=\underset{a}{argmax}\ Q(s_t,a;w)
       </categories>
       <tags>
         <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线性表</title>
-    <url>/2024/04/13/%E7%BA%BF%E6%80%A7%E8%A1%A8/</url>
-    <content><![CDATA[<hr />
-<h3 id="线性表的基本概念">1.线性表的基本概念</h3>
-<ul>
-<li>线性表的定义：线性表是具有相同数据类型的n个数据元素的有限序列；</li>
-<li>线性表按存储结构可分为顺序表和链表；</li>
-</ul>
-<h3 id="顺序表">2.顺序表</h3>
-<p>线性表的顺序存储称为顺序表，其逻辑上相邻的两个元素在物理位置上也相邻，即逻辑顺序和物理顺序相同，可以随机存取，但插入操作需要将其后元素后移，删除操作需要将其后元素前移；</p>
-<ul>
-<li>顺序表插入操作的平均时间复杂度为：<span
-class="math inline">\(O(n)\)</span></li>
-<li>顺序表删除操作的平均时间复杂度为：<span
-class="math inline">\(O(n)\)</span></li>
-<li>顺序表按值查找的平均时间复杂度为：<span
-class="math inline">\(O(n)\)</span></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span>  <span class="keyword">struct</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> * data;</span><br><span class="line">    <span class="type">int</span> MaxSize,length;</span><br><span class="line">&#125;SeqList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListInsert</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span> || i&gt;L.length+<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (L.length&gt;=L.MaxSize) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=L.length;j&gt;=i;j--)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j] = L.data[j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    L.data[i<span class="number">-1</span>] = e;</span><br><span class="line">    L.length++;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">ListDelete</span><span class="params">(SeqList &amp;L,<span class="type">int</span> i,<span class="type">int</span> &amp;e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>||i&gt;L.length) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    e = L.data[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j=i;j&lt;L.length;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[j<span class="number">-1</span>]=L.data[j];</span><br><span class="line">    &#125;</span><br><span class="line">    L.length--;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">LocateElem</span><span class="params">(SeqList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;L.length;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.data[i]==e)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">    SeqList L;</span><br><span class="line">    L.MaxSize = <span class="number">50</span>;</span><br><span class="line">    L.data = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>];</span><br><span class="line">    L.length = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        L.data[i]=i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cout &lt;&lt;endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="built_in">ListInsert</span>(L,<span class="number">5</span>,<span class="number">999</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> s = <span class="built_in">LocateElem</span>(L,<span class="number">999</span>);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;999的次序是&quot;</span> &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> e;</span><br><span class="line">    <span class="built_in">ListDelete</span>(L,<span class="number">5</span>,e);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;返回 &quot;</span> &lt;&lt; e &lt;&lt;endl;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; L.data[i] &lt;&lt;<span class="string">&quot;\t&quot;</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;L.length=&quot;</span> &lt;&lt; L.length;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="链表">3.链表</h3>
-<h4 id="单链表">3.1 单链表</h4>
-<p>线性表的链式存储称为单链表，对每个链表结点，除存放元素自身的信息外，还需要存放一个指向其后继结点的指针；链表的插入和删除不需要移动元素，时间复杂度为<span
-class="math inline">\(O(1)\)</span>,但无法随机存取，存取的时间复杂度为<span
-class="math inline">\(O(n)\)</span>。</p>
-<ul>
-<li><p>头插法建立单链表</p>
-<p>若带头结点，操作为<code>s-&gt;data=x;s-&gt;next=L-&gt;next;L-&gt;next=s;</code>;</p>
-<p>若不带头结点，操作为<code>s-&gt;next=L;L=s;</code>;</p>
-<p>单个结点的插入时间为<span
-class="math inline">\(O(1)\)</span>,建立表长为n的单链表总时间复杂度为<span
-class="math inline">\(O(n)\)</span>;</p></li>
-<li><p>尾插法建立单链表</p>
-<p>需要尾指针的帮助<code>s-&gt;data=x;r-&gt;next=s;r=s;</code>时间复杂度为<span
-class="math inline">\(O(n)\)</span>;</p></li>
-<li><p>按序号查找结点，按值查找结点，求表长，使用while循环<code>p=p-&gt;next</code>遍历即可；时间复杂度为<span
-class="math inline">\(O(n)\)</span>;</p></li>
-<li><p>插入结点，删除结点，同理注意指针的变动顺序即可；时间复杂度为<span
-class="math inline">\(O(n)\)</span>;</p></li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表结点及链表定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">LNode</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">LNode</span> * next;</span><br><span class="line">&#125;LNode,*LinkList;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next = L-&gt;next;</span><br><span class="line">        L-&gt;next = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法建立单链表（不带头结点）</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_HeadInsert_nohead</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *s;<span class="type">int</span> x;</span><br><span class="line">    L = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    L = <span class="literal">NULL</span>;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        s-&gt;next=L;</span><br><span class="line">        L = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 尾插法建立单链表</span></span><br><span class="line"><span class="function">LinkList <span class="title">List_TailInsert</span><span class="params">(LinkList &amp;L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    L = (LinkList)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    LNode *s,*r=L;</span><br><span class="line">    cin &gt;&gt; x;</span><br><span class="line">    <span class="keyword">while</span> (x!=<span class="number">9999</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">        </span><br><span class="line">        s-&gt;data = x;</span><br><span class="line">        r-&gt;next = s;</span><br><span class="line">        r = s;</span><br><span class="line">        cin &gt;&gt; x;</span><br><span class="line">    &#125;</span><br><span class="line">    r-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> L;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按序号查找结点值</span></span><br><span class="line"><span class="function">LNode *<span class="title">GetElem</span><span class="params">(LinkList L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> j =<span class="number">1</span>;</span><br><span class="line">    LNode *p=L-&gt;next;</span><br><span class="line">    <span class="keyword">if</span> (i==<span class="number">0</span>) <span class="keyword">return</span> L;</span><br><span class="line">    <span class="keyword">if</span> (i&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;j&lt;i)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 按值查找结点</span></span><br><span class="line"><span class="function">LNode *<span class="title">LocateElem</span><span class="params">(LinkList L,<span class="type">int</span> e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p&amp;&amp;p-&gt;data!=e)</span><br><span class="line">    &#123;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">InsertNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i,LNode *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode * p = <span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    s-&gt;next = p-&gt;next;</span><br><span class="line">    p-&gt;next = s;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除结点操作</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DeleteNode</span><span class="params">(LinkList &amp;L,<span class="type">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LNode *p=<span class="built_in">GetElem</span>(L,i<span class="number">-1</span>);</span><br><span class="line">    LNode * q = p-&gt;next;</span><br><span class="line">    p-&gt;next = q-&gt;next;</span><br><span class="line">    <span class="built_in">free</span>(q);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求表长</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">List_Length</span><span class="params">(LinkList L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">    LNode *p = L-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        length++;</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//头插法（带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L;</span></span><br><span class="line"><span class="comment">    List_HeadInsert(L);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        L = L-&gt;next;</span></span><br><span class="line"><span class="comment">        if(L)</span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L-&gt;data &lt;&lt;&quot;\t&quot;;      </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//头插法（不带头结点）</span></span><br><span class="line">    <span class="comment">/*LinkList L_1;</span></span><br><span class="line"><span class="comment">    List_HeadInsert_nohead(L_1);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    while(L_1)</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        </span></span><br><span class="line"><span class="comment">        cout &lt;&lt; L_1-&gt;data &lt;&lt;&quot;\t&quot;;     </span></span><br><span class="line"><span class="comment">        L_1 = L_1-&gt;next; </span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//尾插法（带头结点）</span></span><br><span class="line">    LinkList L;</span><br><span class="line">    <span class="built_in">List_TailInsert</span>(L);</span><br><span class="line">    LNode * L_ = L;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按序号查找结点</span></span><br><span class="line">    LNode * L_GetElem =<span class="built_in">GetElem</span>(L,<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_GetElem) cout &lt;&lt; L_GetElem-&gt;data &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按值查找结点</span></span><br><span class="line">    LNode * L_LocateElem =<span class="built_in">LocateElem</span>(L,<span class="number">444</span>);</span><br><span class="line">    <span class="keyword">if</span> (L_LocateElem&amp;&amp;L_LocateElem-&gt;data==<span class="number">444</span>) cout &lt;&lt; <span class="string">&quot;成功啦&quot;</span> &lt;&lt; endl; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 插入结点</span></span><br><span class="line">    LNode * s;</span><br><span class="line">    s = (LNode*)<span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(LNode));</span><br><span class="line">    s-&gt;data = <span class="number">88888</span>;</span><br><span class="line">    s-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">InsertNode</span>(L,<span class="number">3</span>,s);</span><br><span class="line"></span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除结点</span></span><br><span class="line">    <span class="built_in">DeleteNode</span>(L,<span class="number">3</span>);</span><br><span class="line">    L_ = L;</span><br><span class="line">    <span class="keyword">while</span>(L_)</span><br><span class="line">    &#123;</span><br><span class="line">        L_ = L_-&gt;next;</span><br><span class="line">        <span class="keyword">if</span>(L_)</span><br><span class="line">        cout &lt;&lt; L_-&gt;data &lt;&lt;<span class="string">&quot;\t&quot;</span>;      </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; endl &lt;&lt; <span class="string">&quot;length=&quot;</span> &lt;&lt; <span class="built_in">List_Length</span>(L);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="双链表">3.2 双链表</h4>
-<p>双链表结点中有两个指针prior和next，分别指向其前驱结点和后继结点；双链表插入和删除结点的时间复杂度为<span
-class="math inline">\(O(1)\)</span>;</p>
-<p><strong>插入结点</strong></p>
-<p>(1)将结点s插入到结点p之后</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">S-&gt;next=p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior=s;</span><br><span class="line">s-&gt;prior=p;</span><br><span class="line">p-&gt;next=s;</span><br></pre></td></tr></table></figure>
-<p>1和2必须在4之前；</p>
-<p>(2)将结点s插入结点p之前</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">s-&gt;next=p;</span><br><span class="line">s-&gt;prior=p-&gt;prior;</span><br><span class="line">p-&gt;prior-&gt;next=s;</span><br><span class="line">p-&gt;prior=s;</span><br></pre></td></tr></table></figure>
-<p>2和3必须在4之前；</p>
-<p><strong>删除结点</strong></p>
-<p>（1）删除结点p的后继结点q</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p-&gt;next=q-&gt;next;</span><br><span class="line">q-&gt;next-&gt;prior=p;</span><br><span class="line"><span class="built_in">free</span>(q);</span><br></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>删除结点q的前驱结点p</li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">p-&gt;prior-&gt;next=q;</span><br><span class="line">q-&gt;prior=p-&gt;prior;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
-<h4 id="循环链表">3.3 循环链表</h4>
-<ul>
-<li><p>循环单链表：最后一个结点的指针指向头结点，判空操作<code>L-&gt;next==L;</code>,一般设尾指针；</p></li>
-<li><p>循环双链表：尾结点的next指向头结点，头结点的prior指向尾结点；判空操作<code>p-&gt;prior==p-&gt;next==L;</code></p></li>
-</ul>
-]]></content>
-      <categories>
-        <category>重温数据结构</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
       </tags>
   </entry>
 </search>
