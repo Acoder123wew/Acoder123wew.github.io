@@ -133,6 +133,177 @@ long类型；若无后缀且能存的下，则默认使用int类型存储；</p>
       </tags>
   </entry>
   <entry>
+    <title>《RL:Introduction》_chap1,2</title>
+    <url>/2024/04/18/%E3%80%8ARL-Introduction%E3%80%8B-chap1-2/</url>
+    <content><![CDATA[<h3 id="chap1-导论">chap1 导论</h3>
+<ul>
+<li><p><strong>试错</strong>和<strong>延迟收益</strong>是强化学习中最重要最显著的特征；</p></li>
+<li><p>马尔可夫决策过程包含：感知、动作、目标；</p></li>
+<li><p>强化学习区别于<strong>有监督学习</strong>：从带标注训练数据集中学习；<strong>无监督学习</strong>：寻找未标注数据集中的隐含结构；有监督学习、无监督学习、强化学习是并列的三种机器学习范式。</p></li>
+<li><p><strong>弱方法</strong>：基于一般原则的方法，比如搜索、学习；<strong>强方法</strong>：基于知识的方法；</p></li>
+<li><p><strong>贪心</strong>：选择价值最高的动作；<strong>试探</strong>：偶尔随机选择其他动作；</p></li>
+<li><p>状态价值的更新：将早先的状态的价值向后面的状态的价值方向移动一个增量，即：
+<span class="math display">\[
+V(S_t)\gets V(S_t)+\alpha\cdot[V(S_{t+1}-V(S_t))]
+\]</span> <span
+class="math inline">\(0&lt;\alpha&lt;1\)</span>为步长参数；</p></li>
+<li><p>表格型求解方法：状态空间<span
+class="math inline">\(\mathcal{S}\)</span>和动作空间<span
+class="math inline">\(\mathcal{A}\)</span>的维度都较低，可用表格形式表示价值函数，使用简单的比例变换更新参数；与之相对的是深度强化学习中的各种近似手段，并用神经网络的梯度下降更新参数。</p></li>
+</ul>
+<hr />
+<h3 id="chap2-多臂赌博机multi-arm-bandits">chap2 多臂赌博机(Multi-arm
+Bandits)</h3>
+<h4 id="一个k臂赌博机问题">2.1 一个k臂赌博机问题</h4>
+<p>重复地在<span
+class="math inline">\(k\)</span>个动作中进行选择，每次做出选择之后，都将得到一个标量的奖励值，目标是在某一段时间内最大化总回报的期望。将动作<span
+class="math inline">\(a\)</span>被选择之后得到的奖励的平均值记作<span
+class="math inline">\(q_*(a)=E[R_t|A_t=a]\)</span>,称为<strong>动作<span
+class="math inline">\(a\)</span>的价值</strong>，将其估计值记作<span
+class="math inline">\(Q_t(a)\)</span>，我们希望<span
+class="math inline">\(Q_t(a)\)</span>接近<span
+class="math inline">\(q_*(a)\)</span>.</p>
+<p>将<span class="math inline">\(t\)</span>时刻最大<span
+class="math inline">\(Q\)</span>值对应的动作称为<strong>贪心</strong>动作，选择贪心动作的过程我们称之为<strong>开发</strong>，选择<strong>非贪心</strong>动作的过程我们称之为<strong>试探</strong>，一个好的动作应该在贪心和试探中权衡。</p>
+<h4 id="动作-价值方法">2.2 动作-价值方法</h4>
+<ul>
+<li><p><strong>采样平均方法</strong>：通过计算实际奖励（收益）的平均值来估计动作的价值
+<span class="math display">\[
+Q_t(a)=\frac{t时刻前通过执行动作a得到的收益总和}{t时刻前执行动作a的次数}=\frac{\sum_{i=1}^{t-1}R_i\cdot
+1_{A_i=a}}{\sum_{i=1}^{t-1}1_{A_i=a}}
+\]</span></p></li>
+<li><p>贪心：<span class="math inline">\(A_t=\underset{a}{argmax}\
+Q_t(a)\)</span></p></li>
+<li><p><span class="math inline">\(\epsilon\)</span>-贪心： <span
+class="math display">\[
+\begin{cases}
+  argmax_a\ Q_t(a)&amp; \text{  } 以概率(1-\epsilon)  \\
+  均匀抽取\mathcal A中的每一个动作&amp; \text{  } 以概率\epsilon
+\end{cases}
+\]</span></p></li>
+</ul>
+<hr />
+<h4 id="臂测试平台">2.3 10臂测试平台</h4>
+<p>动作<span class="math inline">\(a\)</span>的真实值<span
+class="math inline">\(q_*(a)\)</span>从<span
+class="math inline">\(N(0,1)\)</span>分布生成，动作<span
+class="math inline">\(a\)</span>的实际收益<span
+class="math inline">\(Q_t(a)\)</span>(每个t在选择完动作后都要生成一次)从<span
+class="math inline">\(N(q_*(a),1)\)</span>生成，通常情况下，在一个赌博机问题中，需要进行1000时刻的交互，对一个学习算法，需要在2000个不同的赌博问题中试验。</p>
+<hr />
+<h4 id="增量式实现">2.4 增量式实现</h4>
+<p>设<span class="math inline">\(R_i\)</span>表示第<span
+class="math inline">\(i\)</span>次选择某动作后获得的收益，<span
+class="math inline">\(Q_{n}\)</span>表示该动作被选择<span
+class="math inline">\(n-1\)</span>次后该动作价值的估计值，则： <span
+class="math display">\[
+Q_n=\frac{R_1+R_2+...+R_{n-1}}{n-1}
+\]</span> 这种实现方式需要一直存储并维护<span
+class="math inline">\(\{R_i\}\)</span>序列，并且每增加一次收益都需要重新求和。</p>
+<p>下面推导递推式以简化存储和计算流程： <span class="math display">\[
+Q_{n+1}=\frac{1}{n}\sum\limits_{i=1}^{n}R_i
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{n}(R_n+\sum\limits_{i=1}^{n-1}R_i)
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{n}(R_n+(n-1)\frac{1}{n-1}\sum\limits_{i=1}^{n-1}R_i)
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{n}(R_n+(n-1)Q_n)
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{n}(R_n+nQ_n-Q_n)
+\]</span></p>
+<p><span class="math display">\[
+=Q_n+\frac{1}{n}[R_n-Q_n]
+\]</span></p>
+<p>故实际计算只需要存储当前的<span
+class="math inline">\(Q_n\)</span>和<span
+class="math inline">\(n\)</span>值，再根据新来的<span
+class="math inline">\(R_n\)</span>计算更新即可。</p>
+<p><strong>更新公式</strong>的一般形式为： <span class="math display">\[
+新估计值\gets 旧估计值+步长参数\cdot(目标-旧估计值)
+\]</span>
+这是表格型强化学习方法的通用公式，区别于深度强化学习中的梯度更新方法。</p>
+<hr />
+<h4 id="跟踪一个非平稳问题">2.5 跟踪一个非平稳问题</h4>
+<p>非平稳：收益的概率分布随着时间<span
+class="math inline">\(t\)</span>变化，比如给未来的收益打折扣、或者本书所说的：给近期的收益赋予比过去很久的收益更高的权值。可以使用常数步长来达到这个目标，当使用常数步长时：</p>
+<p><img src="/2024/04/18/《RL-Introduction》-chap1-2/c07fdd4a93bb35af2c8f53b2ae0b041.jpg"  alt="c07fdd4a93bb35af2c8f53b2ae0b041" style="zoom: 50%;" /></p>
+<p>上式中<span class="math inline">\(0&lt;1-\alpha&lt;1\)</span>,<span
+class="math inline">\(n-i\)</span>越大，表明该收益越久远，便赋予更低的权值。</p>
+<p>若随着时刻逐步改变步长，即<span
+class="math inline">\(Q_{n+1}=Q_n+\alpha_n(a)[R_n-Q_n]\)</span>时，<span
+class="math inline">\(Q_{n+1}\)</span>收敛需要满足以下两个条件： <span
+class="math display">\[
+\sum\limits_{n=1}^{\infty}\alpha_n(a)=\infty \ and \
+\sum\limits_{n=1}^{\infty}\alpha_n^2(a)&lt;\infty
+\]</span> 同样，可以推导更新公式：</p>
+<p><img src="/2024/04/18/《RL-Introduction》-chap1-2/image-20240417215254394.png"  alt="image-20240417215254394" style="zoom: 50%;" /></p>
+<hr />
+<h4 id="乐观初始值">2.6 乐观初始值</h4>
+<p>由以上推导过程可知，<span
+class="math inline">\(Q_{n+1}\)</span>均依赖于<span
+class="math inline">\(Q_1\)</span>,根据规定<span
+class="math inline">\(Q_2=R_1\)</span>,而<span
+class="math inline">\(Q_1\)</span>则是我们预设的超参数，它会给我们的估计带来偏差，但这种偏差有时会带来好处；</p>
+<h4 id="置于置信度上界的动作选择">2.7 置于置信度上界的动作选择</h4>
+<p>虽然“试探”那些非贪心的动作是必须的，但经典的<span
+class="math inline">\(\epsilon\)</span>-贪心算法的问题在于它的<span
+class="math inline">\(\epsilon\)</span>行为是均等的，即平等地选择动作空间中的每一个动作，但其实我们应该优先选择那些价值接近贪心动作且不确定性更大的动作。为此，可使用<strong>置信度上界(upper
+confidence bound)</strong>进行动作选择： <span class="math display">\[
+A_t=\underset{a}{argmax}\ [Q_t(a)+c\sqrt{\frac{ln\ t}{N_t(a)}}]
+\]</span> 其中，<span class="math inline">\(ln\ t\)</span>表示时刻<span
+class="math inline">\(t\)</span>的自然对数，<span
+class="math inline">\(N_t(a)\)</span>表示在时刻<span
+class="math inline">\(t\)</span>之前动作<span
+class="math inline">\(a\)</span>被选择的次数，<span
+class="math inline">\(c\)</span>是一个大于0的常数，用于控制试探的程度。</p>
+<p>若<span class="math inline">\(N_t(a)=0\)</span>，则动作<span
+class="math inline">\(a\)</span>的价值最大，这保证了智能体会首先遍历动作空间中的所有动作。</p>
+<hr />
+<h4 id="梯度赌博机算法">2.8 梯度赌博机算法</h4>
+<p>偏好函数：一个不基于动作的收益的数值化值，记作<span
+class="math inline">\(H_t(a)\)</span>,偏好函数越大，动作就越频繁地被选择。</p>
+<p>每个动作都维护这样一个偏好函数，并通过<span
+class="math inline">\(softmax\)</span>计算每个动作被选择的概率(<span
+class="math inline">\(k\)</span>为动作数量）： <span
+class="math display">\[
+Pr\{A_t=a\}=\frac{e^{H_t(a)}}{\sum_{b=1}^{k}e^{H_t(b)}}=\pi_t(a)
+\]</span> 基于随机梯度上升的思想，偏好函数通过下列公式更新：</p>
+<p>若在时刻<span class="math inline">\(t\)</span>,动作<span
+class="math inline">\(A_t\)</span>被选择，则动作<span
+class="math inline">\(A_t\)</span>的偏好函数的更新方式为：<span
+class="math inline">\(H_{t+1}(A_t)=H_t(A_t)+\alpha\cdot
+(R_t-\bar{R_t})(1-\pi_t(A_t))\)</span></p>
+<p>而其他动作的偏好函数的更新方式为：<span
+class="math inline">\(H_{t+1}(a)=H_t(a)-\alpha(R_t-\bar{R_t})\pi_t(a)\)</span>；</p>
+<h4 id="关联搜索上下文相关的赌博机">2.9
+关联搜索（上下文相关的赌博机）</h4>
+<p>即区分出不同的情境，以采用与对应情景相适应的旋转。</p>
+<h4 id="总结">总结</h4>
+<ul>
+<li><p><span
+class="math inline">\(\epsilon\)</span>-贪心方法：在一小段时间内进行随机的动作选择；参数为：<span
+class="math inline">\(\epsilon\)</span></p></li>
+<li><p>UCB方法：通过巧妙的公式，优先选择那些之前被选择的次数较少的动作；参数为：<span
+class="math inline">\(c\)</span></p></li>
+<li><p>梯度赌博机算法：偏好函数值经过softmax变换得到每个动作被执行的概率；参数为：<span
+class="math inline">\(\alpha\)</span></p></li>
+<li><p>乐观设置初值：<span class="math inline">\(Q_1\)</span></p>
+<p><img src="/2024/04/18/《RL-Introduction》-chap1-2/image-20240418203018992.png"  alt="image-20240418203018992" style="zoom:50%;" /></p></li>
+</ul>
+<p>如图所示，图中每一个点表示特定算法(不同颜色标注)在特定参数下(横坐标值)执行1000步的平均收益。</p>
+]]></content>
+      <categories>
+        <category>《RL:Introduction》</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2024/03/31/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -302,6 +473,107 @@ class="math inline">\(S(n)=O(1)\)</span></p></li>
       </tags>
   </entry>
   <entry>
+    <title>第一章、机器学习基础</title>
+    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
+<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
+Regression）</h4>
+<p>线性回归简单理解即”拟合一条曲线“，可通过<span
+class="math inline">\(x\)</span>的值预测<span
+class="math inline">\(y\)</span>值 <span class="math display">\[
+\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
+\]</span></p>
+<ul>
+<li><p>训练集：用于优化模型参数</p></li>
+<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
+<li><p>测试集：用于评估模型性能</p>
+<p><strong>线性回归从零开始实现</strong>，<a
+href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
+Regression)</h4>
+<p>逻辑斯蒂回归=线性回归+<span
+class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
+class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
+class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
+class="math display">\[
+f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
+\]</span></p>
+<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
+交叉熵损失函数(Cross Entropy Loss Function)</h4>
+<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
+class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
+class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
+<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
+<span class="math display">\[
+KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
+\]</span> 其中交叉熵<span
+class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
+<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
+lnp_j\)</span></p>
+<p>当概率分布<span
+class="math inline">\(p\)</span>固定时，也就是说我们要让<span
+class="math inline">\(q\)</span>尽量接近<span
+class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
+<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
+<p>softmax分类=线性函数+softmax激活函数</p>
+<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
+<span class="math display">\[
+\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
+R^{d\times1})+b\in R^{k\times1}
+\]</span> 其中<span
+class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
+<p>通常情况下，需要对矩阵<span
+class="math inline">\(W\)</span>和向量<span
+class="math inline">\(b\)</span>做规范化，使得<span
+class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
+class="math inline">\(w_j\)</span>为矩阵<span
+class="math inline">\(W\)</span>的第<span
+class="math inline">\(j\)</span>行，即矩阵<span
+class="math inline">\(W\)</span>的每列和为0，向量<span
+class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
+<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
+<ul>
+<li><p><span class="math inline">\(min\_max\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p><span class="math inline">\(z\_score\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
+<li><p>正数归一化： <span
+class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p>中心化： <span
+class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
+</ul>
+<h3 id="神经网络简介">1.2 神经网络简介</h3>
+<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
+<p><span class="math display">\[
+{x}’=\sigma(z)=\sigma(Wx+b)
+\]</span></p>
+<p>即线性函数+激活函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
+<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
+<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
+<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
+descent）</h3>
+<ul>
+<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
+<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
+<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
+<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
+<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
+<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>机器学习、强化学习、人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第七章、策略梯度方法</title>
     <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<hr />
@@ -443,104 +715,88 @@ class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p
       </tags>
   </entry>
   <entry>
-    <title>第一章、机器学习基础</title>
-    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
-<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
-Regression）</h4>
-<p>线性回归简单理解即”拟合一条曲线“，可通过<span
-class="math inline">\(x\)</span>的值预测<span
-class="math inline">\(y\)</span>值 <span class="math display">\[
-\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
-\]</span></p>
-<ul>
-<li><p>训练集：用于优化模型参数</p></li>
-<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
-<li><p>测试集：用于评估模型性能</p>
-<p><strong>线性回归从零开始实现</strong>，<a
-href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
-Regression)</h4>
-<p>逻辑斯蒂回归=线性回归+<span
-class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
-class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
-class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
-class="math display">\[
-f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
-\]</span></p>
-<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
-交叉熵损失函数(Cross Entropy Loss Function)</h4>
-<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
-class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
-class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
-<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
+    <title>第二章、蒙特卡洛方法</title>
+    <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<ol type="1">
+<li><strong>随机变量</strong>记作<span
+class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
+class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
+class="math inline">\(P(X=0)=\frac{1}{2}\)</span>中的<span
+class="math inline">\(X\)</span>为大写；</li>
+<li>给定随机变量<span
+class="math inline">\(X\)</span>,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数<span
+class="math inline">\(F_X:R\to[0,1]\)</span>,定义为： <span
+class="math display">\[F_X(x)=P(X\le x)\]</span></li>
+<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong><span
+class="math inline">\(p(x)\)</span>,假设随机变量<span
+class="math inline">\(X\)</span>取值范围是集合<span
+class="math inline">\(\chi\)</span> 则有： <span
+class="math display">\[\sum_{x\in \chi}^{} p(x)=1\]</span> ,<span
+class="math inline">\(X\)</span>的概率质量函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\sum_{x\in
+\chi}^{}p(x)\cdot h(x)\]</span></li>
+<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong><span
+class="math inline">\(p(x)\)</span>,随机变量<span
+class="math inline">\(X\)</span>的取值范围<span
+class="math inline">\(\chi\)</span>是连续集合，则有：<span
+class="math display">\[\int_{-\infty }^{x} p(u)du=F_X(x)=P(X\le
+x)\]</span><span class="math display">\[\int_{-\infty }^{+\infty}
+p(u)du=1\]</span>,<span
+class="math inline">\(X\)</span>的概率密度函数为<span
+class="math inline">\(p(\cdot)\)</span>,则函数<span
+class="math inline">\(h(X)\)</span>关于变量<span
+class="math inline">\(X\)</span>的期望是 <span
+class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
+h(x)dx\]</span>
+<img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134538137.png"  alt="image-20240401134538137" style="zoom: 33%;" /></li>
+</ol>
+<p>总的来说，就是<span
+class="math inline">\(\frac{抽中次数}{总抽样数}=精确的理论概率\)</span></p>
+<h3 id="例一近似pi值">例一、近似<span
+class="math inline">\(\pi\)</span>值</h3>
+<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134618614.png"  alt="image-20240401134618614" style="zoom:33%;" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
+<p>输出：3.13528 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
+10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
+<h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
+<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134642296.png"  alt="image-20240401134642296" style="zoom:33%;" /></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+<p>输出：0.59632</p>
+<h3 id="例三计算近似定积分期望">例三、计算近似定积分、期望</h3>
+<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即
 <span class="math display">\[
-KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
-\]</span> 其中交叉熵<span
-class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
-<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
-lnp_j\)</span></p>
-<p>当概率分布<span
-class="math inline">\(p\)</span>固定时，也就是说我们要让<span
-class="math inline">\(q\)</span>尽量接近<span
-class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
-<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
-<p>softmax分类=线性函数+softmax激活函数</p>
-<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
+I=\int_{a}^{b}f(x)dx \approx
+q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span>
+<strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即
 <span class="math display">\[
-\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
-R^{d\times1})+b\in R^{k\times1}
-\]</span> 其中<span
-class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
-<p>通常情况下，需要对矩阵<span
-class="math inline">\(W\)</span>和向量<span
-class="math inline">\(b\)</span>做规范化，使得<span
-class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
-class="math inline">\(w_j\)</span>为矩阵<span
-class="math inline">\(W\)</span>的第<span
-class="math inline">\(j\)</span>行，即矩阵<span
-class="math inline">\(W\)</span>的每列和为0，向量<span
-class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
-<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
-<ul>
-<li><p><span class="math inline">\(min\_max\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p><span class="math inline">\(z\_score\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
-<li><p>正数归一化： <span
-class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p>中心化： <span
-class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
-</ul>
-<h3 id="神经网络简介">1.2 神经网络简介</h3>
-<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
-<p><span class="math display">\[
-{x}’=\sigma(z)=\sigma(Wx+b)
-\]</span></p>
-<p>即线性函数+激活函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
-<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
-<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
-<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
-descent）</h3>
-<ul>
-<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
-<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
-<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
-<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
-<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
-<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
-</ul>
+I=\int_{\Omega }^{}f(x)dx \approx
+q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
+\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
+\]</span> 求<strong>期望</strong>：计算 <span class="math display">\[
+E_{X\sim p(\cdot)}[f(X)]=\int_{\Omega}^{}p(x)\cdot f(x)dx
+\]</span>
+，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的<span
+class="math inline">\(f(x_i)\)</span>换成<span
+class="math inline">\(p(x_i)\cdot f(x_i)\)</span>即可；</p>
+<p>假设用期望计算<span
+class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
+输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">期望 tensor([1.2539])</span><br><span class="line">积分 tensor([3.7617])</span><br><span class="line">3.744150881493428</span><br></pre></td></tr></table></figure>
+<h3 id="第二章习题2.2">第二章习题2.2</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
+<p>输出：tensor([17.3412])</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
+<p>输出：tensor([17.3020])</p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
       </categories>
       <tags>
-        <tag>机器学习、强化学习、人工智能</tag>
+        <tag>人工智能、强化学习</tag>
       </tags>
   </entry>
   <entry>
@@ -665,91 +921,6 @@ V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
 <p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
 <p>无模型方法：价值学习、策略学习</p>
 <p>基于模型的方法：AlphaGo</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>人工智能、强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第二章、蒙特卡洛方法</title>
-    <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<ol type="1">
-<li><strong>随机变量</strong>记作<span
-class="math inline">\(X\)</span>,<strong>观测值</strong>记作<span
-class="math inline">\(x\)</span>,观测值只是数字而已，没有随机性,如<span
-class="math inline">\(P(X=0)=\frac{1}{2}\)</span>中的<span
-class="math inline">\(X\)</span>为大写；</li>
-<li>给定随机变量<span
-class="math inline">\(X\)</span>,它的<strong>累积分布函数</strong>（即<strong>概率分布函数</strong>）（CDF）是函数<span
-class="math inline">\(F_X:R\to[0,1]\)</span>,定义为： <span
-class="math display">\[F_X(x)=P(X\le x)\]</span></li>
-<li>对于<strong>离散概率分布</strong>，有<strong>概率质量函数</strong><span
-class="math inline">\(p(x)\)</span>,假设随机变量<span
-class="math inline">\(X\)</span>取值范围是集合<span
-class="math inline">\(\chi\)</span> 则有： <span
-class="math display">\[\sum_{x\in \chi}^{} p(x)=1\]</span> ,<span
-class="math inline">\(X\)</span>的概率质量函数为<span
-class="math inline">\(p(\cdot)\)</span>,则函数<span
-class="math inline">\(h(X)\)</span>关于变量<span
-class="math inline">\(X\)</span>的期望是 <span
-class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\sum_{x\in
-\chi}^{}p(x)\cdot h(x)\]</span></li>
-<li>对于<strong>连续概率发布</strong>，有<strong>概率密度函数</strong><span
-class="math inline">\(p(x)\)</span>,随机变量<span
-class="math inline">\(X\)</span>的取值范围<span
-class="math inline">\(\chi\)</span>是连续集合，则有：<span
-class="math display">\[\int_{-\infty }^{x} p(u)du=F_X(x)=P(X\le
-x)\]</span><span class="math display">\[\int_{-\infty }^{+\infty}
-p(u)du=1\]</span>,<span
-class="math inline">\(X\)</span>的概率密度函数为<span
-class="math inline">\(p(\cdot)\)</span>,则函数<span
-class="math inline">\(h(X)\)</span>关于变量<span
-class="math inline">\(X\)</span>的期望是 <span
-class="math display">\[E_{X\sim p(\cdot)}[h(X)]=\int_{\chi}p(x)\cdot
-h(x)dx\]</span>
-<img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134538137.png"  alt="image-20240401134538137" style="zoom: 33%;" /></li>
-</ol>
-<p>总的来说，就是<span
-class="math inline">\(\frac{抽中次数}{总抽样数}=精确的理论概率\)</span></p>
-<h3 id="例一近似pi值">例一、近似<span
-class="math inline">\(\pi\)</span>值</h3>
-<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134618614.png"  alt="image-20240401134618614" style="zoom:33%;" /></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span>,<span class="number">2</span>*torch.rand(<span class="number">1</span>)-<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>  torch.<span class="built_in">pow</span>(x,<span class="number">2</span>)+ torch.<span class="built_in">pow</span>(y,<span class="number">2</span>) &lt;= <span class="number">1</span>:</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">pi = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(pi)</span><br></pre></td></tr></table></figure>
-<p>输出：3.13528 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 2.2节，蒙特卡洛近似计算圆周率。</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">approxiate_pi</span>(<span class="params">n: <span class="built_in">int</span></span>):</span><br><span class="line">    <span class="comment"># 在[-1, 1] x [-1, 1]的空间中随机取n个点。</span></span><br><span class="line">    x_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    y_lst = np.random.uniform(-<span class="number">1</span>, <span class="number">1</span>, size=n)</span><br><span class="line">    <span class="comment"># 统计距离圆心距离在1以内的点。</span></span><br><span class="line">    m = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(x_lst, y_lst):</span><br><span class="line">        <span class="keyword">if</span> x ** <span class="number">2</span> + y ** <span class="number">2</span> &lt;= <span class="number">1</span>:</span><br><span class="line">            m += <span class="number">1</span></span><br><span class="line">    <span class="comment"># 近似计算圆周率。</span></span><br><span class="line">    pi = <span class="number">4</span> * m / n</span><br><span class="line">    <span class="keyword">return</span> pi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    pi = approxiate_pi(<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;100个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;10000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br><span class="line">    pi = approxiate_pi(<span class="number">1000000</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;1000000个点近似的圆周率：&quot;</span>, pi)</span><br><span class="line"></span><br></pre></td></tr></table></figure> 输出：100个点近似的圆周率： 3.08
-10000个点近似的圆周率： 3.1352 1000000个点近似的圆周率： 3.141</p>
-<h3 id="例二计算阴影部分面积">例二、计算阴影部分面积</h3>
-<p><img src="/2024/03/31/第二章、蒙特卡洛方法/image-20240401134642296.png"  alt="image-20240401134642296" style="zoom:33%;" /></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">m = <span class="number">0</span></span><br><span class="line">n = <span class="number">100000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x,y = <span class="number">2</span>*torch.rand(<span class="number">1</span>),<span class="number">2</span>*torch.rand(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span>  ((x-<span class="number">1</span>)**<span class="number">2</span>+(y-<span class="number">1</span>)**<span class="number">2</span>&lt;=<span class="number">1</span>) &amp; (x**<span class="number">2</span>+y**<span class="number">2</span>&gt;<span class="number">4</span>):</span><br><span class="line">        m = m+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">s = <span class="number">4</span> * m / n</span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-<p>输出：0.59632</p>
-<h3 id="例三计算近似定积分期望">例三、计算近似定积分、期望</h3>
-<p><strong>一元函数的定积分</strong>：抽样函数的平均值乘以区间长度，即
-<span class="math display">\[
-I=\int_{a}^{b}f(x)dx \approx
-q_n=(b-a)\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
-\]</span>
-<strong>多元函数的定积分</strong>：抽样函数的平均值乘以积分集合的体积，即
-<span class="math display">\[
-I=\int_{\Omega }^{}f(x)dx \approx
-q_n=V\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)=\int_{\Omega}^{}dx
-\cdot\frac{1}{n}\sum\limits_{i=1}^{n}f(x_i)
-\]</span> 求<strong>期望</strong>：计算 <span class="math display">\[
-E_{X\sim p(\cdot)}[f(X)]=\int_{\Omega}^{}p(x)\cdot f(x)dx
-\]</span>
-，可按照变量服从的概率分布抽样，求函数平均值即可；当然也可利用定积分，把其中的<span
-class="math inline">\(f(x_i)\)</span>换成<span
-class="math inline">\(p(x_i)\cdot f(x_i)\)</span>即可；</p>
-<p>假设用期望计算<span
-class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line">n=<span class="number">10000</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x ** (<span class="number">2</span>/<span class="number">3</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    a = torch.rand(<span class="number">1</span>) * <span class="number">3</span></span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t) * q + (<span class="number">1</span>/t) * f(a)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;期望&quot;</span>,q)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;积分&quot;</span>,<span class="number">3</span>*q)</span><br></pre></td></tr></table></figure>
-输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">期望 tensor([1.2539])</span><br><span class="line">积分 tensor([3.7617])</span><br><span class="line">3.744150881493428</span><br></pre></td></tr></table></figure>
-<h3 id="第二章习题2.2">第二章习题2.2</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 方法1</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">f = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    f = <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span>+f</span><br><span class="line"><span class="built_in">print</span>(f/n)</span><br></pre></td></tr></table></figure>
-<p>输出：tensor([17.3412])</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
-<p>输出：tensor([17.3020])</p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
@@ -924,143 +1095,6 @@ ln\pi(a_t|s_t;\theta_{now})
 \]</span> 注：A2C的价值网络存在自举问题，对于<span
 class="math inline">\(\hat{v}_{t+1}\)</span>，可通过目标网络<span
 class="math inline">\(v(s;w^-)\)</span>近似；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第六章、价值学习高级技巧</title>
-    <url>/2024/04/12/%E7%AC%AC%E5%85%AD%E7%AB%A0%E3%80%81%E4%BB%B7%E5%80%BC%E5%AD%A6%E4%B9%A0%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7/</url>
-    <content><![CDATA[<hr />
-<hr />
-<hr />
-<hr />
-<p>DQN、SARSA都属于价值学习，本章介绍价值学习的高级技巧，它们可以应用于多种价值学习和策略学习方法中以提升算法的效果。</p>
-<h4 id="经验回放">1.经验回放</h4>
-<ul>
-<li><strong>经验回放</strong>是指把智能体与环境交互的记录（即经验）<span
-class="math inline">\([(s_t,a_t,r_t,s_{t+1}),(s_{t+1},a_{t+1},r_{t+1},s_{t+2}),...]\)</span>存储到一个缓存里，事后反复利用这些经验训练智能体，这个缓存就是<strong>经验回放缓存</strong>;</li>
-<li>缓存的大小b是个超参数，需要人为指定，缓存中只保留最近b条数据，当缓存存满之后，删除最旧的数据，补充新的数据。在实践中，要等到回放缓存中有足够多的四元组时，才开始做经验回放更新DQN；</li>
-<li>经验回放的优点：（1）每次更新从缓存中随机抽取一个四元组，消除了相关性；（2）重复利用经验，减小所需的样本数量；</li>
-<li>经验回放的缺点：只适用于异策略，如Q学习、确定性策略梯度（DPG）等；不适用于同策略，如SARSA,REINFORCE,A2C等；</li>
-<li>优先经验回放：给四元组样本设置权重，让权重较大的抽样概率大且学习率较小，更新时按照概率做加权随机抽样；</li>
-</ul>
-<p><span class="math display">\[
-p_j\propto |\delta_j|+\epsilon=|Q(s_j,a_j;w_{now})-[r_j+\gamma\cdot
-\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w_{now})]|+\epsilon
-\]</span></p>
-<h4 id="高估问题及其解决方法">2.高估问题及其解决方法</h4>
-<ul>
-<li><p>自举导致偏差传播；</p></li>
-<li><p>最大化导致高估：在一系列数据中加入均值为0的随机噪声，将其中的最大值对噪声求期望，其结果大于原有数据的最大值；导致</p>
-<p><span class="math inline">\(Q(s,a;w)\)</span>高估<span
-class="math inline">\(Q_*(s,a)\)</span>.</p></li>
-</ul>
-<h4 id="使用目标网络切断自举">3.使用目标网络切断”自举“</h4>
-<p>Q学习算法计算TD目标：<span
-class="math inline">\(\hat{y}_j=r_j+\gamma\cdot
-\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w)\)</span></p>
-<p>其中的<span
-class="math inline">\(Q(s_{j+1},a;w)\)</span>是DQN自己计算出的，属于自举，因此可以用一个新的网络来计算它，即目标网络<span
-class="math inline">\(Q(s,a;w^-)\)</span>,其神经网络结构与DQN完全相同，但其参数<span
-class="math inline">\(w^-\)</span>不同于<span
-class="math inline">\(w\)</span>;</p>
-<p>此时TD目标变为：<span class="math inline">\(\hat{y}_j=r_j+\gamma\cdot
-\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w^-_{now})\)</span></p>
-<p>其余计算步骤与常规DQN相同，用以下公式进行目标网络参数的更新：</p>
-<p><span class="math inline">\(w^-_{new}=\tau \cdot
-w_{new}+(1-\tau)\cdot w^-_{now}\)</span>,其中<span
-class="math inline">\(\tau\in(0,1)\)</span>是需要手动调节的超参数。</p>
-<h4 id="双q学习算法ddqn">4.双Q学习算法（DDQN)</h4>
-<p>把最大化分成两个步骤：（1）选择最佳动作（在DQN中）：<span
-class="math inline">\(a^*=\underset{\alpha\in\mathcal{A}}{argmax}Q(s_{j+1},a;w_{now})\)</span></p>
-<p>​ （2）求值（在目标网络中）：<span
-class="math inline">\(\hat{q}_{j+1}=Q(s_{j+1},a^*;w^-_{now})\)</span></p>
-<p><strong>总结</strong>：</p>
-<p><img src="/2024/04/12/第六章、价值学习高级技巧/image-20240413140249926.png"  alt="image-20240413140249926" style="zoom:50%;" /></p>
-<hr />
-<h4 id="对决网络">5.对决网络</h4>
-<p>首先理清相关的概念：</p>
-<p><strong>动作价值函数</strong>：<span
-class="math inline">\(Q_\pi(s,a)=E[U_t|S_t=s,A_t=a]\)</span>,其中的期望是对<span
-class="math inline">\(S_{t+1},A_{t+1},S_{t+2},A_{t+2},...,S_n,A_n\)</span>求的；</p>
-<p><strong>最优动作价值函数</strong>：<span
-class="math inline">\(Q_*(s,a)=\underset{\pi}{max}\ Q_\pi(s,a),\forall
-s\in\mathcal{S},a\in\mathcal{A}\)</span></p>
-<p><strong>状态价值函数</strong>：<span
-class="math inline">\(V_\pi(s)=E_{A\sim\pi}[Q_\pi(s,A)],\forall s\in
-\mathcal{S}\)</span></p>
-<p><strong>最优状态价值函数</strong>：<span
-class="math inline">\(V_*(s)=\underset{\pi}{max}V_{\pi}(s),\forall
-s\in\mathcal{S}\)</span></p>
-<p><strong>最优优势函数</strong>：<span
-class="math inline">\(D_*(s,a)=Q_*(s,a)-V_*(s)\)</span></p>
-<p><strong>最优优势函数定理</strong>：<span
-class="math inline">\(Q_*(s,a)=V_*(s)+D_*(s,a)-\underset{a\in\mathcal{A}}{max}D_*(s,a),\forall
-s\in\mathcal{S},a\in\mathcal{A}\)</span>,其中最后一项恒等于0；</p>
-<hr />
-<p><strong>对决网络的结构</strong>：</p>
-<p>对决网络由两个神经网络组成，一个神经网络记作<span
-class="math inline">\(D(s,a;w^D)\)</span>以近似最优优势函数<span
-class="math inline">\(D_*(s,a)\)</span>;另一个神经网络记作<span
-class="math inline">\(V(s;w^V)\)</span>以近似最优状态价值函数<span
-class="math inline">\(V_*(s)\)</span>.两个神经网络共享部分卷积层，如图所示：</p>
-<p><img src="/2024/04/12/第六章、价值学习高级技巧/image-20240413160528494.png"  alt="image-20240413160528494" style="zoom:50%;" /></p>
-<p>于是： <span class="math display">\[
-Q(s,a;w)=V(s;w^V)+D(s,a;w^D)-\underset{a\in\mathcal{A}}{max}D(s,a;w^D)
-\]</span> 举例说明计算过程：动作空间为<span
-class="math inline">\(\mathcal{A}=\{左、右、上\}\)</span>，输入状态<span
-class="math inline">\(s\)</span>,由卷积神经网络提取特征向量，其（1）经”优势头“全连接神经网络映射为<span
-class="math inline">\(|\mathcal{A}|\)</span>维向量，其元素代表每个动作的优势值，比如分别为：
-<span class="math display">\[
-D(s,左;w^D)=-90,D(s,右;w^D)=-420,D(s,上;w^D)=30
-\]</span>
-（2）经”状态价值头“全连接神经网络映射为一个标量，代表状态价值，比如<span
-class="math inline">\(V(s;w^V)=300\)</span></p>
-<p>由公式可知，<span
-class="math inline">\(\underset{a\in\mathcal{A}}{max}D(s,a;w^D)=max\{-90,-420,-30\}=30\)</span>
-<span class="math display">\[
-Q(s,左;w)=300-90-30=180,Q(s,右;w)=300-420-30=-150,Q(s,上;w)=300+30-30=300
-\]</span> 在实际实现中，一般使用mean代替max： <span
-class="math display">\[
-Q(s,a;w)=V(s;w^V)+D(s,a;w^D)-\underset{a\in\mathcal{A}}{mean}D(s,a;w^D)
-\]</span></p>
-<p>需要说明的是，对决网络和DQN都是输入状态s，输出每个动作的最优动作价值函数，只不过对决网络的参数为<span
-class="math inline">\((w^D,w^V)\)</span>.因此两者的训练和决策完全相同，比如都可以使用目标网络、双Q学习训练，也会出现高估问题；</p>
-<h4 id="噪声网络">6.噪声网络</h4>
-<p>将神经网络中的参数<span class="math inline">\(w\)</span>改为<span
-class="math inline">\(w=\mu+\sigma\cdot \xi\)</span>,其中<span
-class="math inline">\(\mu,\sigma,\xi\)</span>的形状与<span
-class="math inline">\(w\)</span>完全相同，<span
-class="math inline">\(\mu\)</span>代表均值，<span
-class="math inline">\(\sigma\)</span>代表标准差，<span
-class="math inline">\(\xi\)</span>是随机噪声，它的每个元素独立从标准正态分布<span
-class="math inline">\(\mathcal{N}(0,1)\)</span>中随机抽取。于是，DQN网络由<span
-class="math inline">\(Q(s,a;w)\)</span>变成,<span
-class="math inline">\(\widetilde{Q}(s,a,\xi;\mu,\sigma)=Q(s,a;\mu+\sigma\cdot\xi)\)</span>，参数为<span
-class="math inline">\(\mu\)</span>和<span
-class="math inline">\(\sigma\)</span>,每次要用到<span
-class="math inline">\(Q\)</span>的时候都需要重新抽取<span
-class="math inline">\(\xi\)</span>;</p>
-<p>整个使用流程概述：</p>
-<ol type="1">
-<li><p>收集经验：</p>
-<p>由于噪声DQN本身具有随机性，可以鼓励探索，故将原先的行为策略：<span
-class="math inline">\(\epsilon-greedy\)</span>策略改为：</p>
-<p><span class="math inline">\(a_t=\underset{a\in\mathcal{A}}{argmax}\
-\widetilde{Q}(s,a,\xi;\mu,\sigma)\)</span></p></li>
-<li><p>训练</p>
-<p>训练过程需要使用优先经验回放、双Q学习、对决网络、噪声DQN这四种方法；</p></li>
-<li><p>决策</p>
-<p>做决策时不再需要噪声，将<span
-class="math inline">\(\sigma\)</span>设为全0，只保留参数<span
-class="math inline">\(\mu\)</span>,即用<span
-class="math inline">\(Q(s,a;\mu)\)</span>做决策即可。</p></li>
-</ol>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
@@ -1252,6 +1286,143 @@ a_t=\underset{a}{argmax}\ Q(s_t,a;w)
 <h4 id="经验回放">经验回放</h4>
 <p>将智能体与环境交互的记录暂时保存，然后从中采样和学习的训练方式称为<strong>经验回放</strong>，需要注意的是，经验回放只适用于异策略，如DQN；不适用于同策略，为什么呢，这就像是尝试在当前的工作项目上使用你几年前旧工作的解决方案。</p>
 <p><a href="https://Acoder123wew.github.io/">DQN代码实现</a></p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第六章、价值学习高级技巧</title>
+    <url>/2024/04/12/%E7%AC%AC%E5%85%AD%E7%AB%A0%E3%80%81%E4%BB%B7%E5%80%BC%E5%AD%A6%E4%B9%A0%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<hr />
+<hr />
+<hr />
+<hr />
+<p>DQN、SARSA都属于价值学习，本章介绍价值学习的高级技巧，它们可以应用于多种价值学习和策略学习方法中以提升算法的效果。</p>
+<h4 id="经验回放">1.经验回放</h4>
+<ul>
+<li><strong>经验回放</strong>是指把智能体与环境交互的记录（即经验）<span
+class="math inline">\([(s_t,a_t,r_t,s_{t+1}),(s_{t+1},a_{t+1},r_{t+1},s_{t+2}),...]\)</span>存储到一个缓存里，事后反复利用这些经验训练智能体，这个缓存就是<strong>经验回放缓存</strong>;</li>
+<li>缓存的大小b是个超参数，需要人为指定，缓存中只保留最近b条数据，当缓存存满之后，删除最旧的数据，补充新的数据。在实践中，要等到回放缓存中有足够多的四元组时，才开始做经验回放更新DQN；</li>
+<li>经验回放的优点：（1）每次更新从缓存中随机抽取一个四元组，消除了相关性；（2）重复利用经验，减小所需的样本数量；</li>
+<li>经验回放的缺点：只适用于异策略，如Q学习、确定性策略梯度（DPG）等；不适用于同策略，如SARSA,REINFORCE,A2C等；</li>
+<li>优先经验回放：给四元组样本设置权重，让权重较大的抽样概率大且学习率较小，更新时按照概率做加权随机抽样；</li>
+</ul>
+<p><span class="math display">\[
+p_j\propto |\delta_j|+\epsilon=|Q(s_j,a_j;w_{now})-[r_j+\gamma\cdot
+\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w_{now})]|+\epsilon
+\]</span></p>
+<h4 id="高估问题及其解决方法">2.高估问题及其解决方法</h4>
+<ul>
+<li><p>自举导致偏差传播；</p></li>
+<li><p>最大化导致高估：在一系列数据中加入均值为0的随机噪声，将其中的最大值对噪声求期望，其结果大于原有数据的最大值；导致</p>
+<p><span class="math inline">\(Q(s,a;w)\)</span>高估<span
+class="math inline">\(Q_*(s,a)\)</span>.</p></li>
+</ul>
+<h4 id="使用目标网络切断自举">3.使用目标网络切断”自举“</h4>
+<p>Q学习算法计算TD目标：<span
+class="math inline">\(\hat{y}_j=r_j+\gamma\cdot
+\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w)\)</span></p>
+<p>其中的<span
+class="math inline">\(Q(s_{j+1},a;w)\)</span>是DQN自己计算出的，属于自举，因此可以用一个新的网络来计算它，即目标网络<span
+class="math inline">\(Q(s,a;w^-)\)</span>,其神经网络结构与DQN完全相同，但其参数<span
+class="math inline">\(w^-\)</span>不同于<span
+class="math inline">\(w\)</span>;</p>
+<p>此时TD目标变为：<span class="math inline">\(\hat{y}_j=r_j+\gamma\cdot
+\underset{\alpha\in\mathcal A}{max}Q(s_{j+1},a;w^-_{now})\)</span></p>
+<p>其余计算步骤与常规DQN相同，用以下公式进行目标网络参数的更新：</p>
+<p><span class="math inline">\(w^-_{new}=\tau \cdot
+w_{new}+(1-\tau)\cdot w^-_{now}\)</span>,其中<span
+class="math inline">\(\tau\in(0,1)\)</span>是需要手动调节的超参数。</p>
+<h4 id="双q学习算法ddqn">4.双Q学习算法（DDQN)</h4>
+<p>把最大化分成两个步骤：（1）选择最佳动作（在DQN中）：<span
+class="math inline">\(a^*=\underset{\alpha\in\mathcal{A}}{argmax}Q(s_{j+1},a;w_{now})\)</span></p>
+<p>​ （2）求值（在目标网络中）：<span
+class="math inline">\(\hat{q}_{j+1}=Q(s_{j+1},a^*;w^-_{now})\)</span></p>
+<p><strong>总结</strong>：</p>
+<p><img src="/2024/04/12/第六章、价值学习高级技巧/image-20240413140249926.png"  alt="image-20240413140249926" style="zoom:50%;" /></p>
+<hr />
+<h4 id="对决网络">5.对决网络</h4>
+<p>首先理清相关的概念：</p>
+<p><strong>动作价值函数</strong>：<span
+class="math inline">\(Q_\pi(s,a)=E[U_t|S_t=s,A_t=a]\)</span>,其中的期望是对<span
+class="math inline">\(S_{t+1},A_{t+1},S_{t+2},A_{t+2},...,S_n,A_n\)</span>求的；</p>
+<p><strong>最优动作价值函数</strong>：<span
+class="math inline">\(Q_*(s,a)=\underset{\pi}{max}\ Q_\pi(s,a),\forall
+s\in\mathcal{S},a\in\mathcal{A}\)</span></p>
+<p><strong>状态价值函数</strong>：<span
+class="math inline">\(V_\pi(s)=E_{A\sim\pi}[Q_\pi(s,A)],\forall s\in
+\mathcal{S}\)</span></p>
+<p><strong>最优状态价值函数</strong>：<span
+class="math inline">\(V_*(s)=\underset{\pi}{max}V_{\pi}(s),\forall
+s\in\mathcal{S}\)</span></p>
+<p><strong>最优优势函数</strong>：<span
+class="math inline">\(D_*(s,a)=Q_*(s,a)-V_*(s)\)</span></p>
+<p><strong>最优优势函数定理</strong>：<span
+class="math inline">\(Q_*(s,a)=V_*(s)+D_*(s,a)-\underset{a\in\mathcal{A}}{max}D_*(s,a),\forall
+s\in\mathcal{S},a\in\mathcal{A}\)</span>,其中最后一项恒等于0；</p>
+<hr />
+<p><strong>对决网络的结构</strong>：</p>
+<p>对决网络由两个神经网络组成，一个神经网络记作<span
+class="math inline">\(D(s,a;w^D)\)</span>以近似最优优势函数<span
+class="math inline">\(D_*(s,a)\)</span>;另一个神经网络记作<span
+class="math inline">\(V(s;w^V)\)</span>以近似最优状态价值函数<span
+class="math inline">\(V_*(s)\)</span>.两个神经网络共享部分卷积层，如图所示：</p>
+<p><img src="/2024/04/12/第六章、价值学习高级技巧/image-20240413160528494.png"  alt="image-20240413160528494" style="zoom:50%;" /></p>
+<p>于是： <span class="math display">\[
+Q(s,a;w)=V(s;w^V)+D(s,a;w^D)-\underset{a\in\mathcal{A}}{max}D(s,a;w^D)
+\]</span> 举例说明计算过程：动作空间为<span
+class="math inline">\(\mathcal{A}=\{左、右、上\}\)</span>，输入状态<span
+class="math inline">\(s\)</span>,由卷积神经网络提取特征向量，其（1）经”优势头“全连接神经网络映射为<span
+class="math inline">\(|\mathcal{A}|\)</span>维向量，其元素代表每个动作的优势值，比如分别为：
+<span class="math display">\[
+D(s,左;w^D)=-90,D(s,右;w^D)=-420,D(s,上;w^D)=30
+\]</span>
+（2）经”状态价值头“全连接神经网络映射为一个标量，代表状态价值，比如<span
+class="math inline">\(V(s;w^V)=300\)</span></p>
+<p>由公式可知，<span
+class="math inline">\(\underset{a\in\mathcal{A}}{max}D(s,a;w^D)=max\{-90,-420,-30\}=30\)</span>
+<span class="math display">\[
+Q(s,左;w)=300-90-30=180,Q(s,右;w)=300-420-30=-150,Q(s,上;w)=300+30-30=300
+\]</span> 在实际实现中，一般使用mean代替max： <span
+class="math display">\[
+Q(s,a;w)=V(s;w^V)+D(s,a;w^D)-\underset{a\in\mathcal{A}}{mean}D(s,a;w^D)
+\]</span></p>
+<p>需要说明的是，对决网络和DQN都是输入状态s，输出每个动作的最优动作价值函数，只不过对决网络的参数为<span
+class="math inline">\((w^D,w^V)\)</span>.因此两者的训练和决策完全相同，比如都可以使用目标网络、双Q学习训练，也会出现高估问题；</p>
+<h4 id="噪声网络">6.噪声网络</h4>
+<p>将神经网络中的参数<span class="math inline">\(w\)</span>改为<span
+class="math inline">\(w=\mu+\sigma\cdot \xi\)</span>,其中<span
+class="math inline">\(\mu,\sigma,\xi\)</span>的形状与<span
+class="math inline">\(w\)</span>完全相同，<span
+class="math inline">\(\mu\)</span>代表均值，<span
+class="math inline">\(\sigma\)</span>代表标准差，<span
+class="math inline">\(\xi\)</span>是随机噪声，它的每个元素独立从标准正态分布<span
+class="math inline">\(\mathcal{N}(0,1)\)</span>中随机抽取。于是，DQN网络由<span
+class="math inline">\(Q(s,a;w)\)</span>变成,<span
+class="math inline">\(\widetilde{Q}(s,a,\xi;\mu,\sigma)=Q(s,a;\mu+\sigma\cdot\xi)\)</span>，参数为<span
+class="math inline">\(\mu\)</span>和<span
+class="math inline">\(\sigma\)</span>,每次要用到<span
+class="math inline">\(Q\)</span>的时候都需要重新抽取<span
+class="math inline">\(\xi\)</span>;</p>
+<p>整个使用流程概述：</p>
+<ol type="1">
+<li><p>收集经验：</p>
+<p>由于噪声DQN本身具有随机性，可以鼓励探索，故将原先的行为策略：<span
+class="math inline">\(\epsilon-greedy\)</span>策略改为：</p>
+<p><span class="math inline">\(a_t=\underset{a\in\mathcal{A}}{argmax}\
+\widetilde{Q}(s,a,\xi;\mu,\sigma)\)</span></p></li>
+<li><p>训练</p>
+<p>训练过程需要使用优先经验回放、双Q学习、对决网络、噪声DQN这四种方法；</p></li>
+<li><p>决策</p>
+<p>做决策时不再需要噪声，将<span
+class="math inline">\(\sigma\)</span>设为全0，只保留参数<span
+class="math inline">\(\mu\)</span>,即用<span
+class="math inline">\(Q(s,a;\mu)\)</span>做决策即可。</p></li>
+</ol>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
