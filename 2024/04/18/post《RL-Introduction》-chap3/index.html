@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="《强化学习导论》第三章学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="post《RL:Introduction》_chap3">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/index.html">
+<meta property="og:site_name" content="Well&#39;s BLOG">
+<meta property="og:description" content="《强化学习导论》第三章学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240419112116709.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/643348098b69aaa72f678f47b4575e7.jpg">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240419204326521.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240420104313200.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/643348098b69aaa72f678f47b4575e7.jpg">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240420141223501.png">
+<meta property="article:published_time" content="2024-04-18T12:54:27.000Z">
+<meta property="article:modified_time" content="2024-04-21T14:00:38.345Z">
+<meta property="article:author" content="Well">
+<meta property="article:tag" content="强化学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240419112116709.png">
+
+
+<link rel="canonical" href="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/","path":"2024/04/18/post《RL-Introduction》-chap3/","title":"post《RL:Introduction》_chap3"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>post《RL:Introduction》_chap3 | Well's BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Well's BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#chap3-%E6%9C%89%E9%99%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E5%86%B3%E7%AD%96%E8%BF%87%E7%A8%8B%E6%9C%89%E9%99%90mdp"><span class="nav-number">1.</span> <span class="nav-text">chap3
+有限马尔可夫决策过程（有限MDP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93-%E7%8E%AF%E5%A2%83%E4%BA%A4%E4%BA%92%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 “智能体-环境”交互接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%92%8C%E6%94%B6%E7%9B%8A"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 目标和收益</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%9E%E6%8A%A5%E5%92%8C%E5%88%86%E5%B9%95"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 回报和分幕</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%B9%95%E5%BC%8F%E5%92%8C%E6%8C%81%E7%BB%AD%E6%80%A7%E4%BB%BB%E5%8A%A1%E7%9A%84%E7%BB%9F%E4%B8%80%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">3.4
+分幕式和持续性任务的统一表示法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AD%96%E7%95%A5%E5%92%8C%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.</span> <span class="nav-text">3.5 策略和价值函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E7%AD%96%E7%95%A5%E5%92%8C%E6%9C%80%E4%BC%98%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">3.6 最优策略和最优价值函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.7.</span> <span class="nav-text">3.7 分析</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Well"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Well</p>
+  <div class="site-description" itemprop="description">keep learning</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Well">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Well's BLOG">
+      <meta itemprop="description" content="keep learning">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="post《RL:Introduction》_chap3 | Well's BLOG">
+      <meta itemprop="description" content="《强化学习导论》第三章学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          post《RL:Introduction》_chap3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-04-18 20:54:27" itemprop="dateCreated datePublished" datetime="2024-04-18T20:54:27+08:00">2024-04-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-04-21 22:00:38" itemprop="dateModified" datetime="2024-04-21T22:00:38+08:00">2024-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E3%80%8ARL-Introduction%E3%80%8B/" itemprop="url" rel="index"><span itemprop="name">《RL:Introduction》</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">《强化学习导论》第三章学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h3 id="chap3-有限马尔可夫决策过程有限mdp">chap3
+有限马尔可夫决策过程（有限MDP）</h3>
+<h4 id="智能体-环境交互接口">3.1 “智能体-环境”交互接口</h4>
+<ul>
+<li><p>智能体与环境交互的流程：在每个时刻<span
+class="math inline">\(t\)</span>，智能体处于状态<span
+class="math inline">\(S_t\in\mathcal{S}\)</span>,选择一个动作<span
+class="math inline">\(A_t\in\mathcal{A(s)}\)</span>并执行，环境返回一个收益<span
+class="math inline">\(R_{t+1}\in\mathcal{R}\subset
+R\)</span>,并进入一个新状态<span
+class="math inline">\(S_{t+1}\)</span>(需要注意的是：1.这里用<span
+class="math inline">\(R_{t+1}\)</span>而不是<span
+class="math inline">\(R_t\)</span>表示<span
+class="math inline">\(A_t\)</span>导致的收益，注意区分；2.这里假定<span
+class="math inline">\(R_{t+1}\)</span>只是<span
+class="math inline">\(S_t,A_t\)</span>的函数（实际上还和<span
+class="math inline">\(S_{t+1}\)</span>）有关）；经过一系列交互，得到一个轨迹序列：</p>
+<p><span
+class="math inline">\(S_0,A_0,R_1,S_1,A_1,R_2,...,S_n,A_n\)</span></p></li>
+<li><p>给定前继状态和前继动作的值，<span
+class="math inline">\(s&#39;\in\mathcal{S},r\in\mathcal{R}\)</span>在<span
+class="math inline">\(t\)</span>时刻出现的概率为<span
+class="math inline">\(p(s&#39;,r|s,a)\dot{=}Pr\{S_t=s&#39;,R_t=r|S_{t-1}=s,A_{t-1}=a\}\)</span></p></li>
+</ul>
+<p>则： <span class="math display">\[
+\sum\limits_{s&#39;\in\mathcal{S}}\sum\limits_{r\in\mathcal{R}}^{}p(s&#39;,r|s,a)=1,\forall
+s\in\mathcal{S},a\in\mathcal{A}(s)
+\]</span> <strong>马尔可夫性</strong>：<span
+class="math inline">\(S_t\)</span>和<span
+class="math inline">\(R_t\)</span>的每个可能的值出现的概率只取决于前一个状态<span
+class="math inline">\(S_{t-1}\)</span>和前一个动作<span
+class="math inline">\(A_{t-1}\)</span>，而与更早之前的状态和动作完全无关。</p>
+<p>由上面的概率公式可以推导出其他函数：</p>
+<ul>
+<li>状态转移函数：<span
+class="math inline">\(p(s&#39;|s,a)\dot{=}Pr\{S_t=s&#39;|S_{t-1}=s,A_{t-1}=a\}=\sum\limits_{r\in\mathcal{R}}p(s&#39;,r|s,a)\)</span></li>
+<li>"状态-动作"二元组<span
+class="math inline">\((s,a)\)</span>的期望收益:<span
+class="math inline">\(r(s,a)\dot{=}E[R_t|S_{t-1}=s,A_{t-1}=a]=\sum\limits_{r\in\mathcal{R}}r\sum\limits_{s&#39;\in\mathcal{S}}p(s&#39;,r|s,a)\)</span></li>
+<li>"状态-动作-后继状态"三元组的期望收益：<span
+class="math inline">\(r(s,a,s&#39;)\dot{=}E[R_t|S_{t-1}=s,A_{t-1}=a,S_t=s&#39;]=\sum\limits_{r\in\mathcal{R}}r\frac{p(s&#39;,r|s,a)}{p(s&#39;|s,a)}\)</span></li>
+</ul>
+<p><strong>MDP转移图</strong>：如图所示，空心圆表示状态节点，圆内标注状态。实心圆表示动作节点，表示“状态-动作”二元组<span
+class="math inline">\((s_t,a_t)\)</span></p>
+<p>一个状态在选择完动作后经过对应的动作节点指向最终的状态，每个箭头代表着三元组<span
+class="math inline">\((s_t,a_t,s_{t+1})\)</span>,转移的连线上标注转移概率</p>
+<p><span
+class="math inline">\(p(s_{t+1}|s_t,a_t)\)</span>和转移的期望收益<span
+class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>。</p>
+<p>显然，所有经过同一个动作节点的出度之和为1，即<span
+class="math inline">\(\sum\limits_{s&#39;}^{}p(s&#39;|s,a)=1\)</span></p>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240419112116709.png"  alt="image-20240419112116709" style="zoom:50%;" /></p>
+<h4 id="目标和收益">3.2 目标和收益</h4>
+<p>收益的设定只能用来传达“什么”是你想要实现的目标，而不是“如何”实现这个目标。目标可以归结为：最大化智能体接收到的收益（标量信号）的累积和的概率期望值。</p>
+<h4 id="回报和分幕">3.3 回报和分幕</h4>
+<ul>
+<li><p><strong>幕</strong>：一般又称“回合”，指智能体与环境交互直到终结状态的整个过程；具有这样性质的任务被称为“分幕式任务”；与之对应的是“持续性任务”。</p></li>
+<li><p>折扣回报： <span class="math display">\[
+G_t=R_{t+1}+\gamma
+R_{t+2}+\gamma^2R_{t+3}+...=\sum\limits_{k=0}^{\infty}\gamma^kR_{t+k+1}
+\]</span> 其中，<span
+class="math inline">\(0\le\gamma\le1\)</span>,为折扣率； <span
+class="math display">\[
+G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+...
+\]</span></p>
+<p><span class="math display">\[
+=R_{t+1}+\gamma\cdot(R_{t+2}+\gamma R_{t+3}+...)
+\]</span></p>
+<p><span class="math display">\[
+=R_{t+1}+\gamma\cdot G_{t+1}
+\]</span></p></li>
+</ul>
+<h4 id="分幕式和持续性任务的统一表示法">3.4
+分幕式和持续性任务的统一表示法</h4>
+<p>将回报统一表示为 <span class="math display">\[
+G_t\dot{=}\sum\limits_{k=t+1}^{T}\gamma^{k-t-1}R_k=\sum\limits_{k=0}^{T-t-1}\gamma^{k}R_{t+k+1}
+\]</span> 其中允许<span class="math inline">\(T=\infty\)</span>或<span
+class="math inline">\(\gamma=1\)</span>（但二者不能同时满足，否则回报就无界了），<span
+class="math inline">\(T=\infty\)</span>表示持续性任务，<span
+class="math inline">\(\gamma=1\)</span>表示无折扣；</p>
+<h4 id="策略和价值函数">3.5 策略和价值函数</h4>
+<ul>
+<li><p><strong>价值函数</strong>：其中状态价值函数用于评估智能体所处的状态的好坏，动作价值函数用于评估智能体在给定状态下执行给定动作的好坏；好坏的概念由回报的期望定义；</p></li>
+<li><p><strong>策略</strong>:<span
+class="math inline">\(\pi(a|s)\)</span>表示从状态到每个动作的选择概率之间的映射；</p></li>
+<li><p><strong>状态价值函数</strong>：<span
+class="math inline">\(v_{\pi}(s)\)</span>，表示从状态<span
+class="math inline">\(s\)</span>开始，智能体按照策略<span
+class="math inline">\(\pi\)</span>进行决策所获得的回报的期望值； <span
+class="math display">\[
+v_\pi(s)=E_{\pi}[G_t|S_t=s]=E_{\pi}[\sum\limits_{k=0}^{\infty}\gamma^kR_{t+k+1}|S_t=s],\forall
+s\in\mathcal{S}
+\]</span> 其中，<span
+class="math inline">\(E_{\pi}[\cdot]\)</span>并不表示对策略求期望（事实上也不可能），而表示在给定策略<span
+class="math inline">\(\pi\)</span>时括号中随机变量的期望值；事实上，是在对<span
+class="math inline">\(S_{t+1},A_{t+1}，S_{t+2},A_{t+2},...,S_n,A_n\)</span>求期望。</p></li>
+<li><p><strong>动作价值函数</strong>：<span
+class="math inline">\(q_{\pi}(s,a)\)</span>,表示从状态<span
+class="math inline">\(s\)</span>，执行动作<span
+class="math inline">\(a\)</span>之后，所有可能的决策序列的期望回报 <span
+class="math display">\[
+q_\pi(s,a)=E_{\pi}[G_t|S_t=s,A_t=a]=E_{\pi}[\sum\limits_{k=0}^{\infty}\gamma^kR_{t+k+1}|S_t=s,A_t=a],\forall
+s\in\mathcal{S},\forall a\in{\mathcal A}
+\]</span></p></li>
+<li><p>状态价值函数和动作价值函数的关系： <span class="math display">\[
+v_{\pi}=E_{a\sim\pi(\cdot|s)}[q_{\pi}(s,a)]=\sum_{a\in\mathcal{A}}\pi(a|s)q_{\pi}(s,a)
+\]</span></p>
+<p><span class="math display">\[
+q_{\pi}(s,a) = E_{r,s^\prime}[r+\gamma
+v_\pi(s^\prime)]=\sum_{r,s^\prime}p(s^\prime,r|s,a)[r+\gamma
+v_{\pi}(s^\prime)]
+\]</span></p></li>
+<li><p>状态价值函数的递推关系：</p>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/643348098b69aaa72f678f47b4575e7.jpg"  alt="643348098b69aaa72f678f47b4575e7" style="zoom:50%;" /></p></li>
+</ul>
+<p>这被称为<span
+class="math inline">\(v_\pi\)</span>的贝尔曼方程，它用等式表达了当前状态价值和后继状态价值之间的关系；</p>
+<ul>
+<li><p><span class="math inline">\(v_\pi\)</span>的回溯图：</p>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240419204326521.png"  alt="image-20240419204326521" style="zoom:50%;" /></p></li>
+</ul>
+<p>起始状态为<span class="math inline">\(s\)</span>，智能体通过策略<span
+class="math inline">\(\pi(\cdot|s)\)</span>选择一个动作<span
+class="math inline">\(a\)</span>并执行，然后通过状态转移函数（或者更通用地，四参数函数p)转移到一个新的状态<span
+class="math inline">\(s&#39;\)</span>,环境再返回一个收益<span
+class="math inline">\(r\)</span>.贝尔曼方程从左到右的写法就是这样一个过程，只是它对所有的可能性采用其出现概率进行了加权平均。贝尔曼方程也说明，起始状态的价值=当前动作的收益+后继状态的折扣期望价值。</p>
+<hr />
+<ul>
+<li><strong>网格问题</strong>：</li>
+</ul>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240420104313200.png"  alt="image-20240420104313200" style="zoom:50%;" /></p>
+<p><strong>规定</strong>：智能体在网格中移动，每个格子代表状态，在每个状态中均有四个可选的动作，分别为上下左右，若动作使得智能体移出边界，则智能体位置保持原格不动，并且获得-1的收益；若智能体处于A状态，则无论选择什么动作，智能体都会转移到A’状态并获得+10收益；而若智能体处于B状态，则无论选择什么动作，智能体都会转移到B‘状态并获得+5收益；其余情况随意移动，并且收益为0；右图则是通过下式列出线性方程组求解得到的每个格子的状态价值函数；</p>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/643348098b69aaa72f678f47b4575e7.jpg"  alt="643348098b69aaa72f678f47b4575e7" style="zoom:50%;" /></p>
+<h4 id="最优策略和最优价值函数">3.6 最优策略和最优价值函数</h4>
+<ul>
+<li><p>最优策略：总会存在至少一个策略，它不劣于其他所有的策略，我们称之为<strong>最优策略</strong>；</p></li>
+<li><p>最优状态价值函数： <span class="math display">\[
+v_*(s)=\underset{\pi}{max}\ v_{\pi}(s)
+\]</span> 它表示了，在状态<span
+class="math inline">\(s\)</span>下，之后按照最优策略去决策的期望回报</p></li>
+<li><p>最优动作价值函数： <span class="math display">\[
+q_*(s,a)=\underset{\pi}{max}\ q_{\pi}(s,a)
+\]</span> 它表示了，在状态<span
+class="math inline">\(s\)</span>下，先采取动作<span
+class="math inline">\(a\)</span>,之后按照最优策略去决策的期望回报</p></li>
+</ul>
+<p>（注意：状态价值和动作价值求max选出来的最优策略可以是完全一致的）</p>
+<ul>
+<li><p><span class="math inline">\(v_*\)</span>和<span
+class="math inline">\(q_*\)</span>的关系： <span class="math display">\[
+q_*(s,a)=E[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]
+\]</span></p></li>
+<li><p><strong>贝尔曼最优方程</strong>：</p>
+<ul>
+<li><p><span class="math inline">\(v_*\)</span>的贝尔曼最优方程 <span
+class="math display">\[
+v_*(s)
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a\in\mathcal{A(s)}}{max}q_{\pi_*}(s,a)
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}E_{\pi_*}[G_t|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}E_{\pi_*}[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}E[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma
+v_*(s&#39;)]
+\]</span></p></li>
+</ul>
+<p>注意：这里<span class="math inline">\(R_{t+1}\)</span>和<span
+class="math inline">\(a\)</span>相关，因此max放外面；</p>
+<ul>
+<li><p><span class="math inline">\(q_*\)</span>的贝尔曼最优方程 <span
+class="math display">\[
+q_*(s,a)=E[R_{t+1}+\gamma\ \underset{a&#39;}{max}\
+q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
+\underset{a&#39;}{max}\ q_*(s&#39;,a&#39;)]
+\]</span></p>
+<p><span class="math display">\[
+也可以进一步==\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
+v_*(s&#39;)]
+\]</span></p>
+<p>注意：这里<span class="math inline">\(R_{t+1}\)</span>和<span
+class="math inline">\(a&#39;\)</span>无关，因此max放里面；</p>
+<p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240420141223501.png"  alt="image-20240420141223501" style="zoom:50%;" /></p></li>
+</ul></li>
+</ul>
+<h4 id="分析">3.7 分析</h4>
+<ul>
+<li>若最优状态价值函数<span
+class="math inline">\(v_*(s)\)</span>给定，<span
+class="math inline">\(v_*(s)=\underset{a\in\mathcal{A(s)}}{max}q_{\pi_*}(s,a)\)</span>,满足max条件的动作可能有一个或多个，那么那些只将这些动作的概率设为非零值的策略就是最优策略；</li>
+<li>若给定最优动作价值函数<span
+class="math inline">\(q_*(s,a)\)</span>，则选取动作只需：<span
+class="math inline">\(a_*=\underset{a\in\mathcal{A}}{max}\
+q_*(s,a)\)</span></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/18/%E3%80%8ARL-Introduction%E3%80%8B-chap1-2/" rel="prev" title="《RL:Introduction》_chap1,2">
+                  <i class="fa fa-angle-left"></i> 《RL:Introduction》_chap1,2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Well</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
