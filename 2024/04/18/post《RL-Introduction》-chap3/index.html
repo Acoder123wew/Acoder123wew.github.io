@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/643348098b69aaa72f678f47b4575e7.jpg">
 <meta property="og:image" content="http://acoder123wew.github.io/2024/04/18/post%E3%80%8ARL-Introduction%E3%80%8B-chap3/image-20240420141223501.png">
 <meta property="article:published_time" content="2024-04-18T12:54:27.000Z">
-<meta property="article:modified_time" content="2024-04-22T11:26:17.503Z">
+<meta property="article:modified_time" content="2024-04-25T12:21:54.995Z">
 <meta property="article:author" content="Well">
 <meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
@@ -238,7 +238,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-22 19:26:17" itemprop="dateModified" datetime="2024-04-22T19:26:17+08:00">2024-04-22</time>
+      <time title="修改时间：2024-04-25 20:21:54" itemprop="dateModified" datetime="2024-04-25T20:21:54+08:00">2024-04-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -373,7 +373,7 @@ q_\pi(s,a)=E_{\pi}[G_t|S_t=s,A_t=a]=E_{\pi}[\sum\limits_{k=0}^{\infty}\gamma^kR_
 s\in\mathcal{S},\forall a\in{\mathcal A}
 \]</span></p></li>
 <li><p>状态价值函数和动作价值函数的关系： <span class="math display">\[
-v_{\pi}=E_{a\sim\pi(\cdot|s)}[q_{\pi}(s,a)]=\sum_{a\in\mathcal{A}}\pi(a|s)q_{\pi}(s,a)
+v_{\pi}(s)=E_{a\sim\pi(\cdot|s)}[q_{\pi}(s,a)]=\sum_{a\in\mathcal{A}}\pi(a|s)q_{\pi}(s,a)
 \]</span></p>
 <p><span class="math display">\[
 q_{\pi}(s,a) = E_{r,s^\prime}[r+\gamma
@@ -386,6 +386,12 @@ v_{\pi}(s^\prime)]
 <p>这被称为<span
 class="math inline">\(v_\pi\)</span>的贝尔曼方程，它用等式表达了当前状态价值和后继状态价值之间的关系；</p>
 <ul>
+<li><p>动作价值函数的递推关系 <span class="math display">\[
+q_\pi(s,a) = E_\pi[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] \\
+\qquad \qquad \qquad \quad =
+\sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma\sum_{a^\prime}\pi(a^\prime|s^\prime)
+q_\pi(s^\prime,a^\prime)]
+\]</span></p></li>
 <li><p><span class="math inline">\(v_\pi\)</span>的回溯图：</p>
 <p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240419204326521.png"  alt="image-20240419204326521" style="zoom:50%;" /></p></li>
 </ul>
