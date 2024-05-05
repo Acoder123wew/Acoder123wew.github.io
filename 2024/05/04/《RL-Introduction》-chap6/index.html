@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="强化学习导论第六章学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《RL:Introduction》-chap6">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/index.html">
+<meta property="og:site_name" content="Well&#39;s BLOG">
+<meta property="og:description" content="强化学习导论第六章学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240504203035657.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240504211634752.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240504213502124.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240504215509521.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240505114803514.png">
+<meta property="article:published_time" content="2024-05-04T03:00:13.000Z">
+<meta property="article:modified_time" content="2024-05-05T06:14:17.876Z">
+<meta property="article:author" content="Well">
+<meta property="article:tag" content="RL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/image-20240504203035657.png">
+
+
+<link rel="canonical" href="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/","path":"2024/05/04/《RL-Introduction》-chap6/","title":"《RL:Introduction》-chap6"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>《RL:Introduction》-chap6 | Well's BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Well's BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#chap6-%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">chap6 时序差分学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E9%A2%84%E6%B5%8B"><span class="nav-number">1.1.</span> <span class="nav-text">6.1 时序差分预测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-number">1.2.</span> <span class="nav-text">6.2 时序差分预测方法的优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#td0%E7%9A%84%E6%9C%80%E4%BC%98%E6%80%A7"><span class="nav-number">1.3.</span> <span class="nav-text">6.3 TD(0)的最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sarsa%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E4%B8%8B%E7%9A%84%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E6%8E%A7%E5%88%B6"><span class="nav-number">1.4.</span> <span class="nav-text">6.4
+Sarsa：同轨策略下的时序差分控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#q-learning-%E7%A6%BB%E8%BD%A8%E7%AD%96%E7%95%A5%E4%B8%8B%E7%9A%84%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86%E6%8E%A7%E5%88%B6"><span class="nav-number">1.5.</span> <span class="nav-text">6.5 Q-learning:
+离轨策略下的时序差分控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9Bsarsa"><span class="nav-number">1.6.</span> <span class="nav-text">6.6 期望Sarsa</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E5%8C%96%E5%81%8F%E5%B7%AE%E4%B8%8E%E5%8F%8C%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.7.</span> <span class="nav-text">6.7 最大化偏差与双学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E5%90%8E%E4%BD%8D%E7%8A%B6%E6%80%81%E5%92%8C%E5%85%B6%E4%BB%96%E7%89%B9%E6%AE%8A%E4%BE%8B%E5%AD%90"><span class="nav-number">1.8.</span> <span class="nav-text">6.8
+游戏、后位状态和其他特殊例子</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Well"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Well</p>
+  <div class="site-description" itemprop="description">keep learning</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Well">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Well's BLOG">
+      <meta itemprop="description" content="keep learning">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="《RL:Introduction》-chap6 | Well's BLOG">
+      <meta itemprop="description" content="强化学习导论第六章学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《RL:Introduction》-chap6
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-04 11:00:13" itemprop="dateCreated datePublished" datetime="2024-05-04T11:00:13+08:00">2024-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-05-05 14:14:17" itemprop="dateModified" datetime="2024-05-05T14:14:17+08:00">2024-05-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/RLintroduction/" itemprop="url" rel="index"><span itemprop="name">RLintroduction</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">强化学习导论第六章学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h3 id="chap6-时序差分学习">chap6 时序差分学习</h3>
+<ul>
+<li><strong>预测问题（策略评估问题）</strong>：如何对于一个给定的策略<span
+class="math inline">\(\pi\)</span>估计它的价值函数<span
+class="math inline">\(v_\pi\)</span>;</li>
+<li><strong>控制问题</strong>：找到最优的策略；</li>
+</ul>
+<h4 id="时序差分预测">6.1 时序差分预测</h4>
+<p>蒙特卡洛方法以时刻t观测到的真实的回报<span
+class="math inline">\(G_t\)</span>为目标去更新<span
+class="math inline">\(V(S_t)\)</span>: <span class="math display">\[
+V(S_t)\gets V(S_t)+\alpha [G_t-V(S_t)]
+\]</span> TD方法以<span class="math inline">\(R_{t+1}+\gamma
+V(S_{t+1})\)</span>为目标去更新<span
+class="math inline">\(V(S_{t})\)</span>： <span class="math display">\[
+V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma V(S_{t+1})-V(S_t)]
+\]</span> 这种方法被称为<span
+class="math inline">\(TD(0)\)</span>或单步<span
+class="math inline">\(TD\)</span>;TD方法结合了蒙特卡洛方法和DP方法的优势。</p>
+<p>其中TD目标<span class="math inline">\(R_{t+1}+\gamma
+V(S_{t+1})\)</span>和现状<span
+class="math inline">\(V(S_t)\)</span>之间的差异被称为TD误差：即<span
+class="math inline">\(\delta_t=R_{t+1}+\gamma
+V(S_{t+1})-V(S_t)\)</span></p>
+<ul>
+<li><p>若价值函数数组<span
+class="math inline">\(V\)</span>在一幕内没有改变，则蒙特卡洛误差可写成TD误差之和：即<span
+class="math inline">\(G_t-V(S_t)=\sum\limits_{k=t}^{T-1}\gamma^{k-t}\delta_k\)</span></p></li>
+<li><p>蒙特卡洛方法需要得到<span
+class="math inline">\(G_t\)</span>再更新，即需要知道最终结果；而TD方法只需要一步即可进行更新；</p></li>
+</ul>
+<h4 id="时序差分预测方法的优势">6.2 时序差分预测方法的优势</h4>
+<ul>
+<li>TD方法不需要
+描述收益和下一个状态的联合概率分布的模型，即不需要知道<span
+class="math inline">\(p(s&#39;,r|s,a)\)</span>；</li>
+<li>TD方法下一时刻即可更新；</li>
+<li>在实践中，TD方法在随机任务上通常比常量<span
+class="math inline">\(\alpha\)</span>MC方法收敛得更快；</li>
+</ul>
+<h4 id="td0的最优性">6.3 TD(0)的最优性</h4>
+<p>未完待续</p>
+<h4 id="sarsa同轨策略下的时序差分控制">6.4
+Sarsa：同轨策略下的时序差分控制</h4>
+<p>通过五元组数据<span
+class="math inline">\((S_t,A_t,R_{t+1},S_{t+1},A_{t+1})\)</span>对动作价值函数进行更新：
+<span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+Q(S_{t+1},A_{t+1})-Q(S_t,A_t)]
+\]</span> 每当从非终止状态<span
+class="math inline">\(S_t\)</span>出现一次转移之后，就进行上式的一次更新。特别地，如果<span
+class="math inline">\(S_{t+1}\)</span>是终止状态，则<span
+class="math inline">\(Q(S_{t+1},A_{t+1})=0\)</span>;</p>
+<p>Sarsa算法的流程如图所示：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504203035657.png"  alt="image-20240504203035657" style="zoom: 33%;" /></p>
+<h4 id="q-learning-离轨策略下的时序差分控制">6.5 Q-learning:
+离轨策略下的时序差分控制</h4>
+<p>Q学习的更新公式为： <span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma\ \underset{a}{max}\
+Q(S_{t+1},a)-Q(S_t,A_t)]
+\]</span> <span
+class="math inline">\(Q\)</span>值最终会收敛到最优动作价值函数<span
+class="math inline">\(q_*\)</span>；</p>
+<p>Q学习算法的流程如图所示：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504211634752.png"  alt="image-20240504211634752" style="zoom: 33%;" /></p>
+<p>Q学习的回溯图：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504213502124.png"  alt="image-20240504213502124" style="zoom:33%;" /></p>
+<h4 id="期望sarsa">6.6 期望Sarsa</h4>
+<p>期望Sarsa算法更新规则为： <span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+E[Q(S_{t+1},A_{t+1})|S_{t+1}]-Q(S_t,A_t)]
+\]</span></p>
+<p><span class="math display">\[
+\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+\sum\limits_{a}^{}\pi(a|S_{t+1})Q(S_{t+1},a)-Q(S_t,A_t)]
+\]</span></p>
+<p>期望Sarsa的回溯图：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504215509521.png"  alt="image-20240504215509521" style="zoom:33%;" /></p>
+<p>在相同数量的经验下，期望Sarsa的表现更佳；</p>
+<h4 id="最大化偏差与双学习">6.7 最大化偏差与双学习</h4>
+<p><span class="math inline">\(\underset{a}{max}\
+Q(S_{t+1},a)\)</span>这样一个表达式实质上包含两个操作：（1）确定价值最大的动作<span
+class="math inline">\(a^*=\underset{a}{argmax}\
+Q\)</span>;(2)估计价值<span class="math inline">\(Q(a^*)\)</span></p>
+<p>若确定价值最大的动作和估计它的价值这两个流程采用相同的样本（多幕序列），则会产生最大化偏差问题，双Q学习则将样本划分为两个集合，并用它们学习两个独立的对真实价值<span
+class="math inline">\(q(a),\forall a\in A\)</span>的估计<span
+class="math inline">\(Q_1(a)\)</span>和<span
+class="math inline">\(Q_2(a)\)</span>,并使用两者分别承担选择和估计的任务，即</p>
+<p><span class="math inline">\(Q_2(A^*)=Q_2(argmax_a\
+Q_1(a))\)</span>或<span class="math inline">\(Q_1(A^*)=Q_1(argmax_a\
+Q_2(a))\)</span></p>
+<p>将双学习应用于Q学习得到双Q学习的更新公式： <span
+class="math display">\[
+Q_1(S_t,A_t)\gets Q_1(S_t,A_t)+\alpha [R_{t+1}+\gamma
+Q_2(S_{t+1},argmax_a Q_1(S_{t+1},a))-Q_1(S_t,A_t)]
+\]</span> 双Q学习的完整算法流程：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240505114803514.png"  alt="image-20240505114803514" style="zoom: 33%;" /></p>
+<h4 id="游戏后位状态和其他特殊例子">6.8
+游戏、后位状态和其他特殊例子</h4>
+<ul>
+<li>后位状态：</li>
+<li>后位状态价值函数：</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/RL/" rel="tag"># RL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/30/%E3%80%8ARL-Introduction%E3%80%8B-chap5/" rel="prev" title="《RL:Introduction》-chap5">
+                  <i class="fa fa-angle-left"></i> 《RL:Introduction》-chap5
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Well</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
