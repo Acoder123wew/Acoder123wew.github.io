@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>60分钟入门pytorch</title>
+    <url>/2024/04/08/60%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8pytorch/</url>
+    <content><![CDATA[<h4 id="tensor">Tensor</h4>
+<p>Tensor,张量，是PyTorch中的核心类，我们平常所说的张量通常是张量类的实例，张量即n维数组，支持GPU加速计算和自动微分。</p>
+<ul>
+<li><p>初始化tensor的方法</p>
+<ul>
+<li><ol type="1">
+<li>直接从数据创建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>],[<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line">x_data = torch.tensor(data)</span><br><span class="line"><span class="built_in">type</span>(data),<span class="built_in">type</span>(x_data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">list</span>, torch.Tensor)</span><br></pre></td></tr></table></figure>
+<p>其中，torch.tensor()函数可以将数据转换为torch.Tensor()类型；</p></li>
+<li><ol start="2" type="1">
+<li>从numpy的array转换过来</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">data = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line">np_array = np.array(data)</span><br><span class="line">x = torch.from_numpy(np_array)</span><br><span class="line"><span class="built_in">type</span>(data),<span class="built_in">type</span>(np_array),<span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">list</span>, numpy.ndarray, torch.Tensor)</span><br></pre></td></tr></table></figure></li>
+<li><ol start="3" type="1">
+<li>根据其他tensor样式创建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x_zeros = torch.zeros_like(x_data)</span><br><span class="line">x_ones = torch.ones_like(x_data)</span><br><span class="line">x_rand = torch.rand_like(x_data)</span><br><span class="line">x_zeros,x_ones,x_rand</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[<span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">         [<span class="number">0</span>, <span class="number">0</span>]]),</span><br><span class="line"> tensor([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">         [<span class="number">1</span>, <span class="number">1</span>]]),</span><br><span class="line"> tensor([[<span class="number">0.5286</span>, <span class="number">0.8992</span>],</span><br><span class="line">         [<span class="number">0.7840</span>, <span class="number">0.2935</span>]]))</span><br></pre></td></tr></table></figure>
+<p>这三个函数的参数必须是torch.Tensor</p></li>
+<li><ol start="4" type="1">
+<li>从shape元组创建</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">shape = (<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">x_zeros_ = torch.zeros(shape)</span><br><span class="line">x_ones_ = torch.ones(shape)</span><br><span class="line">x_rand_ = torch.rand(shape)</span><br><span class="line">x_zeros_,x_ones_,x_rand_,x_zeros_.shape,x_ones_.shape,x_rand_.shape</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]]]),</span><br><span class="line"> tensor([[[<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>]]]),</span><br><span class="line"> tensor([[[<span class="number">0.7854</span>, <span class="number">0.6111</span>],</span><br><span class="line">          [<span class="number">0.8331</span>, <span class="number">0.9508</span>],</span><br><span class="line">          [<span class="number">0.2372</span>, <span class="number">0.5213</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">0.6088</span>, <span class="number">0.8252</span>],</span><br><span class="line">          [<span class="number">0.0571</span>, <span class="number">0.2459</span>],</span><br><span class="line">          [<span class="number">0.9353</span>, <span class="number">0.4851</span>]]]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure></li>
+</ul></li>
+<li><p>Tensor的属性：shape形状，dtype元素数据类型，device存储设备</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x_zeros.shape,x_zeros.dtype,x_zeros.device)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.Size([<span class="number">2</span>, <span class="number">2</span>]) torch.int64 cpu</span><br></pre></td></tr></table></figure></li>
+<li><p>转换数据的device</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = torch.ones((<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(tensor.device)</span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">  tensor = tensor.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tensor.device)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cpu</span><br><span class="line">cuda:<span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li><p>pytorch切片与索引操作和python相同</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = torch.ones(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">tensor[:,<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(tensor)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure></li>
+<li><p>torch.cat([a,b,c],dim=n),按照第n维度连接张量a,b,c,维度为0表示按行连接，维度为1表示按列连接</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t1 = torch.cat([tensor, tensor, tensor], dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(t1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure></li>
+<li><p>torch.mul(A,B)和torch.mul(A,number)分别表示相同形状的矩阵按元素相乘和矩阵乘以常数,*运算符可实现相同的功能；</p></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.mul(tensor,tensor),torch.mul(tensor,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">         [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>),</span><br><span class="line"> tensor([[<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>],</span><br><span class="line">         [<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>相应地，矩阵乘法为torch.matmul(A,B),A@B</p></li>
+<li><p>带有<code>_</code>后缀的操作为原地操作</p></li>
+<li><p>.numpy()可以将torch.Tensor类型转换为numpy.ndarray类型</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = tensor.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor.numpy()))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;torch.Tensor&#x27;</span>&gt;</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用t =
+torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化会影响到t</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n = np.ones(<span class="number">5</span>)</span><br><span class="line">t = torch.from_numpy(n)</span><br><span class="line">np.add(n, <span class="number">1</span>, out=n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;t: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;n: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t: tensor([<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>], dtype=torch.float64)</span><br><span class="line">n: [<span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>pytorch</category>
+      </categories>
+      <tags>
+        <tag>深度学习、编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++初级知识</title>
     <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<ul>
@@ -323,6 +389,152 @@ q_*(s,a)\)</span></li>
       </tags>
   </entry>
   <entry>
+    <title>《RL-Introduction》-chap4</title>
+    <url>/2024/04/22/%E3%80%8ARL-Introduction%E3%80%8B-chap4/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap4-动态规划">chap4 动态规划</h3>
+<ul>
+<li>动态规划（Dynamic
+Programming，DP）是一类在用马尔可夫决策过程（MDP)描述的完备环境中计算最优策略的优化方法；</li>
+<li>动态规划假定环境为有限MDP，即状态集合<span
+class="math inline">\(\mathcal{S}\)</span>,动作集合<span
+class="math inline">\(\mathcal{A}\)</span>,收益集合<span
+class="math inline">\(\mathcal{R}\)</span>均有限，且整个系统的的动态特性完全由四参数概率分布函数</li>
+</ul>
+<p><span class="math inline">\(p(s&#39;,r;s,a)\)</span>给出；</p>
+<ul>
+<li><p>核心思想：使用价值函数来结构化地组织对最优策略的搜索； <span
+class="math display">\[
+v_*(s)=\underset{a}{max}E[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma
+v_*(s&#39;)]
+\]</span></p>
+<p><span class="math display">\[
+q_*(s,a)=E[R_{t+1}+\gamma\ \underset{a&#39;}{max}\
+q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
+\underset{a&#39;}{max}\ q_*(s&#39;,a&#39;)]
+\]</span></p>
+<p><span class="math display">\[
+也可以进一步=\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
+v_*(s&#39;)]
+\]</span></p></li>
+</ul>
+<h4 id="策略评估预测">4.1 策略评估（预测）</h4>
+<p>对于任意<span class="math inline">\(s\in\mathcal{S}\)</span>,有：</p>
+<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240422194722256.png"  alt="image-20240422194722256" style="zoom:50%;" /></p>
+<p>只要<span
+class="math inline">\(0&lt;\gamma&lt;1\)</span>或者在任何状态，智能体按<span
+class="math inline">\(\pi\)</span>执行动作之后都能到达终止状态，则能保证<span
+class="math inline">\(v_\pi(s),\forall
+s\in\mathcal{S}\)</span>唯一存在；</p>
+<p>对<span
+class="math inline">\(\mathcal{S}\)</span>中的每一个状态，都列出上式，可得到<span
+class="math inline">\(|\mathcal{S}|\)</span>个方程组成的<span
+class="math inline">\(|\mathcal{S}|\)</span>元方程组，因此可以通过解线性方程组得到状态价值。也可以先给<span
+class="math inline">\(|\mathcal{S}|\)</span>个状态赋予初值（终止状态的状态价值必须赋0），然后根据式<span
+class="math inline">\(v_\pi(s)=\sum\limits_{a}\pi(a|s)\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
+v_\pi(s&#39;)]\)</span>一直迭代，直到满足精度要求。这种更新方法称为“期望更新”，这种算法被称作<strong>迭代策略评估</strong>。</p>
+<p>注意具体实现时，有2种实现方式，（1）定义两个<span
+class="math inline">\(|\mathcal{S}|\)</span>长数组存储新旧状态价值new_value,value，等式左边为new_value,右边为value，做完一轮更新后再value=new_value;
+(2)只需定义一个value数组，左边为新值，右边新旧皆有可能，这被称为“就地更新”，它依然能够收敛，甚至速度更快。</p>
+<h4 id="策略改进">4.2 策略改进</h4>
+<p>状态价值函数<span
+class="math inline">\(v_\pi(s)\)</span>表示从状态<span
+class="math inline">\(s\)</span>开始，智能体按照策略<span
+class="math inline">\(\pi\)</span>进行决策所获得的回报的期望值；我们的目标正是改进策略，那么为什么要计算给定策略下的价值呢，其实这是为了寻找更好的策略：动作价值函数<span
+class="math inline">\(q_\pi(s,a)\)</span>表示，在状态<span
+class="math inline">\(s\)</span>下，执行动作<span
+class="math inline">\(a\)</span>之后（这个动作<span
+class="math inline">\(a\)</span>与<span
+class="math inline">\(\pi\)</span>无关），再使用策略<span
+class="math inline">\(\pi\)</span>控制智能体，得到的回报的期望；两者的关系为：<span
+class="math inline">\(q_\pi(s,a)=E[R_{t+1}+\gamma
+v_{\pi}(S_{t+1})|S_t=s,A_t=a]=\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
+v_\pi(s&#39;)]\)</span></p>
+<p><strong>策略改进定理</strong>：</p>
+<p>若<span class="math inline">\(\forall
+s\in\mathcal{S}\)</span>,有<span
+class="math inline">\(q_\pi(s,\pi^\prime(s))\ge
+v_\pi(s)\)</span>,则<span class="math inline">\(\forall
+s\in\mathcal{S}\)</span>,有<span
+class="math inline">\(v_{\pi^\prime}(s)\ge v_\pi(s)\)</span>,即策略<span
+class="math inline">\(\pi^\prime\)</span>要好于策略<span
+class="math inline">\(\pi\)</span>;</p>
+<p>因此我们可以基于<span
+class="math inline">\(v_\pi\)</span>的值构造这样一个贪心策略： <span
+class="math display">\[
+\pi&#39;(s)=\underset{a}{argmax}\ q_\pi(s,a)
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{argmax}\ E[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{argmax}\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
+v_\pi(s&#39;)]
+\]</span></p>
+<h4 id="策略迭代">4.3 策略迭代</h4>
+<p>对于一个策略，我们可以通过策略评估迭代计算得到它的状态价值函数，然后据此通过策略改进得到一个更好的新的策略，通过这样的链式过程，我们可以得到一个不断改进的策略和价值函数序列：</p>
+<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423153753485.png"  alt="image-20240423153753485" style="zoom:50%;" /></p>
+<p>其中<span
+class="math inline">\(E(evaluation)\)</span>代表策略评估，<span
+class="math inline">\(I(improve)\)</span>代表策略改进；(<span
+class="math inline">\(old-action\ne\pi(s)\)</span>表示动作发生变动，依然未收敛)</p>
+<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423161144756.png"  alt="image-20240423161144756" style="zoom: 50%;" /></p>
+<h4 id="价值迭代">4.4 价值迭代</h4>
+<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423165227621.png"  alt="image-20240423165227621" style="zoom: 50%;" /></p>
+<p>可见，右边比左边收敛快得多。（左侧为随机策略（0.25x4)的<span
+class="math inline">\(v_\pi\)</span>值期望更新，右边为根据<span
+class="math inline">\(v_\pi\)</span>值的策略改进，箭头所指方向均为最佳动作）；</p>
+<p>价值迭代其实就是贝尔曼最优方程的更新形式： <span
+class="math display">\[
+v_{k+1}(s)=\underset{a}{max}\ E[R_{t+1}+\gamma v_k(S_{t+1})|S_t=s,A_t=a]
+\]</span></p>
+<p><span class="math display">\[
+=\underset{a}{max}\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma
+v_k(s&#39;)]
+\]</span></p>
+<p>需要注意的是，价值迭代中不存在显式的策略，我们只维护一个状态价值函数;最后，从中恢复最优策略即可。</p>
+<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240425214400132.png"  alt="image-20240425214400132" style="zoom:50%;" /></p>
+<h4 id="异步动态规划">4.5 异步动态规划</h4>
+<ul>
+<li>异步DP算法属于就地迭代算法，其不以系统遍历状态集的形式来组织算法；所谓的“不系统”，指的是更新状态的顺序非常灵活，不必是<span
+class="math inline">\(s_1,s_1,...,s_{\mathcal{|S|}}\)</span>,我们可以调整更新的顺序，使得价值信息能更有效地在状态间传播，如果某些状态与最优行为无关，甚至可以完全跳过这些状态进行更新，如此一来可以加快收敛速度；</li>
+<li>一个智能体实际在MDP中进行真实交互时，我们可以在智能体访问特定状态时将其更新，即将DP算法的更新聚焦到部分与智能体最相关的状态集。</li>
+</ul>
+<h4 id="广义策略迭代">4.6 广义策略迭代</h4>
+<p>在策略迭代中，有两个同时进行的相互作用的流程，分别是<strong>策略评估</strong>：使得价值函数与当前策略一致即<span
+class="math inline">\(v\to v_\pi\)</span>;</p>
+<p><strong>策略改进</strong>：根据当前价值函数贪心地更新策略。两者相互作用，最终到达最优价值函数和一个最优策略。</p>
+<p>​
+<img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423222446830.png"  alt="image-20240423222446830" style="zoom:50%;" /><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423222526572.png"  alt="image-20240423222526572" style="zoom: 50%;" /></p>
+<hr />
+<h4 id="动态规划的效率">4.7 动态规划的效率</h4>
+<ul>
+<li>动态规划算法能保证在多项式时间内找到一个最优策略；</li>
+<li>对于状态空间很大的问题，通常使用异步DP算法；</li>
+</ul>
+<h4 id="总结">总结</h4>
+<ul>
+<li>策略评估：对一个策略的价值函数进行迭代计算；</li>
+<li>策略改进：给定某个策略的价值函数，计算一个改进的策略；</li>
+<li>策略迭代：策略评估和策略改进交替进行；</li>
+<li>价值迭代：</li>
+<li>异步DP算法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《RL:Introduction》_chap1,2</title>
     <url>/2024/04/18/%E3%80%8ARL-Introduction%E3%80%8B-chap1-2/</url>
     <content><![CDATA[<h3 id="chap1-导论">chap1 导论</h3>
@@ -485,152 +697,6 @@ class="math inline">\(\alpha\)</span></p></li>
 <p><img src="/2024/04/18/《RL-Introduction》-chap1-2/image-20240418203018992.png"  alt="image-20240418203018992" style="zoom:50%;" /></p></li>
 </ul>
 <p>如图所示，图中每一个点表示特定算法(不同颜色标注)在特定参数下(横坐标值)执行1000步的平均收益。</p>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL-Introduction》-chap4</title>
-    <url>/2024/04/22/%E3%80%8ARL-Introduction%E3%80%8B-chap4/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap4-动态规划">chap4 动态规划</h3>
-<ul>
-<li>动态规划（Dynamic
-Programming，DP）是一类在用马尔可夫决策过程（MDP)描述的完备环境中计算最优策略的优化方法；</li>
-<li>动态规划假定环境为有限MDP，即状态集合<span
-class="math inline">\(\mathcal{S}\)</span>,动作集合<span
-class="math inline">\(\mathcal{A}\)</span>,收益集合<span
-class="math inline">\(\mathcal{R}\)</span>均有限，且整个系统的的动态特性完全由四参数概率分布函数</li>
-</ul>
-<p><span class="math inline">\(p(s&#39;,r;s,a)\)</span>给出；</p>
-<ul>
-<li><p>核心思想：使用价值函数来结构化地组织对最优策略的搜索； <span
-class="math display">\[
-v_*(s)=\underset{a}{max}E[R_{t+1}+\gamma v_*(S_{t+1})|S_t=s,A_t=a]
-\]</span></p>
-<p><span class="math display">\[
-=\underset{a}{max}\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma
-v_*(s&#39;)]
-\]</span></p>
-<p><span class="math display">\[
-q_*(s,a)=E[R_{t+1}+\gamma\ \underset{a&#39;}{max}\
-q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]
-\]</span></p>
-<p><span class="math display">\[
-=\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
-\underset{a&#39;}{max}\ q_*(s&#39;,a&#39;)]
-\]</span></p>
-<p><span class="math display">\[
-也可以进一步=\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma\
-v_*(s&#39;)]
-\]</span></p></li>
-</ul>
-<h4 id="策略评估预测">4.1 策略评估（预测）</h4>
-<p>对于任意<span class="math inline">\(s\in\mathcal{S}\)</span>,有：</p>
-<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240422194722256.png"  alt="image-20240422194722256" style="zoom:50%;" /></p>
-<p>只要<span
-class="math inline">\(0&lt;\gamma&lt;1\)</span>或者在任何状态，智能体按<span
-class="math inline">\(\pi\)</span>执行动作之后都能到达终止状态，则能保证<span
-class="math inline">\(v_\pi(s),\forall
-s\in\mathcal{S}\)</span>唯一存在；</p>
-<p>对<span
-class="math inline">\(\mathcal{S}\)</span>中的每一个状态，都列出上式，可得到<span
-class="math inline">\(|\mathcal{S}|\)</span>个方程组成的<span
-class="math inline">\(|\mathcal{S}|\)</span>元方程组，因此可以通过解线性方程组得到状态价值。也可以先给<span
-class="math inline">\(|\mathcal{S}|\)</span>个状态赋予初值（终止状态的状态价值必须赋0），然后根据式<span
-class="math inline">\(v_\pi(s)=\sum\limits_{a}\pi(a|s)\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
-v_\pi(s&#39;)]\)</span>一直迭代，直到满足精度要求。这种更新方法称为“期望更新”，这种算法被称作<strong>迭代策略评估</strong>。</p>
-<p>注意具体实现时，有2种实现方式，（1）定义两个<span
-class="math inline">\(|\mathcal{S}|\)</span>长数组存储新旧状态价值new_value,value，等式左边为new_value,右边为value，做完一轮更新后再value=new_value;
-(2)只需定义一个value数组，左边为新值，右边新旧皆有可能，这被称为“就地更新”，它依然能够收敛，甚至速度更快。</p>
-<h4 id="策略改进">4.2 策略改进</h4>
-<p>状态价值函数<span
-class="math inline">\(v_\pi(s)\)</span>表示从状态<span
-class="math inline">\(s\)</span>开始，智能体按照策略<span
-class="math inline">\(\pi\)</span>进行决策所获得的回报的期望值；我们的目标正是改进策略，那么为什么要计算给定策略下的价值呢，其实这是为了寻找更好的策略：动作价值函数<span
-class="math inline">\(q_\pi(s,a)\)</span>表示，在状态<span
-class="math inline">\(s\)</span>下，执行动作<span
-class="math inline">\(a\)</span>之后（这个动作<span
-class="math inline">\(a\)</span>与<span
-class="math inline">\(\pi\)</span>无关），再使用策略<span
-class="math inline">\(\pi\)</span>控制智能体，得到的回报的期望；两者的关系为：<span
-class="math inline">\(q_\pi(s,a)=E[R_{t+1}+\gamma
-v_{\pi}(S_{t+1})|S_t=s,A_t=a]=\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
-v_\pi(s&#39;)]\)</span></p>
-<p><strong>策略改进定理</strong>：</p>
-<p>若<span class="math inline">\(\forall
-s\in\mathcal{S}\)</span>,有<span
-class="math inline">\(q_\pi(s,\pi^\prime(s))\ge
-v_\pi(s)\)</span>,则<span class="math inline">\(\forall
-s\in\mathcal{S}\)</span>,有<span
-class="math inline">\(v_{\pi^\prime}(s)\ge v_\pi(s)\)</span>,即策略<span
-class="math inline">\(\pi^\prime\)</span>要好于策略<span
-class="math inline">\(\pi\)</span>;</p>
-<p>因此我们可以基于<span
-class="math inline">\(v_\pi\)</span>的值构造这样一个贪心策略： <span
-class="math display">\[
-\pi&#39;(s)=\underset{a}{argmax}\ q_\pi(s,a)
-\]</span></p>
-<p><span class="math display">\[
-=\underset{a}{argmax}\ E[R_{t+1}+\gamma v_\pi(S_{t+1})|S_t=s,A_t=a]
-\]</span></p>
-<p><span class="math display">\[
-=\underset{a}{argmax}\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)[r+\gamma
-v_\pi(s&#39;)]
-\]</span></p>
-<h4 id="策略迭代">4.3 策略迭代</h4>
-<p>对于一个策略，我们可以通过策略评估迭代计算得到它的状态价值函数，然后据此通过策略改进得到一个更好的新的策略，通过这样的链式过程，我们可以得到一个不断改进的策略和价值函数序列：</p>
-<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423153753485.png"  alt="image-20240423153753485" style="zoom:50%;" /></p>
-<p>其中<span
-class="math inline">\(E(evaluation)\)</span>代表策略评估，<span
-class="math inline">\(I(improve)\)</span>代表策略改进；(<span
-class="math inline">\(old-action\ne\pi(s)\)</span>表示动作发生变动，依然未收敛)</p>
-<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423161144756.png"  alt="image-20240423161144756" style="zoom: 50%;" /></p>
-<h4 id="价值迭代">4.4 价值迭代</h4>
-<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423165227621.png"  alt="image-20240423165227621" style="zoom: 50%;" /></p>
-<p>可见，右边比左边收敛快得多。（左侧为随机策略（0.25x4)的<span
-class="math inline">\(v_\pi\)</span>值期望更新，右边为根据<span
-class="math inline">\(v_\pi\)</span>值的策略改进，箭头所指方向均为最佳动作）；</p>
-<p>价值迭代其实就是贝尔曼最优方程的更新形式： <span
-class="math display">\[
-v_{k+1}(s)=\underset{a}{max}\ E[R_{t+1}+\gamma v_k(S_{t+1})|S_t=s,A_t=a]
-\]</span></p>
-<p><span class="math display">\[
-=\underset{a}{max}\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)[r+\gamma
-v_k(s&#39;)]
-\]</span></p>
-<p>需要注意的是，价值迭代中不存在显式的策略，我们只维护一个状态价值函数;最后，从中恢复最优策略即可。</p>
-<p><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240425214400132.png"  alt="image-20240425214400132" style="zoom:50%;" /></p>
-<h4 id="异步动态规划">4.5 异步动态规划</h4>
-<ul>
-<li>异步DP算法属于就地迭代算法，其不以系统遍历状态集的形式来组织算法；所谓的“不系统”，指的是更新状态的顺序非常灵活，不必是<span
-class="math inline">\(s_1,s_1,...,s_{\mathcal{|S|}}\)</span>,我们可以调整更新的顺序，使得价值信息能更有效地在状态间传播，如果某些状态与最优行为无关，甚至可以完全跳过这些状态进行更新，如此一来可以加快收敛速度；</li>
-<li>一个智能体实际在MDP中进行真实交互时，我们可以在智能体访问特定状态时将其更新，即将DP算法的更新聚焦到部分与智能体最相关的状态集。</li>
-</ul>
-<h4 id="广义策略迭代">4.6 广义策略迭代</h4>
-<p>在策略迭代中，有两个同时进行的相互作用的流程，分别是<strong>策略评估</strong>：使得价值函数与当前策略一致即<span
-class="math inline">\(v\to v_\pi\)</span>;</p>
-<p><strong>策略改进</strong>：根据当前价值函数贪心地更新策略。两者相互作用，最终到达最优价值函数和一个最优策略。</p>
-<p>​
-<img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423222446830.png"  alt="image-20240423222446830" style="zoom:50%;" /><img src="/2024/04/22/《RL-Introduction》-chap4/image-20240423222526572.png"  alt="image-20240423222526572" style="zoom: 50%;" /></p>
-<hr />
-<h4 id="动态规划的效率">4.7 动态规划的效率</h4>
-<ul>
-<li>动态规划算法能保证在多项式时间内找到一个最优策略；</li>
-<li>对于状态空间很大的问题，通常使用异步DP算法；</li>
-</ul>
-<h4 id="总结">总结</h4>
-<ul>
-<li>策略评估：对一个策略的价值函数进行迭代计算；</li>
-<li>策略改进：给定某个策略的价值函数，计算一个改进的策略；</li>
-<li>策略迭代：策略评估和策略改进交替进行；</li>
-<li>价值迭代：</li>
-<li>异步DP算法</li>
-</ul>
 ]]></content>
       <categories>
         <category>RLintroduction</category>
@@ -1133,6 +1199,112 @@ class="math inline">\(S(n)=O(1)\)</span></p></li>
       </tags>
   </entry>
   <entry>
+    <title>《RL-Introduction》-chap7</title>
+    <url>/2024/05/14/%E3%80%8ARL-Introduction%E3%80%8B-chap7/</url>
+    <content><![CDATA[<hr />
+<hr />
+<hr />
+<h3 id="chap7-n步自举法">chap7 n步自举法</h3>
+<p><span class="math inline">\(V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma
+V(S_{t+1})-V(S_t)]\)</span></p>
+<ul>
+<li>n步自举解决了单步时序差分方法的不灵活问题，即<span
+class="math inline">\(V(S_{t+1})\)</span>变化不明显导致<span
+class="math inline">\(V(S_t)\)</span>更新缓慢的问题；</li>
+<li>n步时序差分方法是蒙特卡洛方法和单步时序差分算法的折中；</li>
+</ul>
+<h4 id="n步时序差分预测">7.1 n步时序差分预测</h4>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515104403769.png"  alt="image-20240515104403769" style="zoom: 50%;" /></p>
+<ul>
+<li><p>蒙特卡洛方法的更新目标为完整回报： <span class="math display">\[
+G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...+\gamma ^{T-t-1}R_T
+\]</span></p></li>
+<li><p>单步TD方法的更新目标为单步回报： <span class="math display">\[
+G_{t:t+1}=R_{t+1}+\gamma V_t(S_{t+1})
+\]</span> <span
+class="math inline">\(V_t(S_{t+1})\)</span>下标表示t时刻对状态<span
+class="math inline">\(S_{t+1}\)</span>的价值的估计值，这是因为状态价值可能一直在更新，而我们计算时应该使用最新的估计值</p></li>
+<li><p>n步TD方法的更新目标为n步回报： <span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+V_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
+class="math inline">\(G_{t:t+n}=G_t\)</span></p></li>
+<li><p><strong>n步时序差分算法更新公式</strong>为：</p>
+<p>对于<span class="math inline">\(S_t\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[
+V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha [G_{t:t+n}-V_{t+n-1}(S_t)],0\le
+t&lt;T
+\]</span></p>
+<p>​ 对于任意其他状态：<span
+class="math inline">\(V_{t+n}(S)=V_{t+n-1}(S)\)</span></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515120741239.png"  alt="image-20240515120741239" style="zoom:50%;" /></p>
+<p>n步时序差分算法收敛的数学基础：<strong>误差减少性质</strong></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515125036138.png"  alt="image-20240515125036138" style="zoom:50%;" /></p>
+<h4 id="n步sarsa">7.2 n步Sarsa</h4>
+<p>n步Sarsa的更新目标为 <span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+Q_{t+n-1}(S_{t+n},A_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
+class="math inline">\(G_{t:t+n}=G_t\)</span></p>
+<p>则n步Sarsa的更新公式为：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515161052573.png"  alt="image-20240515161052573" style="zoom:50%;" /></p>
+<p>对于任意其他状态-动作二元组：<span
+class="math inline">\(Q_{t+n}(s,a)=Q_{t+n-1}(s,a)\)</span></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515165316919.png"  alt="image-20240515165316919" style="zoom:50%;" /></p>
+<h4 id="期望sarsa">7.2.’ 期望Sarsa</h4>
+<p><span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span></p>
+<p>其中<span
+class="math inline">\(\bar{V}_{t}(s)=\sum_{a}\pi(a|s)Q_t(s,a)\)</span></p>
+<p>除此之外，其他均与n步Sarsa相同。</p>
+<h4 id="n步离轨策略学习">7.3 n步离轨策略学习</h4>
+<ul>
+<li>在n步时序差分时使用重要度采样率<span
+class="math inline">\(\rho_{t:t+n-1}\)</span>对价值更新进行加权： <span
+class="math display">\[
+V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha
+\rho_{t:t+n-1}[G_{t:t+n}-V_{t+n-1}(S_t)],0\le t&lt;T
+\]</span></li>
+</ul>
+<p>其中重要度采样率：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515203231212.png"  alt="image-20240515203231212" style="zoom:50%;" /></p>
+<ul>
+<li>在n步Sarsa时使用重要度采样率<span
+class="math inline">\(\rho_{t+1:t+n}\)</span>对价值更新进行加权：</li>
+</ul>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515205021292.png"  alt="image-20240515205021292" style="zoom:50%;" /></p>
+<ul>
+<li><p>在n步期望Sarsa时使用重要度采样率<span
+class="math inline">\(\rho_{t+1:t+n-1}\)</span>对价值更新进行加权：
+<span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span></p>
+<p><span class="math display">\[
+Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
+\rho_{t+1:t+n-1}[G_{t:t+n}-Q_{t+n-1}(S_t,A_t)]
+\]</span></p></li>
+</ul>
+<p><strong>离轨策略下的n步Sarsa算法</strong>：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515210348794.png"  alt="image-20240515210348794" style="zoom:50%;" /></p>
+<h4 id="带控制变量的每次决策型方法">7.4 带控制变量的每次决策型方法</h4>
+<h4 id="不需要使用重要度采样的离轨策略学习方法n步树回溯算法">7.5
+不需要使用重要度采样的离轨策略学习方法：n步树回溯算法</h4>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213756088.png"  alt="image-20240515213756088" style="zoom:50%;" /></p>
+<hr />
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213850184.png"  alt="image-20240515213850184" style="zoom:50%;" /></p>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第七章、策略梯度方法</title>
     <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<hr />
@@ -1271,6 +1443,207 @@ class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p
       </categories>
       <tags>
         <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三章、强化学习基本概念</title>
+    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
+<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
+Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
+<strong>环境</strong>：与智能体交互的对象；</p>
+<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
+<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
+class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
+<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
+class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
+<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
+<strong>动作空间</strong>：所有可能动作的集合，记作<span
+class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
+<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
+class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
+class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
+class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
+class="math inline">\(s_t,s_{t+1}\)</span>,有<span
+class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
+<h3 id="状态转移">3.状态转移</h3>
+<p><strong>状态转移</strong>：智能体从当前<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s\)</span>转移到下一刻的状态<span
+class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
+<span
+class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
+表示发生下述事件的概率：在当前状态<span
+class="math inline">\(s\)</span>,智能体执行动作<span
+class="math inline">\(a\)</span>,下一刻环境的状态变成<span
+class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因为状态转移存在随机性。
+<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
+class="math inline">\(s&#39;\)</span>完全由<span
+class="math inline">\(s,a\)</span>决定： <span
+class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
+  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
+  &amp; \text{ 0 , otherwise }
+\end{cases}\]</span>
+<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
+<h3 id="策略">4.策略</h3>
+<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
+<strong>随机性策略</strong>：<span
+class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
+<strong>确定性策略</strong>：记作<span
+class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
+class="math inline">\(a\)</span>完全由状态<span
+class="math inline">\(s\)</span>决定:<span
+class="math inline">\(a=\mu(s)\)</span></p>
+<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
+class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
+(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
+class="math inline">\(a\)</span></p>
+<p>,环境通过状态转移函数<span
+class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
+class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
+class="math inline">\(r(s,a,s’)\)</span>。</p>
+<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
+property）</h3>
+<p>马尔可夫性，即下一时刻状态<span
+class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
+class="math inline">\(S_t\)</span>和动作<span
+class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
+class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
+<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
+class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
+<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
+<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
+class="math inline">\(n\)</span>结束，则<span
+class="math inline">\(t\)</span>时刻的回报定义为： <span
+class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
+<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
+class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
+class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
+R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
+class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
+<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
+<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
+<strong>动作价值函数</strong>： <span
+class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
+表示已经观测到了<span
+class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
+class="math inline">\(s_t\)</span>,选中动作<span
+class="math inline">\(a_t\)</span>，原来<span
+class="math inline">\(U_t\)</span>中的随机性来自<span
+class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
+class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
+class="math inline">\(\qquad\)</span><span
+class="math inline">\(t\)</span>时刻的动作价值函数<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
+（1）当前状态<span
+class="math inline">\(s_t\)</span>：当前状态越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
+class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
+class="math inline">\(\pi\)</span>：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
+<strong>最优动作价值函数</strong>： 为了排除策略<span
+class="math inline">\(\pi\)</span>的影响，可以使： <span
+class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
+Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
+即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
+class="math inline">\(\pi\)</span>的影响，<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
+<strong>状态价值函数</strong>: <span
+class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
+\cdot Q_\pi(s_t,a)\]</span>
+状态价值函数可以理解为在动作价值函数的基础上，动作<span
+class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
+class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
+class="math inline">\(\pi\)</span>和状态<span
+class="math inline">\(s_t\)</span>的好坏</p>
+<p><strong>两者比较</strong>： <span class="math display">\[
+Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
+\]</span></p>
+<p><span class="math display">\[
+V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
+\]</span></p>
+<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
+<p>无模型方法：价值学习、策略学习</p>
+<p>基于模型的方法：AlphaGo</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第五章、SARSA算法</title>
+    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
+class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
+class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
+<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
+<p>贝尔曼方程 <span class="math display">\[
+Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
+Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
+\]</span> 训练所用的<strong>五元组</strong>数据<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
+<p>观测到当前状态为<span
+class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
+class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
+class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
+<p>再根据当前策略做抽样得到<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
+class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
+<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
+q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
+\]</span>
+等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
+class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
+q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
+<p>更新公式： <span class="math display">\[
+q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
+\]</span></p>
+<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
+<p>用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,即<span
+class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
+S,a\in\mathcal A\)</span></p>
+<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
+<span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
+\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span></p>
+<p><span class="math display">\[
+损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
+,\delta_t=\hat{q}_t-\hat{y}_t
+\]</span></p>
+<p>更新价值网络参数 <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
+\]</span></p>
+<h4 id="多步td目标">3.多步TD目标</h4>
+<p><span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
+q(s_{t+m},a_{t+m};w_{now})
+\]</span></p>
+<ul>
+<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
+class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
+</ul>
+<h4 id="对比">4.对比</h4>
+<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
+<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
+class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
+class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习、人工智能</tag>
       </tags>
   </entry>
   <entry>
@@ -1451,207 +1824,6 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
 <p>输出：tensor([17.3412])</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
 <p>输出：tensor([17.3020])</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>人工智能、强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第五章、SARSA算法</title>
-    <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<hr />
-<p>Q-learning和SARSA都是时间差分算法（TD），但前者目标是学习最优动作价值函数<span
-class="math inline">\(Q_*\)</span>，为异策略，可以使用经验回放；而后者目标是学习动作价值函数<span
-class="math inline">\(Q_\pi(s,a)\)</span>,为同策略，不能使用经验回放。下面分别介绍表格形式和神经网络形式的SARSA算法；</p>
-<h4 id="表格形式的sarsa算法">1.表格形式的SARSA算法</h4>
-<p>贝尔曼方程 <span class="math display">\[
-Q_\pi(s_t,a_t)=E_{S_{t+1},A_{t+1}}[R_t+\gamma\cdot
-Q_\pi(S_{t+1},A_{t+1})|S_t=s_t,A_t=a_t]
-\]</span> 训练所用的<strong>五元组</strong>数据<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span>的来源：</p>
-<p>观测到当前状态为<span
-class="math inline">\(s_t\)</span>,根据当前策略做抽样得到<span
-class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函数得到<span
-class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
-class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
-<p>再根据当前策略做抽样得到<span
-class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
-class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
-<p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
-q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
-\]</span>
-等式左边为原预测，右边和为TD目标，两项分别为部分观测和补充预测，TD目标<span
-class="math inline">\(\hat{y_t}=r_t+\gamma\cdot
-q(s_{t+1},\widetilde{a}_{t+1})\)</span>；</p>
-<p>更新公式： <span class="math display">\[
-q(s_t,a_t)=(1-\alpha)\cdot q(s_t,a_t)+\alpha\cdot \hat{y_t}
-\]</span></p>
-<h4 id="神经网络形式的sarsa算法">2.神经网络形式的SARSA算法</h4>
-<p>用神经网络<span
-class="math inline">\(q(s,a;w)\)</span>(价值网络)来近似<span
-class="math inline">\(Q_\pi(s,a)\)</span>,即<span
-class="math inline">\(q(s,a;w)\to Q_\pi(s,a),\forall s\in\mathcal
-S,a\in\mathcal A\)</span></p>
-<p><img src="/2024/04/12/第五章、SARSA算法/image-20240412114045675.png"  alt="image-20240412114045675" style="zoom:50%;" />
-<span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=r_t+\gamma\cdot
-\hat{q}_{t+1}=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1};w_{now})
-\]</span></p>
-<p><span class="math display">\[
-损失函数：L(w)=\frac{1}{2}[q(s_t,a_t;w_{now})-\hat{y}_t]^2
-,\delta_t=\hat{q}_t-\hat{y}_t
-\]</span></p>
-<p>更新价值网络参数 <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot \delta_t\cdot\nabla _wq(s_t,a_t;w_{now})
-\]</span></p>
-<h4 id="多步td目标">3.多步TD目标</h4>
-<p><span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now})\to\hat{y}_t=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-\hat{q}_{t+m}=\sum\limits_{i=0}^{m-1}\gamma^ir_{t+i}+\gamma^m\cdot
-q(s_{t+m},a_{t+m};w_{now})
-\]</span></p>
-<ul>
-<li>回报<span class="math inline">\(u_t\)</span>的书写形式：<span
-class="math inline">\(u_t=\sum_{i=0}^{n-t}\gamma^ir_{t+i}=\sum_{i=t}^{n}\gamma^{i-t}r_i\)</span></li>
-</ul>
-<h4 id="对比">4.对比</h4>
-<p>蒙特卡洛方法：用实际观测值去近似期望，特点是它是期望的无偏估计，但实际观测有可能距离期望较远，即方差大，收敛较慢；</p>
-<p>自举：用估算去更新改进估算本身，自举方法中单步TD的特点是方差小收敛快，但它是期望的有偏估计，自举会让偏差从<span
-class="math inline">\((s_{t+1},a_{t+1})\)</span>传播到<span
-class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习、人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第三章、强化学习基本概念</title>
-    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
-<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
-Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
-<strong>环境</strong>：与智能体交互的对象；</p>
-<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
-<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
-class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
-<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
-class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
-<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
-<strong>动作空间</strong>：所有可能动作的集合，记作<span
-class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
-<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
-class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
-class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
-class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
-class="math inline">\(s_t,s_{t+1}\)</span>,有<span
-class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
-<h3 id="状态转移">3.状态转移</h3>
-<p><strong>状态转移</strong>：智能体从当前<span
-class="math inline">\(t\)</span>时刻的状态<span
-class="math inline">\(s\)</span>转移到下一刻的状态<span
-class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
-<span
-class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
-表示发生下述事件的概率：在当前状态<span
-class="math inline">\(s\)</span>,智能体执行动作<span
-class="math inline">\(a\)</span>,下一刻环境的状态变成<span
-class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因为状态转移存在随机性。
-<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
-class="math inline">\(s&#39;\)</span>完全由<span
-class="math inline">\(s,a\)</span>决定： <span
-class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
-  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
-  &amp; \text{ 0 , otherwise }
-\end{cases}\]</span>
-<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
-<h3 id="策略">4.策略</h3>
-<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
-<strong>随机性策略</strong>：<span
-class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
-<strong>确定性策略</strong>：记作<span
-class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
-class="math inline">\(a\)</span>完全由状态<span
-class="math inline">\(s\)</span>决定:<span
-class="math inline">\(a=\mu(s)\)</span></p>
-<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
-class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
-(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
-class="math inline">\(a\)</span></p>
-<p>,环境通过状态转移函数<span
-class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
-class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
-class="math inline">\(r(s,a,s’)\)</span>。</p>
-<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
-property）</h3>
-<p>马尔可夫性，即下一时刻状态<span
-class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
-class="math inline">\(S_t\)</span>和动作<span
-class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
-class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
-<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
-class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
-<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
-<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
-class="math inline">\(n\)</span>结束，则<span
-class="math inline">\(t\)</span>时刻的回报定义为： <span
-class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
-<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
-class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
-class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
-R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
-class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
-<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
-<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
-<strong>动作价值函数</strong>： <span
-class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
-表示已经观测到了<span
-class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
-class="math inline">\(s_t\)</span>,选中动作<span
-class="math inline">\(a_t\)</span>，原来<span
-class="math inline">\(U_t\)</span>中的随机性来自<span
-class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
-class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
-class="math inline">\(\qquad\)</span><span
-class="math inline">\(t\)</span>时刻的动作价值函数<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
-（1）当前状态<span
-class="math inline">\(s_t\)</span>：当前状态越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
-class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
-class="math inline">\(\pi\)</span>：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
-<strong>最优动作价值函数</strong>： 为了排除策略<span
-class="math inline">\(\pi\)</span>的影响，可以使： <span
-class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
-Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
-即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
-class="math inline">\(\pi\)</span>的影响，<span
-class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
-<strong>状态价值函数</strong>: <span
-class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
-\cdot Q_\pi(s_t,a)\]</span>
-状态价值函数可以理解为在动作价值函数的基础上，动作<span
-class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
-class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
-class="math inline">\(\pi\)</span>和状态<span
-class="math inline">\(s_t\)</span>的好坏</p>
-<p><strong>两者比较</strong>： <span class="math display">\[
-Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
-\]</span></p>
-<p><span class="math display">\[
-V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
-\]</span></p>
-<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
-<p>无模型方法：价值学习、策略学习</p>
-<p>基于模型的方法：AlphaGo</p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
@@ -1898,72 +2070,6 @@ class="math inline">\(Q(s,a;\mu)\)</span>做决策即可。</p></li>
       </categories>
       <tags>
         <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>60分钟入门pytorch</title>
-    <url>/2024/04/08/60%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8pytorch/</url>
-    <content><![CDATA[<h4 id="tensor">Tensor</h4>
-<p>Tensor,张量，是PyTorch中的核心类，我们平常所说的张量通常是张量类的实例，张量即n维数组，支持GPU加速计算和自动微分。</p>
-<ul>
-<li><p>初始化tensor的方法</p>
-<ul>
-<li><ol type="1">
-<li>直接从数据创建</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line">data = [[<span class="number">1</span>, <span class="number">2</span>],[<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line">x_data = torch.tensor(data)</span><br><span class="line"><span class="built_in">type</span>(data),<span class="built_in">type</span>(x_data)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">list</span>, torch.Tensor)</span><br></pre></td></tr></table></figure>
-<p>其中，torch.tensor()函数可以将数据转换为torch.Tensor()类型；</p></li>
-<li><ol start="2" type="1">
-<li>从numpy的array转换过来</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">data = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>]]</span><br><span class="line">np_array = np.array(data)</span><br><span class="line">x = torch.from_numpy(np_array)</span><br><span class="line"><span class="built_in">type</span>(data),<span class="built_in">type</span>(np_array),<span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(<span class="built_in">list</span>, numpy.ndarray, torch.Tensor)</span><br></pre></td></tr></table></figure></li>
-<li><ol start="3" type="1">
-<li>根据其他tensor样式创建</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x_zeros = torch.zeros_like(x_data)</span><br><span class="line">x_ones = torch.ones_like(x_data)</span><br><span class="line">x_rand = torch.rand_like(x_data)</span><br><span class="line">x_zeros,x_ones,x_rand</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[<span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line">         [<span class="number">0</span>, <span class="number">0</span>]]),</span><br><span class="line"> tensor([[<span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">         [<span class="number">1</span>, <span class="number">1</span>]]),</span><br><span class="line"> tensor([[<span class="number">0.5286</span>, <span class="number">0.8992</span>],</span><br><span class="line">         [<span class="number">0.7840</span>, <span class="number">0.2935</span>]]))</span><br></pre></td></tr></table></figure>
-<p>这三个函数的参数必须是torch.Tensor</p></li>
-<li><ol start="4" type="1">
-<li>从shape元组创建</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">shape = (<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>)</span><br><span class="line">x_zeros_ = torch.zeros(shape)</span><br><span class="line">x_ones_ = torch.ones(shape)</span><br><span class="line">x_rand_ = torch.rand(shape)</span><br><span class="line">x_zeros_,x_ones_,x_rand_,x_zeros_.shape,x_ones_.shape,x_rand_.shape</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>],</span><br><span class="line">          [<span class="number">0.</span>, <span class="number">0.</span>]]]),</span><br><span class="line"> tensor([[[<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">          [<span class="number">1.</span>, <span class="number">1.</span>]]]),</span><br><span class="line"> tensor([[[<span class="number">0.7854</span>, <span class="number">0.6111</span>],</span><br><span class="line">          [<span class="number">0.8331</span>, <span class="number">0.9508</span>],</span><br><span class="line">          [<span class="number">0.2372</span>, <span class="number">0.5213</span>]],</span><br><span class="line"> </span><br><span class="line">         [[<span class="number">0.6088</span>, <span class="number">0.8252</span>],</span><br><span class="line">          [<span class="number">0.0571</span>, <span class="number">0.2459</span>],</span><br><span class="line">          [<span class="number">0.9353</span>, <span class="number">0.4851</span>]]]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]),</span><br><span class="line"> torch.Size([<span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure></li>
-</ul></li>
-<li><p>Tensor的属性：shape形状，dtype元素数据类型，device存储设备</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(x_zeros.shape,x_zeros.dtype,x_zeros.device)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.Size([<span class="number">2</span>, <span class="number">2</span>]) torch.int64 cpu</span><br></pre></td></tr></table></figure></li>
-<li><p>转换数据的device</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = torch.ones((<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(tensor.device)</span><br><span class="line"><span class="keyword">if</span> torch.cuda.is_available():</span><br><span class="line">  tensor = tensor.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(tensor.device)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cpu</span><br><span class="line">cuda:<span class="number">0</span></span><br></pre></td></tr></table></figure></li>
-<li><p>pytorch切片与索引操作和python相同</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = torch.ones(<span class="number">4</span>, <span class="number">4</span>)</span><br><span class="line">tensor[:,<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(tensor)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure></li>
-<li><p>torch.cat([a,b,c],dim=n),按照第n维度连接张量a,b,c,维度为0表示按行连接，维度为1表示按列连接</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t1 = torch.cat([tensor, tensor, tensor], dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(t1)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">        [<span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>, <span class="number">0.</span>, <span class="number">1.</span>, <span class="number">1.</span>]])</span><br></pre></td></tr></table></figure></li>
-<li><p>torch.mul(A,B)和torch.mul(A,number)分别表示相同形状的矩阵按元素相乘和矩阵乘以常数,*运算符可实现相同的功能；</p></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.mul(tensor,tensor),torch.mul(tensor,<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">(tensor([[<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>],</span><br><span class="line">         [<span class="number">1.</span>, <span class="number">1.</span>, <span class="number">1.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>),</span><br><span class="line"> tensor([[<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>],</span><br><span class="line">         [<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>]], device=<span class="string">&#x27;cuda:0&#x27;</span>))</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>相应地，矩阵乘法为torch.matmul(A,B),A@B</p></li>
-<li><p>带有<code>_</code>后缀的操作为原地操作</p></li>
-<li><p>.numpy()可以将torch.Tensor类型转换为numpy.ndarray类型</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor = tensor.to(<span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(tensor.numpy()))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;torch.Tensor&#x27;</span>&gt;</span><br><span class="line">&lt;<span class="keyword">class</span> <span class="string">&#x27;numpy.ndarray&#x27;</span>&gt;</span><br></pre></td></tr></table></figure></li>
-<li><p>使用t =
-torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化会影响到t</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n = np.ones(<span class="number">5</span>)</span><br><span class="line">t = torch.from_numpy(n)</span><br><span class="line">np.add(n, <span class="number">1</span>, out=n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;t: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;n: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t: tensor([<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>], dtype=torch.float64)</span><br><span class="line">n: [<span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span>]</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>pytorch</category>
-      </categories>
-      <tags>
-        <tag>深度学习、编程语言</tag>
       </tags>
   </entry>
   <entry>
