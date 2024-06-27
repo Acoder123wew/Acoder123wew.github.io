@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="人工智能与数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学基础之1人工智能与数学">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/index.html">
+<meta property="og:site_name" content="Well&#39;s BLOG">
+<meta property="og:description" content="人工智能与数学">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-30T13:47:08.000Z">
+<meta property="article:modified_time" content="2024-06-26T14:08:55.093Z">
+<meta property="article:author" content="Well">
+<meta property="article:tag" content="人工智能">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://acoder123wew.github.io/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/","path":"2024/05/30/数学基础之1人工智能与数学/","title":"数学基础之1人工智能与数学"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数学基础之1人工智能与数学 | Well's BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Well's BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">1 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E7%A7%AF%E5%88%86"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 微积分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 线性代数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E7%9F%A9%E9%98%B5%E5%92%8C%E5%BC%A0%E9%87%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 向量、矩阵和张量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%8C%83%E6%95%B0%E5%92%8C%E5%86%85%E7%A7%AF"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 范数和内积</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%8F%98%E6%8D%A2"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3 线性变换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC%E5%92%8C%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4 特征值和特征向量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3svdsingular-value-decomposition"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5
+奇异值分解（SVD，Singular Value Decomposition)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA%E4%B8%8E%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 概率论与数理统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E5%8C%96%E7%90%86%E8%AE%BA"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 最优化理论</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 目标函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 线性规划</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 梯度下降法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E7%AD%89%E6%95%B0%E5%AD%A6"><span class="nav-number">2.</span> <span class="nav-text">2.初等数学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%88%97"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 数列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%92%E5%88%97%E7%BB%84%E5%90%88"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 排列组合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 集合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6"><span class="nav-number">3.</span> <span class="nav-text">3.高等数学</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%82%E7%BA%A7%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 幂级数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%B9%E5%87%B8%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 凹凸性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 主成分分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">4 概率论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Well"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Well</p>
+  <div class="site-description" itemprop="description">keep learning</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Well">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Well's BLOG">
+      <meta itemprop="description" content="keep learning">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数学基础之1人工智能与数学 | Well's BLOG">
+      <meta itemprop="description" content="人工智能与数学">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学基础之1人工智能与数学
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-30 21:47:08" itemprop="dateCreated datePublished" datetime="2024-05-30T21:47:08+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-26 22:08:55" itemprop="dateModified" datetime="2024-06-26T22:08:55+08:00">2024-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">人工智能数学基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">人工智能与数学</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h3 id="概述">1 概述</h3>
+<h4 id="微积分">1.1 微积分</h4>
+<ul>
+<li>泰勒级数 <span class="math display">\[
+f(x)=f(x_0)+\frac{f&#39;(x_0)}{1!}(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+R_n(x)
+\]</span></li>
+</ul>
+<p>泰勒级数体现了用多项式逼近函数的思想</p>
+<ul>
+<li>傅里叶级数 <span class="math display">\[
+f(t)=a_0+\sum\limits_{n=1}^{\infin}[a_ncos(nw_0t)+b_nsin(nw_0t)]
+\]</span></li>
+</ul>
+<p>它可以反映函数的频率特性，每阶的三角函数系数可以看成该阶频率的成分量。</p>
+<h4 id="线性代数">1.2 线性代数</h4>
+<h5 id="向量矩阵和张量">1.2.1 向量、矩阵和张量</h5>
+<ul>
+<li>标量：零维数组</li>
+<li>向量：一维数组，如<span
+class="math inline">\(a=(x,y,z)\)</span></li>
+<li>矩阵：二维数组，如灰度图像数据</li>
+<li>张量：三维及以上数组，如RGB图像数据为三维数组</li>
+</ul>
+<h5 id="范数和内积">1.2.2 范数和内积</h5>
+<ul>
+<li><p>范数：对单个向量的度量，描述的是向量自身的性质，其作用是将向量映射为一个非负的数值</p>
+<p>通用的<span class="math inline">\(L_p\)</span>范数定义：<span
+class="math inline">\(||x||_p=(\sum\limits_{i}|x_i|^p)^{\frac{1}{p}}\)</span></p></li>
+<li><p>内积：表示两个向量之间的相关度，内积为0表示两个向量正交即互相垂直</p>
+<p><span class="math inline">\(\left \langle x,y \right \rangle
+=\sum\limits_{i}^{}x_iy_i=|x|\cdot |y|\cdot cos\theta\)</span></p></li>
+</ul>
+<p>其中<span class="math inline">\(\theta\)</span>为向量<span
+class="math inline">\(x,y\)</span>共起点之后的夹角；</p>
+<h5 id="线性变换">1.2.3 线性变换</h5>
+<p><span class="math display">\[
+Ax=y
+\]</span></p>
+<p>有两种理解方式：</p>
+<ul>
+<li>1.向量<span class="math inline">\(x\)</span>经过矩阵<span
+class="math inline">\(A\)</span>所描述的线性变换后变成了向量<span
+class="math inline">\(y\)</span></li>
+<li>2.一个对象在矩阵<span
+class="math inline">\(A\)</span>的列向量作基向量的坐标系下得到的坐标为<span
+class="math inline">\(x\)</span>，在标准坐标系<span
+class="math inline">\(I\)</span>下得到的坐标为<span
+class="math inline">\(y\)</span></li>
+</ul>
+<p>另外，若矩阵<span
+class="math inline">\(A\)</span>不可逆，则可两边同时左乘<span
+class="math inline">\(A^T\)</span>，构造伪逆，得到正则方程： <span
+class="math display">\[
+x=(A^TA)^{-1}A^Ty
+\]</span></p>
+<h5 id="特征值和特征向量">1.2.4 特征值和特征向量</h5>
+<p><span class="math display">\[
+Ax=\lambda x
+\]</span></p>
+<p>其中向量<span class="math inline">\(x\)</span>为特征向量，<span
+class="math inline">\(\lambda\)</span>为特征值，本质为向量<span
+class="math inline">\(x\)</span>经过矩阵<span
+class="math inline">\(A\)</span>的线性变换后与原来共线，特征值<span
+class="math inline">\(\lambda\)</span>表示尺度缩放系数。</p>
+<h5 id="奇异值分解svdsingular-value-decomposition">1.2.5
+奇异值分解（SVD，Singular Value Decomposition)</h5>
+<p>求解给定n维方阵的特征值和特征向量的过程叫做特征值分解，若不是方阵，则需要使用更加通用的矩阵分解方法---奇异值分解方法。</p>
+<p>矩阵的奇异值分解是指，将一个非零的<span class="math inline">\(m\times
+n\)</span>实矩阵<span class="math inline">\(A,A\in R^{m\times
+n}\)</span>,表示为以下三个实矩阵乘积形式的运算，即进行矩阵的因子分解：
+<span class="math display">\[
+A=U\Sigma V^T
+\]</span> 其中<span class="math inline">\(U\)</span>是<span
+class="math inline">\(m\)</span>阶正交矩阵，<span
+class="math inline">\(V\)</span>是<span
+class="math inline">\(n\)</span>阶正交矩阵，<span
+class="math inline">\(\Sigma\)</span>是由降序排列的非负的对角线元素组成的<span
+class="math inline">\(m\times n\)</span>矩形对角矩阵，即满足： <span
+class="math display">\[
+UU^T=I,VV^T=I,\Sigma=diag(\sigma_1,\sigma_2,...,\sigma_p),\sigma_1\ge
+\sigma_2\ge ...\ge \sigma_p \ge 0,p=min(m,n)
+\]</span> <span class="math inline">\(U\Sigma V^T\)</span>称为矩阵<span
+class="math inline">\(A\)</span>的奇异值分解，<span
+class="math inline">\(\sigma_i\)</span>称为矩阵<span
+class="math inline">\(A\)</span>的奇异值，<span
+class="math inline">\(U\)</span>的列向量称为左奇异向量，<span
+class="math inline">\(V\)</span>的列向量称为右奇异向量。</p>
+<h4 id="概率论与数理统计">1.3 概率论与数理统计</h4>
+<h4 id="最优化理论">1.4 最优化理论</h4>
+<p>最优化理论研究的问题是判定给定目标函数是否存在最大值或最小值，并找到令目标函数取最大值或最小值的数值。</p>
+<h5 id="目标函数">1.4.1 目标函数</h5>
+<p>要实现最小化或最大化的函数称为目标函数，最小化：<span
+class="math inline">\(min \ f(x)\)</span>，最大化：<span
+class="math inline">\(min\ -f(x)\)</span></p>
+<h5 id="线性规划">1.4.2 线性规划</h5>
+<p>可分为无约束优化和约束优化，通过引入拉格朗日乘子，可以将含有<span
+class="math inline">\(n\)</span>个变量和<span
+class="math inline">\(k\)</span>个约束条件的约束优化问题转化为含有<span
+class="math inline">\(n+k\)</span>个变量的无约束优化问题。</p>
+<h5 id="梯度下降法">1.4.3 梯度下降法</h5>
+<p>多元函数沿其负梯度方向下降最快，一般情况下，使用梯度下降法得到的解不保证是全局最优解，但当目标函数是凸函数时，可以保证是全局最优解。另外，由于梯度下降法只用到目标函数的一阶导数，故其下降速度未必是最快的。</p>
+<h3 id="初等数学">2.初等数学</h3>
+<h4 id="函数">2.1 函数</h4>
+<h4 id="数列">2.2 数列</h4>
+<h4 id="排列组合">2.3 排列组合</h4>
+<h4 id="集合">2.4 集合</h4>
+<h3 id="高等数学">3.高等数学</h3>
+<h4 id="幂级数">3.1 幂级数</h4>
+<p><span class="math display">\[
+\sum\limits_{n=0}^{\infin}a_nx^n=a_0+a_1x+a_2x^2+...+a_nx^n+...
+\]</span></p>
+<p><span class="math display">\[
+\sum\limits_{n=0}^{\infin}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+...+a_n(x-x_0)^n+...
+\]</span></p>
+<ul>
+<li>幂级数的收敛半径：</li>
+</ul>
+<p><span class="math display">\[
+\rho=\lim_{n\to\infin}|\frac{a_{n+1}}{a_n}|=\lim_{n\to\infin}\sqrt[n]{|a_n|},0\le\rho\le+\infin
+\]</span></p>
+<p>(1)<span
+class="math inline">\(\rho\)</span>为非零常数，则收敛半径为<span
+class="math inline">\(R=\frac{1}{\rho}\)</span>；</p>
+<p>(2)<span class="math inline">\(\rho=0\)</span>,则收敛半径为<span
+class="math inline">\(R=+\infin\)</span>；</p>
+<p>(3)<span
+class="math inline">\(\rho=+\infin\)</span>,则收敛半径为<span
+class="math inline">\(R=0\)</span>；</p>
+<p>则收敛域为<span class="math inline">\((-R,+R)\ or\
+(x_0-R,x_0+R)\)</span>,至于边界处是否收敛，需要代入级数式进行常数项级数是否收敛的判断；</p>
+<ul>
+<li>泰勒级数</li>
+</ul>
+<p><span class="math display">\[
+f(x)=f(x_0)+f&#39;(x_0)(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)
+\]</span></p>
+<h4 id="凹凸性">3.2 凹凸性</h4>
+<ul>
+<li>定义：设函数<span class="math inline">\(y=f(x)\)</span>定义在<span
+class="math inline">\([a,b]\)</span>上且连续，若对<span
+class="math inline">\([a,b]\)</span>中任意不同的两点<span
+class="math inline">\(x_1,x_2\)</span>,总有<span
+class="math inline">\(\frac{f(x_1)+f(x_2)}{2}&lt;f(\frac{x_1+x_2}{2})\)</span>,则称函数<span
+class="math inline">\(y=f(x)\)</span>在<span
+class="math inline">\((a,b)\)</span>上是凸的；否则，称函数<span
+class="math inline">\(y=f(x)\)</span>在<span
+class="math inline">\((a,b)\)</span>上是凹的；</li>
+<li>二阶导数符号判定函数的凹凸性：二阶导数<span
+class="math inline">\(f&#39;&#39;(x)&gt;0\)</span>,涨得越来越快，表现为凹；二阶导数<span
+class="math inline">\(f&#39;&#39;(x)&lt;0\)</span>,涨得越来越慢，表现为凸；</li>
+</ul>
+<h4 id="主成分分析">3.3 主成分分析</h4>
+<p>主成分分析(PCA,Principal Component
+Analysis),通过计算数据矩阵的协方差矩阵，得到协方差矩阵的特征值及其特征向量，并将特征值从大到小排序，选择前N个特征值对应的特征向量组成变换矩阵，即可将数据矩阵转换为新的空间从而实现数据特征的降维。</p>
+<p>采用PCA降维的基本步骤如下：</p>
+<ol type="1">
+<li>减去平均值以规范化</li>
+<li>计算协方差矩阵</li>
+<li>计算协方差矩阵的特征值和特征向量</li>
+<li>将特征值从大到小排序</li>
+<li>保留前N个特征值对应的特征向量</li>
+<li>将数据转换到上面得到的N个特征向量构建的新空间中</li>
+</ol>
+<h3 id="概率论">4 概率论</h3>
+<ul>
+<li>条件概率公式：</li>
+</ul>
+<p><span class="math display">\[
+P(AB)=P(BA)=P(A|B)P(B)=P(B|A)P(A)
+\]</span></p>
+<ul>
+<li>贝叶斯定理：</li>
+</ul>
+<p><span class="math display">\[
+P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum\limits_{i=1}^{n}P(A_i)P(B|A_i)},i=1,2...n
+\]</span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/30/%E3%80%8ARL-Introduction%E3%80%8B-chap10/" rel="prev" title="《RL:Introduction》-chap10">
+                  <i class="fa fa-angle-left"></i> 《RL:Introduction》-chap10
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/03/%E3%80%8ARL-Introduction%E3%80%8B-chap13/" rel="next" title="《RL:Introduction》-chap13">
+                  《RL:Introduction》-chap13 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Well</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

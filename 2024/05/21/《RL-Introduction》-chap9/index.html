@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha256-wiz7ZSCn/btzhjKDQBms9Hx4sSeUYsDrTLg7roPstac=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="强化学习导论第九章学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《RL:Introduction》-chap9">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/index.html">
+<meta property="og:site_name" content="Well&#39;s BLOG">
+<meta property="og:description" content="强化学习导论第九章学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240521213938421.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240521220729364.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240521222013856.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240521222947800.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240530160135215.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240523160854549.png">
+<meta property="og:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240523165412474.png">
+<meta property="article:published_time" content="2024-05-21T06:54:46.000Z">
+<meta property="article:modified_time" content="2024-06-27T12:58:05.335Z">
+<meta property="article:author" content="Well">
+<meta property="article:tag" content="强化学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/image-20240521213938421.png">
+
+
+<link rel="canonical" href="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/","path":"2024/05/21/《RL-Introduction》-chap9/","title":"《RL:Introduction》-chap9"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>《RL:Introduction》-chap9 | Well's BLOG</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Well's BLOG</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">保持热爱</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#chap9-%E5%9F%BA%E4%BA%8E%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E7%9A%84%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E9%A2%84%E6%B5%8B"><span class="nav-number">1.</span> <span class="nav-text">chap9
+基于函数逼近的同轨策略预测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.1.</span> <span class="nav-text">9.1 价值函数逼近</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E7%9B%AE%E6%A0%87overlineve"><span class="nav-number">1.2.</span> <span class="nav-text">9.2 预测目标(\(\overline{VE}\))</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E6%A2%AF%E5%BA%A6%E5%92%8C%E5%8D%8A%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">9.3 随机梯度和半梯度方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">9.4 线性方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%96%B9%E6%B3%95%E7%9A%84%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0"><span class="nav-number">1.5.</span> <span class="nav-text">9.5 线性方法的特征构造</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA"><span class="nav-number">1.5.1.</span> <span class="nav-text">9.5.1 多项式基</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%82%85%E7%AB%8B%E5%8F%B6%E5%9F%BA"><span class="nav-number">1.5.2.</span> <span class="nav-text">9.5.2 傅立叶基</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%B2%97%E7%BC%96%E7%A0%81"><span class="nav-number">1.5.3.</span> <span class="nav-text">9.5.3 粗编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%93%A6%E7%89%87%E7%BC%96%E7%A0%81"><span class="nav-number">1.5.4.</span> <span class="nav-text">9.5.4 瓦片编码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BE%84%E5%90%91%E5%9F%BA%E5%87%BD%E6%95%B0"><span class="nav-number">1.5.5.</span> <span class="nav-text">9.5.5 径向基函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E9%80%89%E6%8B%A9%E6%AD%A5%E9%95%BF%E5%8F%82%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">9.6 手动选择步长参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91%E4%BA%BA%E5%B7%A5%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.7.</span> <span class="nav-text">9.7
+非线性函数逼近：人工神经网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%97%B6%E5%BA%8F%E5%B7%AE%E5%88%86"><span class="nav-number">1.8.</span> <span class="nav-text">9.8 最小二乘时序差分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%AE%B0%E5%BF%86%E7%9A%84%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.9.</span> <span class="nav-text">9.9 基于记忆的函数逼近</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%B8%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.10.</span> <span class="nav-text">9.10 基于核函数的函数逼近</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%8C%E8%BD%A8%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E5%85%B4%E8%B6%A3%E4%B8%8E%E5%BC%BA%E8%B0%83"><span class="nav-number">1.11.</span> <span class="nav-text">9.11 同轨策略学习：“兴趣”与强调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%BB%93"><span class="nav-number">1.12.</span> <span class="nav-text">9 本章小结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Well"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Well</p>
+  <div class="site-description" itemprop="description">keep learning</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Well">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Well's BLOG">
+      <meta itemprop="description" content="keep learning">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="《RL:Introduction》-chap9 | Well's BLOG">
+      <meta itemprop="description" content="强化学习导论第九章学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          《RL:Introduction》-chap9
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-05-21 14:54:46" itemprop="dateCreated datePublished" datetime="2024-05-21T14:54:46+08:00">2024-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-27 20:58:05" itemprop="dateModified" datetime="2024-06-27T20:58:05+08:00">2024-06-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/RLintroduction/" itemprop="url" rel="index"><span itemprop="name">RLintroduction</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">强化学习导论第九章学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h3 id="chap9-基于函数逼近的同轨策略预测">chap9
+基于函数逼近的同轨策略预测</h3>
+<p>从此章开始，学习通过使用有限的计算资源求解一个比较好的近似解。为提高模型的泛化能力，经常使用函数逼近方法，它从一个预期的函数中获取实例，并试图对它们进行泛化来逼近整个函数。本章使用同轨策略数据来估计状态价值函数，即通过一个已知的策略<span
+class="math inline">\(\pi\)</span>生成的经验对价值函数<span
+class="math inline">\(v_\pi\)</span>进行近似，记作一个具有权值向量<span
+class="math inline">\(w\in
+R^d,d\ll|\mathcal{S}|\)</span>的参数化函数，即<span
+class="math inline">\(\hat{v}(s,w)\to v_\pi(s)\)</span></p>
+<h4 id="价值函数逼近">9.1 价值函数逼近</h4>
+<p>价值函数的更新可表示为<span class="math inline">\(s\to
+u\)</span>,其中<span
+class="math inline">\(s\)</span>表示更新的状态，<span
+class="math inline">\(u\)</span>表示<span
+class="math inline">\(s\)</span>的估计价值朝向的更新目标。蒙特卡洛方法、TD(0)、n步TD方法中的更新都只是朝着<span
+class="math inline">\(u\)</span>的方向进行了一定比例的移动，而其他状态的估计价值保持不变。而在动态规划中，由于知道模型<span
+class="math inline">\(p(s&#39;,r|s,a)\)</span>，故DP中的任意一个状态<span
+class="math inline">\(s\)</span>都会被更新。而<strong>函数逼近</strong>则把每次更新使用的<span
+class="math inline">\(s\to
+u\)</span>作为使用函数逼近进行价值函数预测的训练样本，更新<span
+class="math inline">\(w\)</span>以使状态<span
+class="math inline">\(s\)</span>的估计价值更接近更新目标<span
+class="math inline">\(u\)</span>,由于所有状态共享相同的<span
+class="math inline">\(w\)</span>，故每次更新都会影响其他状态的价值估计。</p>
+<p>适用于强化学习的函数逼近方法需要的特点：</p>
+<ul>
+<li><p>（1）能够在线学习（即训练集动态变化），即算法要能够从逐步获得的数据中有效地学习。</p></li>
+<li><p>（2）能够处理非平稳目标函数（即随着时间变化的目标函数）</p></li>
+</ul>
+<h4 id="预测目标overlineve">9.2 预测目标(<span
+class="math inline">\(\overline{VE}\)</span>)</h4>
+<p>目标函数，即均方价值误差，记作<span
+class="math inline">\(\overline{VE}\)</span> <span
+class="math display">\[
+\overline{VE}(w)=\sum\limits_{s\in\mathcal{S}}\mu(s)[v_\pi(s)-\hat{v}(s,w)]^2
+\]</span> 其中<span
+class="math inline">\(\sum\limits_{s}\mu(s)=1\)</span>表示我们对于每个状态<span
+class="math inline">\(s\)</span>的误差的重视程度，这个分布在同轨策略训练中称为同轨策略分布。同轨策略分布（on-policy
+distribution）是在强化学习中的一个重要概念，它描述了一个强化学习智能体在执行其当前策略时，遇到不同状态的概率分布。这种分布是根据智能体遵循的策略和环境的动态特性所决定的。简单来说，同轨策略分布反映了在特定策略下，智能体在长时间内可能处于某个状态的频率或概率。</p>
+<p><strong>总结总框架</strong>：使用<u>价值函数的更新</u>来生成<u>函数逼近方法（有监督学习）</u>的训练数据。</p>
+<h4 id="随机梯度和半梯度方法">9.3 随机梯度和半梯度方法</h4>
+<ul>
+<li>函数逼近方法一：<strong>随机梯度下降</strong></li>
+</ul>
+<p>随机梯度下降（SGD,stochastic gradient descent）：对于每一个样本<span
+class="math inline">\(S_t\)</span>，将权值向量<span
+class="math inline">\(w\)</span>朝着能够减小这个样本误差的方向移动一点：</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521213938421.png"  alt="image-20240521213938421" style="zoom:50%;" /></p>
+<p>其中<span
+class="math inline">\(\alpha\)</span>表示一个正的步长参数，“随机”指的是更新时只依赖于随机抽取的一个样本。如果<span
+class="math inline">\(\alpha\)</span>以满足标准随机近似条件的方式减小，那么SGD方法能够保证收敛到局部最优解。事实上，如果<span
+class="math inline">\(U_t\)</span>为<span
+class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，即满足对任意的状态，有<span
+class="math inline">\(E[U_t|S_t=s]=v_\pi(S_t)\)</span></p>
+<p>也可用下式对状态价值函数进行更新：</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521220729364.png"  alt="image-20240521220729364" style="zoom:50%;" /></p>
+<p>在<span
+class="math inline">\(\alpha\)</span>以满足标准随即近似条件减小时，<span
+class="math inline">\(w_t\)</span>也一定会收敛到一个局部最优解。</p>
+<p>比如蒙特卡洛目标<span class="math inline">\(U_t=G_t\)</span>就是<span
+class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，<u>蒙特卡洛状态价值函数预测的梯度下降版本如下：</u></p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222013856.png"  alt="image-20240521222013856" style="zoom:50%;" /></p>
+<p>由于目标为<span
+class="math inline">\(G_t\)</span>,故需要在生成一总幕数据后，再对<span
+class="math inline">\(w\)</span>进行更新。</p>
+<ul>
+<li>函数逼近方法二：<strong>半梯度下降</strong></li>
+</ul>
+<p>将目标替换为<span class="math inline">\(U_t=R_{t+1}+\gamma
+\hat{v}(S_{t+1},w)\)</span>,即可得到半梯度方法TD(0)</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222947800.png"  alt="image-20240521222947800" style="zoom:50%;" /></p>
+<p>由于目标为<span class="math inline">\(R+\gamma
+\hat{v}(S&#39;,w)\)</span>,故可在轨迹生成的每一步中进行<span
+class="math inline">\(w\)</span>的更新，另外，尽管<span
+class="math inline">\(R+\gamma \hat{v}(S&#39;,w)\)</span>是权重向量<span
+class="math inline">\(w\)</span>的函数，但在计算其梯度时，将其视为常数，故而被称为半梯度方法。</p>
+<ul>
+<li>半梯度方法的<strong>优势</strong>：</li>
+</ul>
+<ol type="1">
+<li>学习速度快</li>
+<li>支持持续地或在线地学习，不需要等待一幕的结束</li>
+</ol>
+<h4 id="线性方法">9.4 线性方法</h4>
+<p>状态<span class="math inline">\(s\)</span>的特征向量：<span
+class="math inline">\(x(s)=(x_1(s),x_2(s),...,x_d(s))^T\)</span></p>
+<p>则线性近似的状态价值函数可以写作<span
+class="math inline">\(w\)</span>和<span
+class="math inline">\(x(s)\)</span>的内积： <span
+class="math display">\[
+\hat{v}(s,w)=w^Tx(s)=\sum\limits_{i=1}^{d}w_ix_i(s)
+\]</span> 则SGD的更新式可以更新为：<span
+class="math inline">\(w_{t+1}=w_t+\alpha
+[U_t-\hat{v}(S_t,w_t)]x(S_t)\)</span></p>
+<p>其中每个<span class="math inline">\(x_i(s)\)</span>都是状态<span
+class="math inline">\(s\)</span>的特征函数，被称为基函数，它们构成了可能的近似函数集合的线性基。</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240530160135215.png"  alt="image-20240530160135215" style="zoom:50%;" /></p>
+<h4 id="线性方法的特征构造">9.5 线性方法的特征构造</h4>
+<ul>
+<li>线性方法的优点：收敛性保证、数据和计算方面的高效性；</li>
+<li>如何选取用来表达状态的特征至关重要，选择适合于任务的特征是将先验知识加入强化学习系统的重要方式；</li>
+<li>线性方法的局限性：无法表示特征之间的相互作用；</li>
+</ul>
+<h5 id="多项式基">9.5.1 多项式基</h5>
+<p>假设每一个状态<span
+class="math inline">\(s\)</span>对应的(用于描述状态特征的)<span
+class="math inline">\(k\)</span>个数字分量<span
+class="math inline">\(s_1,s_2,...,s_k，s_i\in
+R,i=1,2,...k\)</span>。对这个<span
+class="math inline">\(k\)</span>维的状态空间，每一个<span
+class="math inline">\(n\)</span>阶多项式基特征<span
+class="math inline">\(x_i\)</span>可以写作： <span
+class="math display">\[
+x_i(s)=\Pi_{j=1}^{k}s_{j}^{c_{i,j}},i=1,2...,(n+1)^k
+\]</span> 其中<span
+class="math inline">\(c_{i,j}\)</span>是集合{0,1,...,n}中任一，即对不同的数字分量赋予不同的指数即可得到不同的多项式基特征。</p>
+<h5 id="傅立叶基">9.5.2 傅立叶基</h5>
+<p>假设每一个状态<span class="math inline">\(s\)</span>对应一个<span
+class="math inline">\(k\)</span>维向量，<span
+class="math inline">\(s=(s_1,s_2,...,s_k)^T\)</span>,这里<span
+class="math inline">\(s_i\in[0,1]\)</span>,则<span
+class="math inline">\(n\)</span>阶傅里叶余弦基的第<span
+class="math inline">\(i\)</span>个特征可以写作：<span
+class="math inline">\(x_i(s)=cos(\pi s^Tc^i)\)</span>,这里的<span
+class="math inline">\(c^i=(c_1^i,c_2^i,...,c_k^i)\)</span>，其中的<span
+class="math inline">\(c_j^i\in{0,1,...,n},j=1,2...,k;i=1,2,...,(n+1)^k\)</span></p>
+<h5 id="粗编码">9.5.3 粗编码</h5>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523160854549.png"  alt="image-20240523160854549" style="zoom:50%;" /></p>
+<h5 id="瓦片编码">9.5.4 瓦片编码</h5>
+<h5 id="径向基函数">9.5.5 径向基函数</h5>
+<p><span class="math inline">\(RBF\)</span>函数 <span
+class="math display">\[
+x_i(s)=exp(-\frac{||s-c_i||^2}{2\sigma_i^2})
+\]</span>
+<img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523165412474.png"  alt="image-20240523165412474" style="zoom:50%;" /></p>
+<h4 id="手动选择步长参数">9.6 手动选择步长参数</h4>
+<p>设置线性SGD步长参数的粗略经验法则： <span class="math display">\[
+\alpha=(\tau E[x^Tx])^{-1}
+\]</span> 其中<span
+class="math inline">\(\tau\)</span>为状态的经验数量，<span
+class="math inline">\(x\)</span>为从SGD的输入向量的分布中选取的一个随机特征向量。</p>
+<h4 id="非线性函数逼近人工神经网络">9.7
+非线性函数逼近：人工神经网络</h4>
+<h4 id="最小二乘时序差分">9.8 最小二乘时序差分</h4>
+<h4 id="基于记忆的函数逼近">9.9 基于记忆的函数逼近</h4>
+<h4 id="基于核函数的函数逼近">9.10 基于核函数的函数逼近</h4>
+<h4 id="同轨策略学习兴趣与强调">9.11 同轨策略学习：“兴趣”与强调</h4>
+<h4 id="本章小结">9 本章小结</h4>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"># 强化学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/16/%E3%80%8ARL-Introduction%E3%80%8B-chap8/" rel="prev" title="《RL-Introduction》-chap8">
+                  <i class="fa fa-angle-left"></i> 《RL-Introduction》-chap8
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/05/30/%E3%80%8ARL-Introduction%E3%80%8B-chap10/" rel="next" title="《RL:Introduction》-chap10">
+                  《RL:Introduction》-chap10 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Well</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
