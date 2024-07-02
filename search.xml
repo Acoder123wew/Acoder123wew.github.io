@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>C++初级知识</title>
-    <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<ul>
-<li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
-<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，也就是说，主函数main()的返回值返回给操作系统，<code>void</code>表示不返回信息或不接受参数；</li>
-<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略名称空间，直接使用<code>cout</code>;</li>
-<li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
-<li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
-<li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
-<li>变量声明：1.分配指定数据类型的内存
-2.指定存储在这个内存中的数据的名称；</li>
-<li>声明包括定义声明、引用声明；</li>
-<li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
-Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
-<li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
-<li><strong>函数原型</strong>：在调用某个函数之前，应提供其原型，要么在源代码文件中main()函数前输入函数原型，要么<code>#include</code>该函数所在的头文件；</li>
-<li>C++不允许将函数定义嵌套在另一个函数定义中，每个函数的定义都是独立的；</li>
-<li>在任何一门编程语言中，对变量、函数、对象等，都需要尽可能使用一目了然的命名，推荐使用”驼峰命名法“；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>C++学习</category>
-      </categories>
-      <tags>
-        <tag>编程语言</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>60分钟入门pytorch</title>
     <url>/2024/04/08/60%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8pytorch/</url>
     <content><![CDATA[<h4 id="tensor">Tensor</h4>
@@ -92,6 +64,34 @@ torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化�
       </categories>
       <tags>
         <tag>深度学习、编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>C++初级知识</title>
+    <url>/2024/04/06/C-%E5%88%9D%E7%BA%A7%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<ul>
+<li>C++语言对大小写敏感，所有C++语句须以<code>;</code>结尾，它作为终止符是C++语句结束的标志；</li>
+<li>函数名前面的部分叫做函数返回类型，后面的部分叫做形参列表，<code>int main()</code>描述的是<code>main()</code>与操作系统之间的接口，也就是说，主函数main()的返回值返回给操作系统，<code>void</code>表示不返回信息或不接受参数；</li>
+<li>可以将函数、类等对象封装在名称空间中，调用时指定即可，如<code>std::cout</code>，<code>ros::NodeHandle n;</code>等，在前面提前声明名称空间<code>using namespace std;using namespace ros;</code>,在后续使用时可以省略名称空间，直接使用<code>cout</code>;</li>
+<li><code>cout&lt;&lt;"ABC"</code>的本质：<code>cout</code>是<code>iostream</code>文件中预定义的对象，这条语句的本质是cout对象将字符串”ABC“插入到输出流中；</li>
+<li>运算符重载：对于同一个运算符，编译器可以通过上下文来确定运算符的含义从而实现不同的功能；</li>
+<li>C++中，<code>endl</code>和<code>\n</code>均可表示换行，其中<code>\n</code>须在字符串中使用；</li>
+<li>变量声明：1.分配指定数据类型的内存
+2.指定存储在这个内存中的数据的名称；</li>
+<li>声明包括定义声明、引用声明；</li>
+<li><strong>类</strong>：类是C++中面向对象编程（Object Oriented
+Programming，OOP）的核心概念，类描述它能够表示什么信息和可对数据执行哪些操作，对象则是根据类中的数据格式规范创建的实体；</li>
+<li><strong>函数初步</strong>：调用函数传递参数给被调用函数，被调用函数返回值以替代调用函数中相应的部分；</li>
+<li><strong>函数原型</strong>：在调用某个函数之前，应提供其原型，要么在源代码文件中main()函数前输入函数原型，要么<code>#include</code>该函数所在的头文件；</li>
+<li>C++不允许将函数定义嵌套在另一个函数定义中，每个函数的定义都是独立的；</li>
+<li>在任何一门编程语言中，对变量、函数、对象等，都需要尽可能使用一目了然的命名，推荐使用”驼峰命名法“；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+      <tags>
+        <tag>编程语言</tag>
       </tags>
   </entry>
   <entry>
@@ -578,6 +578,159 @@ class="math inline">\(\alpha\)</span>设置为0.1</p>
       </tags>
   </entry>
   <entry>
+    <title>《RL:Introduction》-chap10</title>
+    <url>/2024/05/30/%E3%80%8ARL-Introduction%E3%80%8B-chap10/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap10-基于函数逼近的同轨策略控制">chap10
+基于函数逼近的同轨策略控制</h3>
+<p>在chap9中我们关注对状态价值函数<span
+class="math inline">\(\hat{v}(s;w)\approx v(s),w\in
+R^d\)</span>进行参数化逼近的<strong>预测</strong>问题，在本章，我们关注对动作价值函数<span
+class="math inline">\(\hat{q}(s,a;w)\approx
+q_{*}(s,a)\)</span>进行参数化逼近的<strong>控制</strong>问题.</p>
+<h4 id="分幕式半梯度控制">10.1 分幕式半梯度控制</h4>
+<p>前面近似的是状态价值函数，使用<span class="math inline">\(S_t\to
+U_t\)</span>作为随机训练样本，本章近似的是动作价值函数，使用<span
+class="math inline">\(S_t,A_t\to U_t\)</span>作为训练样本。</p>
+<p>动作价值函数预测的梯度下降更新的一般形式为：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531215204822.png"  alt="image-20240531215204822" style="zoom:50%;" /></p>
+<p>其中的更新目标<span
+class="math inline">\(U_t\)</span>可以是动作价值函数<span
+class="math inline">\(q_\pi(S_t,A_t)\)</span>的任意近似，比如完整的蒙特卡洛回报<span
+class="math inline">\(G_t\)</span>或者<span
+class="math inline">\(n\)</span>步<span
+class="math inline">\(Sarsa\)</span>回报：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531220109697.png"  alt="image-20240531220109697" style="zoom: 50%;" /></p>
+<p>特殊地，若<span
+class="math inline">\(n=1\)</span>,即为分幕式半梯度单步<span
+class="math inline">\(Sarsa\)</span>，其更新为：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531220650427.png"  alt="image-20240531220650427" style="zoom:50%;" /></p>
+<p><strong>分幕式半梯度单步Sarsa控制算法</strong>完整流程：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531221124779.png"  alt="image-20240531221124779" style="zoom:50%;" /></p>
+<h4 id="半梯度n步sarsa">10.2 半梯度n步Sarsa</h4>
+<p>更新公式为：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601111949613.png"  alt="image-20240601111949613" style="zoom:50%;" /></p>
+<p>其中 <span class="math display">\[
+G_{t:t+n}=\begin{cases}
+R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma ^n
+\hat{q}(S_{t+n},A_{t+n};w_{t+n-1})   &amp; \text{ if } t+n&lt;T \\
+G_t &amp; \text{ if } t+n\ge T
+\end{cases}
+\]</span>
+<img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601113653024.png"  alt="image-20240601113653024" style="zoom:50%;" /></p>
+<h4 id="平均收益持续性任务中新的问题设定">10.3
+平均收益：持续性任务中新的问题设定</h4>
+<ul>
+<li><strong>平均收益定义</strong>：</li>
+</ul>
+<p>在平均收益设定时，一个策略<span
+class="math inline">\(\pi\)</span>的质量被定义为在遵循该策略时的收益率的平均值，简称平均收益，表示为：
+<span class="math display">\[
+r(\pi)=\lim_{h \to \infty}
+\frac{1}{h}\sum\limits_{t=1}^{h}E[R_t|S_0,A_{0:t-1}\sim\pi]
+\]</span></p>
+<p><span class="math display">\[
+=\lim_{t\to \infty}E[R_t|S_0,A_{0:t-1}\sim\pi]
+\]</span></p>
+<p><span class="math display">\[
+=\sum\limits_{s}\mu_\pi(s)\sum\limits_{a}\pi(a|s)\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)r
+\]</span></p>
+<p>式中的期望是对初始状态<span
+class="math inline">\(S_0\)</span>和遵循策略<span
+class="math inline">\(\pi\)</span>生成的动作序列<span
+class="math inline">\(A_0,A_1,...,A_{t-1}\)</span>求的，终式中的<span
+class="math inline">\(\mu_\pi\)</span>是一个稳态发布，若其对于每一个<span
+class="math inline">\(\pi\)</span>都存在并且独立于初始状态<span
+class="math inline">\(S_0\)</span>即与<span
+class="math inline">\(S_0\)</span>无关，则有 <span
+class="math display">\[
+\mu_\pi(s)=\lim_{t\to\infty}Pr\{S_t=s|A_{0：t-1}\sim\pi\}
+\]</span>
+简单理解就是极限状态下最终形成的各个状态的稳定概率分布，这种关于MDP的假设被称为遍历性。</p>
+<ul>
+<li><strong>差分回报</strong>：在平均收益设定中，差分回报定义为即时收益和平均收益的差</li>
+</ul>
+<p><span class="math display">\[
+G_t=R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+...
+\]</span></p>
+<ul>
+<li><strong>差分价值函数</strong></li>
+</ul>
+<p><span class="math display">\[
+v_\pi(s)=E_\pi[G_t|S_t=s]
+\]</span></p>
+<p><span class="math display">\[
+q_\pi(s,a)=E_\pi[G_t|S_t=s,A_t=a]
+\]</span></p>
+<ul>
+<li><strong>差分价值函数的贝尔曼方程</strong></li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601161752313.png"  alt="image-20240601161752313" style="zoom: 33%;" /></p>
+<p>下面为原型，建议比较记忆理解：</p>
+<ul>
+<li></li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601161943559.png"  alt="image-20240601161943559" style="zoom: 33%;" /></p>
+<ul>
+<li></li>
+</ul>
+<p><span class="math display">\[
+\begin{array}{l}
+q_\pi(s,a)  \overset{.}{=} E_\pi[G_t|S_t=s,A_t=a] \\
+\qquad \quad \ = E_\pi[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] \\
+\qquad \quad \ = \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma
+\sum_{a^\prime}\pi(a^\prime|s^\prime)E_\pi[G_{t+1}|S_{t+1}=s^\prime,A_{t+1}=a^\prime]]
+\\
+\qquad \quad \ = \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma
+\sum_{a^\prime}\pi(a^\prime|s^\prime)q_\pi(s^\prime,a^\prime)]
+\end{array}
+\]</span></p>
+<ul>
+<li></li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162415620.png"  alt="image-20240601162415620" style="zoom: 33%;" /></p>
+<ul>
+<li></li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162517963.png"  alt="image-20240601162517963" style="zoom: 33%;" /></p>
+<ul>
+<li>两类TD误差的差分形式</li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162906427.png"  alt="image-20240601162906427" style="zoom:50%;" /></p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162937724.png"  alt="image-20240601162937724" style="zoom: 50%;" /></p>
+<p>其中<span class="math inline">\(\bar{R}_t\)</span>是时刻<span
+class="math inline">\(t\)</span>对平均收益<span
+class="math inline">\(r(\pi)\)</span>的估计</p>
+<hr />
+<ul>
+<li><strong>差分半梯度Sarsa算法，用于估计<span
+class="math inline">\(\hat{q}\approx q_*\)</span></strong></li>
+</ul>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601191252171.png"  alt="image-20240601191252171" style="zoom: 50%;" /></p>
+<h4 id="弃用折扣">10.4 弃用折扣</h4>
+<ul>
+<li>使用函数逼近会失去策略改进定理；</li>
+<li>在持续性问题中，带折扣的价值函数和无折扣的平均收益差分价值函数对策略好坏的排序完全相同；</li>
+</ul>
+<h4 id="差分半梯度n步sarsa">10.5 差分半梯度n步Sarsa</h4>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601201028393.png"  alt="image-20240601201028393" style="zoom: 33%;" /></p>
+<p>其中：</p>
+<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240614162050083.png"  alt="image-20240614162050083" style="zoom:50%;" /></p>
+<p>上式是<span
+class="math inline">\(n\ge1,t+n&lt;T\)</span>的情况，其中<span
+class="math inline">\(\bar{R}\)</span>是对平均收益<span
+class="math inline">\(r(\pi)\)</span>的估计；当<span
+class="math inline">\(t+n\ge T\)</span>时，<span
+class="math inline">\(G_{t:t+n}=G_t\)</span></p>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《RL:Introduction》-chap13</title>
     <url>/2024/06/03/%E3%80%8ARL-Introduction%E3%80%8B-chap13/</url>
     <content><![CDATA[<hr />
@@ -761,1139 +914,6 @@ class="math inline">\(v\to v_{\pi_{newest}}\)</span>;</p>
       </categories>
       <tags>
         <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL:Introduction》-chap10</title>
-    <url>/2024/05/30/%E3%80%8ARL-Introduction%E3%80%8B-chap10/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap10-基于函数逼近的同轨策略控制">chap10
-基于函数逼近的同轨策略控制</h3>
-<p>在chap9中我们关注对状态价值函数$(s;w)v(s)，wR^d <span
-class="math inline">\(进行参数化逼近的**预测**问题，在本章，我们关注对动作价值函数\)</span>(s,a;w)q_*(s,a)$进行参数化逼近的<strong>控制</strong>问题.</p>
-<h4 id="分幕式半梯度控制">10.1 分幕式半梯度控制</h4>
-<p>前面近似的是状态价值函数，使用<span class="math inline">\(S_t\to
-U_t\)</span>作为随机训练样本，本章近似的是动作价值函数，使用<span
-class="math inline">\(S_t,A_t\to U_t\)</span>作为训练样本。</p>
-<p>动作价值函数预测的梯度下降更新的一般形式为：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531215204822.png"  alt="image-20240531215204822" style="zoom:50%;" /></p>
-<p>其中的更新目标<span
-class="math inline">\(U_t\)</span>可以是动作价值函数<span
-class="math inline">\(q_\pi(S_t,A_t)\)</span>的任意近似，比如完整的蒙特卡洛回报<span
-class="math inline">\(G_t\)</span>或者<span
-class="math inline">\(n\)</span>步<span
-class="math inline">\(Sarsa\)</span>回报：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531220109697.png"  alt="image-20240531220109697" style="zoom: 50%;" /></p>
-<p>特殊地，若<span
-class="math inline">\(n=1\)</span>,即为分幕式半梯度单步<span
-class="math inline">\(Sarsa\)</span>，其更新为：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531220650427.png"  alt="image-20240531220650427" style="zoom:50%;" /></p>
-<p><strong>分幕式半梯度单步Sarsa控制算法</strong>完整流程：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240531221124779.png"  alt="image-20240531221124779" style="zoom:50%;" /></p>
-<h4 id="半梯度n步sarsa">10.2 半梯度n步Sarsa</h4>
-<p>更新公式为：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601111949613.png"  alt="image-20240601111949613" style="zoom:50%;" /></p>
-<p>其中 <span class="math display">\[
-G_{t:t+n}=\begin{cases}
-R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma ^n
-\hat{q}(S_{t+n},A_{t+n};w_{t+n-1})   &amp; \text{ if } t+n&lt;T \\
-G_t &amp; \text{ if } t+n\ge T
-\end{cases}
-\]</span>
-<img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601113653024.png"  alt="image-20240601113653024" style="zoom:50%;" /></p>
-<h4 id="平均收益持续性任务中新的问题设定">10.3
-平均收益：持续性任务中新的问题设定</h4>
-<ul>
-<li><strong>平均收益定义</strong>：</li>
-</ul>
-<p>在平均收益设定时，一个策略<span
-class="math inline">\(\pi\)</span>的质量被定义为在遵循该策略时的收益率的平均值，简称平均收益，表示为：
-<span class="math display">\[
-r(\pi)=\lim_{h \to \infty}
-\frac{1}{h}\sum\limits_{t=1}^{h}E[R_t|S_0,A_{0:t-1}\sim\pi]
-\]</span></p>
-<p><span class="math display">\[
-=\lim_{t\to \infty}E[R_t|S_0,A_{0:t-1}\sim\pi]
-\]</span></p>
-<p><span class="math display">\[
-=\sum\limits_{s}\mu_\pi(s)\sum\limits_{a}\pi(a|s)\sum\limits_{s&#39;,r}p(s&#39;,r|s,a)r
-\]</span></p>
-<p>式中的期望是对初始状态<span
-class="math inline">\(S_0\)</span>和遵循策略<span
-class="math inline">\(\pi\)</span>生成的动作序列<span
-class="math inline">\(A_0,A_1,...,A_{t-1}\)</span>求的，终式中的<span
-class="math inline">\(\mu_\pi\)</span>是一个稳态发布，若其对于每一个<span
-class="math inline">\(\pi\)</span>都存在并且独立于初始状态<span
-class="math inline">\(S_0\)</span>即与<span
-class="math inline">\(S_0\)</span>无关，则有 <span
-class="math display">\[
-\mu_\pi(s)=\lim_{t\to\infty}Pr\{S_t=s|A_{0：t-1}\sim\pi\}
-\]</span>
-简单理解就是极限状态下最终形成的各个状态的稳定概率分布，这种关于MDP的假设被称为遍历性。</p>
-<ul>
-<li><strong>差分回报</strong>：在平均收益设定中，差分回报定义为即时收益和平均收益的差</li>
-</ul>
-<p><span class="math display">\[
-G_t=R_{t+1}-r(\pi)+R_{t+2}-r(\pi)+R_{t+3}-r(\pi)+...
-\]</span></p>
-<ul>
-<li><strong>差分价值函数</strong></li>
-</ul>
-<p><span class="math display">\[
-v_\pi(s)=E_\pi[G_t|S_t=s]
-\]</span></p>
-<p><span class="math display">\[
-q_\pi(s,a)=E_\pi[G_t|S_t=s,A_t=a]
-\]</span></p>
-<ul>
-<li><strong>差分价值函数的贝尔曼方程</strong></li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601161752313.png"  alt="image-20240601161752313" style="zoom: 33%;" /></p>
-<p>下面为原型，建议比较记忆理解：</p>
-<ul>
-<li></li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601161943559.png"  alt="image-20240601161943559" style="zoom: 33%;" /></p>
-<ul>
-<li></li>
-</ul>
-<p><span class="math display">\[
-\begin{array}{l}
-q_\pi(s,a)  \overset{.}{=} E_\pi[G_t|S_t=s,A_t=a] \\
-\qquad \quad \ = E_\pi[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] \\
-\qquad \quad \ = \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma
-\sum_{a^\prime}\pi(a^\prime|s^\prime)E_\pi[G_{t+1}|S_{t+1}=s^\prime,A_{t+1}=a^\prime]]
-\\
-\qquad \quad \ = \sum_{s^\prime,r}p(s^\prime,r|s,a)[r+\gamma
-\sum_{a^\prime}\pi(a^\prime|s^\prime)q_\pi(s^\prime,a^\prime)]
-\end{array}
-\]</span></p>
-<ul>
-<li></li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162415620.png"  alt="image-20240601162415620" style="zoom: 33%;" /></p>
-<ul>
-<li></li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162517963.png"  alt="image-20240601162517963" style="zoom: 33%;" /></p>
-<ul>
-<li>两类TD误差的差分形式</li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162906427.png"  alt="image-20240601162906427" style="zoom:50%;" /></p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601162937724.png"  alt="image-20240601162937724" style="zoom: 50%;" /></p>
-<p>其中<span class="math inline">\(\bar{R}_t\)</span>是时刻<span
-class="math inline">\(t\)</span>对平均收益<span
-class="math inline">\(r(\pi)\)</span>的估计</p>
-<hr />
-<ul>
-<li><strong>差分半梯度Sarsa算法，用于估计<span
-class="math inline">\(\hat{q}\approx q_*\)</span></strong></li>
-</ul>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601191252171.png"  alt="image-20240601191252171" style="zoom: 50%;" /></p>
-<h4 id="弃用折扣">10.4 弃用折扣</h4>
-<ul>
-<li>使用函数逼近会失去策略改进定理；</li>
-<li>在持续性问题中，带折扣的价值函数和无折扣的平均收益差分价值函数对策略好坏的排序完全相同；</li>
-</ul>
-<h4 id="差分半梯度n步sarsa">10.5 差分半梯度n步Sarsa</h4>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240601201028393.png"  alt="image-20240601201028393" style="zoom: 33%;" /></p>
-<p>其中：</p>
-<p><img src="/2024/05/30/《RL-Introduction》-chap10/image-20240614162050083.png"  alt="image-20240614162050083" style="zoom:50%;" /></p>
-<p>上式是<span
-class="math inline">\(n\ge1,t+n&lt;T\)</span>的情况，其中<span
-class="math inline">\(\bar{R}\)</span>是对平均收益<span
-class="math inline">\(r(\pi)\)</span>的估计；当<span
-class="math inline">\(t+n\ge T\)</span>时，<span
-class="math inline">\(G_{t:t+n}=G_t\)</span></p>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL:Introduction》-chap6</title>
-    <url>/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap6-时序差分学习">chap6 时序差分学习</h3>
-<ul>
-<li><strong>预测问题（策略评估问题）</strong>：如何对于一个给定的策略<span
-class="math inline">\(\pi\)</span>估计它的价值函数<span
-class="math inline">\(v_\pi\)</span>;</li>
-<li><strong>控制问题</strong>：找到最优的策略；</li>
-</ul>
-<h4 id="时序差分预测">6.1 时序差分预测</h4>
-<p>蒙特卡洛方法以时刻t观测到的真实的回报<span
-class="math inline">\(G_t\)</span>为目标去更新<span
-class="math inline">\(V(S_t)\)</span>: <span class="math display">\[
-V(S_t)\gets V(S_t)+\alpha [G_t-V(S_t)]
-\]</span> TD方法以<span class="math inline">\(R_{t+1}+\gamma
-V(S_{t+1})\)</span>为目标去更新<span
-class="math inline">\(V(S_{t})\)</span>： <span class="math display">\[
-V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma V(S_{t+1})-V(S_t)]
-\]</span> 这种方法被称为<span
-class="math inline">\(TD(0)\)</span>或单步<span
-class="math inline">\(TD\)</span>;TD方法结合了蒙特卡洛方法和DP方法的优势。</p>
-<ul>
-<li><p>TD(0)算法的全流程与回溯图：</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222000317.png"  alt="image-20240511222000317" style="zoom: 50%;" /></p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222939256.png"  alt="image-20240511222939256" style="zoom:50%;" /></p></li>
-</ul>
-<p>其中TD目标<span class="math inline">\(R_{t+1}+\gamma
-V(S_{t+1})\)</span>和现状<span
-class="math inline">\(V(S_t)\)</span>之间的差异被称为TD误差：即<span
-class="math inline">\(\delta_t=R_{t+1}+\gamma
-V(S_{t+1})-V(S_t)\)</span></p>
-<ul>
-<li><p>若价值函数数组<span
-class="math inline">\(V\)</span>在一幕内没有改变，则蒙特卡洛误差可写成TD误差之和：即<span
-class="math inline">\(G_t-V(S_t)=\sum\limits_{k=t}^{T-1}\gamma^{k-t}\delta_k\)</span></p></li>
-<li><p>蒙特卡洛方法需要得到<span
-class="math inline">\(G_t\)</span>再更新，即需要知道最终结果；而TD方法只需要一步即可进行更新；</p></li>
-<li><p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222343007.png"  alt="image-20240511222343007" style="zoom:50%;" /></p></li>
-<li><p>上式中的123行，分别是MC、DP、TD(0)算法更新的目标。</p></li>
-</ul>
-<h4 id="时序差分预测方法的优势">6.2 时序差分预测方法的优势</h4>
-<ul>
-<li>TD方法不需要描述收益和下一个状态的联合概率分布的环境模型，即不需要知道<span
-class="math inline">\(p(s&#39;,r|s,a)\)</span>；</li>
-<li>TD方法下一时刻即可更新，收敛速度快；</li>
-<li>在实践中，TD方法在随机任务上通常比常量<span
-class="math inline">\(\alpha\)</span>MC方法收敛得更快；</li>
-</ul>
-<h4 id="td0的最优性">6.3 TD(0)的最优性</h4>
-<ul>
-<li>在批量训练下，常数<span class="math inline">\(\alpha
-MC\)</span>的收敛值<span
-class="math inline">\(V(s)\)</span>是经过状态<span
-class="math inline">\(s\)</span>后得到的实际回报的样本均值，它们最小化了与训练集中实际回报的均方根误差；</li>
-<li>TD方法的最优性与预测回报任务更为相关，TD方法在未来的数据上会比MC产生更小的误差；</li>
-<li>批量蒙特卡洛方法总是找出最小化训练集上均方误差的估计，批量TD(0)方法总是找出完全符合马尔可夫过程模型的最大似然估计参数。</li>
-<li>对于状态空间巨大的任务，TD方法可能是唯一可行的逼近确定性等价解的方法。</li>
-</ul>
-<h4 id="sarsa同轨策略下的时序差分控制on-policy-td">6.4
-Sarsa：同轨策略下的时序差分控制(on-policy TD)</h4>
-<p>通过五元组数据<span
-class="math inline">\((S_t,A_t,R_{t+1},S_{t+1},A_{t+1})\)</span>对动作价值函数进行更新：</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240514142046731.png"  alt="image-20240514142046731" style="zoom:50%;" />
-<span class="math display">\[
-Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
-Q(S_{t+1},A_{t+1})-Q(S_t,A_t)]
-\]</span> 每当从非终止状态<span
-class="math inline">\(S_t\)</span>出现一次转移之后，就进行上式的一次更新。特别地，如果<span
-class="math inline">\(S_{t+1}\)</span>是终止状态，则<span
-class="math inline">\(Q(S_{t+1},A_{t+1})=0\)</span>;</p>
-<p><strong>Sarsa算法的流程如图所示：</strong></p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504203035657.png"  alt="image-20240504203035657" style="zoom: 33%;" /></p>
-<p>只要所有“状态-动作”二元组都能被无限次访问到，并且贪心策略在极限情况下能够收敛（例如：贪心策略中的<span
-class="math inline">\(\varepsilon=\frac{1}{t}\)</span>),则经过上述Sarsa算法，都能够收敛到最优的策略和动作价值函数。</p>
-<h4 id="q-learning-离轨策略下的时序差分控制off-policy-td">6.5
-Q-learning: 离轨策略下的时序差分控制(off-policy TD)</h4>
-<p>Q学习的更新公式为： <span class="math display">\[
-Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma\ \underset{a}{max}\
-Q(S_{t+1},a)-Q(S_t,A_t)]
-\]</span> <span
-class="math inline">\(Q\)</span>值最终会收敛到最优动作价值函数<span
-class="math inline">\(q_*\)</span>；</p>
-<p><strong>Q学习算法的流程如图所示：</strong></p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504211634752.png"  alt="image-20240504211634752" style="zoom: 33%;" /></p>
-<p>Q学习的回溯图：</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504213502124.png"  alt="image-20240504213502124" style="zoom:33%;" /></p>
-<h4 id="期望sarsa">6.6 期望Sarsa</h4>
-<h4 id="期望sarsa算法更新规则为">期望Sarsa算法更新规则为：</h4>
-<p><span class="math display">\[
-Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
-E[Q(S_{t+1},A_{t+1})|S_{t+1}]-Q(S_t,A_t)]
-\]</span></p>
-<p><span class="math display">\[
-\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
-\sum\limits_{a}^{}\pi(a|S_{t+1})Q(S_{t+1},a)-Q(S_t,A_t)]
-\]</span></p>
-<p>期望Sarsa的回溯图：</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504215509521.png"  alt="image-20240504215509521" style="zoom:33%;" /></p>
-<p>在相同数量的经验下，期望Sarsa的表现更佳；</p>
-<h4 id="最大化偏差与双学习">6.7 最大化偏差与双学习</h4>
-<p><span class="math inline">\(\underset{a}{max}\
-Q(S_{t+1},a)\)</span>这样一个表达式实质上包含两个操作：（1）确定价值最大的动作<span
-class="math inline">\(a^*=\underset{a}{argmax}\
-Q\)</span>;(2)估计价值<span class="math inline">\(Q(a^*)\)</span></p>
-<p>若确定价值最大的动作和估计它的价值这两个流程采用相同的样本（多幕序列），则会产生最大化偏差问题，双Q学习则将样本划分为两个集合，并用它们学习两个独立的对真实价值<span
-class="math inline">\(q(a),\forall a\in A\)</span>的估计<span
-class="math inline">\(Q_1(a)\)</span>和<span
-class="math inline">\(Q_2(a)\)</span>,并使用两者分别承担选择和估计的任务，即</p>
-<p><span class="math inline">\(Q_2(A^*)=Q_2(argmax_a\
-Q_1(a))\)</span>或<span class="math inline">\(Q_1(A^*)=Q_1(argmax_a\
-Q_2(a))\)</span></p>
-<p>将双学习应用于Q学习得到双Q学习的更新公式： <span
-class="math display">\[
-Q_1(S_t,A_t)\gets Q_1(S_t,A_t)+\alpha [R_{t+1}+\gamma
-Q_2(S_{t+1},argmax_a Q_1(S_{t+1},a))-Q_1(S_t,A_t)]
-\]</span> 双Q学习的完整算法流程：</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240505114803514.png"  alt="image-20240505114803514" style="zoom: 33%;" /></p>
-<h4 id="游戏后位状态和其他特殊例子">6.8
-游戏、后位状态和其他特殊例子</h4>
-<ul>
-<li><p>后位状态：例如：智能体下完一步棋之后的棋盘局面</p></li>
-<li><p>后位状态价值函数：后位状态的价值函数，例如评估下完一步棋之后的棋盘局面的好坏</p>
-<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240514164923297.png"  alt="image-20240514164923297" style="zoom:50%;" /></p></li>
-</ul>
-<p>图中的状态-动作二元组最终产生了相同的局面，他们的价值函数理应相同。</p>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>RL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL-Introduction》-chap7</title>
-    <url>/2024/05/14/%E3%80%8ARL-Introduction%E3%80%8B-chap7/</url>
-    <content><![CDATA[<hr />
-<hr />
-<hr />
-<h3 id="chap7-n步自举法">chap7 n步自举法</h3>
-<p><span class="math inline">\(V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma
-V(S_{t+1})-V(S_t)]\)</span></p>
-<ul>
-<li>n步自举解决了单步时序差分方法的不灵活问题，即<span
-class="math inline">\(V(S_{t+1})\)</span>变化不明显导致<span
-class="math inline">\(V(S_t)\)</span>更新缓慢的问题；</li>
-<li>n步时序差分方法是蒙特卡洛方法和单步时序差分算法的折中；</li>
-</ul>
-<h4 id="n步时序差分预测">7.1 n步时序差分预测</h4>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515104403769.png"  alt="image-20240515104403769" style="zoom: 50%;" /></p>
-<ul>
-<li><p>蒙特卡洛方法的更新目标为完整回报： <span class="math display">\[
-G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...+\gamma ^{T-t-1}R_T
-\]</span></p></li>
-<li><p>单步TD方法的更新目标为单步回报： <span class="math display">\[
-G_{t:t+1}=R_{t+1}+\gamma V_t(S_{t+1})
-\]</span> <span
-class="math inline">\(V_t(S_{t+1})\)</span>下标表示t时刻对状态<span
-class="math inline">\(S_{t+1}\)</span>的价值的估计值，这是因为状态价值可能一直在更新，而我们计算时应该使用最新的估计值</p></li>
-<li><p>n步TD方法的更新目标为n步回报： <span class="math display">\[
-G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
-V_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
-\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
-class="math inline">\(G_{t:t+n}=G_t\)</span></p></li>
-<li><p><strong>n步时序差分算法更新公式</strong>为：</p>
-<p>对于<span class="math inline">\(S_t\)</span>:</p></li>
-</ul>
-<p><span class="math display">\[
-V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha [G_{t:t+n}-V_{t+n-1}(S_t)],0\le
-t&lt;T
-\]</span></p>
-<p>​ 对于任意其他状态：<span
-class="math inline">\(V_{t+n}(S)=V_{t+n-1}(S)\)</span></p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515120741239.png"  alt="image-20240515120741239" style="zoom:50%;" /></p>
-<p>n步时序差分算法收敛的数学基础：<strong>误差减少性质</strong></p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515125036138.png"  alt="image-20240515125036138" style="zoom:50%;" /></p>
-<h4 id="n步sarsa">7.2 n步Sarsa</h4>
-<p>n步Sarsa的更新目标为 <span class="math display">\[
-G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
-Q_{t+n-1}(S_{t+n},A_{t+n}),n\ge1,0\le t&lt;T-n
-\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
-class="math inline">\(G_{t:t+n}=G_t\)</span></p>
-<p>则n步Sarsa的更新公式为：</p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515161052573.png"  alt="image-20240515161052573" style="zoom:50%;" /></p>
-<p>对于任意其他状态-动作二元组：<span
-class="math inline">\(Q_{t+n}(s,a)=Q_{t+n-1}(s,a)\)</span></p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515165316919.png"  alt="image-20240515165316919" style="zoom:50%;" /></p>
-<h4 id="期望sarsa">7.2.’ 期望Sarsa</h4>
-<p><span class="math display">\[
-G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
-\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
-\]</span></p>
-<p>其中<span
-class="math inline">\(\bar{V}_{t}(s)=\sum_{a}\pi(a|s)Q_t(s,a)\)</span></p>
-<p>除此之外，其他均与n步Sarsa相同。</p>
-<h4 id="n步离轨策略学习">7.3 n步离轨策略学习</h4>
-<ul>
-<li>在n步时序差分时使用重要度采样率<span
-class="math inline">\(\rho_{t:t+n-1}\)</span>对价值更新进行加权： <span
-class="math display">\[
-V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha
-\rho_{t:t+n-1}[G_{t:t+n}-V_{t+n-1}(S_t)],0\le t&lt;T
-\]</span></li>
-</ul>
-<p>其中重要度采样率：</p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515203231212.png"  alt="image-20240515203231212" style="zoom:50%;" /></p>
-<ul>
-<li>在n步Sarsa时使用重要度采样率<span
-class="math inline">\(\rho_{t+1:t+n}\)</span>对价值更新进行加权：</li>
-</ul>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515205021292.png"  alt="image-20240515205021292" style="zoom:50%;" /></p>
-<ul>
-<li><p>在n步期望Sarsa时使用重要度采样率<span
-class="math inline">\(\rho_{t+1:t+n-1}\)</span>对价值更新进行加权：
-<span class="math display">\[
-G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
-\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
-\]</span></p>
-<p><span class="math display">\[
-Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
-\rho_{t+1:t+n-1}[G_{t:t+n}-Q_{t+n-1}(S_t,A_t)]
-\]</span></p></li>
-</ul>
-<p><strong>离轨策略下的n步Sarsa算法</strong>：</p>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515210348794.png"  alt="image-20240515210348794" style="zoom:50%;" /></p>
-<h4 id="带控制变量的每次决策型方法">7.4 带控制变量的每次决策型方法</h4>
-<h4 id="不需要使用重要度采样的离轨策略学习方法n步树回溯算法">7.5
-不需要使用重要度采样的离轨策略学习方法：n步树回溯算法</h4>
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213756088.png"  alt="image-20240515213756088" style="zoom:50%;" /></p>
-<hr />
-<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213850184.png"  alt="image-20240515213850184" style="zoom:50%;" /></p>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数学基础之1人工智能与数学</title>
-    <url>/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/</url>
-    <content><![CDATA[<hr />
-<h3 id="概述">1 概述</h3>
-<h4 id="微积分">1.1 微积分</h4>
-<ul>
-<li>泰勒级数 <span class="math display">\[
-f(x)=f(x_0)+\frac{f&#39;(x_0)}{1!}(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+R_n(x)
-\]</span></li>
-</ul>
-<p>泰勒级数体现了用多项式逼近函数的思想</p>
-<ul>
-<li>傅里叶级数 <span class="math display">\[
-f(t)=a_0+\sum\limits_{n=1}^{\infin}[a_ncos(nw_0t)+b_nsin(nw_0t)]
-\]</span></li>
-</ul>
-<p>它可以反映函数的频率特性，每阶的三角函数系数可以看成该阶频率的成分量。</p>
-<h4 id="线性代数">1.2 线性代数</h4>
-<h5 id="向量矩阵和张量">1.2.1 向量、矩阵和张量</h5>
-<ul>
-<li>标量：零维数组</li>
-<li>向量：一维数组，如<span
-class="math inline">\(a=(x,y,z)\)</span></li>
-<li>矩阵：二维数组，如灰度图像数据</li>
-<li>张量：三维及以上数组，如RGB图像数据为三维数组</li>
-</ul>
-<h5 id="范数和内积">1.2.2 范数和内积</h5>
-<ul>
-<li><p>范数：对单个向量的度量，描述的是向量自身的性质，其作用是将向量映射为一个非负的数值</p>
-<p>通用的<span class="math inline">\(L_p\)</span>范数定义：<span
-class="math inline">\(||x||_p=(\sum\limits_{i}|x_i|^p)^{\frac{1}{p}}\)</span></p></li>
-<li><p>内积：表示两个向量之间的相关度，内积为0表示两个向量正交即互相垂直</p>
-<p><span class="math inline">\(\left \langle x,y \right \rangle
-=\sum\limits_{i}^{}x_iy_i=|x|\cdot |y|\cdot cos\theta\)</span></p></li>
-</ul>
-<p>其中<span class="math inline">\(\theta\)</span>为向量<span
-class="math inline">\(x,y\)</span>共起点之后的夹角；</p>
-<h5 id="线性变换">1.2.3 线性变换</h5>
-<p><span class="math display">\[
-Ax=y
-\]</span></p>
-<p>有两种理解方式：</p>
-<ul>
-<li>1.向量<span class="math inline">\(x\)</span>经过矩阵<span
-class="math inline">\(A\)</span>所描述的线性变换后变成了向量<span
-class="math inline">\(y\)</span></li>
-<li>2.一个对象在矩阵<span
-class="math inline">\(A\)</span>的列向量作基向量的坐标系下得到的坐标为<span
-class="math inline">\(x\)</span>，在标准坐标系<span
-class="math inline">\(I\)</span>下得到的坐标为<span
-class="math inline">\(y\)</span></li>
-</ul>
-<p>另外，若矩阵<span
-class="math inline">\(A\)</span>不可逆，则可两边同时左乘<span
-class="math inline">\(A^T\)</span>，构造伪逆，得到正则方程： <span
-class="math display">\[
-x=(A^TA)^{-1}A^Ty
-\]</span></p>
-<h5 id="特征值和特征向量">1.2.4 特征值和特征向量</h5>
-<p><span class="math display">\[
-Ax=\lambda x
-\]</span></p>
-<p>其中向量<span class="math inline">\(x\)</span>为特征向量，<span
-class="math inline">\(\lambda\)</span>为特征值，本质为向量<span
-class="math inline">\(x\)</span>经过矩阵<span
-class="math inline">\(A\)</span>的线性变换后与原来共线，特征值<span
-class="math inline">\(\lambda\)</span>表示尺度缩放系数。</p>
-<h5 id="奇异值分解svdsingular-value-decomposition">1.2.5
-奇异值分解（SVD，Singular Value Decomposition)</h5>
-<p>求解给定n维方阵的特征值和特征向量的过程叫做特征值分解，若不是方阵，则需要使用更加通用的矩阵分解方法---奇异值分解方法。</p>
-<p>矩阵的奇异值分解是指，将一个非零的<span class="math inline">\(m\times
-n\)</span>实矩阵<span class="math inline">\(A,A\in R^{m\times
-n}\)</span>,表示为以下三个实矩阵乘积形式的运算，即进行矩阵的因子分解：
-<span class="math display">\[
-A=U\Sigma V^T
-\]</span> 其中<span class="math inline">\(U\)</span>是<span
-class="math inline">\(m\)</span>阶正交矩阵，<span
-class="math inline">\(V\)</span>是<span
-class="math inline">\(n\)</span>阶正交矩阵，<span
-class="math inline">\(\Sigma\)</span>是由降序排列的非负的对角线元素组成的<span
-class="math inline">\(m\times n\)</span>矩形对角矩阵，即满足： <span
-class="math display">\[
-UU^T=I,VV^T=I,\Sigma=diag(\sigma_1,\sigma_2,...,\sigma_p),\sigma_1\ge
-\sigma_2\ge ...\ge \sigma_p \ge 0,p=min(m,n)
-\]</span> <span class="math inline">\(U\Sigma V^T\)</span>称为矩阵<span
-class="math inline">\(A\)</span>的奇异值分解，<span
-class="math inline">\(\sigma_i\)</span>称为矩阵<span
-class="math inline">\(A\)</span>的奇异值，<span
-class="math inline">\(U\)</span>的列向量称为左奇异向量，<span
-class="math inline">\(V\)</span>的列向量称为右奇异向量。</p>
-<h4 id="概率论与数理统计">1.3 概率论与数理统计</h4>
-<h4 id="最优化理论">1.4 最优化理论</h4>
-<p>最优化理论研究的问题是判定给定目标函数是否存在最大值或最小值，并找到令目标函数取最大值或最小值的数值。</p>
-<h5 id="目标函数">1.4.1 目标函数</h5>
-<p>要实现最小化或最大化的函数称为目标函数，最小化：<span
-class="math inline">\(min \ f(x)\)</span>，最大化：<span
-class="math inline">\(min\ -f(x)\)</span></p>
-<h5 id="线性规划">1.4.2 线性规划</h5>
-<p>可分为无约束优化和约束优化，通过引入拉格朗日乘子，可以将含有<span
-class="math inline">\(n\)</span>个变量和<span
-class="math inline">\(k\)</span>个约束条件的约束优化问题转化为含有<span
-class="math inline">\(n+k\)</span>个变量的无约束优化问题。</p>
-<h5 id="梯度下降法">1.4.3 梯度下降法</h5>
-<p>多元函数沿其负梯度方向下降最快，一般情况下，使用梯度下降法得到的解不保证是全局最优解，但当目标函数是凸函数时，可以保证是全局最优解。另外，由于梯度下降法只用到目标函数的一阶导数，故其下降速度未必是最快的。</p>
-<h3 id="初等数学">2.初等数学</h3>
-<h4 id="函数">2.1 函数</h4>
-<h4 id="数列">2.2 数列</h4>
-<h4 id="排列组合">2.3 排列组合</h4>
-<h4 id="集合">2.4 集合</h4>
-<h3 id="高等数学">3.高等数学</h3>
-<h4 id="幂级数">3.1 幂级数</h4>
-<p><span class="math display">\[
-\sum\limits_{n=0}^{\infin}a_nx^n=a_0+a_1x+a_2x^2+...+a_nx^n+...
-\]</span></p>
-<p><span class="math display">\[
-\sum\limits_{n=0}^{\infin}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+...+a_n(x-x_0)^n+...
-\]</span></p>
-<ul>
-<li>幂级数的收敛半径：</li>
-</ul>
-<p><span class="math display">\[
-\rho=\lim_{n\to\infin}|\frac{a_{n+1}}{a_n}|=\lim_{n\to\infin}\sqrt[n]{|a_n|},0\le\rho\le+\infin
-\]</span></p>
-<p>(1)<span
-class="math inline">\(\rho\)</span>为非零常数，则收敛半径为<span
-class="math inline">\(R=\frac{1}{\rho}\)</span>；</p>
-<p>(2)<span class="math inline">\(\rho=0\)</span>,则收敛半径为<span
-class="math inline">\(R=+\infin\)</span>；</p>
-<p>(3)<span
-class="math inline">\(\rho=+\infin\)</span>,则收敛半径为<span
-class="math inline">\(R=0\)</span>；</p>
-<p>则收敛域为<span class="math inline">\((-R,+R)\ or\
-(x_0-R,x_0+R)\)</span>,至于边界处是否收敛，需要代入级数式进行常数项级数是否收敛的判断；</p>
-<ul>
-<li>泰勒级数</li>
-</ul>
-<p><span class="math display">\[
-f(x)=f(x_0)+f&#39;(x_0)(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)
-\]</span></p>
-<h4 id="凹凸性">3.2 凹凸性</h4>
-<ul>
-<li>定义：设函数<span class="math inline">\(y=f(x)\)</span>定义在<span
-class="math inline">\([a,b]\)</span>上且连续，若对<span
-class="math inline">\([a,b]\)</span>中任意不同的两点<span
-class="math inline">\(x_1,x_2\)</span>,总有<span
-class="math inline">\(\frac{f(x_1)+f(x_2)}{2}&lt;f(\frac{x_1+x_2}{2})\)</span>,则称函数<span
-class="math inline">\(y=f(x)\)</span>在<span
-class="math inline">\((a,b)\)</span>上是凸的；否则，称函数<span
-class="math inline">\(y=f(x)\)</span>在<span
-class="math inline">\((a,b)\)</span>上是凹的；</li>
-<li>二阶导数符号判定函数的凹凸性：二阶导数<span
-class="math inline">\(f&#39;&#39;(x)&gt;0\)</span>,涨得越来越快，表现为凹；二阶导数<span
-class="math inline">\(f&#39;&#39;(x)&lt;0\)</span>,涨得越来越慢，表现为凸；</li>
-</ul>
-<h4 id="主成分分析">3.3 主成分分析</h4>
-<p>主成分分析(PCA,Principal Component
-Analysis),通过计算数据矩阵的协方差矩阵，得到协方差矩阵的特征值及其特征向量，并将特征值从大到小排序，选择前N个特征值对应的特征向量组成变换矩阵，即可将数据矩阵转换为新的空间从而实现数据特征的降维。</p>
-<p>采用PCA降维的基本步骤如下：</p>
-<ol type="1">
-<li>减去平均值以规范化</li>
-<li>计算协方差矩阵</li>
-<li>计算协方差矩阵的特征值和特征向量</li>
-<li>将特征值从大到小排序</li>
-<li>保留前N个特征值对应的特征向量</li>
-<li>将数据转换到上面得到的N个特征向量构建的新空间中</li>
-</ol>
-<h3 id="概率论">4 概率论</h3>
-<ul>
-<li>条件概率公式：</li>
-</ul>
-<p><span class="math display">\[
-P(AB)=P(BA)=P(A|B)P(B)=P(B|A)P(A)
-\]</span></p>
-<ul>
-<li>贝叶斯定理：</li>
-</ul>
-<p><span class="math display">\[
-P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum\limits_{i=1}^{n}P(A_i)P(B|A_i)},i=1,2...n
-\]</span></p>
-]]></content>
-      <categories>
-        <category>人工智能数学基础</category>
-      </categories>
-      <tags>
-        <tag>人工智能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL-Introduction》-chap8</title>
-    <url>/2024/05/16/%E3%80%8ARL-Introduction%E3%80%8B-chap8/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap8-基于表格型方法的规划和学习">chap8
-基于表格型方法的规划和学习</h3>
-<ul>
-<li>基于模型的强化学习方法将规划作为其主要组成部分</li>
-<li>无模型的强化学习方法主要依赖于学习</li>
-</ul>
-<h4 id="模型和规划">8.1 模型和规划</h4>
-<ul>
-<li><p><strong>模型</strong>：智能体用来预测环境对其动作的反应的任何事物，给定一个状态和动作，作为环境的反应结果，模型就会产生后继状态和下一个收益的预测。其中可分为<strong>分布模型</strong>：模型生成对所有可能结果的描述及其对应的概率分布；<strong>样本模型</strong>：模型通过概率分布采样从所有的可能性中生成一个确定的结果。</p></li>
-<li><p>分布模型可以用来生成样本模型，分布模型获取困难，样本模型获取简单。</p></li>
-<li><p><strong>规划</strong>：任何以环境模型为输入，并生成或改进与它进行交互的策略的计算过程。</p>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516095022376.png"  alt="image-20240516095022376" style="zoom:50%;" /></p></li>
-<li><p>随机采样单步表格型Q规划：</p>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p></li>
-</ul>
-<h4 id="dyna集成在一起的规划动作和学习">8.2
-Dyna：集成在一起的规划、动作和学习</h4>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516110343794.png"  alt="image-20240516110343794" style="zoom:50%;" /></p>
-<h4 id="模型错误纠正">8.3 模型错误纠正</h4>
-<h4 id="优先遍历">8.4 优先遍历</h4>
-<h4 id="期望更新与采样更新的对比">8.5 期望更新与采样更新的对比</h4>
-<p>不同类型的价值函数：</p>
-<ul>
-<li>状态价值还是动作价值</li>
-<li>对应最优策略还是任意给定策略</li>
-<li>采用期望更新还是采样更新</li>
-</ul>
-<h4 id="轨迹采样">8.6 轨迹采样</h4>
-<h4 id="实时动态规划">8.7 实时动态规划</h4>
-<h4 id="决策时规划">8.8 决策时规划</h4>
-<h4 id="启发式搜索">8.9 启发式搜索</h4>
-<h4 id="预演算法">8.10 预演算法</h4>
-<h4 id="mtcs蒙特卡洛树搜索">8.11 MTCS蒙特卡洛树搜索</h4>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>斐波那契数列算法总结</title>
-    <url>/2024/04/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h3 id="斐波那契数列">斐波那契数列：</h3>
-<p><span class="math inline">\(\begin{cases}
-0, &amp; \text{  } n=0 \\
-1,&amp; \text{  } n=1,2 \\
-f(n-1)+f(n-2), &amp; \text{  } n&gt;2
-\end{cases}\)</span></p>
-<h4 id="方法一朴素递归">方法一、朴素递归</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>) + <span class="built_in">fib</span>(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>斐波那契数列的通项公式为： <span class="math display">\[
-f(n)=\frac{1}{\sqrt{5}} \left [ (\frac{1+\sqrt[]{5} }{2} )^{n}-
-(\frac{1-\sqrt[]{5} }{2} )^{n}\right ]
-\]</span></p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240401221016279.png"  alt="image-20240401221016279" style="zoom: 55%;" /></p>
-<p>如图所示，递归计算的终点都是<span
-class="math inline">\(fib(1)\)</span>和<span
-class="math inline">\(fib(2)\)</span>，因为它们是直接返回的，因此计算<span
-class="math inline">\(fib(n)\)</span>的时间复杂度为计算<span
-class="math inline">\(fib(1)\)</span>和<span
-class="math inline">\(fib(2)\)</span>的次数，同时也等于<span
-class="math inline">\(fib(n)\)</span>本身，因此<span
-class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
-(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
-])=O((\frac{1+\sqrt[]{5} }{2}
-)^{n})\)</span>，第二项绝对值小于1，为<span
-class="math inline">\(n\)</span>阶无穷小，可舍去，空间复杂度为函数调用栈的高度<span
-class="math inline">\(n\)</span>,即<span
-class="math inline">\(S(n)=O(n)\)</span>。</p>
-<h4 id="方法二尾递归">方法二、尾递归</h4>
-<p>首先需要清楚递归和尾递归的区别：</p>
-<ul>
-<li>1.递归：在调用函数自身后还有事要做，需要保存当前轮次的环境，以供后续返回时使用；</li>
-</ul>
-<p>如计算自然数前<span class="math inline">\(n\)</span>项和的函数<span
-class="math inline">\(sum(n)\)</span>,递归实现方式如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> n + <span class="built_in">sum</span>(n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这里的“+",即前面所说”还要做的事“，其计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>)</span><br><span class="line"><span class="number">5</span> + <span class="built_in">sum</span>(<span class="number">4</span>)</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="built_in">sum</span>(<span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="built_in">sum</span>(<span class="number">2</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="built_in">sum</span>(<span class="number">1</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="built_in">sum</span>(<span class="number">0</span>)))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="number">0</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="number">1</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="number">6</span>)</span><br><span class="line"><span class="number">5</span> + <span class="number">10</span></span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>2.尾递归：每轮直接return，不需要保存当前环境供后续处理。</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> total = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(n<span class="number">-1</span>,total+n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">3</span>, <span class="number">9</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">2</span>, <span class="number">12</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">1</span>, <span class="number">14</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">0</span>, <span class="number">15</span>)</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
-<p>利用尾递归求斐波那契数列：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> x1,<span class="type">int</span> x2,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x1+x2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(x2,x1+x2,n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>计算过程如下：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fib</span>(<span class="number">6</span>)=<span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
-<p>观察变量<span
-class="math inline">\(n\)</span>的变化可知，时间复杂度<span
-class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
-class="math inline">\(x1,x2\)</span>,因此空间复杂度<span
-class="math inline">\(S(n)=O(1)\)</span>.</p>
-<h4 id="方法三非递归迭代">方法三、非递归(迭代)</h4>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> x=<span class="number">1</span>,y=<span class="number">1</span>;<span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-2</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = x+y;</span><br><span class="line">            x = y;</span><br><span class="line">            y = tmp;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>观察变量<span
-class="math inline">\(n\)</span>的变化可知，时间复杂度<span
-class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
-class="math inline">\(x,y,i,tmp\)</span>,因此空间复杂度<span
-class="math inline">\(S(n)=O(1)\)</span>.</p>
-<h4 id="方法四矩阵快速幂">方法四、矩阵快速幂</h4>
-<ul>
-<li><h5 id="快速幂">快速幂：</h5>
-<p>在计算<span class="math inline">\(a^n\)</span>时，若使用<span
-class="math inline">\(a^n=a\ \cdot a \ \cdot a...a
-(n个)\)</span>方法，则时间复杂度为<span
-class="math inline">\(O(n)\)</span>;快速幂的思想是，将<span
-class="math inline">\(n\)</span>写成二进制形式</p>
-<p><span
-class="math inline">\((n_tn_{t-1}...n_1n_0)_2\)</span>,那么<span
-class="math inline">\(a^n = a^{n_t\cdot 2^t}*a^{n_{t-1}\cdot
-2^{t-1}}*...*a^{n_0\cdot 2^0}\)</span>,其中<span
-class="math inline">\(n_i\in\{0,1\}\)</span></p>
-<p>因此我们只需要将<span class="math inline">\(2^0\ 2^1....2^{\left
-\lfloor log_{2}{n} \right
-\rfloor}\)</span>算出，再将二进制位为1对应的幂运算结果相乘即可，时间复杂度为<span
-class="math inline">\(O(log n)\)</span>。</p>
-<p>比如：<img src="/2024/04/01/斐波那契数列算法总结/image-20240403132154215.png"  alt="image-20240403132154215" style="zoom:67%;" /><img src="/2024/04/01/斐波那契数列算法总结/image-20240403132250525.png"  alt="image-20240403132250525" style="zoom:67%;" /></p>
-<p>快速幂分为递归和迭代两种实现方式，两者理论时间复杂度都为<span
-class="math inline">\(O(logn)\)</span>,通常情况下，迭代性能较好。</p>
-<h5 id="递归版本">(1)递归版本</h5>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">double</span> a,<span class="type">long</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1.0</span>/<span class="built_in">quickPow</span>(a,-n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> res = <span class="built_in">quickPow</span>(a,n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res *a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如：计算<span
-class="math inline">\(2^5\)</span>的调用及计算过程如下：</p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403135754758.png"  alt="image-20240403135754758" style="zoom: 25%;" /></p></li>
-</ul>
-<h5 id="迭代版本">(2)迭代版本</h5>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span>  n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">quickPow</span>(a,-n);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)<span class="comment">//相当于b%2==1</span></span><br><span class="line">        &#123;</span><br><span class="line">            res = res * a;</span><br><span class="line">        &#125;</span><br><span class="line">        a = a * a;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;<span class="comment">//右移一位相当于b=b/2;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>如计算<span class="math inline">\(2^{10}\)</span>的迭代过程如下：</p>
-<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403142939144.png"  alt="image-20240403142939144" style="zoom: 33%;" /></p>
-<ul>
-<li><h3 id="快速矩阵幂">快速矩阵幂</h3>
-<p>由斐波那契数列的递推公式可知：</p>
-<p><span
-class="math inline">\(\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}=\cdot
-\cdot \cdot =\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}f(1)\\f(0)\end{bmatrix}=\cdot
-\cdot \cdot =\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}
-1\\0\end{bmatrix}\)</span></p>
-<p>故，令<span class="math inline">\(A=\begin{bmatrix}
-1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\)</span>，则<span
-class="math inline">\(f(n)=A[0][0]\)</span></p>
-<p>矩阵快速幂和快速幂的方法和思想一致，都是将先前的计算结果保存下来以供后续使用，减小计算量，只需将<span
-class="math inline">\(1\)</span>换为单位矩阵，将常熟换为矩阵<span
-class="math inline">\(A\)</span>即可.</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩阵乘法函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">multiply</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> b[<span class="number">2</span>][<span class="number">2</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mul[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            mul[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                mul[i][j] += a[i][k] * b[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将乘法结果复制回a矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            a[i][j] = mul[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速矩阵幂算法</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">matrixPower</span><span class="params">(<span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;; <span class="comment">// 单位矩阵</span></span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">multiply</span>(result, matrix);</span><br><span class="line">        <span class="built_in">multiply</span>(matrix, matrix);</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算斐波那契数</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fibonacci</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">matrixPower</span>(matrix, n - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    cout &lt;&lt;<span class="built_in">fibonacci</span>(<span class="number">7</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>分析程序知时间复杂度为<span
-class="math inline">\(O(logn)\)</span>,空间复杂度为<span
-class="math inline">\(O(1)\)</span></p>
-<h3 id="总结">总结</h3>
-<p>（1)朴素递归：<span
-class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
-(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
-])=O((\frac{1+\sqrt[]{5} }{2} )^{n})\)</span>,<span
-class="math inline">\(S(n)=O(n)\)</span></p>
-<ol start="2" type="1">
-<li>尾递归：<span class="math inline">\(T(n)=O(n)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></li>
-</ol>
-<p>(3)非递归（迭代）：<span
-class="math inline">\(T(n)=O(n)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></p>
-<p>（4) 矩阵快速幂：<span
-class="math inline">\(T(n)=O(logn)\)</span>,<span
-class="math inline">\(S(n)=O(1)\)</span></p></li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程算法</category>
-      </categories>
-      <tags>
-        <tag>算法、数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第七章、策略梯度方法</title>
-    <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<hr />
-<h4 id="策略网络">1. 策略网络</h4>
-<p>神经网络<span
-class="math inline">\(\pi(a|s;\theta)\)</span>称为策略网络，输入状态<span
-class="math inline">\(s\)</span>,输出<span
-class="math inline">\(\mathcal{A}\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
-<h4 id="策略学习的目标函数">2.策略学习的目标函数</h4>
-<p>首先还是复习相关的基本概念：</p>
-<ul>
-<li><p>回报：<span class="math inline">\(U_t=R_t+\gamma\cdot
-R_{t+1}+...+\gamma^{n-t}\cdot R_n\)</span>,由于<span
-class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span>,故<span
-class="math inline">\(U_t\)</span>依赖于<span
-class="math inline">\(t\)</span>时刻之后的所有状态和动作：<span
-class="math inline">\(S_t,A_t,S_{t+1},A_{t+1},...,\)</span></p></li>
-<li><p>动作价值函数：<span
-class="math inline">\(t\)</span>时刻的状态<span
-class="math inline">\(s_t\)</span>和动作<span
-class="math inline">\(a_t\)</span>看成已知观测值，然后将<span
-class="math inline">\(U_t\)</span>对之后的状态和动作求期望： <span
-class="math display">\[
-Q_{\pi}(s_t,a_t)=E[U_t|S_t=s_t,A_t=a_t]
-\]</span></p></li>
-<li><p>状态价值函数：<span
-class="math inline">\(t\)</span>时刻的状态<span
-class="math inline">\(s_t\)</span>看成已知观测值，将<span
-class="math inline">\(Q_{\pi}(s_t,A_t)\)</span>对使用策略网络<span
-class="math inline">\(\pi(\cdot|s_t;\theta)\)</span>决策后的<span
-class="math inline">\(A_t\)</span>求期望： <span class="math display">\[
-V_{\pi}(s_t)=E_{A_t\sim\pi(\cdot|s_t;\theta)}[Q_{\pi}(s_t,A_t)]
-\]</span> 状态价值取决于当前状态<span
-class="math inline">\(s_t\)</span>以及策略网络参数<span
-class="math inline">\(\theta\)</span>(因为策略网络的结构已经固定)</p></li>
-</ul>
-<p>为了使得目标函数排除当前状态<span
-class="math inline">\(s_t\)</span>的影响，可对其求期望，即我们定义目标函数为：
-<span class="math display">\[
-J(\theta)=E_S(V_\pi(S))
-\]</span> 优化问题为： <span class="math display">\[
-\underset{\theta}{max}\ J(\theta)
-\]</span> 可通过梯度上升来最大化<span
-class="math inline">\(J(\theta)\)</span>,即 <span
-class="math display">\[
-\theta_{new}=\theta_{now}+\beta\cdot \nabla_{\theta}J(\theta_{now})
-\]</span>
-其中的梯度部分，可以通过以下展示的<strong>策略梯度定理</strong>来计算：</p>
-<ul>
-<li>策略梯度定理：设目标函数为<span
-class="math inline">\(J(\theta)=E_{S\sim
-d(\cdot)}[V_{\pi}(S)]\)</span>,设<span
-class="math inline">\(d(s)\)</span>为马尔可夫链稳态发布的概率质量（密度）函数，那么
-<span class="math display">\[
-\frac{\partial J(\theta)}{\partial \theta}
-=(1+\gamma+\gamma^2+...+\gamma^{n-1})\cdot E_{S\sim d(\cdot)}[E_{A\sim
-\pi(\cdot|S;\theta)}[\frac{\partial\
-ln\pi(A|S;\theta)}{\partial\theta}\cdot Q_{\pi}(S,A)]]
-\]</span>
-前面的系数无关紧要，可以省略，因为做梯度下降时前面都要乘以学习率<span
-class="math inline">\(\beta\)</span>.</li>
-</ul>
-<h4 id="reinforce">3.REINFORCE</h4>
-<p>首先使用蒙特卡洛方法对策略梯度进行近似， <span
-class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi(S,A)}\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
-\]</span> 每当要做梯度下降时，从环境中观测出一个状态<span
-class="math inline">\(s\)</span>,根据当前最新的策略网络，随机抽样得出一个动作<span
-class="math inline">\(a\sim\pi(\cdot|s;\theta)\)</span></p>
-<p>计算梯度： <span class="math display">\[
-g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
-\]</span>
-它是第一个式子的无偏估计，但在实际应用中依然不知道式中第一项<span
-class="math inline">\(Q_\pi(s,a)\)</span>的值，要么用实际观测到的回报<span
-class="math inline">\(u_t\)</span>代替（即REINFORCE)；要么像SARSA一样使用神经网络<span
-class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算；</p>
-<p><strong>REINFORCE训练流程</strong>：</p>
-<p>（1）REINFORCE属于同策略，用策略网络<span
-class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
-<span class="math display">\[
-s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
-\]</span> (2) 计算所有回报： <span class="math display">\[
-u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
-\]</span> (3)用<span
-class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
-<span class="math display">\[
-\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
-\]</span> (4)做随机梯度上升更新策略网络参数： <span
-class="math display">\[
-\theta_{new}=\theta_{now}+\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
-u_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
-\]</span></p>
-<h4 id="actor-critic">4.actor-critic</h4>
-<p><span class="math display">\[
-g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
-\]</span></p>
-<p>actor-critic方法使用神经网络近似<span
-class="math inline">\(Q_\pi(s,a)\)</span>,这个神经网络称为“价值网络”，记作<span
-class="math inline">\(q(s,a;w)\)</span>,价值网络的输入是状态，输出是<span
-class="math inline">\(\mathcal{A}\)</span>维向量，它的每个元素代表每个动作的价值。actor-critic方法中，策略网络<span
-class="math inline">\(\pi(a|s;\theta)\)</span>基于状态<span
-class="math inline">\(s\)</span>做出动作<span
-class="math inline">\(a\)</span>,相当于演员；价值网络<span
-class="math inline">\(q(s,a;w)\)</span>评价在状态<span
-class="math inline">\(s\)</span>下做出动作<span
-class="math inline">\(a\)</span>的评分。如图所示：</p>
-<p><img src="/2024/04/14/第七章、策略梯度方法/image-20240414202442043.png"  alt="image-20240414202442043" style="zoom:50%;" /></p>
-<p><strong>actor-critic的训练流程</strong>:</p>
-<p>训练价值网络的目的是让其输出更接近于动作价值函数，使用损失函数的梯度下降；而训练策略网络的目的是最大化<span
-class="math inline">\(J(\theta)\)</span>,使用目标函数的梯度上升；</p>
-<p>(1)观测到当前状态<span
-class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
-class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
-class="math inline">\(a_t\)</span></strong>;</p>
-<p>(2)从环境中观测到新的状态<span
-class="math inline">\(s_{t+1}\)</span>和奖励<span
-class="math inline">\(r_t\)</span>;</p>
-<p>(3)根据新的状态再次做决策：<span
-class="math inline">\(\widetilde{a}_{t+1}\sim\pi(\cdot|s_{t+1};\theta_{now})\)</span>,<strong>但不让智能体执行动作</strong><span
-class="math inline">\(\widetilde{a}_{t+1}\)</span>,因为算出<span
-class="math inline">\(\widetilde{a}_{t+1}\)</span>只是为了计算出训练价值网络时要用到的TD目标；</p>
-<p>(4)让价值网络打分： <span class="math display">\[
-\hat{q}_t=q(s_t,a_t;w_{now}),\hat{q}_{t+1}=q(s_{t+1},\widetilde{a}_{t+1};w_{now})
-\]</span> (5)计算TD目标和TD误差： <span class="math display">\[
-\hat{y}_t=r_t+\gamma\cdot \hat{q}_{t+1},\delta_t=\hat{q}_t-\hat{y}_t
-\]</span> (6)更新价值网络： <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wq(s_t,a_t;w_{now})
-\]</span> (7)更新策略网络： <span class="math display">\[
-\theta_{new}=\theta_{now}+\beta\cdot\hat{q}_t\cdot\nabla_\theta
-ln\pi(a_t|s_t;\theta_{now})
-\]</span> 注：actor-critic的价值网络存在自举问题，对于<span
-class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第三章、强化学习基本概念</title>
-    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
-<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
-Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
-<strong>环境</strong>：与智能体交互的对象；</p>
-<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
-<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
-class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
-<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
-class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
-<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
-<strong>动作空间</strong>：所有可能动作的集合，记作<span
-class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
-<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
-class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
-class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
-class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
-class="math inline">\(s_t,s_{t+1}\)</span>,有<span
-class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
-<h3 id="状态转移">3.状态转移</h3>
-<p><strong>状态转移</strong>：智能体从当前<span
-class="math inline">\(t\)</span>时刻的状态<span
-class="math inline">\(s\)</span>转移到下一刻的状态<span
-class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
-<span
-class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
-表示发生下述事件的概率：在当前状态<span
-class="math inline">\(s\)</span>,智能体执行动作<span
-class="math inline">\(a\)</span>,下一刻环境的状态变成<span
-class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因为状态转移存在随机性。
-<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
-class="math inline">\(s&#39;\)</span>完全由<span
-class="math inline">\(s,a\)</span>决定： <span
-class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
-  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
-  &amp; \text{ 0 , otherwise }
-\end{cases}\]</span>
-<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
-<h3 id="策略">4.策略</h3>
-<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
-<strong>随机性策略</strong>：<span
-class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
-<strong>确定性策略</strong>：记作<span
-class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
-class="math inline">\(a\)</span>完全由状态<span
-class="math inline">\(s\)</span>决定:<span
-class="math inline">\(a=\mu(s)\)</span></p>
-<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
-class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
-(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
-class="math inline">\(a\)</span></p>
-<p>,环境通过状态转移函数<span
-class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
-class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
-class="math inline">\(r(s,a,s’)\)</span>。</p>
-<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
-property）</h3>
-<p>马尔可夫性，即下一时刻状态<span
-class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
-class="math inline">\(S_t\)</span>和动作<span
-class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
-class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
-<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
-class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
-<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
-<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
-class="math inline">\(n\)</span>结束，则<span
-class="math inline">\(t\)</span>时刻的回报定义为： <span
-class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
-<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
-class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
-class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
-R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
-class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
-<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
-<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
-<strong>动作价值函数</strong>： <span
-class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
-表示已经观测到了<span
-class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
-class="math inline">\(s_t\)</span>,选中动作<span
-class="math inline">\(a_t\)</span>，原来<span
-class="math inline">\(U_t\)</span>中的随机性来自<span
-class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
-class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
-class="math inline">\(\qquad\)</span><span
-class="math inline">\(t\)</span>时刻的动作价值函数<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
-（1）当前状态<span
-class="math inline">\(s_t\)</span>：当前状态越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
-class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
-class="math inline">\(\pi\)</span>：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
-<strong>最优动作价值函数</strong>： 为了排除策略<span
-class="math inline">\(\pi\)</span>的影响，可以使： <span
-class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
-Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
-即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
-class="math inline">\(\pi\)</span>的影响，<span
-class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
-<strong>状态价值函数</strong>: <span
-class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
-\cdot Q_\pi(s_t,a)\]</span>
-状态价值函数可以理解为在动作价值函数的基础上，动作<span
-class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
-class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
-class="math inline">\(\pi\)</span>和状态<span
-class="math inline">\(s_t\)</span>的好坏</p>
-<p><strong>两者比较</strong>： <span class="math display">\[
-Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
-\]</span></p>
-<p><span class="math display">\[
-V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
-\]</span></p>
-<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
-<p>无模型方法：价值学习、策略学习</p>
-<p>基于模型的方法：AlphaGo</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>人工智能、强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第一章、机器学习基础</title>
-    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
-<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
-Regression）</h4>
-<p>线性回归简单理解即”拟合一条曲线“，可通过<span
-class="math inline">\(x\)</span>的值预测<span
-class="math inline">\(y\)</span>值 <span class="math display">\[
-\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
-\]</span></p>
-<ul>
-<li><p>训练集：用于优化模型参数</p></li>
-<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
-<li><p>测试集：用于评估模型性能</p>
-<p><strong>线性回归从零开始实现</strong>，<a
-href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
-Regression)</h4>
-<p>逻辑斯蒂回归=线性回归+<span
-class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
-class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
-class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
-class="math display">\[
-f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
-\]</span></p>
-<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
-交叉熵损失函数(Cross Entropy Loss Function)</h4>
-<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
-class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
-class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
-<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
-<span class="math display">\[
-KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
-\]</span> 其中交叉熵<span
-class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
-<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
-lnp_j\)</span></p>
-<p>当概率分布<span
-class="math inline">\(p\)</span>固定时，也就是说我们要让<span
-class="math inline">\(q\)</span>尽量接近<span
-class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
-<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
-<p>softmax分类=线性函数+softmax激活函数</p>
-<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
-<span class="math display">\[
-\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
-R^{d\times1})+b\in R^{k\times1}
-\]</span> 其中<span
-class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
-<p>通常情况下，需要对矩阵<span
-class="math inline">\(W\)</span>和向量<span
-class="math inline">\(b\)</span>做规范化，使得<span
-class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
-class="math inline">\(w_j\)</span>为矩阵<span
-class="math inline">\(W\)</span>的第<span
-class="math inline">\(j\)</span>行，即矩阵<span
-class="math inline">\(W\)</span>的每列和为0，向量<span
-class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
-<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
-<ul>
-<li><p><span class="math inline">\(min\_max\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p><span class="math inline">\(z\_score\)</span>: <span
-class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
-<li><p>正数归一化： <span
-class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
-<li><p>中心化： <span
-class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
-</ul>
-<h3 id="神经网络简介">1.2 神经网络简介</h3>
-<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
-<p><span class="math display">\[
-{x}’=\sigma(z)=\sigma(Wx+b)
-\]</span></p>
-<p>即线性函数+激活函数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
-<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
-<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
-<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
-descent）</h3>
-<ul>
-<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
-<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
-<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
-<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
-<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
-<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
-</ul>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>机器学习、强化学习、人工智能</tag>
       </tags>
   </entry>
   <entry>
@@ -2140,6 +1160,1031 @@ class="math inline">\(\pi(A_t|S_t)\)</span>等于1.</p>
       </tags>
   </entry>
   <entry>
+    <title>《RL-Introduction》-chap7</title>
+    <url>/2024/05/14/%E3%80%8ARL-Introduction%E3%80%8B-chap7/</url>
+    <content><![CDATA[<hr />
+<hr />
+<hr />
+<h3 id="chap7-n步自举法">chap7 n步自举法</h3>
+<p><span class="math inline">\(V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma
+V(S_{t+1})-V(S_t)]\)</span></p>
+<ul>
+<li>n步自举解决了单步时序差分方法的不灵活问题，即<span
+class="math inline">\(V(S_{t+1})\)</span>变化不明显导致<span
+class="math inline">\(V(S_t)\)</span>更新缓慢的问题；</li>
+<li>n步时序差分方法是蒙特卡洛方法和单步时序差分算法的折中；</li>
+</ul>
+<h4 id="n步时序差分预测">7.1 n步时序差分预测</h4>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515104403769.png"  alt="image-20240515104403769" style="zoom: 50%;" /></p>
+<ul>
+<li><p>蒙特卡洛方法的更新目标为完整回报： <span class="math display">\[
+G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...+\gamma ^{T-t-1}R_T
+\]</span></p></li>
+<li><p>单步TD方法的更新目标为单步回报： <span class="math display">\[
+G_{t:t+1}=R_{t+1}+\gamma V_t(S_{t+1})
+\]</span> <span
+class="math inline">\(V_t(S_{t+1})\)</span>下标表示t时刻对状态<span
+class="math inline">\(S_{t+1}\)</span>的价值的估计值，这是因为状态价值可能一直在更新，而我们计算时应该使用最新的估计值</p></li>
+<li><p>n步TD方法的更新目标为n步回报： <span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+V_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
+class="math inline">\(G_{t:t+n}=G_t\)</span></p></li>
+<li><p><strong>n步时序差分算法更新公式</strong>为：</p>
+<p>对于<span class="math inline">\(S_t\)</span>:</p></li>
+</ul>
+<p><span class="math display">\[
+V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha [G_{t:t+n}-V_{t+n-1}(S_t)],0\le
+t&lt;T
+\]</span></p>
+<p>​ 对于任意其他状态：<span
+class="math inline">\(V_{t+n}(S)=V_{t+n-1}(S)\)</span></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515120741239.png"  alt="image-20240515120741239" style="zoom:50%;" /></p>
+<p>n步时序差分算法收敛的数学基础：<strong>误差减少性质</strong></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515125036138.png"  alt="image-20240515125036138" style="zoom:50%;" /></p>
+<h4 id="n步sarsa">7.2 n步Sarsa</h4>
+<p>n步Sarsa的更新目标为 <span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+Q_{t+n-1}(S_{t+n},A_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span> 若<span class="math inline">\(t+n\ge T\)</span>,则<span
+class="math inline">\(G_{t:t+n}=G_t\)</span></p>
+<p>则n步Sarsa的更新公式为：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515161052573.png"  alt="image-20240515161052573" style="zoom:50%;" /></p>
+<p>对于任意其他状态-动作二元组：<span
+class="math inline">\(Q_{t+n}(s,a)=Q_{t+n-1}(s,a)\)</span></p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515165316919.png"  alt="image-20240515165316919" style="zoom:50%;" /></p>
+<h4 id="期望sarsa">7.2.’ 期望Sarsa</h4>
+<p><span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span></p>
+<p>其中<span
+class="math inline">\(\bar{V}_{t}(s)=\sum_{a}\pi(a|s)Q_t(s,a)\)</span></p>
+<p>除此之外，其他均与n步Sarsa相同。</p>
+<h4 id="n步离轨策略学习">7.3 n步离轨策略学习</h4>
+<ul>
+<li>在n步时序差分时使用重要度采样率<span
+class="math inline">\(\rho_{t:t+n-1}\)</span>对价值更新进行加权： <span
+class="math display">\[
+V_{t+n}(S_t)=V_{t+n-1}(S_t)+\alpha
+\rho_{t:t+n-1}[G_{t:t+n}-V_{t+n-1}(S_t)],0\le t&lt;T
+\]</span></li>
+</ul>
+<p>其中重要度采样率：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515203231212.png"  alt="image-20240515203231212" style="zoom:50%;" /></p>
+<ul>
+<li>在n步Sarsa时使用重要度采样率<span
+class="math inline">\(\rho_{t+1:t+n}\)</span>对价值更新进行加权：</li>
+</ul>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515205021292.png"  alt="image-20240515205021292" style="zoom:50%;" /></p>
+<ul>
+<li><p>在n步期望Sarsa时使用重要度采样率<span
+class="math inline">\(\rho_{t+1:t+n-1}\)</span>对价值更新进行加权：
+<span class="math display">\[
+G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
+\bar{V}_{t+n-1}(S_{t+n}),n\ge1,0\le t&lt;T-n
+\]</span></p>
+<p><span class="math display">\[
+Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
+\rho_{t+1:t+n-1}[G_{t:t+n}-Q_{t+n-1}(S_t,A_t)]
+\]</span></p></li>
+</ul>
+<p><strong>离轨策略下的n步Sarsa算法</strong>：</p>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515210348794.png"  alt="image-20240515210348794" style="zoom:50%;" /></p>
+<h4 id="带控制变量的每次决策型方法">7.4 带控制变量的每次决策型方法</h4>
+<h4 id="不需要使用重要度采样的离轨策略学习方法n步树回溯算法">7.5
+不需要使用重要度采样的离轨策略学习方法：n步树回溯算法</h4>
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213756088.png"  alt="image-20240515213756088" style="zoom:50%;" /></p>
+<hr />
+<p><img src="/2024/05/14/《RL-Introduction》-chap7/image-20240515213850184.png"  alt="image-20240515213850184" style="zoom:50%;" /></p>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《RL-Introduction》-chap8</title>
+    <url>/2024/05/16/%E3%80%8ARL-Introduction%E3%80%8B-chap8/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap8-基于表格型方法的规划和学习">chap8
+基于表格型方法的规划和学习</h3>
+<ul>
+<li>基于模型的强化学习方法将规划作为其主要组成部分</li>
+<li>无模型的强化学习方法主要依赖于学习</li>
+</ul>
+<h4 id="模型和规划">8.1 模型和规划</h4>
+<ul>
+<li><p><strong>模型</strong>：智能体用来预测环境对其动作的反应的任何事物，给定一个状态和动作，作为环境的反应结果，模型就会产生后继状态和下一个收益的预测。其中可分为<strong>分布模型</strong>：模型生成对所有可能结果的描述及其对应的概率分布；<strong>样本模型</strong>：模型通过概率分布采样从所有的可能性中生成一个确定的结果。</p></li>
+<li><p>分布模型可以用来生成样本模型，分布模型获取困难，样本模型获取简单。</p></li>
+<li><p><strong>规划</strong>：任何以环境模型为输入，并生成或改进与它进行交互的策略的计算过程。</p>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516095022376.png"  alt="image-20240516095022376" style="zoom:50%;" /></p></li>
+<li><p>随机采样单步表格型Q规划：</p>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p></li>
+</ul>
+<h4 id="dyna集成在一起的规划动作和学习">8.2
+Dyna：集成在一起的规划、动作和学习</h4>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516110343794.png"  alt="image-20240516110343794" style="zoom:50%;" /></p>
+<h4 id="模型错误纠正">8.3 模型错误纠正</h4>
+<h4 id="优先遍历">8.4 优先遍历</h4>
+<h4 id="期望更新与采样更新的对比">8.5 期望更新与采样更新的对比</h4>
+<p>不同类型的价值函数：</p>
+<ul>
+<li>状态价值还是动作价值</li>
+<li>对应最优策略还是任意给定策略</li>
+<li>采用期望更新还是采样更新</li>
+</ul>
+<h4 id="轨迹采样">8.6 轨迹采样</h4>
+<h4 id="实时动态规划">8.7 实时动态规划</h4>
+<h4 id="决策时规划">8.8 决策时规划</h4>
+<h4 id="启发式搜索">8.9 启发式搜索</h4>
+<h4 id="预演算法">8.10 预演算法</h4>
+<h4 id="mtcs蒙特卡洛树搜索">8.11 MTCS蒙特卡洛树搜索</h4>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《RL:Introduction》-chap6</title>
+    <url>/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap6-时序差分学习">chap6 时序差分学习</h3>
+<ul>
+<li><strong>预测问题（策略评估问题）</strong>：如何对于一个给定的策略<span
+class="math inline">\(\pi\)</span>估计它的价值函数<span
+class="math inline">\(v_\pi\)</span>;</li>
+<li><strong>控制问题</strong>：找到最优的策略；</li>
+</ul>
+<h4 id="时序差分预测">6.1 时序差分预测</h4>
+<p>蒙特卡洛方法以时刻t观测到的真实的回报<span
+class="math inline">\(G_t\)</span>为目标去更新<span
+class="math inline">\(V(S_t)\)</span>: <span class="math display">\[
+V(S_t)\gets V(S_t)+\alpha [G_t-V(S_t)]
+\]</span> TD方法以<span class="math inline">\(R_{t+1}+\gamma
+V(S_{t+1})\)</span>为目标去更新<span
+class="math inline">\(V(S_{t})\)</span>： <span class="math display">\[
+V(S_t)\gets V(S_t)+\alpha [R_{t+1}+\gamma V(S_{t+1})-V(S_t)]
+\]</span> 这种方法被称为<span
+class="math inline">\(TD(0)\)</span>或单步<span
+class="math inline">\(TD\)</span>;TD方法结合了蒙特卡洛方法和DP方法的优势。</p>
+<ul>
+<li><p>TD(0)算法的全流程与回溯图：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222000317.png"  alt="image-20240511222000317" style="zoom: 50%;" /></p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222939256.png"  alt="image-20240511222939256" style="zoom:50%;" /></p></li>
+</ul>
+<p>其中TD目标<span class="math inline">\(R_{t+1}+\gamma
+V(S_{t+1})\)</span>和现状<span
+class="math inline">\(V(S_t)\)</span>之间的差异被称为TD误差：即<span
+class="math inline">\(\delta_t=R_{t+1}+\gamma
+V(S_{t+1})-V(S_t)\)</span></p>
+<ul>
+<li><p>若价值函数数组<span
+class="math inline">\(V\)</span>在一幕内没有改变，则蒙特卡洛误差可写成TD误差之和：即<span
+class="math inline">\(G_t-V(S_t)=\sum\limits_{k=t}^{T-1}\gamma^{k-t}\delta_k\)</span></p></li>
+<li><p>蒙特卡洛方法需要得到<span
+class="math inline">\(G_t\)</span>再更新，即需要知道最终结果；而TD方法只需要一步即可进行更新；</p></li>
+<li><p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222343007.png"  alt="image-20240511222343007" style="zoom:50%;" /></p></li>
+<li><p>上式中的123行，分别是MC、DP、TD(0)算法更新的目标。</p></li>
+</ul>
+<h4 id="时序差分预测方法的优势">6.2 时序差分预测方法的优势</h4>
+<ul>
+<li>TD方法不需要描述收益和下一个状态的联合概率分布的环境模型，即不需要知道<span
+class="math inline">\(p(s&#39;,r|s,a)\)</span>；</li>
+<li>TD方法下一时刻即可更新，收敛速度快；</li>
+<li>在实践中，TD方法在随机任务上通常比常量<span
+class="math inline">\(\alpha\)</span>MC方法收敛得更快；</li>
+</ul>
+<h4 id="td0的最优性">6.3 TD(0)的最优性</h4>
+<ul>
+<li>在批量训练下，常数<span class="math inline">\(\alpha
+MC\)</span>的收敛值<span
+class="math inline">\(V(s)\)</span>是经过状态<span
+class="math inline">\(s\)</span>后得到的实际回报的样本均值，它们最小化了与训练集中实际回报的均方根误差；</li>
+<li>TD方法的最优性与预测回报任务更为相关，TD方法在未来的数据上会比MC产生更小的误差；</li>
+<li>批量蒙特卡洛方法总是找出最小化训练集上均方误差的估计，批量TD(0)方法总是找出完全符合马尔可夫过程模型的最大似然估计参数。</li>
+<li>对于状态空间巨大的任务，TD方法可能是唯一可行的逼近确定性等价解的方法。</li>
+</ul>
+<h4 id="sarsa同轨策略下的时序差分控制on-policy-td">6.4
+Sarsa：同轨策略下的时序差分控制(on-policy TD)</h4>
+<p>通过五元组数据<span
+class="math inline">\((S_t,A_t,R_{t+1},S_{t+1},A_{t+1})\)</span>对动作价值函数进行更新：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240514142046731.png"  alt="image-20240514142046731" style="zoom:50%;" />
+<span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+Q(S_{t+1},A_{t+1})-Q(S_t,A_t)]
+\]</span> 每当从非终止状态<span
+class="math inline">\(S_t\)</span>出现一次转移之后，就进行上式的一次更新。特别地，如果<span
+class="math inline">\(S_{t+1}\)</span>是终止状态，则<span
+class="math inline">\(Q(S_{t+1},A_{t+1})=0\)</span>;</p>
+<p><strong>Sarsa算法的流程如图所示：</strong></p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504203035657.png"  alt="image-20240504203035657" style="zoom: 33%;" /></p>
+<p>只要所有“状态-动作”二元组都能被无限次访问到，并且贪心策略在极限情况下能够收敛（例如：贪心策略中的<span
+class="math inline">\(\varepsilon=\frac{1}{t}\)</span>),则经过上述Sarsa算法，都能够收敛到最优的策略和动作价值函数。</p>
+<h4 id="q-learning-离轨策略下的时序差分控制off-policy-td">6.5
+Q-learning: 离轨策略下的时序差分控制(off-policy TD)</h4>
+<p>Q学习的更新公式为： <span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma\ \underset{a}{max}\
+Q(S_{t+1},a)-Q(S_t,A_t)]
+\]</span> <span
+class="math inline">\(Q\)</span>值最终会收敛到最优动作价值函数<span
+class="math inline">\(q_*\)</span>；</p>
+<p><strong>Q学习算法的流程如图所示：</strong></p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504211634752.png"  alt="image-20240504211634752" style="zoom: 33%;" /></p>
+<p>Q学习的回溯图：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504213502124.png"  alt="image-20240504213502124" style="zoom:33%;" /></p>
+<h4 id="期望sarsa">6.6 期望Sarsa</h4>
+<h4 id="期望sarsa算法更新规则为">期望Sarsa算法更新规则为：</h4>
+<p><span class="math display">\[
+Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+E[Q(S_{t+1},A_{t+1})|S_{t+1}]-Q(S_t,A_t)]
+\]</span></p>
+<p><span class="math display">\[
+\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
+\sum\limits_{a}^{}\pi(a|S_{t+1})Q(S_{t+1},a)-Q(S_t,A_t)]
+\]</span></p>
+<p>期望Sarsa的回溯图：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504215509521.png"  alt="image-20240504215509521" style="zoom:33%;" /></p>
+<p>在相同数量的经验下，期望Sarsa的表现更佳；</p>
+<h4 id="最大化偏差与双学习">6.7 最大化偏差与双学习</h4>
+<p><span class="math inline">\(\underset{a}{max}\
+Q(S_{t+1},a)\)</span>这样一个表达式实质上包含两个操作：（1）确定价值最大的动作<span
+class="math inline">\(a^*=\underset{a}{argmax}\
+Q\)</span>;(2)估计价值<span class="math inline">\(Q(a^*)\)</span></p>
+<p>若确定价值最大的动作和估计它的价值这两个流程采用相同的样本（多幕序列），则会产生最大化偏差问题，双Q学习则将样本划分为两个集合，并用它们学习两个独立的对真实价值<span
+class="math inline">\(q(a),\forall a\in A\)</span>的估计<span
+class="math inline">\(Q_1(a)\)</span>和<span
+class="math inline">\(Q_2(a)\)</span>,并使用两者分别承担选择和估计的任务，即</p>
+<p><span class="math inline">\(Q_2(A^*)=Q_2(argmax_a\
+Q_1(a))\)</span>或<span class="math inline">\(Q_1(A^*)=Q_1(argmax_a\
+Q_2(a))\)</span></p>
+<p>将双学习应用于Q学习得到双Q学习的更新公式： <span
+class="math display">\[
+Q_1(S_t,A_t)\gets Q_1(S_t,A_t)+\alpha [R_{t+1}+\gamma
+Q_2(S_{t+1},argmax_a Q_1(S_{t+1},a))-Q_1(S_t,A_t)]
+\]</span> 双Q学习的完整算法流程：</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240505114803514.png"  alt="image-20240505114803514" style="zoom: 33%;" /></p>
+<h4 id="游戏后位状态和其他特殊例子">6.8
+游戏、后位状态和其他特殊例子</h4>
+<ul>
+<li><p>后位状态：例如：智能体下完一步棋之后的棋盘局面</p></li>
+<li><p>后位状态价值函数：后位状态的价值函数，例如评估下完一步棋之后的棋盘局面的好坏</p>
+<p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240514164923297.png"  alt="image-20240514164923297" style="zoom:50%;" /></p></li>
+</ul>
+<p>图中的状态-动作二元组最终产生了相同的局面，他们的价值函数理应相同。</p>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>RL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能数学基础chap7-函数逼近</title>
+    <url>/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/</url>
+    <content><![CDATA[<h3 id="chap7-函数逼近">chap7 函数逼近</h3>
+<h4 id="函数插值">7.1 函数插值</h4>
+]]></content>
+      <categories>
+        <category>人工智能数学基础</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《RL:Introduction》-chap9</title>
+    <url>/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap9-基于函数逼近的同轨策略预测">chap9
+基于函数逼近的同轨策略预测</h3>
+<p>从此章开始，学习通过使用有限的计算资源求解一个比较好的近似解。为提高模型的泛化能力，经常使用函数逼近方法，它从一个预期的函数中获取实例，并试图对它们进行泛化来逼近整个函数。本章使用同轨策略数据来估计状态价值函数，即通过一个已知的策略<span
+class="math inline">\(\pi\)</span>生成的经验对价值函数<span
+class="math inline">\(v_\pi\)</span>进行近似，记作一个具有权值向量<span
+class="math inline">\(w\in
+R^d,d\ll|\mathcal{S}|\)</span>的参数化函数，即<span
+class="math inline">\(\hat{v}(s,w)\to v_\pi(s)\)</span></p>
+<h4 id="价值函数逼近">9.1 价值函数逼近</h4>
+<p>价值函数的更新可表示为<span class="math inline">\(s\to
+u\)</span>,其中<span
+class="math inline">\(s\)</span>表示更新的状态，<span
+class="math inline">\(u\)</span>表示<span
+class="math inline">\(s\)</span>的估计价值朝向的更新目标。蒙特卡洛方法、TD(0)、n步TD方法中的更新都只是朝着<span
+class="math inline">\(u\)</span>的方向进行了一定比例的移动，而其他状态的估计价值保持不变。而在动态规划中，由于知道模型<span
+class="math inline">\(p(s&#39;,r|s,a)\)</span>，故DP中的任意一个状态<span
+class="math inline">\(s\)</span>都会被更新。而<strong>函数逼近</strong>则把每次更新使用的<span
+class="math inline">\(s\to
+u\)</span>作为使用函数逼近进行价值函数预测的训练样本，更新<span
+class="math inline">\(w\)</span>以使状态<span
+class="math inline">\(s\)</span>的估计价值更接近更新目标<span
+class="math inline">\(u\)</span>,由于所有状态共享相同的<span
+class="math inline">\(w\)</span>，故每次更新都会影响其他状态的价值估计。</p>
+<p>适用于强化学习的函数逼近方法需要的特点：</p>
+<ul>
+<li><p>（1）能够在线学习（即训练集动态变化），即算法要能够从逐步获得的数据中有效地学习。</p></li>
+<li><p>（2）能够处理非平稳目标函数（即随着时间变化的目标函数）</p></li>
+</ul>
+<h4 id="预测目标overlineve">9.2 预测目标(<span
+class="math inline">\(\overline{VE}\)</span>)</h4>
+<p>目标函数，即均方价值误差，记作<span
+class="math inline">\(\overline{VE}\)</span> <span
+class="math display">\[
+\overline{VE}(w)=\sum\limits_{s\in\mathcal{S}}\mu(s)[v_\pi(s)-\hat{v}(s,w)]^2
+\]</span> 其中<span
+class="math inline">\(\sum\limits_{s}\mu(s)=1\)</span>表示我们对于每个状态<span
+class="math inline">\(s\)</span>的误差的重视程度，这个分布在同轨策略训练中称为同轨策略分布。同轨策略分布（on-policy
+distribution）是在强化学习中的一个重要概念，它描述了一个强化学习智能体在执行其当前策略时，遇到不同状态的概率分布。这种分布是根据智能体遵循的策略和环境的动态特性所决定的。简单来说，同轨策略分布反映了在特定策略下，智能体在长时间内可能处于某个状态的频率或概率。</p>
+<p><strong>总结总框架</strong>：使用<u>价值函数的更新</u>来生成<u>函数逼近方法（有监督学习）</u>的训练数据。</p>
+<h4 id="随机梯度和半梯度方法">9.3 随机梯度和半梯度方法</h4>
+<ul>
+<li>函数逼近方法一：<strong>随机梯度下降</strong></li>
+</ul>
+<p>随机梯度下降（SGD,stochastic gradient descent）：对于每一个样本<span
+class="math inline">\(S_t\)</span>，将权值向量<span
+class="math inline">\(w\)</span>朝着能够减小这个样本误差的方向移动一点：</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521213938421.png"  alt="image-20240521213938421" style="zoom:50%;" /></p>
+<p>其中<span
+class="math inline">\(\alpha\)</span>表示一个正的步长参数，“随机”指的是更新时只依赖于随机抽取的一个样本。如果<span
+class="math inline">\(\alpha\)</span>以满足标准随机近似条件的方式减小，那么SGD方法能够保证收敛到局部最优解。事实上，如果<span
+class="math inline">\(U_t\)</span>为<span
+class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，即满足对任意的状态，有<span
+class="math inline">\(E[U_t|S_t=s]=v_\pi(S_t)\)</span></p>
+<p>也可用下式对状态价值函数进行更新：</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521220729364.png"  alt="image-20240521220729364" style="zoom:50%;" /></p>
+<p>在<span
+class="math inline">\(\alpha\)</span>以满足标准随即近似条件减小时，<span
+class="math inline">\(w_t\)</span>也一定会收敛到一个局部最优解。</p>
+<p>比如蒙特卡洛目标<span class="math inline">\(U_t=G_t\)</span>就是<span
+class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，<u>蒙特卡洛状态价值函数预测的梯度下降版本如下：</u></p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222013856.png"  alt="image-20240521222013856" style="zoom:50%;" /></p>
+<p>由于目标为<span
+class="math inline">\(G_t\)</span>,故需要在生成一总幕数据后，再对<span
+class="math inline">\(w\)</span>进行更新。</p>
+<ul>
+<li>函数逼近方法二：<strong>半梯度下降</strong></li>
+</ul>
+<p>将目标替换为<span class="math inline">\(U_t=R_{t+1}+\gamma
+\hat{v}(S_{t+1},w)\)</span>,即可得到半梯度方法TD(0)</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222947800.png"  alt="image-20240521222947800" style="zoom:50%;" /></p>
+<p>由于目标为<span class="math inline">\(R+\gamma
+\hat{v}(S&#39;,w)\)</span>,故可在轨迹生成的每一步中进行<span
+class="math inline">\(w\)</span>的更新，另外，尽管<span
+class="math inline">\(R+\gamma \hat{v}(S&#39;,w)\)</span>是权重向量<span
+class="math inline">\(w\)</span>的函数，但在计算其梯度时，将其视为常数，故而被称为半梯度方法。</p>
+<ul>
+<li>半梯度方法的<strong>优势</strong>：</li>
+</ul>
+<ol type="1">
+<li>学习速度快</li>
+<li>支持持续地或在线地学习，不需要等待一幕的结束</li>
+</ol>
+<h4 id="线性方法">9.4 线性方法</h4>
+<p>状态<span class="math inline">\(s\)</span>的特征向量：<span
+class="math inline">\(x(s)=(x_1(s),x_2(s),...,x_d(s))^T\)</span></p>
+<p>则线性近似的状态价值函数可以写作<span
+class="math inline">\(w\)</span>和<span
+class="math inline">\(x(s)\)</span>的内积： <span
+class="math display">\[
+\hat{v}(s,w)=w^Tx(s)=\sum\limits_{i=1}^{d}w_ix_i(s)
+\]</span> 则SGD的更新式可以更新为：<span
+class="math inline">\(w_{t+1}=w_t+\alpha
+[U_t-\hat{v}(S_t,w_t)]x(S_t)\)</span></p>
+<p>其中每个<span class="math inline">\(x_i(s)\)</span>都是状态<span
+class="math inline">\(s\)</span>的特征函数，被称为基函数，它们构成了可能的近似函数集合的线性基。</p>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240530160135215.png"  alt="image-20240530160135215" style="zoom:50%;" /></p>
+<h4 id="线性方法的特征构造">9.5 线性方法的特征构造</h4>
+<ul>
+<li>线性方法的优点：收敛性保证、数据和计算方面的高效性；</li>
+<li>如何选取用来表达状态的特征至关重要，选择适合于任务的特征是将先验知识加入强化学习系统的重要方式；</li>
+<li>线性方法的局限性：无法表示特征之间的相互作用；</li>
+</ul>
+<h5 id="多项式基">9.5.1 多项式基</h5>
+<p>假设每一个状态<span
+class="math inline">\(s\)</span>对应的(用于描述状态特征的)<span
+class="math inline">\(k\)</span>个数字分量<span
+class="math inline">\(s_1,s_2,...,s_k，s_i\in
+R,i=1,2,...k\)</span>。对这个<span
+class="math inline">\(k\)</span>维的状态空间，每一个<span
+class="math inline">\(n\)</span>阶多项式基特征<span
+class="math inline">\(x_i\)</span>可以写作： <span
+class="math display">\[
+x_i(s)=\Pi_{j=1}^{k}s_{j}^{c_{i,j}},i=1,2...,(n+1)^k
+\]</span> 其中<span
+class="math inline">\(c_{i,j}\)</span>是集合{0,1,...,n}中任一，即对不同的数字分量赋予不同的指数即可得到不同的多项式基特征。</p>
+<h5 id="傅立叶基">9.5.2 傅立叶基</h5>
+<p>假设每一个状态<span class="math inline">\(s\)</span>对应一个<span
+class="math inline">\(k\)</span>维向量，<span
+class="math inline">\(s=(s_1,s_2,...,s_k)^T\)</span>,这里<span
+class="math inline">\(s_i\in[0,1]\)</span>,则<span
+class="math inline">\(n\)</span>阶傅里叶余弦基的第<span
+class="math inline">\(i\)</span>个特征可以写作：<span
+class="math inline">\(x_i(s)=cos(\pi s^Tc^i)\)</span>,这里的<span
+class="math inline">\(c^i=(c_1^i,c_2^i,...,c_k^i)\)</span>，其中的<span
+class="math inline">\(c_j^i\in{0,1,...,n},j=1,2...,k;i=1,2,...,(n+1)^k\)</span></p>
+<h5 id="粗编码">9.5.3 粗编码</h5>
+<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523160854549.png"  alt="image-20240523160854549" style="zoom:50%;" /></p>
+<h5 id="瓦片编码">9.5.4 瓦片编码</h5>
+<h5 id="径向基函数">9.5.5 径向基函数</h5>
+<p><span class="math inline">\(RBF\)</span>函数 <span
+class="math display">\[
+x_i(s)=exp(-\frac{||s-c_i||^2}{2\sigma_i^2})
+\]</span>
+<img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523165412474.png"  alt="image-20240523165412474" style="zoom:50%;" /></p>
+<h4 id="手动选择步长参数">9.6 手动选择步长参数</h4>
+<p>设置线性SGD步长参数的粗略经验法则： <span class="math display">\[
+\alpha=(\tau E[x^Tx])^{-1}
+\]</span> 其中<span
+class="math inline">\(\tau\)</span>为状态的经验数量，<span
+class="math inline">\(x\)</span>为从SGD的输入向量的分布中选取的一个随机特征向量。</p>
+<h4 id="非线性函数逼近人工神经网络">9.7
+非线性函数逼近：人工神经网络</h4>
+<h4 id="最小二乘时序差分">9.8 最小二乘时序差分</h4>
+<h4 id="基于记忆的函数逼近">9.9 基于记忆的函数逼近</h4>
+<h4 id="基于核函数的函数逼近">9.10 基于核函数的函数逼近</h4>
+<h4 id="同轨策略学习兴趣与强调">9.11 同轨策略学习：“兴趣”与强调</h4>
+<h4 id="本章小结">9 本章小结</h4>
+]]></content>
+      <categories>
+        <category>RLintroduction</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数学基础之1人工智能与数学</title>
+    <url>/2024/05/30/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E4%B9%8B1%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B8%8E%E6%95%B0%E5%AD%A6/</url>
+    <content><![CDATA[<hr />
+<h3 id="概述">1 概述</h3>
+<h4 id="微积分">1.1 微积分</h4>
+<ul>
+<li>泰勒级数 <span class="math display">\[
+f(x)=f(x_0)+\frac{f&#39;(x_0)}{1!}(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+R_n(x)
+\]</span></li>
+</ul>
+<p>泰勒级数体现了用多项式逼近函数的思想</p>
+<ul>
+<li>傅里叶级数 <span class="math display">\[
+f(t)=a_0+\sum\limits_{n=1}^{\infty}[a_ncos(nw_0t)+b_nsin(nw_0t)]
+\]</span></li>
+</ul>
+<p>它可以反映函数的频率特性，每阶的三角函数系数可以看成该阶频率的成分量。</p>
+<h4 id="线性代数">1.2 线性代数</h4>
+<h5 id="向量矩阵和张量">1.2.1 向量、矩阵和张量</h5>
+<ul>
+<li>标量：零维数组</li>
+<li>向量：一维数组，如<span
+class="math inline">\(a=(x,y,z)\)</span></li>
+<li>矩阵：二维数组，如灰度图像数据</li>
+<li>张量：三维及以上数组，如RGB图像数据为三维数组</li>
+</ul>
+<h5 id="范数和内积">1.2.2 范数和内积</h5>
+<ul>
+<li><p>范数：对单个向量的度量，描述的是向量自身的性质，其作用是将向量映射为一个非负的数值</p>
+<p>通用的<span class="math inline">\(L_p\)</span>范数定义：<span
+class="math inline">\(||x||_p=(\sum\limits_{i}|x_i|^p)^{\frac{1}{p}}\)</span></p></li>
+<li><p>内积：表示两个向量之间的相关度，内积为0表示两个向量正交即互相垂直</p>
+<p><span class="math inline">\(\left \langle x,y \right \rangle
+=\sum\limits_{i}^{}x_iy_i=|x|\cdot |y|\cdot cos\theta\)</span></p></li>
+</ul>
+<p>其中<span class="math inline">\(\theta\)</span>为向量<span
+class="math inline">\(x,y\)</span>共起点之后的夹角；</p>
+<h5 id="线性变换">1.2.3 线性变换</h5>
+<p><span class="math display">\[
+Ax=y
+\]</span></p>
+<p>有两种理解方式：</p>
+<ul>
+<li>1.向量<span class="math inline">\(x\)</span>经过矩阵<span
+class="math inline">\(A\)</span>所描述的线性变换后变成了向量<span
+class="math inline">\(y\)</span></li>
+<li>2.一个对象在矩阵<span
+class="math inline">\(A\)</span>的列向量作基向量的坐标系下得到的坐标为<span
+class="math inline">\(x\)</span>，在标准坐标系<span
+class="math inline">\(I\)</span>下得到的坐标为<span
+class="math inline">\(y\)</span></li>
+</ul>
+<p>另外，若矩阵<span
+class="math inline">\(A\)</span>不可逆，则可两边同时左乘<span
+class="math inline">\(A^T\)</span>，构造伪逆，得到正则方程： <span
+class="math display">\[
+x=(A^TA)^{-1}A^Ty
+\]</span></p>
+<h5 id="特征值和特征向量">1.2.4 特征值和特征向量</h5>
+<p><span class="math display">\[
+Ax=\lambda x
+\]</span></p>
+<p>其中向量<span class="math inline">\(x\)</span>为特征向量，<span
+class="math inline">\(\lambda\)</span>为特征值，本质为向量<span
+class="math inline">\(x\)</span>经过矩阵<span
+class="math inline">\(A\)</span>的线性变换后与原来共线，特征值<span
+class="math inline">\(\lambda\)</span>表示尺度缩放系数。</p>
+<h5 id="奇异值分解svdsingular-value-decomposition">1.2.5
+奇异值分解（SVD，Singular Value Decomposition)</h5>
+<p>求解给定n维方阵的特征值和特征向量的过程叫做特征值分解，若不是方阵，则需要使用更加通用的矩阵分解方法---奇异值分解方法。</p>
+<p>矩阵的奇异值分解是指，将一个非零的<span class="math inline">\(m\times
+n\)</span>实矩阵<span class="math inline">\(A,A\in R^{m\times
+n}\)</span>,表示为以下三个实矩阵乘积形式的运算，即进行矩阵的因子分解：
+<span class="math display">\[
+A=U\Sigma V^T
+\]</span> 其中<span class="math inline">\(U\)</span>是<span
+class="math inline">\(m\)</span>阶正交矩阵，<span
+class="math inline">\(V\)</span>是<span
+class="math inline">\(n\)</span>阶正交矩阵，<span
+class="math inline">\(\Sigma\)</span>是由降序排列的非负的对角线元素组成的<span
+class="math inline">\(m\times n\)</span>矩形对角矩阵，即满足： <span
+class="math display">\[
+UU^T=I,VV^T=I,\Sigma=diag(\sigma_1,\sigma_2,...,\sigma_p),\sigma_1\ge
+\sigma_2\ge ...\ge \sigma_p \ge 0,p=min(m,n)
+\]</span> <span class="math inline">\(U\Sigma V^T\)</span>称为矩阵<span
+class="math inline">\(A\)</span>的奇异值分解，<span
+class="math inline">\(\sigma_i\)</span>称为矩阵<span
+class="math inline">\(A\)</span>的奇异值，<span
+class="math inline">\(U\)</span>的列向量称为左奇异向量，<span
+class="math inline">\(V\)</span>的列向量称为右奇异向量。</p>
+<h4 id="概率论与数理统计">1.3 概率论与数理统计</h4>
+<h4 id="最优化理论">1.4 最优化理论</h4>
+<p>最优化理论研究的问题是判定给定目标函数是否存在最大值或最小值，并找到令目标函数取最大值或最小值的数值。</p>
+<h5 id="目标函数">1.4.1 目标函数</h5>
+<p>要实现最小化或最大化的函数称为目标函数，最小化：<span
+class="math inline">\(min \ f(x)\)</span>，最大化：<span
+class="math inline">\(min\ -f(x)\)</span></p>
+<h5 id="线性规划">1.4.2 线性规划</h5>
+<p>可分为无约束优化和约束优化，通过引入拉格朗日乘子，可以将含有<span
+class="math inline">\(n\)</span>个变量和<span
+class="math inline">\(k\)</span>个约束条件的约束优化问题转化为含有<span
+class="math inline">\(n+k\)</span>个变量的无约束优化问题。</p>
+<h5 id="梯度下降法">1.4.3 梯度下降法</h5>
+<p>多元函数沿其负梯度方向下降最快，一般情况下，使用梯度下降法得到的解不保证是全局最优解，但当目标函数是凸函数时，可以保证是全局最优解。另外，由于梯度下降法只用到目标函数的一阶导数，故其下降速度未必是最快的。</p>
+<h3 id="初等数学">2.初等数学</h3>
+<h4 id="函数">2.1 函数</h4>
+<h4 id="数列">2.2 数列</h4>
+<h4 id="排列组合">2.3 排列组合</h4>
+<h4 id="集合">2.4 集合</h4>
+<h3 id="高等数学">3.高等数学</h3>
+<h4 id="幂级数">3.1 幂级数</h4>
+<p><span class="math display">\[
+\sum\limits_{n=0}^{\infty}a_nx^n=a_0+a_1x+a_2x^2+...+a_nx^n+...
+\]</span></p>
+<p><span class="math display">\[
+\sum\limits_{n=0}^{\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_0)^2+...+a_n(x-x_0)^n+...
+\]</span></p>
+<ul>
+<li>幂级数的收敛半径：</li>
+</ul>
+<p><span class="math display">\[
+\rho=\lim_{n\to\infty}|\frac{a_{n+1}}{a_n}|=\lim_{n\to\infty}\sqrt[n]{|a_n|},0\le\rho\le+\infty
+\]</span></p>
+<p>(1)<span
+class="math inline">\(\rho\)</span>为非零常数，则收敛半径为<span
+class="math inline">\(R=\frac{1}{\rho}\)</span>；</p>
+<p>(2)<span class="math inline">\(\rho=0\)</span>,则收敛半径为<span
+class="math inline">\(+\infty\)</span>；</p>
+<p>(3)<span
+class="math inline">\(\rho=+\infin\)</span>,则收敛半径为<span
+class="math inline">\(R=0\)</span>；</p>
+<p>则收敛域为<span class="math inline">\((-R,+R)\ or\
+(x_0-R,x_0+R)\)</span>,至于边界处是否收敛，需要代入级数式进行常数项级数是否收敛的判断；</p>
+<ul>
+<li>泰勒级数</li>
+</ul>
+<p><span class="math display">\[
+f(x)=f(x_0)+f&#39;(x_0)(x-x_0)+\frac{f&#39;&#39;(x_0)}{2!}(x-x_0)^2+...+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+o((x-x_0)^n)
+\]</span></p>
+<h4 id="凹凸性">3.2 凹凸性</h4>
+<ul>
+<li>定义：设函数<span class="math inline">\(y=f(x)\)</span>定义在<span
+class="math inline">\([a,b]\)</span>上且连续，若对<span
+class="math inline">\([a,b]\)</span>中任意不同的两点<span
+class="math inline">\(x_1,x_2\)</span>,总有<span
+class="math inline">\(\frac{f(x_1)+f(x_2)}{2}&lt;f(\frac{x_1+x_2}{2})\)</span>,则称函数<span
+class="math inline">\(y=f(x)\)</span>在<span
+class="math inline">\((a,b)\)</span>上是凸的；否则，称函数<span
+class="math inline">\(y=f(x)\)</span>在<span
+class="math inline">\((a,b)\)</span>上是凹的；</li>
+<li>二阶导数符号判定函数的凹凸性：二阶导数<span
+class="math inline">\(f&#39;&#39;(x)&gt;0\)</span>,涨得越来越快，表现为凹；二阶导数<span
+class="math inline">\(f&#39;&#39;(x)&lt;0\)</span>,涨得越来越慢，表现为凸；</li>
+</ul>
+<h4 id="主成分分析">3.3 主成分分析</h4>
+<p>主成分分析(PCA,Principal Component
+Analysis),通过计算数据矩阵的协方差矩阵，得到协方差矩阵的特征值及其特征向量，并将特征值从大到小排序，选择前N个特征值对应的特征向量组成变换矩阵，即可将数据矩阵转换为新的空间从而实现数据特征的降维。</p>
+<p>采用PCA降维的基本步骤如下：</p>
+<ol type="1">
+<li>减去平均值以规范化</li>
+<li>计算协方差矩阵</li>
+<li>计算协方差矩阵的特征值和特征向量</li>
+<li>将特征值从大到小排序</li>
+<li>保留前N个特征值对应的特征向量</li>
+<li>将数据转换到上面得到的N个特征向量构建的新空间中</li>
+</ol>
+<h3 id="概率论">4 概率论</h3>
+<ul>
+<li>条件概率公式：</li>
+</ul>
+<p><span class="math display">\[
+P(AB)=P(BA)=P(A|B)P(B)=P(B|A)P(A)
+\]</span></p>
+<ul>
+<li>贝叶斯定理：</li>
+</ul>
+<p><span class="math display">\[
+P(A_i|B)=\frac{P(B|A_i)P(A_i)}{\sum\limits_{i=1}^{n}P(A_i)P(B|A_i)},i=1,2...n
+\]</span></p>
+]]></content>
+      <categories>
+        <category>人工智能数学基础</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>斐波那契数列算法总结</title>
+    <url>/2024/04/01/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<h3 id="斐波那契数列">斐波那契数列：</h3>
+<p><span class="math inline">\(\begin{cases}
+0, &amp; \text{  } n=0 \\
+1,&amp; \text{  } n=1,2 \\
+f(n-1)+f(n-2), &amp; \text{  } n&gt;2
+\end{cases}\)</span></p>
+<h4 id="方法一朴素递归">方法一、朴素递归</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>) + <span class="built_in">fib</span>(n<span class="number">-2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>斐波那契数列的通项公式为： <span class="math display">\[
+f(n)=\frac{1}{\sqrt{5}} \left [ (\frac{1+\sqrt[]{5} }{2} )^{n}-
+(\frac{1-\sqrt[]{5} }{2} )^{n}\right ]
+\]</span></p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240401221016279.png"  alt="image-20240401221016279" style="zoom: 55%;" /></p>
+<p>如图所示，递归计算的终点都是<span
+class="math inline">\(fib(1)\)</span>和<span
+class="math inline">\(fib(2)\)</span>，因为它们是直接返回的，因此计算<span
+class="math inline">\(fib(n)\)</span>的时间复杂度为计算<span
+class="math inline">\(fib(1)\)</span>和<span
+class="math inline">\(fib(2)\)</span>的次数，同时也等于<span
+class="math inline">\(fib(n)\)</span>本身，因此<span
+class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
+(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
+])=O((\frac{1+\sqrt[]{5} }{2}
+)^{n})\)</span>，第二项绝对值小于1，为<span
+class="math inline">\(n\)</span>阶无穷小，可舍去，空间复杂度为函数调用栈的高度<span
+class="math inline">\(n\)</span>,即<span
+class="math inline">\(S(n)=O(n)\)</span>。</p>
+<h4 id="方法二尾递归">方法二、尾递归</h4>
+<p>首先需要清楚递归和尾递归的区别：</p>
+<ul>
+<li>1.递归：在调用函数自身后还有事要做，需要保存当前轮次的环境，以供后续返回时使用；</li>
+</ul>
+<p>如计算自然数前<span class="math inline">\(n\)</span>项和的函数<span
+class="math inline">\(sum(n)\)</span>,递归实现方式如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> n + <span class="built_in">sum</span>(n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的“+",即前面所说”还要做的事“，其计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>)</span><br><span class="line"><span class="number">5</span> + <span class="built_in">sum</span>(<span class="number">4</span>)</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="built_in">sum</span>(<span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="built_in">sum</span>(<span class="number">2</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="built_in">sum</span>(<span class="number">1</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="built_in">sum</span>(<span class="number">0</span>)))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + (<span class="number">1</span> + <span class="number">0</span>))))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + (<span class="number">2</span> + <span class="number">1</span>)))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + (<span class="number">3</span> + <span class="number">3</span>))</span><br><span class="line"><span class="number">5</span> + (<span class="number">4</span> + <span class="number">6</span>)</span><br><span class="line"><span class="number">5</span> + <span class="number">10</span></span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>2.尾递归：每轮直接return，不需要保存当前环境供后续处理。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> n,<span class="type">int</span> total = <span class="number">0</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(n<span class="number">-1</span>,total+n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">sum</span>(<span class="number">5</span>, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">3</span>, <span class="number">9</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">2</span>, <span class="number">12</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">1</span>, <span class="number">14</span>)</span><br><span class="line"><span class="built_in">sum</span>(<span class="number">0</span>, <span class="number">15</span>)</span><br><span class="line"><span class="number">15</span></span><br></pre></td></tr></table></figure>
+<p>利用尾递归求斐波那契数列：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> x1,<span class="type">int</span> x2,<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">1</span> || n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x1+x2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(x2,x1+x2,n<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>计算过程如下：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fib</span>(<span class="number">6</span>)=<span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">1</span>,<span class="number">6</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">fib</span>(<span class="number">3</span>,<span class="number">5</span>,<span class="number">3</span>)</span><br><span class="line"><span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>观察变量<span
+class="math inline">\(n\)</span>的变化可知，时间复杂度<span
+class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
+class="math inline">\(x1,x2\)</span>,因此空间复杂度<span
+class="math inline">\(S(n)=O(1)\)</span>.</p>
+<h4 id="方法三非递归迭代">方法三、非递归(迭代)</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(<span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(n==<span class="number">1</span>||n==<span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> x=<span class="number">1</span>,y=<span class="number">1</span>;<span class="type">int</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>;i &lt; n<span class="number">-2</span>;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = x+y;</span><br><span class="line">            x = y;</span><br><span class="line">            y = tmp;  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>观察变量<span
+class="math inline">\(n\)</span>的变化可知，时间复杂度<span
+class="math inline">\(T(n)=O(n)\)</span>,辅助空间只需要<span
+class="math inline">\(x,y,i,tmp\)</span>,因此空间复杂度<span
+class="math inline">\(S(n)=O(1)\)</span>.</p>
+<h4 id="方法四矩阵快速幂">方法四、矩阵快速幂</h4>
+<ul>
+<li><h5 id="快速幂">快速幂：</h5>
+<p>在计算<span class="math inline">\(a^n\)</span>时，若使用<span
+class="math inline">\(a^n=a\ \cdot a \ \cdot a...a
+(n个)\)</span>方法，则时间复杂度为<span
+class="math inline">\(O(n)\)</span>;快速幂的思想是，将<span
+class="math inline">\(n\)</span>写成二进制形式</p>
+<p><span
+class="math inline">\((n_tn_{t-1}...n_1n_0)_2\)</span>,那么<span
+class="math inline">\(a^n = a^{n_t\cdot 2^t}*a^{n_{t-1}\cdot
+2^{t-1}}*...*a^{n_0\cdot 2^0}\)</span>,其中<span
+class="math inline">\(n_i\in\{0,1\}\)</span></p>
+<p>因此我们只需要将<span class="math inline">\(2^0\ 2^1....2^{\left
+\lfloor log_{2}{n} \right
+\rfloor}\)</span>算出，再将二进制位为1对应的幂运算结果相乘即可，时间复杂度为<span
+class="math inline">\(O(log n)\)</span>。</p>
+<p>比如：<img src="/2024/04/01/斐波那契数列算法总结/image-20240403132154215.png"  alt="image-20240403132154215" style="zoom:67%;" /><img src="/2024/04/01/斐波那契数列算法总结/image-20240403132250525.png"  alt="image-20240403132250525" style="zoom:67%;" /></p>
+<p>快速幂分为递归和迭代两种实现方式，两者理论时间复杂度都为<span
+class="math inline">\(O(logn)\)</span>,通常情况下，迭代性能较好。</p>
+<h5 id="递归版本">(1)递归版本</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">double</span> a,<span class="type">long</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="number">1.0</span>/<span class="built_in">quickPow</span>(a,-n));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> res = <span class="built_in">quickPow</span>(a,n/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (n%<span class="number">2</span>==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res *a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> res * res;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如：计算<span
+class="math inline">\(2^5\)</span>的调用及计算过程如下：</p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403135754758.png"  alt="image-20240403135754758" style="zoom: 25%;" /></p></li>
+</ul>
+<h5 id="迭代版本">(2)迭代版本</h5>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">quickPow</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a, <span class="type">long</span>  n)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">quickPow</span>(a,-n);</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)<span class="comment">//相当于b%2==1</span></span><br><span class="line">        &#123;</span><br><span class="line">            res = res * a;</span><br><span class="line">        &#125;</span><br><span class="line">        a = a * a;</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;<span class="comment">//右移一位相当于b=b/2;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>如计算<span class="math inline">\(2^{10}\)</span>的迭代过程如下：</p>
+<p><img src="/2024/04/01/斐波那契数列算法总结/image-20240403142939144.png"  alt="image-20240403142939144" style="zoom: 33%;" /></p>
+<ul>
+<li><h3 id="快速矩阵幂">快速矩阵幂</h3>
+<p>由斐波那契数列的递推公式可知：</p>
+<p><span
+class="math inline">\(\begin{bmatrix}f(n)\\f(n-1)\end{bmatrix}=\begin{bmatrix}1&amp;1\\1&amp;0\end{bmatrix}\begin{bmatrix}f(n-1)\\f(n-2)\end{bmatrix}=\cdot
+\cdot \cdot =\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}f(1)\\f(0)\end{bmatrix}=\cdot
+\cdot \cdot =\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\begin{bmatrix}
+1\\0\end{bmatrix}\)</span></p>
+<p>故，令<span class="math inline">\(A=\begin{bmatrix}
+1&amp;1\\1&amp;0\end{bmatrix}^{n-1}\)</span>，则<span
+class="math inline">\(f(n)=A[0][0]\)</span></p>
+<p>矩阵快速幂和快速幂的方法和思想一致，都是将先前的计算结果保存下来以供后续使用，减小计算量，只需将<span
+class="math inline">\(1\)</span>换为单位矩阵，将常熟换为矩阵<span
+class="math inline">\(A\)</span>即可.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩阵乘法函数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">multiply</span><span class="params">(<span class="type">long</span> <span class="type">long</span> a[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> b[<span class="number">2</span>][<span class="number">2</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> mul[<span class="number">2</span>][<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            mul[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++)</span><br><span class="line">                mul[i][j] += a[i][k] * b[k][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将乘法结果复制回a矩阵</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">2</span>; j++) &#123;</span><br><span class="line">            a[i][j] = mul[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 快速矩阵幂算法</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">matrixPower</span><span class="params">(<span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>], <span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> result[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">0</span>&#125;, &#123;<span class="number">0</span>, <span class="number">1</span>&#125;&#125;; <span class="comment">// 单位矩阵</span></span><br><span class="line">    <span class="keyword">while</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n &amp; <span class="number">1</span>)</span><br><span class="line">            <span class="built_in">multiply</span>(result, matrix);</span><br><span class="line">        <span class="built_in">multiply</span>(matrix, matrix);</span><br><span class="line">        n &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> result[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算斐波那契数</span></span><br><span class="line"><span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">fibonacci</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> matrix[<span class="number">2</span>][<span class="number">2</span>] = &#123;&#123;<span class="number">1</span>, <span class="number">1</span>&#125;, &#123;<span class="number">1</span>, <span class="number">0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">matrixPower</span>(matrix, n - <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    cout &lt;&lt;<span class="built_in">fibonacci</span>(<span class="number">7</span>) &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析程序知时间复杂度为<span
+class="math inline">\(O(logn)\)</span>,空间复杂度为<span
+class="math inline">\(O(1)\)</span></p>
+<h3 id="总结">总结</h3>
+<p>（1)朴素递归：<span
+class="math inline">\(T(n)=O(fib(n))=O(\frac{1}{\sqrt{5}} \left [
+(\frac{1+\sqrt[]{5} }{2} )^{n}- (\frac{1-\sqrt[]{5} }{2} )^{n}\right
+])=O((\frac{1+\sqrt[]{5} }{2} )^{n})\)</span>,<span
+class="math inline">\(S(n)=O(n)\)</span></p>
+<ol start="2" type="1">
+<li>尾递归：<span class="math inline">\(T(n)=O(n)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></li>
+</ol>
+<p>(3)非递归（迭代）：<span
+class="math inline">\(T(n)=O(n)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></p>
+<p>（4) 矩阵快速幂：<span
+class="math inline">\(T(n)=O(logn)\)</span>,<span
+class="math inline">\(S(n)=O(1)\)</span></p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程算法</category>
+      </categories>
+      <tags>
+        <tag>算法、数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第一章、机器学习基础</title>
+    <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
+<h4 id="线性回归linear-regression">1.1.1 线性回归（Linear
+Regression）</h4>
+<p>线性回归简单理解即”拟合一条曲线“，可通过<span
+class="math inline">\(x\)</span>的值预测<span
+class="math inline">\(y\)</span>值 <span class="math display">\[
+\hat{y}=f(x;\hat{w},\hat{b})=x^T\hat{w}+\hat{b}
+\]</span></p>
+<ul>
+<li><p>训练集：用于优化模型参数</p></li>
+<li><p>验证集：用于优化模型超参数，如学习率、正则化系数等；</p></li>
+<li><p>测试集：用于评估模型性能</p>
+<p><strong>线性回归从零开始实现</strong>，<a
+href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
+Regression)</h4>
+<p>逻辑斯蒂回归=线性回归+<span
+class="math inline">\(sigmoid\)</span>函数，主要用于处理二分类问题，<span
+class="math inline">\(sigmoid\)</span>函数可将任何实数映射到0和1之间，以表示属于两类中某一类别的概率，可设置阈值<span
+class="math inline">\(\delta\)</span>进行类别的最终判断。 <span
+class="math display">\[
+f(x;w,b)=sigmoid(y)=sigmoid(x^Tw+b)=\frac{1}{1+e^{-(x^Tw+b)}}
+\]</span></p>
+<h4 id="交叉熵损失函数cross-entropy-loss-function">1.1.3
+交叉熵损失函数(Cross Entropy Loss Function)</h4>
+<p><strong>KL散度</strong>，也称相对熵，用于衡量两个概率分布之间的差异，在离散情况下，使用向量<span
+class="math inline">\(p=[p_1,p_2,\cdot\cdot\cdot,p_m]^T\)</span>,<span
+class="math inline">\(q=[q_1,q_2,\cdot\cdot\cdot,q_m]^T\)</span></p>
+<p>表示两个<span class="math inline">\(m\)</span>维的离散概率分布，则
+<span class="math display">\[
+KL(p,q)=H(p,q)-H(p)=\sum_{j=1}^{m} p_j\cdot ln\frac{p_j}{q_j}
+\]</span> 其中交叉熵<span
+class="math inline">\(H(p,q)=-\sum_{j=1}^{m}p_j\cdot lnq_j\)</span>,</p>
+<p>信息熵<span class="math inline">\(H(p)=-\sum_{j=1}^{m}p_j\cdot
+lnp_j\)</span></p>
+<p>当概率分布<span
+class="math inline">\(p\)</span>固定时，也就是说我们要让<span
+class="math inline">\(q\)</span>尽量接近<span
+class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为什么交叉熵损失函数有效的原因。</p>
+<h4 id="softmax分类器">1.1.4 softmax分类器</h4>
+<p>softmax分类=线性函数+softmax激活函数</p>
+<p>其中线性函数的结果为向量，再通过softmax将这个向量映射到加和为1的概率分布；
+<span class="math display">\[
+\pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
+R^{d\times1})+b\in R^{k\times1}
+\]</span> 其中<span
+class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
+<p>通常情况下，需要对矩阵<span
+class="math inline">\(W\)</span>和向量<span
+class="math inline">\(b\)</span>做规范化，使得<span
+class="math inline">\(\sum\limits_{j=1}^{k}w_j=0,\sum\limits_{j=1}^{k}b_j=0\)</span>,<span
+class="math inline">\(w_j\)</span>为矩阵<span
+class="math inline">\(W\)</span>的第<span
+class="math inline">\(j\)</span>行，即矩阵<span
+class="math inline">\(W\)</span>的每列和为0，向量<span
+class="math inline">\(b\)</span>和为0，这可以通过全员减去平均值再除以标准差来达成。</p>
+<h5 id="常见的数据标准化方法总结">常见的数据标准化方法总结：</h5>
+<ul>
+<li><p><span class="math inline">\(min\_max\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-x_{min}}{x_{max}-x_{min}}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p><span class="math inline">\(z\_score\)</span>: <span
+class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
+<li><p>正数归一化： <span
+class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
+class="math inline">\([0,1]\)</span>;</p></li>
+<li><p>中心化： <span
+class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
+</ul>
+<h3 id="神经网络简介">1.2 神经网络简介</h3>
+<h4 id="全连接层感知机">1.2.1 全连接层（感知机）</h4>
+<p><span class="math display">\[
+{x}’=\sigma(z)=\sigma(Wx+b)
+\]</span></p>
+<p>即线性函数+激活函数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> d2l <span class="keyword">import</span> torch <span class="keyword">as</span> d2l</span><br><span class="line"></span><br><span class="line">batch_size = <span class="number">256</span></span><br><span class="line">train_iter, test_iter = d2l.load_data_fashion_mnist(batch_size)</span><br><span class="line"></span><br><span class="line">net = nn.Sequential(nn.Flatten(), nn.Linear(<span class="number">784</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">init_weights</span>(<span class="params">m</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(m) == nn.Linear:</span><br><span class="line">        nn.init.normal_(m.weight, std=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line">net.apply(init_weights);</span><br><span class="line"></span><br><span class="line">loss = nn.CrossEntropyLoss(reduction=<span class="string">&#x27;none&#x27;</span>)</span><br><span class="line"></span><br><span class="line">trainer = torch.optim.SGD(net.parameters(), lr=<span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line">num_epochs = <span class="number">10</span></span><br><span class="line">d2l.train_ch3(net, train_iter, test_iter, loss, num_epochs, trainer)</span><br><span class="line">d2l.predict_ch3(net,test_iter)</span><br></pre></td></tr></table></figure>
+<h4 id="卷积神经网络">1.2.2 卷积神经网络</h4>
+<p>卷积神经网络的输入通常是矩阵或三阶张量，CNN从中提取特征并输出提取的特征向量。</p>
+<h3 id="梯度下降gdgradient-descent">1.3 梯度下降（GD，gradient
+descent）</h3>
+<ul>
+<li>目标函数关于某个参数变量的梯度的形状一定与这个参数变量的形状相同；</li>
+<li>梯度的方向是函数上升最快的方向，因此其负方向是下降最快的方向；</li>
+<li><strong>1.梯度下降</strong>：每epoch计算所有样本的损失函数的平均再做梯度下降；（用于非凸问题存在鞍点，且计算量为SGD的n倍）</li>
+<li><strong>2.随机梯度下降</strong>：每epoch从样本集合中选取一个样本计算损失函数再做梯度下降；</li>
+<li><strong>3.小批量随机梯度下降</strong>：每epoch从样本集合中随机抽取batch_size个样本计算损失函数求平均再做梯度下降；</li>
+<li>反向传播：任何一个计算过程都可以构建其计算图，从计算图尾部用梯度下降向前传播，更新参数；</li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>机器学习、强化学习、人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第七章、策略梯度方法</title>
+    <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<h4 id="策略网络">1. 策略网络</h4>
+<p>神经网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>称为策略网络，输入状态<span
+class="math inline">\(s\)</span>,输出<span
+class="math inline">\(\mathcal{A}\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
+<h4 id="策略学习的目标函数">2.策略学习的目标函数</h4>
+<p>首先还是复习相关的基本概念：</p>
+<ul>
+<li><p>回报：<span class="math inline">\(U_t=R_t+\gamma\cdot
+R_{t+1}+...+\gamma^{n-t}\cdot R_n\)</span>,由于<span
+class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span>,故<span
+class="math inline">\(U_t\)</span>依赖于<span
+class="math inline">\(t\)</span>时刻之后的所有状态和动作：<span
+class="math inline">\(S_t,A_t,S_{t+1},A_{t+1},...,\)</span></p></li>
+<li><p>动作价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>和动作<span
+class="math inline">\(a_t\)</span>看成已知观测值，然后将<span
+class="math inline">\(U_t\)</span>对之后的状态和动作求期望： <span
+class="math display">\[
+Q_{\pi}(s_t,a_t)=E[U_t|S_t=s_t,A_t=a_t]
+\]</span></p></li>
+<li><p>状态价值函数：<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s_t\)</span>看成已知观测值，将<span
+class="math inline">\(Q_{\pi}(s_t,A_t)\)</span>对使用策略网络<span
+class="math inline">\(\pi(\cdot|s_t;\theta)\)</span>决策后的<span
+class="math inline">\(A_t\)</span>求期望： <span class="math display">\[
+V_{\pi}(s_t)=E_{A_t\sim\pi(\cdot|s_t;\theta)}[Q_{\pi}(s_t,A_t)]
+\]</span> 状态价值取决于当前状态<span
+class="math inline">\(s_t\)</span>以及策略网络参数<span
+class="math inline">\(\theta\)</span>(因为策略网络的结构已经固定)</p></li>
+</ul>
+<p>为了使得目标函数排除当前状态<span
+class="math inline">\(s_t\)</span>的影响，可对其求期望，即我们定义目标函数为：
+<span class="math display">\[
+J(\theta)=E_S(V_\pi(S))
+\]</span> 优化问题为： <span class="math display">\[
+\underset{\theta}{max}\ J(\theta)
+\]</span> 可通过梯度上升来最大化<span
+class="math inline">\(J(\theta)\)</span>,即 <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot \nabla_{\theta}J(\theta_{now})
+\]</span>
+其中的梯度部分，可以通过以下展示的<strong>策略梯度定理</strong>来计算：</p>
+<ul>
+<li>策略梯度定理：设目标函数为<span
+class="math inline">\(J(\theta)=E_{S\sim
+d(\cdot)}[V_{\pi}(S)]\)</span>,设<span
+class="math inline">\(d(s)\)</span>为马尔可夫链稳态发布的概率质量（密度）函数，那么
+<span class="math display">\[
+\frac{\partial J(\theta)}{\partial \theta}
+=(1+\gamma+\gamma^2+...+\gamma^{n-1})\cdot E_{S\sim d(\cdot)}[E_{A\sim
+\pi(\cdot|S;\theta)}[\frac{\partial\
+ln\pi(A|S;\theta)}{\partial\theta}\cdot Q_{\pi}(S,A)]]
+\]</span>
+前面的系数无关紧要，可以省略，因为做梯度下降时前面都要乘以学习率<span
+class="math inline">\(\beta\)</span>.</li>
+</ul>
+<h4 id="reinforce">3.REINFORCE</h4>
+<p>首先使用蒙特卡洛方法对策略梯度进行近似， <span
+class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi(S,A)}\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 每当要做梯度下降时，从环境中观测出一个状态<span
+class="math inline">\(s\)</span>,根据当前最新的策略网络，随机抽样得出一个动作<span
+class="math inline">\(a\sim\pi(\cdot|s;\theta)\)</span></p>
+<p>计算梯度： <span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span>
+它是第一个式子的无偏估计，但在实际应用中依然不知道式中第一项<span
+class="math inline">\(Q_\pi(s,a)\)</span>的值，要么用实际观测到的回报<span
+class="math inline">\(u_t\)</span>代替（即REINFORCE)；要么像SARSA一样使用神经网络<span
+class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算；</p>
+<p><strong>REINFORCE训练流程</strong>：</p>
+<p>（1）REINFORCE属于同策略，用策略网络<span
+class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
+<span class="math display">\[
+s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
+\]</span> (2) 计算所有回报： <span class="math display">\[
+u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
+\]</span> (3)用<span
+class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
+<span class="math display">\[
+\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
+\]</span> (4)做随机梯度上升更新策略网络参数： <span
+class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
+u_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
+\]</span></p>
+<h4 id="actor-critic">4.actor-critic</h4>
+<p><span class="math display">\[
+g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
+\]</span></p>
+<p>actor-critic方法使用神经网络近似<span
+class="math inline">\(Q_\pi(s,a)\)</span>,这个神经网络称为“价值网络”，记作<span
+class="math inline">\(q(s,a;w)\)</span>,价值网络的输入是状态，输出是<span
+class="math inline">\(\mathcal{A}\)</span>维向量，它的每个元素代表每个动作的价值。actor-critic方法中，策略网络<span
+class="math inline">\(\pi(a|s;\theta)\)</span>基于状态<span
+class="math inline">\(s\)</span>做出动作<span
+class="math inline">\(a\)</span>,相当于演员；价值网络<span
+class="math inline">\(q(s,a;w)\)</span>评价在状态<span
+class="math inline">\(s\)</span>下做出动作<span
+class="math inline">\(a\)</span>的评分。如图所示：</p>
+<p><img src="/2024/04/14/第七章、策略梯度方法/image-20240414202442043.png"  alt="image-20240414202442043" style="zoom:50%;" /></p>
+<p><strong>actor-critic的训练流程</strong>:</p>
+<p>训练价值网络的目的是让其输出更接近于动作价值函数，使用损失函数的梯度下降；而训练策略网络的目的是最大化<span
+class="math inline">\(J(\theta)\)</span>,使用目标函数的梯度上升；</p>
+<p>(1)观测到当前状态<span
+class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
+class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
+class="math inline">\(a_t\)</span></strong>;</p>
+<p>(2)从环境中观测到新的状态<span
+class="math inline">\(s_{t+1}\)</span>和奖励<span
+class="math inline">\(r_t\)</span>;</p>
+<p>(3)根据新的状态再次做决策：<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi(\cdot|s_{t+1};\theta_{now})\)</span>,<strong>但不让智能体执行动作</strong><span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>,因为算出<span
+class="math inline">\(\widetilde{a}_{t+1}\)</span>只是为了计算出训练价值网络时要用到的TD目标；</p>
+<p>(4)让价值网络打分： <span class="math display">\[
+\hat{q}_t=q(s_t,a_t;w_{now}),\hat{q}_{t+1}=q(s_{t+1},\widetilde{a}_{t+1};w_{now})
+\]</span> (5)计算TD目标和TD误差： <span class="math display">\[
+\hat{y}_t=r_t+\gamma\cdot \hat{q}_{t+1},\delta_t=\hat{q}_t-\hat{y}_t
+\]</span> (6)更新价值网络： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wq(s_t,a_t;w_{now})
+\]</span> (7)更新策略网络： <span class="math display">\[
+\theta_{new}=\theta_{now}+\beta\cdot\hat{q}_t\cdot\nabla_\theta
+ln\pi(a_t|s_t;\theta_{now})
+\]</span> 注：actor-critic的价值网络存在自举问题，对于<span
+class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第二章、蒙特卡洛方法</title>
     <url>/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<ol type="1">
@@ -2216,6 +2261,136 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
 <p>输出：tensor([17.3412])</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">```python</span><br><span class="line"> <span class="comment"># 方法2</span></span><br><span class="line"><span class="keyword">import</span> torch </span><br><span class="line">n = <span class="number">10000</span></span><br><span class="line">q=<span class="number">0</span></span><br><span class="line">t=<span class="number">1</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span>  <span class="number">2</span>*x+<span class="number">10</span>*torch.sqrt(torch.<span class="built_in">abs</span>(x))+<span class="number">3</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">    x = torch.normal(mean=<span class="number">1</span>,std=<span class="number">2</span>,size=(<span class="number">1</span>,))</span><br><span class="line">    q = (<span class="number">1</span>-<span class="number">1</span>/t)*q+<span class="number">1</span>/t * f(x)</span><br><span class="line">    t = t+<span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(q)</span><br></pre></td></tr></table></figure>
 <p>输出：tensor([17.3020])</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三章、强化学习基本概念</title>
+    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
+<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
+Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
+<strong>环境</strong>：与智能体交互的对象；</p>
+<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
+<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
+class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
+<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
+class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
+<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
+<strong>动作空间</strong>：所有可能动作的集合，记作<span
+class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
+<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
+class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
+class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
+class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
+class="math inline">\(s_t,s_{t+1}\)</span>,有<span
+class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
+<h3 id="状态转移">3.状态转移</h3>
+<p><strong>状态转移</strong>：智能体从当前<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s\)</span>转移到下一刻的状态<span
+class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
+<span
+class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
+表示发生下述事件的概率：在当前状态<span
+class="math inline">\(s\)</span>,智能体执行动作<span
+class="math inline">\(a\)</span>,下一刻环境的状态变成<span
+class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因为状态转移存在随机性。
+<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
+class="math inline">\(s&#39;\)</span>完全由<span
+class="math inline">\(s,a\)</span>决定： <span
+class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
+  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
+  &amp; \text{ 0 , otherwise }
+\end{cases}\]</span>
+<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
+<h3 id="策略">4.策略</h3>
+<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
+<strong>随机性策略</strong>：<span
+class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
+<strong>确定性策略</strong>：记作<span
+class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
+class="math inline">\(a\)</span>完全由状态<span
+class="math inline">\(s\)</span>决定:<span
+class="math inline">\(a=\mu(s)\)</span></p>
+<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
+class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
+(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
+class="math inline">\(a\)</span></p>
+<p>,环境通过状态转移函数<span
+class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
+class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
+class="math inline">\(r(s,a,s’)\)</span>。</p>
+<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
+property）</h3>
+<p>马尔可夫性，即下一时刻状态<span
+class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
+class="math inline">\(S_t\)</span>和动作<span
+class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
+class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
+<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
+class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
+<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
+<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
+class="math inline">\(n\)</span>结束，则<span
+class="math inline">\(t\)</span>时刻的回报定义为： <span
+class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
+<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
+class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
+class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
+R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
+class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
+<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
+<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
+<strong>动作价值函数</strong>： <span
+class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
+表示已经观测到了<span
+class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
+class="math inline">\(s_t\)</span>,选中动作<span
+class="math inline">\(a_t\)</span>，原来<span
+class="math inline">\(U_t\)</span>中的随机性来自<span
+class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
+class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
+class="math inline">\(\qquad\)</span><span
+class="math inline">\(t\)</span>时刻的动作价值函数<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
+（1）当前状态<span
+class="math inline">\(s_t\)</span>：当前状态越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
+class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
+class="math inline">\(\pi\)</span>：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
+<strong>最优动作价值函数</strong>： 为了排除策略<span
+class="math inline">\(\pi\)</span>的影响，可以使： <span
+class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
+Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
+即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
+class="math inline">\(\pi\)</span>的影响，<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
+<strong>状态价值函数</strong>: <span
+class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
+\cdot Q_\pi(s_t,a)\]</span>
+状态价值函数可以理解为在动作价值函数的基础上，动作<span
+class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
+class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
+class="math inline">\(\pi\)</span>和状态<span
+class="math inline">\(s_t\)</span>的好坏</p>
+<p><strong>两者比较</strong>： <span class="math display">\[
+Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
+\]</span></p>
+<p><span class="math display">\[
+V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
+\]</span></p>
+<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
+<p>无模型方法：价值学习、策略学习</p>
+<p>基于模型的方法：AlphaGo</p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
@@ -2530,165 +2705,6 @@ class="math inline">\(v(s;w^-)\)</span>近似；</p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《RL:Introduction》-chap9</title>
-    <url>/2024/05/21/%E3%80%8ARL-Introduction%E3%80%8B-chap9/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap9-基于函数逼近的同轨策略预测">chap9
-基于函数逼近的同轨策略预测</h3>
-<p>从此章开始，学习通过使用有限的计算资源求解一个比较好的近似解。为提高模型的泛化能力，经常使用函数逼近方法，它从一个预期的函数中获取实例，并试图对它们进行泛化来逼近整个函数。本章使用同轨策略数据来估计状态价值函数，即通过一个已知的策略<span
-class="math inline">\(\pi\)</span>生成的经验对价值函数<span
-class="math inline">\(v_\pi\)</span>进行近似，记作一个具有权值向量<span
-class="math inline">\(w\in
-R^d,d\ll|\mathcal{S}|\)</span>的参数化函数，即<span
-class="math inline">\(\hat{v}(s,w)\to v_\pi(s)\)</span></p>
-<h4 id="价值函数逼近">9.1 价值函数逼近</h4>
-<p>价值函数的更新可表示为<span class="math inline">\(s\to
-u\)</span>,其中<span
-class="math inline">\(s\)</span>表示更新的状态，<span
-class="math inline">\(u\)</span>表示<span
-class="math inline">\(s\)</span>的估计价值朝向的更新目标。蒙特卡洛方法、TD(0)、n步TD方法中的更新都只是朝着<span
-class="math inline">\(u\)</span>的方向进行了一定比例的移动，而其他状态的估计价值保持不变。而在动态规划中，由于知道模型<span
-class="math inline">\(p(s&#39;,r|s,a)\)</span>，故DP中的任意一个状态<span
-class="math inline">\(s\)</span>都会被更新。而<strong>函数逼近</strong>则把每次更新使用的<span
-class="math inline">\(s\to
-u\)</span>作为使用函数逼近进行价值函数预测的训练样本，更新<span
-class="math inline">\(w\)</span>以使状态<span
-class="math inline">\(s\)</span>的估计价值更接近更新目标<span
-class="math inline">\(u\)</span>,由于所有状态共享相同的<span
-class="math inline">\(w\)</span>，故每次更新都会影响其他状态的价值估计。</p>
-<p>适用于强化学习的函数逼近方法需要的特点：</p>
-<ul>
-<li><p>（1）能够在线学习（即训练集动态变化），即算法要能够从逐步获得的数据中有效地学习。</p></li>
-<li><p>（2）能够处理非平稳目标函数（即随着时间变化的目标函数）</p></li>
-</ul>
-<h4 id="预测目标overlineve">9.2 预测目标(<span
-class="math inline">\(\overline{VE}\)</span>)</h4>
-<p>目标函数，即均方价值误差，记作<span
-class="math inline">\(\overline{VE}\)</span> <span
-class="math display">\[
-\overline{VE}(w)=\sum\limits_{s\in\mathcal{S}}\mu(s)[v_\pi(s)-\hat{v}(s,w)]^2
-\]</span> 其中<span
-class="math inline">\(\sum\limits_{s}\mu(s)=1\)</span>表示我们对于每个状态<span
-class="math inline">\(s\)</span>的误差的重视程度，这个分布在同轨策略训练中称为同轨策略分布。同轨策略分布（on-policy
-distribution）是在强化学习中的一个重要概念，它描述了一个强化学习智能体在执行其当前策略时，遇到不同状态的概率分布。这种分布是根据智能体遵循的策略和环境的动态特性所决定的。简单来说，同轨策略分布反映了在特定策略下，智能体在长时间内可能处于某个状态的频率或概率。</p>
-<p><strong>总结总框架</strong>：使用<u>价值函数的更新</u>来生成<u>函数逼近方法（有监督学习）</u>的训练数据。</p>
-<h4 id="随机梯度和半梯度方法">9.3 随机梯度和半梯度方法</h4>
-<ul>
-<li>函数逼近方法一：<strong>随机梯度下降</strong></li>
-</ul>
-<p>随机梯度下降（SGD,stochastic gradient descent）：对于每一个样本<span
-class="math inline">\(S_t\)</span>，将权值向量<span
-class="math inline">\(w\)</span>朝着能够减小这个样本误差的方向移动一点：</p>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521213938421.png"  alt="image-20240521213938421" style="zoom:50%;" /></p>
-<p>其中<span
-class="math inline">\(\alpha\)</span>表示一个正的步长参数，“随机”指的是更新时只依赖于随机抽取的一个样本。如果<span
-class="math inline">\(\alpha\)</span>以满足标准随机近似条件的方式减小，那么SGD方法能够保证收敛到局部最优解。事实上，如果<span
-class="math inline">\(U_t\)</span>为<span
-class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，即满足对任意的状态，有<span
-class="math inline">\(E[U_t|S_t=s]=v_\pi(S_t)\)</span></p>
-<p>也可用下式对状态价值函数进行更新：</p>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521220729364.png"  alt="image-20240521220729364" style="zoom:50%;" /></p>
-<p>在<span
-class="math inline">\(\alpha\)</span>以满足标准随即近似条件减小时，<span
-class="math inline">\(w_t\)</span>也一定会收敛到一个局部最优解。</p>
-<p>比如蒙特卡洛目标<span class="math inline">\(U_t=G_t\)</span>就是<span
-class="math inline">\(v_\pi(S_t)\)</span>的无偏估计，<u>蒙特卡洛状态价值函数预测的梯度下降版本如下：</u></p>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222013856.png"  alt="image-20240521222013856" style="zoom:50%;" /></p>
-<p>由于目标为<span
-class="math inline">\(G_t\)</span>,故需要在生成一总幕数据后，再对<span
-class="math inline">\(w\)</span>进行更新。</p>
-<ul>
-<li>函数逼近方法二：<strong>半梯度下降</strong></li>
-</ul>
-<p>将目标替换为<span class="math inline">\(U_t=R_{t+1}+\gamma
-\hat{v}(S_{t+1},w)\)</span>,即可得到半梯度方法TD(0)</p>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240521222947800.png"  alt="image-20240521222947800" style="zoom:50%;" /></p>
-<p>由于目标为<span class="math inline">\(R+\gamma
-\hat{v}(S&#39;,w)\)</span>,故可在轨迹生成的每一步中进行<span
-class="math inline">\(w\)</span>的更新，另外，尽管<span
-class="math inline">\(R+\gamma \hat{v}(S&#39;,w)\)</span>是权重向量<span
-class="math inline">\(w\)</span>的函数，但在计算其梯度时，将其视为常数，故而被称为半梯度方法。</p>
-<ul>
-<li>半梯度方法的<strong>优势</strong>：</li>
-</ul>
-<ol type="1">
-<li>学习速度快</li>
-<li>支持持续地或在线地学习，不需要等待一幕的结束</li>
-</ol>
-<h4 id="线性方法">9.4 线性方法</h4>
-<p>状态<span class="math inline">\(s\)</span>的特征向量：<span
-class="math inline">\(x(s)=(x_1(s),x_2(s),...,x_d(s))^T\)</span></p>
-<p>则线性近似的状态价值函数可以写作<span
-class="math inline">\(w\)</span>和<span
-class="math inline">\(x(s)\)</span>的内积： <span
-class="math display">\[
-\hat{v}(s,w)=w^Tx(s)=\sum\limits_{i=1}^{d}w_ix_i(s)
-\]</span> 则SGD的更新式可以更新为：<span
-class="math inline">\(w_{t+1}=w_t+\alpha
-[U_t-\hat{v}(S_t,w_t)]x(S_t)\)</span></p>
-<p>其中每个<span class="math inline">\(x_i(s)\)</span>都是状态<span
-class="math inline">\(s\)</span>的特征函数，被称为基函数，它们构成了可能的近似函数集合的线性基。</p>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240530160135215.png"  alt="image-20240530160135215" style="zoom:50%;" /></p>
-<h4 id="线性方法的特征构造">9.5 线性方法的特征构造</h4>
-<ul>
-<li>线性方法的优点：收敛性保证、数据和计算方面的高效性；</li>
-<li>如何选取用来表达状态的特征至关重要，选择适合于任务的特征是将先验知识加入强化学习系统的重要方式；</li>
-<li>线性方法的局限性：无法表示特征之间的相互作用；</li>
-</ul>
-<h5 id="多项式基">9.5.1 多项式基</h5>
-<p>假设每一个状态<span
-class="math inline">\(s\)</span>对应的(用于描述状态特征的)<span
-class="math inline">\(k\)</span>个数字分量<span
-class="math inline">\(s_1,s_2,...,s_k，s_i\in
-R,i=1,2,...k\)</span>。对这个<span
-class="math inline">\(k\)</span>维的状态空间，每一个<span
-class="math inline">\(n\)</span>阶多项式基特征<span
-class="math inline">\(x_i\)</span>可以写作： <span
-class="math display">\[
-x_i(s)=\Pi_{j=1}^{k}s_{j}^{c_{i,j}},i=1,2...,(n+1)^k
-\]</span> 其中<span
-class="math inline">\(c_{i,j}\)</span>是集合{0,1,...,n}中任一，即对不同的数字分量赋予不同的指数即可得到不同的多项式基特征。</p>
-<h5 id="傅立叶基">9.5.2 傅立叶基</h5>
-<p>假设每一个状态<span class="math inline">\(s\)</span>对应一个<span
-class="math inline">\(k\)</span>维向量，<span
-class="math inline">\(s=(s_1,s_2,...,s_k)^T\)</span>,这里<span
-class="math inline">\(s_i\in[0,1]\)</span>,则<span
-class="math inline">\(n\)</span>阶傅里叶余弦基的第<span
-class="math inline">\(i\)</span>个特征可以写作：<span
-class="math inline">\(x_i(s)=cos(\pi s^Tc^i)\)</span>,这里的<span
-class="math inline">\(c^i=(c_1^i,c_2^i,...,c_k^i)\)</span>，其中的<span
-class="math inline">\(c_j^i\in{0,1,...,n},j=1,2...,k;i=1,2,...,(n+1)^k\)</span></p>
-<h5 id="粗编码">9.5.3 粗编码</h5>
-<p><img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523160854549.png"  alt="image-20240523160854549" style="zoom:50%;" /></p>
-<h5 id="瓦片编码">9.5.4 瓦片编码</h5>
-<h5 id="径向基函数">9.5.5 径向基函数</h5>
-<p><span class="math inline">\(RBF\)</span>函数 <span
-class="math display">\[
-x_i(s)=exp(-\frac{||s-c_i||^2}{2\sigma_i^2})
-\]</span>
-<img src="/2024/05/21/《RL-Introduction》-chap9/image-20240523165412474.png"  alt="image-20240523165412474" style="zoom:50%;" /></p>
-<h4 id="手动选择步长参数">9.6 手动选择步长参数</h4>
-<p>设置线性SGD步长参数的粗略经验法则： <span class="math display">\[
-\alpha=(\tau E[x^Tx])^{-1}
-\]</span> 其中<span
-class="math inline">\(\tau\)</span>为状态的经验数量，<span
-class="math inline">\(x\)</span>为从SGD的输入向量的分布中选取的一个随机特征向量。</p>
-<h4 id="非线性函数逼近人工神经网络">9.7
-非线性函数逼近：人工神经网络</h4>
-<h4 id="最小二乘时序差分">9.8 最小二乘时序差分</h4>
-<h4 id="基于记忆的函数逼近">9.9 基于记忆的函数逼近</h4>
-<h4 id="基于核函数的函数逼近">9.10 基于核函数的函数逼近</h4>
-<h4 id="同轨策略学习兴趣与强调">9.11 同轨策略学习：“兴趣”与强调</h4>
-<h4 id="本章小结">9 本章小结</h4>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
       </categories>
       <tags>
         <tag>强化学习</tag>

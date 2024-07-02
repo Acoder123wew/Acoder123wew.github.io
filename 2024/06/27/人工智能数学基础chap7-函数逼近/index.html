@@ -19,27 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"acoder123wew.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Hello Hexo">
+    <meta name="description" content="函数逼近">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://acoder123wew.github.io/2024/03/31/hello-world/index.html">
+<meta property="og:title" content="人工智能数学基础chap7-函数逼近">
+<meta property="og:url" content="http://acoder123wew.github.io/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/index.html">
 <meta property="og:site_name" content="Well&#39;s BLOG">
-<meta property="og:description" content="Hello Hexo">
+<meta property="og:description" content="函数逼近">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-31T11:09:46.676Z">
-<meta property="article:modified_time" content="2024-04-01T06:46:01.922Z">
+<meta property="article:published_time" content="2024-06-27T12:59:27.000Z">
+<meta property="article:modified_time" content="2024-06-29T12:52:53.589Z">
 <meta property="article:author" content="Well">
+<meta property="article:tag" content="人工智能">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://acoder123wew.github.io/2024/03/31/hello-world/">
+<link rel="canonical" href="http://acoder123wew.github.io/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/03/31/hello-world/","path":"2024/03/31/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://acoder123wew.github.io/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/","path":"2024/06/27/人工智能数学基础chap7-函数逼近/","title":"人工智能数学基础chap7-函数逼近"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Well's BLOG</title>
+<title>人工智能数学基础chap7-函数逼近 | Well's BLOG</title>
   
 
 
@@ -139,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hello-hexo"><span class="nav-number">1.</span> <span class="nav-text">Hello Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quick-start"><span class="nav-number">2.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#create-a-new-post"><span class="nav-number">2.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run-server"><span class="nav-number">2.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#generate-static-files"><span class="nav-number">2.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#deploy-to-remote-sites"><span class="nav-number">2.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-number">1.</span> <span class="nav-text">chap7 函数逼近</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC"><span class="nav-number">1.1.</span> <span class="nav-text">7.1 函数插值</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -192,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/03/31/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://acoder123wew.github.io/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -205,12 +206,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | Well's BLOG">
-      <meta itemprop="description" content="Hello Hexo">
+      <meta itemprop="name" content="人工智能数学基础chap7-函数逼近 | Well's BLOG">
+      <meta itemprop="description" content="函数逼近">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          人工智能数学基础chap7-函数逼近
         </h1>
 
         <div class="post-meta-container">
@@ -221,14 +222,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-03-31 19:09:46" itemprop="dateCreated datePublished" datetime="2024-03-31T19:09:46+08:00">2024-03-31</time>
+      <time title="创建时间：2024-06-27 20:59:27" itemprop="dateCreated datePublished" datetime="2024-06-27T20:59:27+08:00">2024-06-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-04-01 14:46:01" itemprop="dateModified" datetime="2024-04-01T14:46:01+08:00">2024-04-01</time>
+      <time title="修改时间：2024-06-29 20:52:53" itemprop="dateModified" datetime="2024-06-29T20:52:53+08:00">2024-06-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,7 +237,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+          <a href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">人工智能数学基础</span></a>
         </span>
     </span>
 
@@ -250,37 +251,15 @@
     </span>
 </div>
 
-            <div class="post-description">Hello Hexo</div>
+            <div class="post-description">函数逼近</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very
-first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for
-more info. If you get any problems when using Hexo, you can find the
-answer in <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or
-you can ask me on <a
-target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="hello-hexo">Hello Hexo</h2>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a
-target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <div class="post-body" itemprop="articleBody"><h3 id="chap7-函数逼近">chap7 函数逼近</h3>
+<h4 id="函数插值">7.1 函数插值</h4>
 
     </div>
 
@@ -289,16 +268,19 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2024/06/03/%E3%80%8ARL-Introduction%E3%80%8B-chap13/" rel="prev" title="《RL:Introduction》-chap13">
+                  <i class="fa fa-angle-left"></i> 《RL:Introduction》-chap13
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/31/%E7%AC%AC%E4%BA%8C%E7%AB%A0%E3%80%81%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95/" rel="next" title="第二章、蒙特卡洛方法">
-                  第二章、蒙特卡洛方法 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
