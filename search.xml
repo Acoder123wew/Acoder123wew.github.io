@@ -3,7 +3,56 @@
   <entry>
     <title>60分钟入门pytorch</title>
     <url>/2024/04/08/60%E5%88%86%E9%92%9F%E5%85%A5%E9%97%A8pytorch/</url>
-    <content><![CDATA[<h4 id="tensor">Tensor</h4>
+    <content><![CDATA[<h3 id="一环境配置">一、环境配置</h3>
+<ul>
+<li><p>创建虚拟环境</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda create -n DL python=<span class="number">3.6</span></span><br></pre></td></tr></table></figure>
+<p>DL表示虚拟环境名，python=3.6等等用于指定该虚拟环境中各类包的版本；</p></li>
+<li><p>激活虚拟环境</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda activate DL 注意若在Windows平台只需:activate DL即可</span><br></pre></td></tr></table></figure></li>
+<li><p>失活虚拟环境</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda deactivate 注意Windows平台只需deactivate</span><br></pre></td></tr></table></figure></li>
+<li><p>查看虚拟环境列表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">conda env <span class="built_in">list</span></span><br></pre></td></tr></table></figure></li>
+<li><p>查看GPU状态信息(System Management Interface)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="二读取数据">二、读取数据</h3>
+<ul>
+<li><p>读取图片数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img_path = <span class="string">&quot;train/ants_image/0013035.jpg&quot;</span></span><br><span class="line">img = Imgae.<span class="built_in">open</span>(img_path)</span><br><span class="line">img.show()</span><br></pre></td></tr></table></figure></li>
+<li><p>批量读取某目录下的所有文件</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">img_path_list = os.listdir(dir_path)</span><br></pre></td></tr></table></figure>
+<p>img_path_list表示该目录下所有的文件名组成的list</p></li>
+</ul>
+<h3 id="三tensorboard使用">三、Tensorboard使用</h3>
+<ul>
+<li><p>SummaryWriter的使用</p>
+<ul>
+<li><p>add_scalar</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.tensorboard <span class="keyword">import</span> SummaryWriter</span><br><span class="line">writer = SummaryWriter(<span class="string">&#x27;logs&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">  writer.add_scalar(<span class="string">&quot;y=2x&quot;</span>,<span class="number">2</span>*i,i)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure>
+<p>运行上述代码会生成一个logs文件夹，文件夹中含有类似于events.out.tfevents.1721275869.LAPTOP-FTV4H3M6.6748.0的文件，查看此文件的方法：在IDE终端Command
+Prompt运行命令：<code>tensorboard --logdir=logs --port=6008</code>,logs表示events，port表示端口号；</p></li>
+<li><p>add_image</p>
+<p>add_image()方法传入的参数必须为<code>torch.Tensor, numpy.array, or string/blobname</code>中的一种；</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img_path= <span class="string">&quot;路径&quot;</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(img_path)<span class="comment"># 此时img类型为PIL.JpegImagePlugin.JpegImageFile</span></span><br><span class="line"><span class="keyword">import</span> nummpy <span class="keyword">as</span> np</span><br><span class="line">img_array = np.array(img)<span class="comment"># 使用numpy将其转换为numpy.array类型</span></span><br><span class="line">writer.add_image(<span class="string">&quot;test&quot;</span>,img_array,<span class="number">1</span>,dataformats=<span class="string">&#x27;HWC&#x27;</span>)</span><br><span class="line">writer.close()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="四用于图片变换的transforms">四、用于图片变换的Transforms</h3>
+<ul>
+<li><p>小注：pycharm开发环境中的c、method方法、property属性、field字段；</p></li>
+<li><p>使用transforms将图片数据从<code>PIL.Image\numpy.ndarray</code>数据类型转换为tensor数据类型：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> transforms</span><br><span class="line"><span class="keyword">from</span> torchvision <span class="keyword">import</span> datasets</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line">img_path = <span class="string">&quot;train/ants_image/0013035.jpg&quot;</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(img_path)</span><br><span class="line">tensor_trans = transforms.ToTensor()</span><br><span class="line">tensor_img = tensor_trans(img)</span><br></pre></td></tr></table></figure>
+<p>transforms的其他用法详见文档，需要使用时临时查阅即可；</p></li>
+</ul></li>
+</ul>
+<h3 id="五dataset和dataloader">五、Dataset和Dataloader</h3>
+<ul>
+<li><p><code>Dataset</code>
+是一个用于数据加载的抽象类，它定义了数据集的基本结构和操作方法；</p></li>
+<li><p><code>DataLoader</code> 是 PyTorch
+中用于数据加载的实用工具，它的主要功能是将数据集分割成多个批次（batch），并提供了许多便捷的特性，比如多线程数据加载、数据打乱（shuffle）和批次化（batching）等，这些功能极大地简化了训练过程中的数据处理工作。</p></li>
+</ul>
+<h4 id="tensor">Tensor</h4>
 <p>Tensor,张量，是PyTorch中的核心类，我们平常所说的张量通常是张量类的实例，张量即n维数组，支持GPU加速计算和自动微分。</p>
 <ul>
 <li><p>初始化tensor的方法</p>
@@ -58,6 +107,7 @@ torch.from_numpy(n)将n这个numpy.ndarray转换为torch.Tensor时，n的变化�
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">n = np.ones(<span class="number">5</span>)</span><br><span class="line">t = torch.from_numpy(n)</span><br><span class="line">np.add(n, <span class="number">1</span>, out=n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;t: <span class="subst">&#123;t&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;n: <span class="subst">&#123;n&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">t: tensor([<span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>, <span class="number">2.</span>], dtype=torch.float64)</span><br><span class="line">n: [<span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span> <span class="number">2.</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
+<hr />
 ]]></content>
       <categories>
         <category>pytorch</category>
@@ -180,7 +230,7 @@ class="math inline">\(R_{t+1}\in\mathcal{R}\subset
 R\)</span>,并进入一个新状态<span
 class="math inline">\(S_{t+1}\)</span>(需要注意的是：1.这里用<span
 class="math inline">\(R_{t+1}\)</span>而不是<span
-class="math inline">\(R_t\)</span>表示<span
+class="math inline">\(R_t\)</span>，这是为了表示<span
 class="math inline">\(A_t\)</span>导致的收益，注意区分；2.这里假定<span
 class="math inline">\(R_{t+1}\)</span>只是<span
 class="math inline">\(S_t,A_t\)</span>的函数（实际上还和<span
@@ -221,7 +271,7 @@ class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>。</p>
 class="math inline">\(\sum\limits_{s&#39;,r}^{}p(s&#39;,r|s,a)=1\)</span></p>
 <p><img src="/2024/04/18/post《RL-Introduction》-chap3/image-20240419112116709.png"  alt="image-20240419112116709" style="zoom:50%;" /></p>
 <h4 id="目标和收益">3.2 目标和收益</h4>
-<p>在强化学习中，设立收益的方式要真正表明我们的目标，收益的设定只能用来传达“什么”是你想要实现的目标，而不是“如何”实现这个目标。目标可以归结为：最大化智能体接收到的收益（标量信号）的累积和的概率期望值。</p>
+<p>在强化学习中，设立收益的方式要真正表明我们的目标，收益的设定只能用来传达“什么”是你想要实现的目标，而不是“如何”实现这个目标。目标可以归结为：<strong>最大化</strong>智能体接收到的收益（标量信号）的累积和的概率期望值。</p>
 <h4 id="回报和分幕">3.3 回报和分幕</h4>
 <ul>
 <li><p><strong>幕</strong>：一般又称“回合”，指智能体与环境交互直到终结状态的整个过程；具有这样性质的任务被称为“分幕式任务”；与之对应的是“持续性任务”。注意区分非终结状态集<span
@@ -302,7 +352,7 @@ class="math inline">\(v_\pi\)</span>的回溯图：回溯操作就是将后继�
 class="math inline">\(\pi(\cdot|s)\)</span>选择一个动作<span
 class="math inline">\(a\)</span>并执行，然后通过状态转移函数（或者更通用地，四参数函数p)转移到一个新的状态<span
 class="math inline">\(s&#39;\)</span>,环境再返回一个收益<span
-class="math inline">\(r\)</span>.贝尔曼方程从左到右的写法就是这样一个过程，只是它对所有的可能性采用其出现概率进行了加权平均。贝尔曼方程也说明，起始状态的价值=当前动作的收益+后继状态的折扣期望价值。</p>
+class="math inline">\(r\)</span>.贝尔曼方程从左到右的写法就是这样一个过程，只是它对所有的可能性采用其出现概率进行了加权平均。贝尔曼方程也说明，起始状态的价值=（当前动作的收益+后继状态的折扣期望价值）的期望值。</p>
 <hr />
 <ul>
 <li><strong>网格问题</strong>：</li>
@@ -312,7 +362,7 @@ class="math inline">\(r\)</span>.贝尔曼方程从左到右的写法就是这�
 <p><img src="/2024/04/18/post《RL-Introduction》-chap3/643348098b69aaa72f678f47b4575e7.jpg"  alt="643348098b69aaa72f678f47b4575e7" style="zoom:50%;" /></p>
 <h4 id="最优策略和最优价值函数">3.6 最优策略和最优价值函数</h4>
 <ul>
-<li><p>最优策略：总会存在至少一个策略，它不劣于其他所有的策略，我们称之为<strong>最优策略</strong>；</p></li>
+<li><p>最优策略：总会存在至少一个策略，它不劣于其他所有的策略，我们称之为<strong>最优策略</strong>，它们共享相同的最优状态价值函数和最优动作价值函数；</p></li>
 <li><p>最优状态价值函数： <span class="math display">\[
 v_*(s)=\underset{\pi}{max}\ v_{\pi}(s)
 \]</span> 它表示了，在状态<span
@@ -392,6 +442,7 @@ q_*(s,a)\)</span></li>
     <url>/2024/04/18/%E3%80%8ARL-Introduction%E3%80%8B-chap1-2/</url>
     <content><![CDATA[<h3 id="chap1-导论">chap1 导论</h3>
 <ul>
+<li><p>在交互中学习是几乎所有学习和智能理论的基本思想；</p></li>
 <li><p><strong>试错</strong>和<strong>延迟收益</strong>是强化学习中最重要最显著的特征；</p></li>
 <li><p>马尔可夫决策过程包含：感知、动作、目标；</p></li>
 <li><p>强化学习区别于<strong>有监督学习</strong>：从带标注训练数据集中学习，并让系统能够具备推断或泛化能力；<strong>无监督学习</strong>：寻找未标注数据集中的隐含结构；<strong>强化学习</strong>：智能体从自身的经验中学习，其目的是最大化收益信号；有监督学习、无监督学习、强化学习是并列的三种机器学习范式。</p></li>
@@ -504,7 +555,9 @@ class="math inline">\(Q_{n+1}\)</span>收敛需要满足以下两个条件： <s
 class="math display">\[
 \sum\limits_{n=1}^{\infty}\alpha_n(a)=\infty \ and \
 \sum\limits_{n=1}^{\infty}\alpha_n^2(a)&lt;\infty
-\]</span> 同样，可以推导更新公式：</p>
+\]</span>
+第一个条件是要求保证有足够大的步长，以克服任何初始条件或随机波动；第二个条件保证步长变小，以保证收敛。</p>
+<p>同样，可以推导更新公式：</p>
 <p><img src="/2024/04/18/《RL-Introduction》-chap1-2/image-20240417215254394.png"  alt="image-20240417215254394" style="zoom: 50%;" /></p>
 <hr />
 <h4 id="乐观初始值">2.6 乐观初始值</h4>
@@ -553,13 +606,13 @@ class="math inline">\(H_{t+1}(a)=H_t(a)-\alpha(R_t-\bar{R_t})\pi_t(a)\)</span>�
 <p>两者相互抵消。</p>
 <h4 id="关联搜索上下文相关的赌博机">2.9
 关联搜索（上下文相关的赌博机）</h4>
-<p>即区分出不同的情境，以采用与对应情景相适应的旋转。</p>
+<p>即区分出不同的情境，以采用与对应情景相适应的选择。</p>
 <h4 id="总结">总结</h4>
 <ul>
 <li><p><span
 class="math inline">\(\epsilon\)</span>-贪心方法：在一小段时间内进行随机的动作选择；参数为：<span
 class="math inline">\(\epsilon\)</span></p></li>
-<li><p>UCB方法：通过巧妙的公式，优先选择那些之前被选择的次数较少的动作；参数为：<span
+<li><p>UCB方法：通过巧妙的公式，优先选择那些价值估计较大且之前被选择的次数较少的动作；参数为：<span
 class="math inline">\(c\)</span></p></li>
 <li><p>梯度赌博机算法：偏好函数值经过softmax变换得到每个动作被执行的概率；参数为：<span
 class="math inline">\(\alpha\)</span></p></li>
@@ -867,7 +920,7 @@ class="math inline">\(old-action\ne\pi(s)\)</span>表示动作发生变动，依
 <p>可见，右边比左边收敛快得多,（左侧为随机策略（0.25x4)的<span
 class="math inline">\(v_\pi\)</span>值期望更新，右边为根据<span
 class="math inline">\(v_\pi\)</span>值的策略改进，箭头所指方向均为最佳动作），在策略迭代中，实际上只需要进行到<span
-class="math inline">\(k=3\)</span>这一步就行了，因为我们本质上并不需要随机策略的价值函数；</p>
+class="math inline">\(k=3\)</span>这一步就行了，这时价值函数估计值的相对大小关系已经近乎确定，因为我们本质上并不需要随机策略的最终收敛的价值函数；</p>
 <p><strong>价值迭代</strong>其实就是贝尔曼最优方程的更新形式： <span
 class="math display">\[
 v_{k+1}(s)=\underset{a}{max}\ E[R_{t+1}+\gamma v_k(S_{t+1})|S_t=s,A_t=a]
@@ -905,7 +958,7 @@ class="math inline">\(v\to v_{\pi_{newest}}\)</span>;</p>
 <li>策略评估：对一个策略的价值函数进行迭代计算；</li>
 <li>策略改进：给定某个策略的价值函数，计算一个改进的策略；</li>
 <li>策略迭代：策略评估和策略改进交替进行；</li>
-<li>价值迭代：根据贝尔曼最优方程迭代计算最优价值函数；</li>
+<li>价值迭代：根据贝尔曼最优方程迭代计算最优价值函数,然后恢复出最优策略；</li>
 <li>异步DP算法</li>
 </ul>
 ]]></content>
@@ -932,7 +985,7 @@ class="math inline">\(p(s&#39;,r|s,a)\)</span>，从马尔可夫决策过程的�
 <p>状态价值函数的定义为：<span
 class="math inline">\(v_\pi(s)=E_\pi[G_t|S_t=s]\)</span>,因此可以通过对所有经过这个状态之后产生的回报进行平均，从而近似状态价值函数。</p>
 <ul>
-<li>首次访问型MC算法：用<span
+<li>首次访问型MC算法：使用<span
 class="math inline">\(s\)</span>的所有<strong>首次</strong>访问的回报的平均值估计<span
 class="math inline">\(v_\pi(s)\)</span>;</li>
 <li>每次访问型MC算法：使用<span
@@ -948,7 +1001,9 @@ G_{t+1}\)</span>反向计算，但当遍历状态序列时应从前往后以保�
 class="math inline">\(Return(S_t)\)</span>的回报值在当前幕下为首次访问，确保此次状态在之前并未被访问过，每次访问型MC算法只需将Unless判断删除即可。</p>
 <ul>
 <li><p>DP算法的回溯图显示所有可能的一步转移，MC算法包含采样到的当前幕中到结束的的所有转移。</p>
-<p><img src="/2024/04/30/《RL-Introduction》-chap5/bbc89e3036b55ef4374d7d67dd31f4f-1714631064257-2.png"  alt="bbc89e3036b55ef4374d7d67dd31f4f" style="zoom:50%;" /><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240502142551710.png"  alt="image-20240502142551710" style="zoom:50%;" /></p></li>
+<p>​
+<img src="/2024/04/30/《RL-Introduction》-chap5/bbc89e3036b55ef4374d7d67dd31f4f-1714631064257-2.png"  alt="bbc89e3036b55ef4374d7d67dd31f4f" style="zoom:50%;" />
+<img src="/2024/04/30/《RL-Introduction》-chap5/image-20240502142551710.png"  alt="image-20240502142551710" style="zoom:50%;" /></p></li>
 <li><p>MC算法对于一个状态的估计完全不依赖于对其他状态的估计，即没有使用自举思想，这使得MC算法非常适合仅仅需要获得一个或一个子集的状态的价值函数时使用；</p></li>
 </ul>
 <h4 id="动作价值的蒙特卡洛估计">5.2 动作价值的蒙特卡洛估计</h4>
@@ -992,7 +1047,7 @@ id="基于试探性出发的蒙特卡洛蒙特卡洛es">基于试探性出发的
 <h4 id="没有试探性出发假设的蒙特卡洛控制">5.4
 没有试探性出发假设的蒙特卡洛控制</h4>
 <ul>
-<li><p><strong>试探性出发假设</strong>：将指定的状态-动作二元组作为起点开始一幕采样同时保证所有”状态-动作“二元组都有非零的概率被选为起点</p></li>
+<li><p><strong>试探性出发假设</strong>：将指定的状态-动作二元组作为起点开始一幕采样同时保证所有”状态-动作“二元组都有非零的概率被选为起点，这个假设在现实中较难被满足，而解决这个问题的办法有同轨策略和离轨策略两种。</p></li>
 <li><p><strong>同轨策略(on-policy)</strong>：用于生成采样数据序列的策略和用于实际决策的待评估和改进的策略是相同的；</p></li>
 <li><p><strong>离轨策略(off-policy)</strong>：用于生成采样数据序列的策略和用于实际决策的待评估和改进的策略是不同的；即生成的数据离开了待优化的策略所决定的决策序列轨迹。</p></li>
 <li><p><strong>软性策略</strong>：对于任意<span
@@ -1000,14 +1055,14 @@ class="math inline">\(s\in\mathcal{S}\)</span>以及<span
 class="math inline">\(a\in\mathcal{A(s)}\)</span>都有<span
 class="math inline">\(\pi(a|s)&gt;0\)</span>;</p></li>
 <li><p><span
-class="math inline">\(\varepsilon-\)</span><strong>贪心策略</strong>：对于某个<span
+class="math inline">\(\varepsilon-\)</span><strong>软性策略</strong>：对于某个<span
 class="math inline">\(\varepsilon&gt;0\)</span>,所有的状态和动作都有<span
 class="math inline">\(\pi(a|s)\ge\frac{\varepsilon}{|\mathcal{A}(s)|}\)</span>;</p></li>
 </ul>
 <p>由于缺乏试探性假设，需要将之前的贪心策略改为<span
 class="math inline">\(\epsilon\)</span>-贪心策略，同轨策略的首次访问型MC控制算法如下：</p>
 <p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240502174330393.png"  alt="image-20240502174330393" style="zoom:50%;" /></p>
-<p>其中，当<span
+<p>其中，（with ties broken arbitrarily)表示当<span
 class="math inline">\(Q(S_t,a)\)</span>有多个最大值时，任意选取；</p>
 <p>根据策略改进定理，对一个<span
 class="math inline">\(\epsilon\)</span>-软性策略<span
@@ -1051,7 +1106,9 @@ class="math inline">\(\epsilon\)</span>-软性策略集合中的最优策略；<
 <li>目标策略：用来学习并优化的策略；</li>
 <li>离轨策略学习：学习所用的数据离开了待学习的目标策略；</li>
 <li>同轨策略：生成数据使用的行动策略和待学习的目标策略相同；</li>
-<li>离轨策略：更强大通用但方差更大、收敛更慢</li>
+<li>离轨策略：生成数据使用的行动策略和待学习的目标策略不同，更强大通用但方差更大、收敛更慢</li>
+<li>在离轨策略中，行动策略通常是随机的且具有试探性的（如：<span
+class="math inline">\(\varepsilon\)</span>-贪心策略），目标策略则是由动作价值函数确定的确定性贪心策略</li>
 </ul>
 <hr />
 <p><span class="math inline">\(\pi\)</span>是目标策略，<span
@@ -1065,7 +1122,7 @@ class="math inline">\(\pi\)</span>已知且不变，并对其价值函数进行�
 <p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240510192953806.png"  alt="image-20240510192953806" style="zoom:50%;" /></p>
 <p>对行动策略中得到的回报通过重要度采样比调整可使其拥有在目标策略下正确的期望值：
 <span class="math display">\[
-v_\pi(s)=E[\rho_{t:T-1}G_t|S_t=s]
+v_\pi(s)=E[\rho_{t:T-1}G_{t_b}|S_t=s]
 \]</span></p>
 <ul>
 <li><p><strong>普通重要度采样</strong>：重要度采样比调整后，简单平均。<u>无偏，但方差大（无界）。</u></p>
@@ -1073,20 +1130,14 @@ v_\pi(s)=E[\rho_{t:T-1}G_t|S_t=s]
 <li><p><strong>加权重要度采样</strong>：重要度采样比调整后，加权平均。<u>有偏(偏差值逐渐收敛到0)，方差小（收敛到0）</u></p>
 <p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240510214244559.png"  alt="image-20240510214244559" style="zoom:50%;" /></p></li>
 </ul>
-<p>上式中，若分母为0，则<span
-class="math inline">\(V(s)=0\)</span>;在单幕情况下 <span
+<p>上式中，若分母为0，则<span class="math inline">\(V(s)=0\)</span>; -
+普通重要度采样方差无界性的<strong>证明</strong>： <span
 class="math display">\[
-=\frac{A(G_1+G_2+...+G_n)}{nA}=\frac{G_1+G_2+...+G_n}{n}
-\]</span></p>
-<ul>
-<li><p>普通重要度采样方差无界性的<strong>证明</strong>： <span
-class="math display">\[
-Var[X]=E[(X-\bar{X})^2]=E[X^2-2X\bar{X}+X^2]=E[X^2]-\bar{X}^2
-\]</span> 又因为<span
+  Var[X]=E[(X-\bar{X})^2]=E[X^2-2X\bar{X}+X^2]=E[X^2]-\bar{X}^2
+  \]</span> 又因为<span
 class="math inline">\(\bar{X}\)</span>有界，现须证明<span
 class="math inline">\(E[X^2]\)</span>无界，即证明经过重要度采样加权过的回报的平方的期望无界，即下式无界：</p>
-<p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240511161106528.png"  alt="image-20240511161106528" style="zoom:50%;" /></p></li>
-</ul>
+<p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240511161106528.png"  alt="image-20240511161106528" style="zoom:50%;" /></p>
 <p><img src="/2024/04/30/《RL-Introduction》-chap5/image-20240511161148558.png"  alt="image-20240511161148558" style="zoom:33%;" /></p>
 <p>其中：<span
 class="math inline">\((2^{k+1})^2=2^{2k+2}*(\frac{1}{2})^{k+1}=2^{k+1}\)</span></p>
@@ -1098,7 +1149,7 @@ class="math inline">\((2^{k+1})^2=2^{2k+2}*(\frac{1}{2})^{k+1}=2^{k+1}\)</span><
 <li><p><strong>普通重要度采样</strong>：</p>
 <p>将chap2中的收益替换为用重要度采样比进行缩放后的回报；</p></li>
 <li><p><span class="math display">\[
-C_{n+1}=C_n+W_{n+1}
+C_n=\sum\limits_{k=1}^{n}W_k,C_{n+1}=C_n+W_{n+1}
 \]</span></p></li>
 <li><p><strong>加权重要度采样</strong>： <span class="math display">\[
 \begin{array}{l}
@@ -1220,7 +1271,8 @@ G_{t:t+n}=R_{t+1}+\gamma R_{t+2}+...+\gamma^{n-1}R_{t+n}+\gamma^n
 \]</span></p>
 <p>其中<span
 class="math inline">\(\bar{V}_{t}(s)=\sum_{a}\pi(a|s)Q_t(s,a)\)</span></p>
-<p>除此之外，其他均与n步Sarsa相同。</p>
+<p>除此之外，其他均与n步Sarsa相同，由于动作价值函数的期望就是状态价值函数，故上式写作<span
+class="math inline">\(V\)</span>。</p>
 <h4 id="n步离轨策略学习">7.3 n步离轨策略学习</h4>
 <ul>
 <li>在n步时序差分时使用重要度采样率<span
@@ -1272,8 +1324,8 @@ Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
 <h3 id="chap8-基于表格型方法的规划和学习">chap8
 基于表格型方法的规划和学习</h3>
 <ul>
-<li>基于模型的强化学习方法将规划作为其主要组成部分</li>
-<li>无模型的强化学习方法主要依赖于学习</li>
+<li>基于模型的强化学习方法将<strong>规划</strong>作为其主要组成部分</li>
+<li>无模型的强化学习方法主要依赖于<strong>学习</strong></li>
 </ul>
 <h4 id="模型和规划">8.1 模型和规划</h4>
 <ul>
@@ -1282,19 +1334,42 @@ Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
 <li><p><strong>规划</strong>：任何以环境模型为输入，并生成或改进与它进行交互的策略的计算过程。</p>
 <p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516095022376.png"  alt="image-20240516095022376" style="zoom:50%;" /></p></li>
 <li><p>随机采样单步表格型Q规划：</p>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p></li>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p>
+<ul>
+<li>采用较小增量式步长的规划方法的好处是：能够在任何时候中断和重定向规划，而且几乎不浪费计算资源。</li>
+</ul></li>
 </ul>
 <h4 id="dyna集成在一起的规划动作和学习">8.2
 Dyna：集成在一起的规划、动作和学习</h4>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823095809381.png"  alt="image-20240823095809381" style="zoom: 50%;" /></p>
+<ul>
+<li>如图所示，大圈表示间接强化学习，即通过模型间接地改善价值函数和策略。右边小圈则表示直接强化学习，即直接从经验中学习到价值函数和策略。</li>
+</ul>
 <p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516110343794.png"  alt="image-20240516110343794" style="zoom:50%;" /></p>
+<ul>
+<li>在Dyna-Q中，学习和规划是由完全相同的算法完成的，真实经验用于学习，模拟经验用于规划。</li>
+</ul>
 <h4 id="模型错误纠正">8.3 模型错误纠正</h4>
 <h4 id="优先遍历">8.4 优先遍历</h4>
+<p>一般的模拟经验是从所有之前经历过的那些“状态-动作”二元组中随机采样得到的，我们可以不均匀采样，而去采样那些特定的更有用的“状态-动作”二元组，以提高学习效果。具体思想方法是从任何能使得价值发生变化的状态开始反向计算，这被称为规划计算的<strong>反向聚焦。</strong></p>
 <h4 id="期望更新与采样更新的对比">8.5 期望更新与采样更新的对比</h4>
 <p>不同类型的价值函数：</p>
 <ul>
 <li>状态价值还是动作价值</li>
 <li>对应最优策略还是任意给定策略</li>
 <li>采用期望更新还是采样更新</li>
+</ul>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823115633419.png"  alt="image-20240823115633419" style="zoom: 50%;" /></p>
+<ul>
+<li><p>期望更新近似<span class="math inline">\(q^*\)</span>: <span
+class="math display">\[
+Q(s,a)=\sum\limits_{s&#39;,r}\hat{p}(s&#39;,r|s,a)[r+\underset{a&#39;}{max}Q(s&#39;,a&#39;)]
+\]</span></p></li>
+<li><p>采样更新近似<span class="math inline">\(q^*\)</span>: <span
+class="math display">\[
+Q(s,a)=Q(s,a)+\alpha[R+\gamma\underset{a&#39;}{max}Q(s&#39;,a&#39;)-Q(s,a)]
+\]</span></p></li>
+<li><p>在实际应用中，采样更新通常更适用。</p></li>
 </ul>
 <h4 id="轨迹采样">8.6 轨迹采样</h4>
 <h4 id="实时动态规划">8.7 实时动态规划</h4>
@@ -1314,7 +1389,8 @@ Dyna：集成在一起的规划、动作和学习</h4>
     <title>《RL:Introduction》-chap6</title>
     <url>/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/</url>
     <content><![CDATA[<hr />
-<h3 id="chap6-时序差分学习">chap6 时序差分学习</h3>
+<h3 id="chap6-时序差分学习temporal-difference">chap6
+时序差分学习（Temporal Difference）</h3>
 <ul>
 <li><strong>预测问题（策略评估问题）</strong>：如何对于一个给定的策略<span
 class="math inline">\(\pi\)</span>估计它的价值函数<span
@@ -1350,7 +1426,7 @@ class="math inline">\(G_t-V(S_t)=\sum\limits_{k=t}^{T-1}\gamma^{k-t}\delta_k\)</
 <li><p>蒙特卡洛方法需要得到<span
 class="math inline">\(G_t\)</span>再更新，即需要知道最终结果；而TD方法只需要一步即可进行更新；</p></li>
 <li><p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240511222343007.png"  alt="image-20240511222343007" style="zoom:50%;" /></p></li>
-<li><p>上式中的123行，分别是MC、DP、TD(0)算法更新的目标。</p></li>
+<li><p>上式中的123行，分别是MC、TD(0)、DP算法更新的目标。</p></li>
 </ul>
 <h4 id="时序差分预测方法的优势">6.2 时序差分预测方法的优势</h4>
 <ul>
@@ -1388,17 +1464,21 @@ class="math inline">\(Q(S_{t+1},A_{t+1})=0\)</span>;</p>
 class="math inline">\(\varepsilon=\frac{1}{t}\)</span>),则经过上述Sarsa算法，都能够收敛到最优的策略和动作价值函数。</p>
 <h4 id="q-learning-离轨策略下的时序差分控制off-policy-td">6.5
 Q-learning: 离轨策略下的时序差分控制(off-policy TD)</h4>
-<p>Q学习的更新公式为： <span class="math display">\[
+<p>动作价值函数的最优贝尔曼方程为： <span class="math display">\[
+q_*(s,a)=E[R_{t+1}+\gamma\ \underset{a&#39;}{max}\
+q_*(S_{t+1},a&#39;)|S_t=s,A_t=a]
+\]</span> Q学习的更新公式为： <span class="math display">\[
 Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma\ \underset{a}{max}\
 Q(S_{t+1},a)-Q(S_t,A_t)]
-\]</span> <span
+\]</span> 它采用了对最优动作价值函数<span
+class="math inline">\(q_*\)</span>的直接近似作为学习目标，<span
 class="math inline">\(Q\)</span>值最终会收敛到最优动作价值函数<span
 class="math inline">\(q_*\)</span>；</p>
 <p><strong>Q学习算法的流程如图所示：</strong></p>
 <p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504211634752.png"  alt="image-20240504211634752" style="zoom: 33%;" /></p>
 <p>Q学习的回溯图：</p>
 <p><img src="/2024/05/04/《RL-Introduction》-chap6/image-20240504213502124.png"  alt="image-20240504213502124" style="zoom:33%;" /></p>
-<h4 id="期望sarsa">6.6 期望Sarsa</h4>
+<h4 id="期望sarsaoff-policy-sarsa">6.6 期望Sarsa（off-policy Sarsa)</h4>
 <h4 id="期望sarsa算法更新规则为">期望Sarsa算法更新规则为：</h4>
 <p><span class="math display">\[
 Q(S_t,A_t)\gets Q(S_t,A_t)+\alpha [R_{t+1}+\gamma
@@ -2970,6 +3050,84 @@ class="math inline">\(O(1)\)</span>;</p>
       </categories>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《应用非线性控制》第一章概论</title>
+    <url>/2024/08/30/%E3%80%8A%E5%BA%94%E7%94%A8%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%8E%A7%E5%88%B6%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E6%A6%82%E8%AE%BA/</url>
+    <content><![CDATA[<h3 id="chap1-引论">chap1 引论</h3>
+<h4 id="非线性控制的重要作用">1.非线性控制的重要作用：</h4>
+<ul>
+<li>现有的控制系统的改进</li>
+<li>硬非线性特性分析</li>
+<li>模型不确定性的处理</li>
+<li>设计的简化</li>
+</ul>
+<h4 id="非线性系统的性态">2. 非线性系统的性态</h4>
+<p>非线性系统使用非线性常微分方程描述，线性系统使用线性常微分方程描述</p>
+<h5 id="线性系统之时不变线性控制系统">2.1
+线性系统之时不变线性控制系统</h5>
+<p><span class="math display">\[
+\dot{x}=Ax
+\]</span></p>
+<p>其中，<span class="math inline">\(x\)</span>表示状态向量，<span
+class="math inline">\(A\)</span>是系统矩阵；</p>
+<ul>
+<li>当矩阵<span class="math inline">\(A\)</span>非奇异时，即<span
+class="math inline">\(|A|\ne0\)</span>时，方程<span
+class="math inline">\(Ax=0\)</span>有唯一零解，此时线性系统具有唯一的<strong>平衡点</strong>；</li>
+<li>如果<span class="math inline">\(A\)</span>有特征值<span
+class="math inline">\(\omega+\lambda j\)</span>,<span
+class="math inline">\(\omega&lt;0\)</span>,则平衡点<strong>稳定</strong>，他与初值无关；</li>
+<li>当存在外部输入<span class="math inline">\(u(t)\)</span>时,变为<span
+class="math inline">\(\dot{x}=Ax+Bu\)</span></li>
+</ul>
+<h5 id="非线性系统的例子">2.2 非线性系统的例子</h5>
+<p><span class="math display">\[
+\dot{v}+|v|v=u
+\]</span></p>
+<p>其中<span class="math inline">\(v\)</span>表示状态即车速，<span
+class="math inline">\(u\)</span>表示控制输入即推力</p>
+<p>假设到达匀速运动状态时，当<span
+class="math inline">\(u=1\)</span>时，<span
+class="math inline">\(0+|v_s|v_s=1\Rightarrow v_s=1\)</span>;当<span
+class="math inline">\(u=10\)</span>时，<span
+class="math inline">\(0+|v_s|v_s=10\Rightarrow
+v_s=\sqrt{10}\)</span>,可见非线性系统的状态对输入的影响，具有明显的非线性特征；</p>
+<h5 id="一些常见非线性系统的性态">2.4 一些常见非线性系统的性态</h5>
+<ul>
+<li>非线性系统通常具有一个以上的平衡点（平衡点：系统可以停留在一处，然后永远不动的一个点）</li>
+</ul>
+<p>对于非线性系统<span
+class="math inline">\(\dot{x}=-x+x^2,x(0)=x_0\)</span>，将其线性化（简单讲就是将高于一阶以上的项删除）得到线性系统<span
+class="math inline">\(\dot{x}=-x\)</span>，这个线性系统的精确解为<span
+class="math inline">\(x(t)=x_0e^{-t}\)</span>，对于任何初值<span
+class="math inline">\(x_0\)</span>，当<span
+class="math inline">\(t\to+\infty\)</span>时，该线性系统只有一个平衡点<span
+class="math inline">\(x=0\)</span>;而对于原非线性系统，其精确解可通过<span
+class="math inline">\(\dot{x}=\frac{dx}{dt}=-x+x^2\Rightarrow
+\frac{dx}{-x+x^2}=dt\)</span>然后等式两边同时积分得到非线性系统的精确解为</p>
+<p><span
+class="math inline">\(x(t)=\frac{1}{1-(1-\frac{1}{x_0})e^t}\)</span>，可知当初值<span
+class="math inline">\(x(0)&lt;1\)</span>时，则轨线收敛到平衡点0，当初值<span
+class="math inline">\(x(0)&gt;1\)</span>时，它在有限时间趋于无穷大，在无穷时间趋于0；这说明非线性系统的平衡点依赖于初值</p>
+<ul>
+<li><p>非线性系统的平衡点也依赖于输入值，如<span
+class="math inline">\(\dot{x}=xu\)</span>,若输入<span
+class="math inline">\(u=-1\)</span>时，则<span
+class="math inline">\(x=x_0e^{-t}\)</span>,平衡点为0;若输入<span
+class="math inline">\(u=1\)</span>时，<span
+class="math inline">\(x=x_0e^t\)</span>，平衡点为<span
+class="math inline">\(+\infty\)</span></p></li>
+<li><p>极限环：在没有外部激励的情况下非线性系统表现的固定值及固定周期的简谐振动，从能量角度就是，周期性地向环境释放能量和从环境中吸收能量；极限环不易受到参数变化的影响，临界稳定的线性系统的谐振则对系统参数改变十分敏感；</p></li>
+<li><p>混沌：混沌的基本特征是系统输出不可预测性，系统的输出对初始条件极为敏感；</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>《应用非线性控制》</category>
+      </categories>
+      <tags>
+        <tag>控制理论</tag>
       </tags>
   </entry>
 </search>
