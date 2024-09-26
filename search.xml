@@ -183,6 +183,37 @@ long类型；若无后缀且能存的下，则默认使用int类型存储；</p>
       </tags>
   </entry>
   <entry>
+    <title>DQN代码实现</title>
+    <url>/2024/09/14/DQN%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<ul>
+<li><p><code>tensor</code>类的<code>max</code>方法有两个返回值，分别是所在维度的最大值本身以及这些最大值的索引，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = torch.tensor([[<span class="number">1</span>,<span class="number">2</span>,-<span class="number">1</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">9</span>],[<span class="number">99</span>,<span class="number">10</span>,<span class="number">9</span>]])</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(a.<span class="built_in">max</span>(dim=<span class="number">0</span>))</span><br><span class="line">x,y = a.<span class="built_in">max</span>(dim=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(x,y)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-&quot;</span>.center(<span class="number">60</span>,<span class="string">&quot;*&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a.<span class="built_in">max</span>(dim=<span class="number">1</span>))</span><br><span class="line">m,n = a.<span class="built_in">max</span>(dim=<span class="number">1</span>)</span><br><span class="line"><span class="built_in">print</span>(m,n)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[ <span class="number">1</span>,  <span class="number">2</span>, -<span class="number">1</span>],</span><br><span class="line">        [ <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">9</span>],</span><br><span class="line">        [<span class="number">99</span>, <span class="number">10</span>,  <span class="number">9</span>]])</span><br><span class="line">torch.return_types.<span class="built_in">max</span>(</span><br><span class="line">values=tensor([<span class="number">99</span>, <span class="number">10</span>,  <span class="number">9</span>]),</span><br><span class="line">indices=tensor([<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>]))</span><br><span class="line">tensor([<span class="number">99</span>, <span class="number">10</span>,  <span class="number">9</span>]) tensor([<span class="number">2</span>, <span class="number">2</span>, <span class="number">1</span>])</span><br><span class="line">*****************************-******************************</span><br><span class="line">torch.return_types.<span class="built_in">max</span>(</span><br><span class="line">values=tensor([ <span class="number">2</span>,  <span class="number">9</span>, <span class="number">99</span>]),</span><br><span class="line">indices=tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>]))</span><br><span class="line">tensor([ <span class="number">2</span>,  <span class="number">9</span>, <span class="number">99</span>]) tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>])</span><br></pre></td></tr></table></figure></li>
+<li><p><code>tensor</code>类的<code>unsqueeze</code>方法可以增加<code>tensor</code>的维度，<code>dim=0</code>时增加在前面，<code>dim=1</code>时增加在后面，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test = torch.tensor([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="built_in">print</span>(test.unsqueeze(<span class="number">0</span>))</span><br><span class="line"><span class="built_in">print</span>(test.unsqueeze(<span class="number">0</span>).shape)</span><br><span class="line"><span class="built_in">print</span>(test.unsqueeze(<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(test.unsqueeze(<span class="number">1</span>).shape)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]])</span><br><span class="line">torch.Size([<span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line">tensor([[<span class="number">1</span>],</span><br><span class="line">        [<span class="number">2</span>],</span><br><span class="line">        [<span class="number">3</span>]])</span><br><span class="line">torch.Size([<span class="number">3</span>, <span class="number">1</span>])</span><br></pre></td></tr></table></figure></li>
+<li><p><code>tensor</code>类的<code>squeeze</code>方法可以将维度减为1，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor_test = torch.tensor([[<span class="number">1</span>],[<span class="number">2</span>],[<span class="number">3</span>],[<span class="number">4</span>],[<span class="number">5</span>]])</span><br><span class="line"><span class="built_in">print</span>(tensor_test.shape)</span><br><span class="line"><span class="built_in">print</span>(tensor_test.squeeze())</span><br><span class="line"><span class="built_in">print</span>(tensor_test.squeeze().shape)</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.Size([<span class="number">5</span>, <span class="number">1</span>])</span><br><span class="line">tensor([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">torch.Size([<span class="number">5</span>])</span><br></pre></td></tr></table></figure></li>
+<li><p>通过设置
+<code>random</code>、<code>numpy</code>、<code>torch</code>（CPU 和
+CUDA）相关的随机数生成器的种子，确保程序中所有涉及随机性的操作（如权重初始化、数据采样等）在多次运行时是
+<strong>可复现的</strong>。如果不设置随机数种子，即使代码和数据相同，每次运行可能会产生不同的结果。通过设置随机数种子，我们可以确保多次运行的结果是完全相同的，有利于调试和验证模型的表现。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">set_seed</span>(<span class="params">args</span>):</span><br><span class="line">    random.seed(args.seed)           <span class="comment"># 设置 Python 内置的随机数生成器的种子</span></span><br><span class="line">    np.random.seed(args.seed)        <span class="comment"># 设置 numpy 中的随机数生成器的种子</span></span><br><span class="line">    torch.manual_seed(args.seed)     <span class="comment"># 设置 PyTorch CPU 计算的随机数生成器的种子</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> args.no_cuda:</span><br><span class="line">        torch.cuda.manual_seed(args.seed)  <span class="comment"># 设置 PyTorch 在 GPU 上（CUDA）的随机数生成器的种子</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习、人工智能</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2024/03/31/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very
@@ -1318,74 +1349,6 @@ Q_{t+n}(S_t,A_t)=Q_{t+n-1}(S_t,A_t)+\alpha
       </tags>
   </entry>
   <entry>
-    <title>《RL-Introduction》-chap8</title>
-    <url>/2024/05/16/%E3%80%8ARL-Introduction%E3%80%8B-chap8/</url>
-    <content><![CDATA[<hr />
-<h3 id="chap8-基于表格型方法的规划和学习">chap8
-基于表格型方法的规划和学习</h3>
-<ul>
-<li>基于模型的强化学习方法将<strong>规划</strong>作为其主要组成部分</li>
-<li>无模型的强化学习方法主要依赖于<strong>学习</strong></li>
-</ul>
-<h4 id="模型和规划">8.1 模型和规划</h4>
-<ul>
-<li><p><strong>模型</strong>：智能体用来预测环境对其动作的反应的任何事物，给定一个状态和动作，作为环境的反应结果，模型就会产生后继状态和下一个收益的预测。其中可分为<strong>分布模型</strong>：模型生成对所有可能结果的描述及其对应的概率分布；<strong>样本模型</strong>：模型通过概率分布采样从所有的可能性中生成一个确定的结果。</p></li>
-<li><p>分布模型可以用来生成样本模型，分布模型获取困难，样本模型获取简单。</p></li>
-<li><p><strong>规划</strong>：任何以环境模型为输入，并生成或改进与它进行交互的策略的计算过程。</p>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516095022376.png"  alt="image-20240516095022376" style="zoom:50%;" /></p></li>
-<li><p>随机采样单步表格型Q规划：</p>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p>
-<ul>
-<li>采用较小增量式步长的规划方法的好处是：能够在任何时候中断和重定向规划，而且几乎不浪费计算资源。</li>
-</ul></li>
-</ul>
-<h4 id="dyna集成在一起的规划动作和学习">8.2
-Dyna：集成在一起的规划、动作和学习</h4>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823095809381.png"  alt="image-20240823095809381" style="zoom: 50%;" /></p>
-<ul>
-<li>如图所示，大圈表示间接强化学习，即通过模型间接地改善价值函数和策略。右边小圈则表示直接强化学习，即直接从经验中学习到价值函数和策略。</li>
-</ul>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516110343794.png"  alt="image-20240516110343794" style="zoom:50%;" /></p>
-<ul>
-<li>在Dyna-Q中，学习和规划是由完全相同的算法完成的，真实经验用于学习，模拟经验用于规划。</li>
-</ul>
-<h4 id="模型错误纠正">8.3 模型错误纠正</h4>
-<h4 id="优先遍历">8.4 优先遍历</h4>
-<p>一般的模拟经验是从所有之前经历过的那些“状态-动作”二元组中随机采样得到的，我们可以不均匀采样，而去采样那些特定的更有用的“状态-动作”二元组，以提高学习效果。具体思想方法是从任何能使得价值发生变化的状态开始反向计算，这被称为规划计算的<strong>反向聚焦。</strong></p>
-<h4 id="期望更新与采样更新的对比">8.5 期望更新与采样更新的对比</h4>
-<p>不同类型的价值函数：</p>
-<ul>
-<li>状态价值还是动作价值</li>
-<li>对应最优策略还是任意给定策略</li>
-<li>采用期望更新还是采样更新</li>
-</ul>
-<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823115633419.png"  alt="image-20240823115633419" style="zoom: 50%;" /></p>
-<ul>
-<li><p>期望更新近似<span class="math inline">\(q^*\)</span>: <span
-class="math display">\[
-Q(s,a)=\sum\limits_{s&#39;,r}\hat{p}(s&#39;,r|s,a)[r+\underset{a&#39;}{max}Q(s&#39;,a&#39;)]
-\]</span></p></li>
-<li><p>采样更新近似<span class="math inline">\(q^*\)</span>: <span
-class="math display">\[
-Q(s,a)=Q(s,a)+\alpha[R+\gamma\underset{a&#39;}{max}Q(s&#39;,a&#39;)-Q(s,a)]
-\]</span></p></li>
-<li><p>在实际应用中，采样更新通常更适用。</p></li>
-</ul>
-<h4 id="轨迹采样">8.6 轨迹采样</h4>
-<h4 id="实时动态规划">8.7 实时动态规划</h4>
-<h4 id="决策时规划">8.8 决策时规划</h4>
-<h4 id="启发式搜索">8.9 启发式搜索</h4>
-<h4 id="预演算法">8.10 预演算法</h4>
-<h4 id="mtcs蒙特卡洛树搜索">8.11 MTCS蒙特卡洛树搜索</h4>
-]]></content>
-      <categories>
-        <category>RLintroduction</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《RL:Introduction》-chap6</title>
     <url>/2024/05/04/%E3%80%8ARL-Introduction%E3%80%8B-chap6/</url>
     <content><![CDATA[<hr />
@@ -1526,16 +1489,71 @@ Q_2(S_{t+1},argmax_a Q_1(S_{t+1},a))-Q_1(S_t,A_t)]
       </tags>
   </entry>
   <entry>
-    <title>人工智能数学基础chap7-函数逼近</title>
-    <url>/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/</url>
-    <content><![CDATA[<h3 id="chap7-函数逼近">chap7 函数逼近</h3>
-<h4 id="函数插值">7.1 函数插值</h4>
+    <title>《RL-Introduction》-chap8</title>
+    <url>/2024/05/16/%E3%80%8ARL-Introduction%E3%80%8B-chap8/</url>
+    <content><![CDATA[<hr />
+<h3 id="chap8-基于表格型方法的规划和学习">chap8
+基于表格型方法的规划和学习</h3>
+<ul>
+<li>基于模型的强化学习方法将<strong>规划</strong>作为其主要组成部分</li>
+<li>无模型的强化学习方法主要依赖于<strong>学习</strong></li>
+</ul>
+<h4 id="模型和规划">8.1 模型和规划</h4>
+<ul>
+<li><p><strong>模型</strong>：智能体用来预测环境对其动作的反应的任何事物，给定一个状态和动作，作为环境的反应结果，模型就会产生后继状态和下一个收益的预测。其中可分为<strong>分布模型</strong>：模型生成对所有可能结果的描述及其对应的概率分布；<strong>样本模型</strong>：模型通过概率分布采样从所有的可能性中生成一个确定的结果。</p></li>
+<li><p>分布模型可以用来生成样本模型，分布模型获取困难，样本模型获取简单。</p></li>
+<li><p><strong>规划</strong>：任何以环境模型为输入，并生成或改进与它进行交互的策略的计算过程。</p>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516095022376.png"  alt="image-20240516095022376" style="zoom:50%;" /></p></li>
+<li><p>随机采样单步表格型Q规划：</p>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516101301240.png"  alt="image-20240516101301240" style="zoom:50%;" /></p>
+<ul>
+<li>采用较小增量式步长的规划方法的好处是：能够在任何时候中断和重定向规划，而且几乎不浪费计算资源。</li>
+</ul></li>
+</ul>
+<h4 id="dyna集成在一起的规划动作和学习">8.2
+Dyna：集成在一起的规划、动作和学习</h4>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823095809381.png"  alt="image-20240823095809381" style="zoom: 50%;" /></p>
+<ul>
+<li>如图所示，大圈表示间接强化学习，即通过模型间接地改善价值函数和策略。右边小圈则表示直接强化学习，即直接从经验中学习到价值函数和策略。</li>
+</ul>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240516110343794.png"  alt="image-20240516110343794" style="zoom:50%;" /></p>
+<ul>
+<li>在Dyna-Q中，学习和规划是由完全相同的算法完成的，真实经验用于学习，模拟经验用于规划。</li>
+</ul>
+<h4 id="模型错误纠正">8.3 模型错误纠正</h4>
+<h4 id="优先遍历">8.4 优先遍历</h4>
+<p>一般的模拟经验是从所有之前经历过的那些“状态-动作”二元组中随机采样得到的，我们可以不均匀采样，而去采样那些特定的更有用的“状态-动作”二元组，以提高学习效果。具体思想方法是从任何能使得价值发生变化的状态开始反向计算，这被称为规划计算的<strong>反向聚焦。</strong></p>
+<h4 id="期望更新与采样更新的对比">8.5 期望更新与采样更新的对比</h4>
+<p>不同类型的价值函数：</p>
+<ul>
+<li>状态价值还是动作价值</li>
+<li>对应最优策略还是任意给定策略</li>
+<li>采用期望更新还是采样更新</li>
+</ul>
+<p><img src="/2024/05/16/《RL-Introduction》-chap8/image-20240823115633419.png"  alt="image-20240823115633419" style="zoom: 50%;" /></p>
+<ul>
+<li><p>期望更新近似<span class="math inline">\(q^*\)</span>: <span
+class="math display">\[
+Q(s,a)=\sum\limits_{s&#39;,r}\hat{p}(s&#39;,r|s,a)[r+\underset{a&#39;}{max}Q(s&#39;,a&#39;)]
+\]</span></p></li>
+<li><p>采样更新近似<span class="math inline">\(q^*\)</span>: <span
+class="math display">\[
+Q(s,a)=Q(s,a)+\alpha[R+\gamma\underset{a&#39;}{max}Q(s&#39;,a&#39;)-Q(s,a)]
+\]</span></p></li>
+<li><p>在实际应用中，采样更新通常更适用。</p></li>
+</ul>
+<h4 id="轨迹采样">8.6 轨迹采样</h4>
+<h4 id="实时动态规划">8.7 实时动态规划</h4>
+<h4 id="决策时规划">8.8 决策时规划</h4>
+<h4 id="启发式搜索">8.9 启发式搜索</h4>
+<h4 id="预演算法">8.10 预演算法</h4>
+<h4 id="mtcs蒙特卡洛树搜索">8.11 MTCS蒙特卡洛树搜索</h4>
 ]]></content>
       <categories>
-        <category>人工智能数学基础</category>
+        <category>RLintroduction</category>
       </categories>
       <tags>
-        <tag>人工智能</tag>
+        <tag>强化学习</tag>
       </tags>
   </entry>
   <entry>
@@ -1695,6 +1713,97 @@ class="math inline">\(x\)</span>为从SGD的输入向量的分布中选取的一
       </categories>
       <tags>
         <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《应用非线性控制》第一章概论</title>
+    <url>/2024/08/30/%E3%80%8A%E5%BA%94%E7%94%A8%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%8E%A7%E5%88%B6%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E6%A6%82%E8%AE%BA/</url>
+    <content><![CDATA[<h3 id="chap1-引论">chap1 引论</h3>
+<h4 id="非线性控制的重要作用">1.非线性控制的重要作用：</h4>
+<ul>
+<li>现有的控制系统的改进</li>
+<li>硬非线性特性分析</li>
+<li>模型不确定性的处理</li>
+<li>设计的简化</li>
+</ul>
+<h4 id="非线性系统的性态">2. 非线性系统的性态</h4>
+<p>非线性系统使用非线性常微分方程描述，线性系统使用线性常微分方程描述</p>
+<h5 id="线性系统之时不变线性控制系统">2.1
+线性系统之时不变线性控制系统</h5>
+<p><span class="math display">\[
+\dot{x}=Ax
+\]</span></p>
+<p>其中，<span class="math inline">\(x\)</span>表示状态向量，<span
+class="math inline">\(A\)</span>是系统矩阵；</p>
+<ul>
+<li>当矩阵<span class="math inline">\(A\)</span>非奇异时，即<span
+class="math inline">\(|A|\ne0\)</span>时，方程<span
+class="math inline">\(Ax=0\)</span>有唯一零解，此时线性系统具有唯一的<strong>平衡点</strong>；</li>
+<li>如果<span class="math inline">\(A\)</span>有特征值<span
+class="math inline">\(\omega+\lambda j\)</span>,<span
+class="math inline">\(\omega&lt;0\)</span>,则平衡点<strong>稳定</strong>，他与初值无关；</li>
+<li>当存在外部输入<span class="math inline">\(u(t)\)</span>时,变为<span
+class="math inline">\(\dot{x}=Ax+Bu\)</span></li>
+</ul>
+<h5 id="非线性系统的例子">2.2 非线性系统的例子</h5>
+<p><span class="math display">\[
+\dot{v}+|v|v=u
+\]</span></p>
+<p>其中<span class="math inline">\(v\)</span>表示状态即车速，<span
+class="math inline">\(u\)</span>表示控制输入即推力</p>
+<p>假设到达匀速运动状态时，当<span
+class="math inline">\(u=1\)</span>时，<span
+class="math inline">\(0+|v_s|v_s=1\Rightarrow v_s=1\)</span>;当<span
+class="math inline">\(u=10\)</span>时，<span
+class="math inline">\(0+|v_s|v_s=10\Rightarrow
+v_s=\sqrt{10}\)</span>,可见非线性系统的状态对输入的影响，具有明显的非线性特征；</p>
+<h5 id="一些常见非线性系统的性态">2.4 一些常见非线性系统的性态</h5>
+<ul>
+<li>非线性系统通常具有一个以上的平衡点（平衡点：系统可以停留在一处，然后永远不动的一个点）</li>
+</ul>
+<p>对于非线性系统<span
+class="math inline">\(\dot{x}=-x+x^2,x(0)=x_0\)</span>，将其线性化（简单讲就是将高于一阶以上的项删除）得到线性系统<span
+class="math inline">\(\dot{x}=-x\)</span>，这个线性系统的精确解为<span
+class="math inline">\(x(t)=x_0e^{-t}\)</span>，对于任何初值<span
+class="math inline">\(x_0\)</span>，当<span
+class="math inline">\(t\to+\infty\)</span>时，该线性系统只有一个平衡点<span
+class="math inline">\(x=0\)</span>;而对于原非线性系统，其精确解可通过<span
+class="math inline">\(\dot{x}=\frac{dx}{dt}=-x+x^2\Rightarrow
+\frac{dx}{-x+x^2}=dt\)</span>然后等式两边同时积分得到非线性系统的精确解为</p>
+<p><span
+class="math inline">\(x(t)=\frac{1}{1-(1-\frac{1}{x_0})e^t}\)</span>，可知当初值<span
+class="math inline">\(x(0)&lt;1\)</span>时，则轨线收敛到平衡点0，当初值<span
+class="math inline">\(x(0)&gt;1\)</span>时，它在有限时间趋于无穷大，在无穷时间趋于0；这说明非线性系统的平衡点依赖于初值</p>
+<ul>
+<li><p>非线性系统的平衡点也依赖于输入值，如<span
+class="math inline">\(\dot{x}=xu\)</span>,若输入<span
+class="math inline">\(u=-1\)</span>时，则<span
+class="math inline">\(x=x_0e^{-t}\)</span>,平衡点为0;若输入<span
+class="math inline">\(u=1\)</span>时，<span
+class="math inline">\(x=x_0e^t\)</span>，平衡点为<span
+class="math inline">\(+\infty\)</span></p></li>
+<li><p>极限环：在没有外部激励的情况下非线性系统表现的固定值及固定周期的简谐振动，从能量角度就是，周期性地向环境释放能量和从环境中吸收能量；极限环不易受到参数变化的影响，临界稳定的线性系统的谐振则对系统参数改变十分敏感；</p></li>
+<li><p>混沌：混沌的基本特征是系统输出不可预测性，系统的输出对初始条件极为敏感；</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>《应用非线性控制》</category>
+      </categories>
+      <tags>
+        <tag>控制理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>人工智能数学基础chap7-函数逼近</title>
+    <url>/2024/06/27/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80chap7-%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91/</url>
+    <content><![CDATA[<h3 id="chap7-函数逼近">chap7 函数逼近</h3>
+<h4 id="函数插值">7.1 函数插值</h4>
+]]></content>
+      <categories>
+        <category>人工智能数学基础</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
       </tags>
   </entry>
   <entry>
@@ -2023,6 +2132,133 @@ class="math inline">\(S(n)=O(1)\)</span></p></li>
       </tags>
   </entry>
   <entry>
+    <title>栈-队列-数组</title>
+    <url>/2024/09/04/%E6%A0%88-%E9%98%9F%E5%88%97-%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="chap-3-栈队列和数组">chap 3 栈、队列和数组</h3>
+<h4 id="栈">3.1 栈</h4>
+<ul>
+<li><p>栈的操作特性：先进后出</p></li>
+<li><p>栈的数学性质之卡特兰数：<span
+class="math inline">\(n\)</span>个不同的元素进栈，出栈顺序种数为<span
+class="math inline">\(\frac{1}{n+1}C_{2n}^{n}\)</span></p></li>
+<li><p>顺序栈</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SqStack</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,top:<span class="built_in">int</span>,data_list:<span class="built_in">list</span></span>):</span><br><span class="line">        self.top = top</span><br><span class="line">        self.data_list = data_list</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">InitStack</span>(<span class="params">self</span>):</span><br><span class="line">        self.top = -<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">StackEmpty</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (self.top==-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Push</span>(<span class="params">self,element</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top == MaxSize-<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.data_list.append(element)</span><br><span class="line">            self.top+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">Pop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top == -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            return_data = self.data_list[self.top]</span><br><span class="line">            <span class="keyword">del</span> self.data_list[self.top]</span><br><span class="line">            self.top-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> return_data</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">GetTop</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.top == -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> self.data_list[self.top]</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+<li><p>链栈</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data</span>):</span><br><span class="line">        self.data = data  <span class="comment"># 存储数据</span></span><br><span class="line">        self.<span class="built_in">next</span> = <span class="literal">None</span>  <span class="comment"># 指向下一个节点的引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LinkedList</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.head = <span class="literal">None</span>  <span class="comment"># 初始化链表时，头节点为空</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在链表的末尾添加一个新节点</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">append</span>(<span class="params">self, data</span>):</span><br><span class="line">        new_node = Node(data)</span><br><span class="line">        <span class="keyword">if</span> self.head <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            self.head = new_node</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        last_node = self.head</span><br><span class="line">        <span class="keyword">while</span> last_node.<span class="built_in">next</span>:</span><br><span class="line">            last_node = last_node.<span class="built_in">next</span></span><br><span class="line">        last_node.<span class="built_in">next</span> = new_node</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 在链表的开头添加一个新节点</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">prepend</span>(<span class="params">self, data</span>):</span><br><span class="line">        new_node = Node(data)</span><br><span class="line">        new_node.<span class="built_in">next</span> = self.head</span><br><span class="line">        self.head = new_node</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 打印链表中的所有元素</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">print_list</span>(<span class="params">self</span>):</span><br><span class="line">        current_node = self.head</span><br><span class="line">        <span class="keyword">while</span> current_node:</span><br><span class="line">            <span class="built_in">print</span>(current_node.data, end=<span class="string">&quot; -&gt; &quot;</span>)</span><br><span class="line">            current_node = current_node.<span class="built_in">next</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;None&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 删除链表中的一个节点</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete_node</span>(<span class="params">self, key</span>):</span><br><span class="line">        current_node = self.head</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果要删除的节点是头节点</span></span><br><span class="line">        <span class="keyword">if</span> current_node <span class="keyword">and</span> current_node.data == key:</span><br><span class="line">            self.head = current_node.<span class="built_in">next</span></span><br><span class="line">            current_node = <span class="literal">None</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果要删除的节点不是头节点</span></span><br><span class="line">        prev_node = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span> current_node <span class="keyword">and</span> current_node.data != key:</span><br><span class="line">            prev_node = current_node</span><br><span class="line">            current_node = current_node.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> current_node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span>  <span class="comment"># 如果没有找到节点</span></span><br><span class="line"></span><br><span class="line">        prev_node.<span class="built_in">next</span> = current_node.<span class="built_in">next</span></span><br><span class="line">        current_node = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 查找链表中的第 i 位数据</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_data_at_position</span>(<span class="params">self, position</span>):</span><br><span class="line">        current_node = self.head</span><br><span class="line">        current_position = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> current_node:</span><br><span class="line">            <span class="keyword">if</span> current_position == position:</span><br><span class="line">                <span class="keyword">return</span> current_node.data</span><br><span class="line">            current_node = current_node.<span class="built_in">next</span></span><br><span class="line">            current_position += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span>  <span class="comment"># 如果位置超出链表长度，返回 None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试链表实现</span></span><br><span class="line">linked_list = LinkedList()</span><br><span class="line">linked_list.append(<span class="number">9</span>)</span><br><span class="line">linked_list.append(<span class="number">99</span>)</span><br><span class="line">linked_list.append(<span class="number">999</span>)</span><br><span class="line">linked_list.prepend(<span class="number">0</span>)</span><br><span class="line">linked_list.print_list()  <span class="comment"># 输出: 0 -&gt; 1 -&gt; 2 -&gt; 3 -&gt; None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取第 2 位的数据</span></span><br><span class="line"><span class="built_in">print</span>(linked_list.get_data_at_position(<span class="number">2</span>))  <span class="comment"># 输出: 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取第 4 位的数据</span></span><br><span class="line"><span class="built_in">print</span>(linked_list.get_data_at_position(<span class="number">4</span>))  <span class="comment"># 输出: 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取第 5 位的数据（超出链表长度）</span></span><br><span class="line"><span class="built_in">print</span>(linked_list.get_data_at_position(<span class="number">5</span>))  <span class="comment"># 输出: None</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="队列">3.2 队列</h4>
+<ul>
+<li>顺序队列</li>
+<li>循环队列</li>
+<li>链式队列</li>
+<li>双端队列：队头队尾均可以插入删除即入队出队</li>
+</ul>
+<h4 id="应用">3.3 应用</h4>
+<ul>
+<li><p>栈与括号匹配：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_valid_parentheses</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="comment"># 创建一个栈来存储左括号</span></span><br><span class="line">    stack = []</span><br><span class="line">    <span class="comment"># 定义一个括号匹配的映射</span></span><br><span class="line">    mapping = &#123;<span class="string">&#x27;)&#x27;</span>: <span class="string">&#x27;(&#x27;</span>, <span class="string">&#x27;&#125;&#x27;</span>: <span class="string">&#x27;&#123;&#x27;</span>, <span class="string">&#x27;]&#x27;</span>: <span class="string">&#x27;[&#x27;</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">        <span class="keyword">if</span> char <span class="keyword">in</span> mapping.values():</span><br><span class="line">            <span class="comment"># 如果字符是左括号，推入栈中</span></span><br><span class="line">            stack.append(char)</span><br><span class="line">        <span class="keyword">elif</span> char <span class="keyword">in</span> mapping.keys():</span><br><span class="line">            <span class="comment"># 如果字符是右括号</span></span><br><span class="line">            <span class="keyword">if</span> stack <span class="keyword">and</span> stack[-<span class="number">1</span>] == mapping[char]:</span><br><span class="line">                <span class="comment"># 如果栈顶的左括号与当前的右括号匹配，则弹出栈顶的左括号</span></span><br><span class="line">                stack.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment"># 如果不匹配或栈为空，则括号不匹配</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 如果栈为空，则所有的括号都匹配</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> stack</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试示例</span></span><br><span class="line"><span class="built_in">print</span>(is_valid_parentheses(<span class="string">&quot;()&quot;</span>))          <span class="comment"># 输出: True</span></span><br><span class="line"><span class="built_in">print</span>(is_valid_parentheses(<span class="string">&quot;()[]&#123;&#125;&quot;</span>))      <span class="comment"># 输出: True</span></span><br><span class="line"><span class="built_in">print</span>(is_valid_parentheses(<span class="string">&quot;(]&quot;</span>))          <span class="comment"># 输出: False</span></span><br><span class="line"><span class="built_in">print</span>(is_valid_parentheses(<span class="string">&quot;([)]&quot;</span>))        <span class="comment"># 输出: False</span></span><br><span class="line"><span class="built_in">print</span>(is_valid_parentheses(<span class="string">&quot;&#123;[]&#125;&quot;</span>))        <span class="comment"># 输出: True</span></span><br></pre></td></tr></table></figure></li>
+<li><p>栈与表达式求值</p>
+<p>先将我们常用的中缀表达式转换成后缀表达式：（先标注运算顺序，然后按相对位置写：操作数
+操作数
+符号），转换完成后，对后缀表达式从左到右扫描，若该项是操作数，则将其压入栈中；若该项是操作符op，则连续从栈中退出两个操作数Y,X,形成运算指令XopY,算出结果后将其压入栈中。当后缀表达式的所有项都扫描完成后，栈顶存放的就是计算结果。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">infix_to_postfix</span>(<span class="params">expression</span>):</span><br><span class="line">    precedence = &#123;<span class="string">&#x27;+&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;-&#x27;</span>: <span class="number">1</span>, <span class="string">&#x27;*&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;/&#x27;</span>: <span class="number">2</span>, <span class="string">&#x27;(&#x27;</span>: <span class="number">0</span>&#125;</span><br><span class="line">    stack = []</span><br><span class="line">    output = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> expression:</span><br><span class="line">        <span class="keyword">if</span> char.isnumeric():  <span class="comment"># 如果是操作数，直接加入到输出列表</span></span><br><span class="line">            output.append(char)</span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;(&#x27;</span>:  <span class="comment"># 如果是左括号，压入栈</span></span><br><span class="line">            stack.append(char)</span><br><span class="line">        <span class="keyword">elif</span> char == <span class="string">&#x27;)&#x27;</span>:  <span class="comment"># 如果是右括号，弹出栈直到遇到左括号</span></span><br><span class="line">            top_token = stack.pop()</span><br><span class="line">            <span class="keyword">while</span> top_token != <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                output.append(top_token)</span><br><span class="line">                top_token = stack.pop()</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果是运算符</span></span><br><span class="line">            <span class="keyword">while</span> stack <span class="keyword">and</span> precedence[stack[-<span class="number">1</span>]] &gt;= precedence[char]:</span><br><span class="line">                output.append(stack.pop())</span><br><span class="line">            stack.append(char)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将栈中剩余的操作符加入输出列表</span></span><br><span class="line">    <span class="keyword">while</span> stack:</span><br><span class="line">        output.append(stack.pop())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> output</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate_postfix</span>(<span class="params">postfix_expression</span>):</span><br><span class="line">    stack = []</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> postfix_expression:</span><br><span class="line">        <span class="keyword">if</span> char.isnumeric():  <span class="comment"># 如果是操作数，压入栈</span></span><br><span class="line">            stack.append(<span class="built_in">int</span>(char))</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 如果是操作符，弹出两个操作数进行计算</span></span><br><span class="line">            operand2 = stack.pop()</span><br><span class="line">            operand1 = stack.pop()</span><br><span class="line">            <span class="keyword">if</span> char == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                result = operand1 + operand2</span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                result = operand1 - operand2</span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                result = operand1 * operand2</span><br><span class="line">            <span class="keyword">elif</span> char == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                result = operand1 / operand2</span><br><span class="line">            stack.append(result)  <span class="comment"># 将结果压入栈</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> stack.pop()  <span class="comment"># 返回栈顶的结果</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">evaluate_expression</span>(<span class="params">expression</span>):</span><br><span class="line">    postfix_expression = infix_to_postfix(expression)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Postfix Expression: &quot;</span>, <span class="string">&#x27; &#x27;</span>.join(postfix_expression))</span><br><span class="line">    result = evaluate_postfix(postfix_expression)</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">expression = <span class="string">&quot;3+2*(4-5)-3/2&quot;</span></span><br><span class="line">result = evaluate_expression(expression)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Result: &quot;</span>, result)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p>队列与二叉树层序遍历</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TreeNode</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, value=<span class="number">0</span>, left=<span class="literal">None</span>, right=<span class="literal">None</span></span>):</span><br><span class="line">        self.value = value</span><br><span class="line">        self.left = left</span><br><span class="line">        self.right = right</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">level_order_traversal</span>(<span class="params">root</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">        <span class="keyword">return</span> []</span><br><span class="line"></span><br><span class="line">    result = []</span><br><span class="line">    queue = [root]  <span class="comment"># 初始化队列，将根节点放入列表中</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> queue:</span><br><span class="line">        level = []  <span class="comment"># 用于存储当前层的节点值</span></span><br><span class="line">        level_size = <span class="built_in">len</span>(queue)  <span class="comment"># 当前层的节点数量</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(level_size):</span><br><span class="line">            node = queue.pop(<span class="number">0</span>)  <span class="comment"># 弹出队列中的第一个节点</span></span><br><span class="line">            level.append(node.value)  <span class="comment"># 将节点的值加入当前层的列表</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 将子节点加入队列（先左后右）</span></span><br><span class="line">            <span class="keyword">if</span> node.left:</span><br><span class="line">                queue.append(node.left)</span><br><span class="line">            <span class="keyword">if</span> node.right:</span><br><span class="line">                queue.append(node.right)</span><br><span class="line"></span><br><span class="line">        result.append(level)  <span class="comment"># 将当前层的结果加入最终的结果列表</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="comment"># 创建二叉树</span></span><br><span class="line"><span class="comment">#        1</span></span><br><span class="line"><span class="comment">#       / \</span></span><br><span class="line"><span class="comment">#      2   3</span></span><br><span class="line"><span class="comment">#     / \   \</span></span><br><span class="line"><span class="comment">#    4   5   6</span></span><br><span class="line"></span><br><span class="line">root = TreeNode(<span class="number">1</span>)</span><br><span class="line">root.left = TreeNode(<span class="number">2</span>)</span><br><span class="line">root.right = TreeNode(<span class="number">3</span>)</span><br><span class="line">root.left.left = TreeNode(<span class="number">4</span>)</span><br><span class="line">root.left.right = TreeNode(<span class="number">5</span>)</span><br><span class="line">root.right.right = TreeNode(<span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用层序遍历</span></span><br><span class="line">result = level_order_traversal(root)</span><br><span class="line"><span class="built_in">print</span>(result)  <span class="comment"># 输出: [[1], [2, 3], [4, 5, 6]]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>浅拷贝</strong>：新对象与原对象共享内层的可变对象，修改这些内层对象会同时影响两个对象</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始列表</span></span><br><span class="line">original_list = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 浅拷贝</span></span><br><span class="line">shallow_copy = copy.copy(original_list)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原始列表中的第一个子列表</span></span><br><span class="line">original_list[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">99</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(original_list)    <span class="comment"># 输出: [[99, 2], [3, 4]]</span></span><br><span class="line"><span class="built_in">print</span>(shallow_copy)     <span class="comment"># 输出: [[99, 2], [3, 4]]  &lt;-- 被影响</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>深拷贝</strong>:新对象与原对象完全独立，修改任何一方的内容不会影响另一方</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 原始列表</span></span><br><span class="line">original_list = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 深拷贝</span></span><br><span class="line">deep_copy = copy.deepcopy(original_list)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改原始列表中的第一个子列表</span></span><br><span class="line">original_list[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">99</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(original_list)    <span class="comment"># 输出: [[99, 2], [3, 4]]</span></span><br><span class="line"><span class="built_in">print</span>(deep_copy)        <span class="comment"># 输出: [[1, 2], [3, 4]]  &lt;-- 没有被影响</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>直接赋值</strong>：也称作引用传递，只是让两个变量指向同一个对象，完全共享同一个内存地址，没有新对象被创建。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">list_a = [<span class="number">1</span>,<span class="number">23</span>]</span><br><span class="line">list_b = list_a</span><br><span class="line">list_a[<span class="number">0</span>] = <span class="number">99</span></span><br><span class="line">list_a,list_b            <span class="comment"># 输出: [[99, 23], [99, 23]]  &lt;-- 被影响</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>串的模式匹配</strong></p>
+<p>即返回子串在主串中的索引值：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">SubstrIndex</span>(<span class="params">str1: <span class="built_in">str</span>, str2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">    i,j = <span class="number">0</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(str1) <span class="keyword">and</span> j &lt; <span class="built_in">len</span>(str2):</span><br><span class="line">        <span class="keyword">if</span> str1[i] == str2[j]:</span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">            j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i = i - j + <span class="number">1</span></span><br><span class="line">            j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> j &gt;= <span class="built_in">len</span>(str2):</span><br><span class="line">        <span class="keyword">return</span> i - <span class="built_in">len</span>(str2)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    str1 = <span class="string">&#x27;ababcabcacbab&#x27;</span></span><br><span class="line">    str2 = <span class="string">&#x27;abcac&#x27;</span></span><br><span class="line">    <span class="built_in">print</span>(SubstrIndex(str1, str2))</span><br></pre></td></tr></table></figure>
+<p>上述为模式匹配的暴力求解算法，其最坏时间复杂度为<span
+class="math inline">\(o(len1*len2)\)</span></p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>重温数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树与二叉树</title>
+    <url>/2024/09/06/%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
+    <content><![CDATA[<h3 id="chap5-树与二叉树">chap5 树与二叉树</h3>
+<h4 id="树的基本概念">5.1 树的基本概念</h4>
+<ul>
+<li><p>树的递归定义：树是<span class="math inline">\(n(n\ge
+0)\)</span>个结点的有限集，当<span
+class="math inline">\(n=0\)</span>时，称为空树。在任意一棵非空树中应满足：</p>
+<p>（1）有且仅有一个特定的被称为<strong>根</strong>的结点；</p>
+<p>（2）当<span
+class="math inline">\(n&gt;1\)</span>时，其余结点可分为<span
+class="math inline">\(m(m&gt;0)\)</span>个互不相交的有限集<span
+class="math inline">\(T_1,T_2,...,T_m\)</span>,其中每个集合本身又是一棵树，称其为根的子树。</p></li>
+<li><p>树中的结点数等于所有结点的度数之和加1</p></li>
+<li><p>度为<span class="math inline">\(m\)</span>的树中第<span
+class="math inline">\(i\)</span>层上至多有<span
+class="math inline">\(m^{i-1}\)</span>个结点(<span
+class="math inline">\(i\ge 1\)</span>)</p></li>
+<li><p>高度为<span class="math inline">\(h\)</span>的<span
+class="math inline">\(m\)</span>叉树至多有<span
+class="math inline">\(1+m+...+m^{h-2}+m^{h-1}=\frac{m^h-1}{m-1}\)</span>个结点</p></li>
+<li><p>具有<span class="math inline">\(n\)</span>个结点的<span
+class="math inline">\(m\)</span>叉树的高度为$log_m(n(m-1)+1) $</p></li>
+</ul>
+<h4 id="二叉树">5.2 二叉树</h4>
+<ul>
+<li><p>二叉树：<span class="math inline">\(m=2\)</span>的有序树</p></li>
+<li><p>满二叉树：满二叉树是除了叶子结点之外其他每个结点度数均为2的二叉树;高度为<span
+class="math inline">\(h\)</span>的满二叉树含有<span
+class="math inline">\(2^h-1\)</span>个结点。对满二叉树按层编号，则对于编号为<span
+class="math inline">\(i\)</span>的结点，其双亲结点为$i/2
+$，若有左孩子，则左孩子为<span
+class="math inline">\(2i\)</span>；若有右孩子，则右孩子为<span
+class="math inline">\(2i+1\)</span></p></li>
+<li><p>完全二叉树：相同高度的满二叉树缺失最下层最右边的一些连续叶子结点</p></li>
+<li><p>二叉排序树：左子树上所有结点的关键字均小于根结点的关键字，右子树上所有结点的关键字均大于根结点的关键字；左子树和右子树又各是一颗二叉排序树，递归定义；</p></li>
+<li><p>平衡二叉树：树上任意结点的左子树和右子树的深度之差不超过1</p></li>
+<li><p>二叉树的顺序存储：按照完全二叉树的层序遍历顺序存储在一维数组中，数组下标和树中结点编号一一对应，并通过此来映射树中结点之间的关系</p></li>
+<li><p>二叉树的链式存储：</p>
+<p>每个结点除存放数据的数据域外还有两个指针，分别指向其左孩子结点和右孩子结点；</p></li>
+<li><p>二叉树的三种遍历：</p>
+<ul>
+<li>先序遍历：根左右</li>
+<li>中序遍历：左根右</li>
+<li>后序遍历：左右根</li>
+<li>层序遍历：借助队列，结点出队时让其左右孩子结点入队</li>
+</ul>
+<p>时间复杂度均为:<span
+class="math inline">\(O(n)\)</span>,递归工作栈的深度为:<span
+class="math inline">\(O(h+1)\)</span></p></li>
+<li><p>中序+{先序、后序、层序}中的任何一个均可以唯一确定二叉树的全貌</p></li>
+<li><p>线索二叉树：将空闲的<span
+class="math inline">\(n+1\)</span>个指针指向每个结点的前驱和后继</p></li>
+<li><p>转换：</p>
+<ul>
+<li>树转换成二叉树</li>
+<li>森林转换成二叉树</li>
+<li>二叉树转换为森林</li>
+</ul></li>
+</ul>
+<h4 id="树与二叉树的应用">5.3 树与二叉树的应用</h4>
+<ul>
+<li><p>哈夫曼树：树的带权路径长度最小的二叉树</p></li>
+<li><p>哈夫曼树的构造：逐步合并集合中两个权值最小的结点直至称为一棵树</p></li>
+</ul>
+]]></content>
+      <categories>
+        <category>重温数据结构</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第一章、机器学习基础</title>
     <url>/2024/04/05/%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h3 id="线性模型">1.1 线性模型</h3>
@@ -2039,7 +2275,9 @@ class="math inline">\(y\)</span>值 <span class="math display">\[
 <li><p>测试集：用于评估模型性能</p>
 <p><strong>线性回归从零开始实现</strong>，<a
 href="https://github.com/kumudlakara/Medium-codes/blob/main/linear_regression/house_price_data.txt">数据集下载</a></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># variables to store mean and standard deviation for each feature</span></span><br><span class="line">mu = []</span><br><span class="line">std = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># load data from the filename</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">load_data</span>(<span class="params">filename</span>):</span><br><span class="line">	df = pd.read_csv(filename, sep=<span class="string">&quot;,&quot;</span>, index_col=<span class="literal">False</span>)</span><br><span class="line">	df.columns = [<span class="string">&quot;house size&quot;</span>, <span class="string">&quot;rooms&quot;</span>, <span class="string">&quot;price&quot;</span>]</span><br><span class="line">	data = np.array(df, dtype=<span class="built_in">float</span>)</span><br><span class="line">	plot_data(data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>])</span><br><span class="line">	normalize(data)</span><br><span class="line">	<span class="keyword">return</span> data[:, :<span class="number">2</span>], data[:, -<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the data[house size,price]</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_data</span>(<span class="params">x, y</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;house size&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;price&#x27;</span>)</span><br><span class="line">	plt.plot(x[:, <span class="number">0</span>], y, <span class="string">&#x27;bo&#x27;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment"># normalize the data</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">normalize</span>(<span class="params">data</span>):</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, data.shape[<span class="number">1</span>] - <span class="number">1</span>):</span><br><span class="line">		mu.append(np.mean(data[:, i]))</span><br><span class="line">		std.append(np.std(data[:, i]))</span><br><span class="line">		data[:, i] = ((data[:, i] - np.mean(data[:, i])) / np.std(data[:, i]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># matrix multiply</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">h</span>(<span class="params">x, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> np.matmul(x, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the cost_function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cost_function</span>(<span class="params">x, y, theta</span>):</span><br><span class="line">	<span class="keyword">return</span> ((h(x, theta) - y).T @ (h(x, theta) - y)) / (<span class="number">2</span> * y.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># calculate the gradient</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">x, y, theta, learning_rate=<span class="number">0.1</span>, num_epochs=<span class="number">10</span></span>):</span><br><span class="line">	m = x.shape[<span class="number">0</span>]</span><br><span class="line">	J_all = []</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">		h_x = h(x, theta)</span><br><span class="line">		cost_ = (<span class="number">1</span> / m) * (x.T @ (h_x - y))</span><br><span class="line">		theta = theta - (learning_rate) * cost_</span><br><span class="line">		J_all.append(cost_function(x, y, theta))</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> theta, J_all</span><br><span class="line"></span><br><span class="line"><span class="comment"># draw the change of the cost</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">plot_cost</span>(<span class="params">J_all, num_epochs</span>):</span><br><span class="line">	plt.xlabel(<span class="string">&#x27;Epochs&#x27;</span>)</span><br><span class="line">	plt.ylabel(<span class="string">&#x27;Cost&#x27;</span>)</span><br><span class="line">	plt.plot(num_epochs, J_all, <span class="string">&#x27;m&#x27;</span>, linewidth=<span class="string">&quot;5&quot;</span>)</span><br><span class="line">	plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">theta, x</span>):</span><br><span class="line">	x[<span class="number">0</span>] = (x[<span class="number">0</span>] - mu[<span class="number">0</span>]) / std[<span class="number">0</span>]</span><br><span class="line">	x[<span class="number">1</span>] = (x[<span class="number">1</span>] - mu[<span class="number">1</span>]) / std[<span class="number">1</span>]</span><br><span class="line">	y = theta[<span class="number">0</span>] + theta[<span class="number">1</span>] * x[<span class="number">0</span>] + theta[<span class="number">2</span>] * x[<span class="number">1</span>]</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Price of house: &quot;</span>, y[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">x, y = load_data(<span class="string">&quot;house_price_data.txt&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;x和y的形状分别为&quot;</span>,x.shape,y.shape)</span><br><span class="line">y = np.reshape(y, (<span class="number">46</span>, <span class="number">1</span>))</span><br><span class="line"><span class="comment"># 加一列全1向量</span></span><br><span class="line">x = np.hstack((np.ones((x.shape[<span class="number">0</span>], <span class="number">1</span>)), x))</span><br><span class="line">theta = np.zeros((x.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">learning_rate = <span class="number">0.1</span></span><br><span class="line">num_epochs = <span class="number">10000</span></span><br><span class="line">theta, J_all = gradient_descent(x, y, theta, learning_rate, num_epochs)</span><br><span class="line">J = cost_function(x, y, theta)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Cost: &quot;</span>, J)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Parameters: &quot;</span>, theta)</span><br><span class="line"></span><br><span class="line"><span class="comment"># for testing and plotting cost</span></span><br><span class="line">n_epochs = []</span><br><span class="line">jplot = []</span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;J_all形状&quot;</span>,np.array(J_all).shape)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> J_all:</span><br><span class="line">	jplot.append(i[<span class="number">0</span>][<span class="number">0</span>])</span><br><span class="line">	n_epochs.append(count)</span><br><span class="line">	count += <span class="number">1</span></span><br><span class="line">jplot = np.array(jplot)</span><br><span class="line">n_epochs = np.array(n_epochs)</span><br><span class="line">plot_cost(jplot, n_epochs)</span><br><span class="line"></span><br><span class="line">test(theta, [<span class="number">1203</span>, <span class="number">3</span>])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a
+href="https://www.cnblogs.com/zingp/p/10375691.html">L1与L2正则项的解析</a></p></li>
 </ul>
 <h4 id="逻辑斯蒂回归logistic-regression">1.1.2 逻辑斯蒂回归(Logistic
 Regression)</h4>
@@ -2073,6 +2311,8 @@ class="math inline">\(p\)</span>时,最小化交叉熵即可，这也就是为�
 \pi \in R^k = softmax(z\in R^k)=softmax(W\in R^{k\times d} \cdot x\in
 R^{d\times1})+b\in R^{k\times1}
 \]</span> 其中<span
+class="math inline">\(k\)</span>表示类别数量即输出个数，<span
+class="math inline">\(d\)</span>表示输入特征的维数,<span
 class="math inline">\(softmax(z)=\frac{1}{\sum\limits_{l=1}^{k}exp(z_l)}[exp(z_1),exp(z_2),\cdot\cdot\cdot,exp(z_k)]\)</span></p>
 <p>通常情况下，需要对矩阵<span
 class="math inline">\(W\)</span>和向量<span
@@ -2092,7 +2332,7 @@ class="math inline">\([0,1]\)</span>;</p></li>
 class="math inline">\(x_{new}=\frac{x-\mu}{\delta}\)</span>,映射到标准正态分布；</p></li>
 <li><p>正数归一化： <span
 class="math inline">\(x_{new}=\frac{x}{x_1+x_2+...+x_n}\)</span>,映射到<span
-class="math inline">\([0,1]\)</span>;</p></li>
+class="math inline">\((0,1)\)</span>;</p></li>
 <li><p>中心化： <span
 class="math inline">\(x_{new}=x-\mu\)</span>,使得均值为0</p></li>
 </ul>
@@ -2127,11 +2367,12 @@ descent）</h3>
     <title>第七章、策略梯度方法</title>
     <url>/2024/04/14/%E7%AC%AC%E4%B8%83%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<hr />
+<p>前面所讲均为价值学习，旨在学习出接近真实的动作价值函数或状态价值函数，本文为策略学习，旨在学习出好的策略网络也即学习出好的从状态到动作的映射。</p>
 <h4 id="策略网络">1. 策略网络</h4>
 <p>神经网络<span
 class="math inline">\(\pi(a|s;\theta)\)</span>称为策略网络，输入状态<span
 class="math inline">\(s\)</span>,输出<span
-class="math inline">\(\mathcal{A}\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
+class="math inline">\(|\mathcal{A}|\)</span>维向量，其中每个元素代表每个动作的概率值，决策时按照这个概率质量分布执行动作。</p>
 <h4 id="策略学习的目标函数">2.策略学习的目标函数</h4>
 <p>首先还是复习相关的基本概念：</p>
 <ul>
@@ -2199,7 +2440,7 @@ g(s,a;\theta)=Q_{\pi}(s,a)\cdot \nabla_{\theta}ln\pi(a|s;\theta)
 它是第一个式子的无偏估计，但在实际应用中依然不知道式中第一项<span
 class="math inline">\(Q_\pi(s,a)\)</span>的值，要么用实际观测到的回报<span
 class="math inline">\(u_t\)</span>代替（即REINFORCE)；要么像SARSA一样使用神经网络<span
-class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算；</p>
+class="math inline">\(q(s,a;w)\)</span>近似（即actor—critic）；而对于第二项，可以通过策略网络反向传播计算而来；</p>
 <p><strong>REINFORCE训练流程</strong>：</p>
 <p>（1）REINFORCE属于同策略，用策略网络<span
 class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
@@ -2256,6 +2497,214 @@ w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wq(s_t,a_t;w_{now})
 ln\pi(a_t|s_t;\theta_{now})
 \]</span> 注：actor-critic的价值网络存在自举问题，对于<span
 class="math inline">\(\hat{q}_{t+1}\)</span>，可通过目标网络近似；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第三章、强化学习基本概念</title>
+    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
+<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
+Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
+<strong>环境</strong>：与智能体交互的对象；</p>
+<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
+<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
+class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
+<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
+class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
+<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
+<strong>动作空间</strong>：所有可能动作的集合，记作<span
+class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
+<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
+class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
+class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
+class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
+class="math inline">\(s_t,s_{t+1}\)</span>,有<span
+class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
+<h3 id="状态转移">3.状态转移</h3>
+<p><strong>状态转移</strong>：智能体从当前<span
+class="math inline">\(t\)</span>时刻的状态<span
+class="math inline">\(s\)</span>转移到下一刻的状态<span
+class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
+<span
+class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
+表示发生下述事件的概率：在当前状态<span
+class="math inline">\(s\)</span>,智能体执行动作<span
+class="math inline">\(a\)</span>,下一刻环境的状态变成<span
+class="math inline">\(s&#39;\)</span>
+<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
+class="math inline">\(s&#39;\)</span>完全由<span
+class="math inline">\(s,a\)</span>决定： <span
+class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
+  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
+  &amp; \text{ 0 , otherwise }
+\end{cases}\]</span>
+<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由例子之一。</p>
+<h3 id="策略">4.策略</h3>
+<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
+<strong>随机性策略</strong>：<span
+class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
+<strong>确定性策略</strong>：记作<span
+class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
+class="math inline">\(a\)</span>完全由状态<span
+class="math inline">\(s\)</span>决定:<span
+class="math inline">\(a=\mu(s)\)</span></p>
+<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
+class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
+(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
+class="math inline">\(a\)</span></p>
+<p>,环境通过状态转移函数<span
+class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
+class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
+class="math inline">\(r(s,a,s’)\)</span>。</p>
+<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
+property）</h3>
+<p>马尔可夫性，即下一时刻状态<span
+class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
+class="math inline">\(S_t\)</span>和动作<span
+class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
+class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
+<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
+class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
+<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
+<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
+class="math inline">\(n\)</span>结束，则<span
+class="math inline">\(t\)</span>时刻的回报定义为： <span
+class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
+<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
+class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
+class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
+R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
+class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
+<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
+<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
+<strong>动作价值函数</strong>： <span
+class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
+表示已经观测到了<span
+class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
+class="math inline">\(s_t\)</span>,选中动作<span
+class="math inline">\(a_t\)</span>，原来<span
+class="math inline">\(U_t\)</span>中的随机性来自<span
+class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
+class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
+class="math inline">\(\qquad\)</span><span
+class="math inline">\(t\)</span>时刻的动作价值函数<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
+（1）当前状态<span
+class="math inline">\(s_t\)</span>：当前状态越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
+class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
+class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
+class="math inline">\(\pi\)</span>：<span
+class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
+<strong>最优动作价值函数</strong>： 为了排除策略<span
+class="math inline">\(\pi\)</span>的影响，可以使： <span
+class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
+Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
+即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
+class="math inline">\(\pi\)</span>的影响，<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
+<strong>状态价值函数</strong>: <span
+class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
+\cdot Q_\pi(s_t,a)\]</span>
+状态价值函数可以理解为在动作价值函数的基础上，动作<span
+class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
+class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
+class="math inline">\(\pi\)</span>和状态<span
+class="math inline">\(s_t\)</span>的好坏</p>
+<p><strong>两者比较</strong>： <span class="math display">\[
+Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
+\]</span></p>
+<p><span class="math display">\[
+V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
+\]</span></p>
+<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
+<p>无模型方法：价值学习、策略学习</p>
+<p>基于模型的方法：AlphaGo</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>人工智能、强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第九章、策略学习高级技巧</title>
+    <url>/2024/09/26/%E7%AC%AC%E4%B9%9D%E7%AB%A0%E3%80%81%E7%AD%96%E7%95%A5%E5%AD%A6%E4%B9%A0%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<hr />
+<h4 id="chap-9-策略学习高级技巧">chap 9 策略学习高级技巧</h4>
+<h4 id="置信域策略优化">9.1 置信域策略优化</h4>
+<p>置信域策略优化(Trus Region Policy
+Optimization)可以用于代替策略梯度方法，它的优势有：（1）表现更加稳定，收敛曲线不会剧烈波动，对学习率不敏感（2）用更少的经验就能达到与策略梯度方法相同的表现。</p>
+<ul>
+<li><p>置信域</p>
+<p>若<span class="math inline">\(\forall \theta \in
+\mathcal{N}(\theta_{now})\)</span>,函数<span
+class="math inline">\(L(\theta|\theta_{now})\)</span>足够接近<span
+class="math inline">\(J(\theta)\)</span>,换句话说就是在此区域内我们可以信任函数<span
+class="math inline">\(L(\theta|\theta_{now})\)</span>代替目标函数<span
+class="math inline">\(J(\theta)\)</span>,则称</p>
+<p><span
+class="math inline">\(\mathcal{N}(\theta_{now})\)</span>为<strong>置信域</strong></p></li>
+<li><p>置信域算法(循环重复下面两个步骤)</p>
+<p>（1）做近似：给定<span
+class="math inline">\(\theta_{now}\)</span>,构造函数<span
+class="math inline">\(L(\theta|\theta_{now})\)</span>,使得对于所有的<span
+class="math inline">\(\theta\in
+\mathcal{N}(\theta_{now})\)</span>,函数值<span
+class="math inline">\(L(\theta|\theta_{now})\)</span>与<span
+class="math inline">\(J(\theta)\)</span>足够接近</p>
+<p>（2）最大化：在置信域<span
+class="math inline">\(\mathcal{N}_{now}\)</span>中寻找变量<span
+class="math inline">\(\theta\)</span>的值，使得函数<span
+class="math inline">\(L\)</span>的值最大化，把找到的值记作<span
+class="math inline">\(\theta_{new}=\underset{\theta\in\mathcal{N}(\theta_{now})}{argmax}L(\theta|\theta_{now})\)</span></p></li>
+<li><p>目标函数的等价形式</p>
+<p>策略学习中的目标函数<span
+class="math inline">\(J(\theta)\)</span>可以等价写成： <span
+class="math display">\[
+J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta_{now})}[\frac{\pi(A|S;\theta)}{\pi(A|S;\theta_{now})}\cdot
+Q_\pi(S,A)]]
+\]</span> 其中<span class="math inline">\(\theta\)</span>表示新值，<span
+class="math inline">\(\theta_{now}\)</span>表示旧值，<span
+class="math inline">\(Q_\pi(S,A)\)</span>表示新值计算而来的动作价值函数。</p></li>
+</ul>
+<h4 id="trpo算法推导">9.2 TRPO算法推导</h4>
+<ul>
+<li><p>第一步---做近似 <span class="math display">\[
+J\to
+L(\theta|\theta_{now})=\frac{1}{n}\sum\limits_{t=1}^{n}\frac{\pi(a_t|s_t;\theta)}{\pi(a_t|s_t;\theta_{now})}\cdot
+Q_\pi(s_t,a_t)
+\]</span></p>
+<p><span class="math display">\[
+\to
+\tilde{L}(\theta|\theta_{now})=\frac{1}{n}\sum\limits_{t=1}^{n}\frac{\pi(a_t|s_t;\theta)}{\pi(a_t|s_t;\theta_{now})}\cdot
+u_t
+\]</span></p></li>
+<li><p>第二步---最大化</p>
+<p>求解带约束的最大化问题 <span class="math display">\[
+\underset{\theta}{max}\ \tilde{L}(\theta|\theta_{now}) \ \ \ s.t.\
+\theta\in\mathcal{N}(\theta_{now})
+\]</span> 若采用<span
+class="math inline">\(KL\)</span>散度置信域，则最大化问题变为 <span
+class="math display">\[
+\underset{\theta}{max}\ \tilde{L}(\theta|\theta_{now}) \ \ \
+s.t.\frac{1}{t}\sum\limits_{i=1}^{t}KL[\pi(\cdot|s_i;\theta_{now})||\pi(\cdot|s_i;\theta)]
+\]</span></p></li>
+</ul>
+<h4 id="trpo的训练流程">9.3 TRPO的训练流程</h4>
+<h4 id="熵正则化">9.4 熵正则化</h4>
+<p><span class="math display">\[
+\tilde{g}(s,a;\theta)=[Q_\pi(s,a)-\lambda \cdot
+ln\pi(a|s;\theta)-\lambda]\cdot \nabla _\theta ln\pi(a|s;\theta)
+\]</span></p>
 ]]></content>
       <categories>
         <category>深度强化学习读书笔记</category>
@@ -2350,136 +2799,6 @@ class="math inline">\(\int_{0}^{3}x^\frac{2}{3}dx\)</span> <figure class="highli
       </tags>
   </entry>
   <entry>
-    <title>第三章、强化学习基本概念</title>
-    <url>/2024/04/01/%E7%AC%AC%E4%B8%89%E7%AB%A0%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/</url>
-    <content><![CDATA[<h3 id="马尔可夫决策过程">1. 马尔可夫决策过程</h3>
-<p>马尔可夫决策过程：<span class="math inline">\(MDP,Markov Decision
-Process\)</span> <strong>智能体</strong>：做动作或决策的主体；
-<strong>环境</strong>：与智能体交互的对象；</p>
-<h3 id="状态动作奖励">2. 状态、动作、奖励</h3>
-<p><strong>状态</strong>：对当前时刻环境的概括,记作<span
-class="math inline">\(s_t\)</span>，是做决策的依据；如：棋盘上的格局
-<strong>状态空间</strong>：所有可能存在的状态的集合，记作<span
-class="math inline">\(\mathcal{S}\)</span>;状态空间可离散、可连续；可有限、可无限
-<strong>动作</strong>：智能体基于当前状态所做出的决策，动作的选取可以是确定性的、也可以是随机性的（多数情况下为随机性的），即给定一个概率分布（一个加和为1的概率向量），智能体按照这个概率分布选取一个动作
-<strong>动作空间</strong>：所有可能动作的集合，记作<span
-class="math inline">\(\mathcal{A}\)</span>;同样，离散、连续、有限、无限皆可
-<strong>奖励</strong>：智能体在执行一个动作后，环境返回给智能体的一个数值；奖励函数一般由自己设计及定义，记作<span
-class="math inline">\(r(s_t,a_t,s_{t+1})\)</span>或<span
-class="math inline">\(r(s_t,a_t)\)</span>;我们总是假设奖励函数是有界的，即对于所有<span
-class="math inline">\(a_t\in\mathcal{A}\)</span>, <span
-class="math inline">\(s_t,s_{t+1}\)</span>,有<span
-class="math inline">\(|r(s_t,a_t,s_{t+1})|&lt;\infty\)</span>，否则得到一个正负无穷大的奖励后就没必要继续了。</p>
-<h3 id="状态转移">3.状态转移</h3>
-<p><strong>状态转移</strong>：智能体从当前<span
-class="math inline">\(t\)</span>时刻的状态<span
-class="math inline">\(s\)</span>转移到下一刻的状态<span
-class="math inline">\(s&#39;\)</span>的过程；我们用<strong>状态转移函数</strong>来描述状态转移，记作：
-<span
-class="math display">\[p_t(s&#39;|s,a)=P(S_{t+1}=s&#39;|S_t=s,A_t=a)\]</span>
-表示发生下述事件的概率：在当前状态<span
-class="math inline">\(s\)</span>,智能体执行动作<span
-class="math inline">\(a\)</span>,下一刻环境的状态变成<span
-class="math inline">\(s&#39;\)</span>，这个值必不恒等于1，因为状态转移存在随机性。
-<strong>确定性状态转移</strong>：环境中不存在随机性，下一个状态<span
-class="math inline">\(s&#39;\)</span>完全由<span
-class="math inline">\(s,a\)</span>决定： <span
-class="math display">\[p_t(s&#39;|s,a)=\begin{cases}
-  &amp; \text{ 1 , if } \tau_t(s,a) = s&#39; \\
-  &amp; \text{ 0 , otherwise }
-\end{cases}\]</span>
-<strong>随机性状态转移</strong>：环境中存在随机性，比如，在玛丽欧游戏中你可以控制玛丽欧怎么移动，但敌人怎么移动则无法确定，这就是下一刻状态不确定的缘由。</p>
-<h3 id="策略">4.策略</h3>
-<p><strong>策略</strong>：如何根据观测到的状态做出决策，即如何从动作空间中选取一个动作。
-<strong>随机性策略</strong>：<span
-class="math inline">\(\pi(a|s)=P(A=a|S=s)\)</span>,即给定当前状态条件下采取各个动作的概率，也就是加和为1的向量。
-<strong>确定性策略</strong>：记作<span
-class="math inline">\(\mu:\mathcal{S}\to\mathcal{A}\)</span>,即动作<span
-class="math inline">\(a\)</span>完全由状态<span
-class="math inline">\(s\)</span>决定:<span
-class="math inline">\(a=\mu(s)\)</span></p>
-<p><strong>智能体与环境交互的流程</strong>：观测到当前状态<span
-class="math inline">\(s\)</span>，用策略<span class="math inline">\(\pi
-(a|s)\)</span>算出所有动作的概率并随机抽样，得到其中一个动作<span
-class="math inline">\(a\)</span></p>
-<p>,环境通过状态转移函数<span
-class="math inline">\(p_t(s&#39;|s,a)\)</span>(这也是一个概率分布)随机生成新的状态<span
-class="math inline">\(s’\)</span>，并向智能体返回一个奖励<span
-class="math inline">\(r(s,a,s’)\)</span>。</p>
-<h3 id="马尔可夫性质markov-property">5.马尔可夫性质（Markov
-property）</h3>
-<p>马尔可夫性，即下一时刻状态<span
-class="math inline">\(S_{t+1}\)</span>仅仅依赖于当前状态<span
-class="math inline">\(S_t\)</span>和动作<span
-class="math inline">\(A_t\)</span>,而不依赖于过去的状态和动作： <span
-class="math display">\[P(S_{t+1}|S_t,A_t)=P(S_{t+1}|S_1,A_1,S_2,A_2,...,S_t,A_t)\]</span>
-<strong>轨迹</strong>：在一个回合（从开始到结束）中智能体观测到的所有状态、动作、奖励：<span
-class="math inline">\(s_1,a_1,r_1,s_2,a_2,r_2,s_3,a_3,r_3...\)</span></p>
-<h3 id="回报与折扣回报">6.回报与折扣回报</h3>
-<p><strong>回报</strong>：从当前时刻开始到本回合结束所有奖励的总和，也叫作累积奖励。假设本回合在时刻<span
-class="math inline">\(n\)</span>结束，则<span
-class="math inline">\(t\)</span>时刻的回报定义为： <span
-class="math display">\[U_t=R_{t\to end}=R_t+R_{t+1}+...+R_n\]</span>
-<strong>折扣回报</strong>：越久远的未来的回报越不重要，所以应该随时间乘上相应的折扣率<span
-class="math inline">\(\gamma\in[0,1]\)</span>，折扣回报： <span
-class="math display">\[U_t=R_t+\gamma \cdot R_{t+1}+\gamma^2 \cdot
-R_{t+2}+...\]</span> 可以将其理解为得到了一个新的奖励函数，<span
-class="math inline">\(R_{t+i}=\gamma^i\cdot R_{t+i}\)</span></p>
-<h3 id="价值函数重中之重">7.价值函数（重中之重！！！）</h3>
-<p>价值函数是回报的期望，价值函数值越大，说明现状越有利；
-<strong>动作价值函数</strong>： <span
-class="math display">\[Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]\]</span>
-表示已经观测到了<span
-class="math inline">\(S_t,A_t\)</span>的值，即观测到状态<span
-class="math inline">\(s_t\)</span>,选中动作<span
-class="math inline">\(a_t\)</span>，原来<span
-class="math inline">\(U_t\)</span>中的随机性来自<span
-class="math inline">\(t+1\)</span>时刻起所有的状态和动作：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>,而动作价值函数对它们求期望，简单理解就是找出它们的所有情况，算出<span
-class="math inline">\(U_t\)</span>求平均，这样就消除它们的影响。 <span
-class="math inline">\(\qquad\)</span><span
-class="math inline">\(t\)</span>时刻的动作价值函数<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>依赖于以下三个因素：
-（1）当前状态<span
-class="math inline">\(s_t\)</span>：当前状态越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （2）当前动作<span
-class="math inline">\(a_t\)</span>：智能体执行的动作越好，<span
-class="math inline">\(Q_\pi(s_t,a_t)\)</span>越大 （3）策略函数<span
-class="math inline">\(\pi\)</span>：<span
-class="math inline">\(S_{t+1},A_{t+1},...,S_n,A_n\)</span>由策略决定，所以对它们求期望最终的结果受到策略的影响。
-<strong>最优动作价值函数</strong>： 为了排除策略<span
-class="math inline">\(\pi\)</span>的影响，可以使： <span
-class="math display">\[\pi^*=\mathop{argmax}\limits_{\pi}
-Q_\pi(s_t,a_t),\forall s_t\in\mathcal{S},a_t\in\mathcal{A}\]</span>
-即选取一个当前为任何状态、执行任何动作的情况下都最优的策略，这样策略就确定了，也就排除了策略<span
-class="math inline">\(\pi\)</span>的影响，<span
-class="math inline">\(Q_*(s_t,a_t)\)</span>就是最优动作价值函数。
-<strong>状态价值函数</strong>: <span
-class="math display">\[V_\pi(s_t)=E_{A_t\sim\pi(\cdot|s_t)}[Q_\pi(s_t,A_t)]=\sum_{a\in\mathcal{A}}^{}\pi(a|s_t)
-\cdot Q_\pi(s_t,a)\]</span>
-状态价值函数可以理解为在动作价值函数的基础上，动作<span
-class="math inline">\(A_t\)</span>不再确定，而是随机变量，对动作<span
-class="math inline">\(A_t\)</span>求期望以消除动作的影响，使得状态价值函数只依赖于策略函数<span
-class="math inline">\(\pi\)</span>和状态<span
-class="math inline">\(s_t\)</span>的好坏</p>
-<p><strong>两者比较</strong>： <span class="math display">\[
-Q_{\pi}(s_t,a_t)=E_{S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t,A_t=a_t]
-\]</span></p>
-<p><span class="math display">\[
-V_{\pi}(s_t)=E_{A_t,S_{t+1},A_{t+1},...,S_n,A_n}[U_t|S_t=s_t]
-\]</span></p>
-<p>强化学习分为（1）基于模型的方法 （2）无模型方法</p>
-<p>无模型方法：价值学习、策略学习</p>
-<p>基于模型的方法：AlphaGo</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>人工智能、强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第五章、SARSA算法</title>
     <url>/2024/04/12/%E7%AC%AC%E4%BA%94%E7%AB%A0%E3%80%81SARSA%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<hr />
@@ -2498,7 +2817,7 @@ class="math inline">\(a_t\sim\pi_{now}(\cdot|s_t)\)</span>,再由状态转移函
 class="math inline">\(s_{t+1}\)</span>,如此可计算出<span
 class="math inline">\(r_t=r(s_t,a_t,s_{t+1})\)</span></p>
 <p>再根据当前策略做抽样得到<span
-class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到<span
+class="math inline">\(\widetilde{a}_{t+1}\sim\pi_{now}(\cdot|s_{t+1})\)</span>,（注意，这个动作只是假想的动作，智能体不予执行）这样就得到五元组<span
 class="math inline">\((s_t,a_t,r_t,s_{t+1},\widetilde{a}_{t+1})\)</span></p>
 <p>对贝尔曼方程做蒙特卡洛近似得到： <span class="math display">\[
 q(s_t,a_t)=r_t+\gamma\cdot q(s_{t+1},\widetilde{a}_{t+1})
@@ -2551,6 +2870,111 @@ class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
       </tags>
   </entry>
   <entry>
+    <title>第八章、带基线的策略梯度方法</title>
+    <url>/2024/04/15/%E7%AC%AC%E5%85%AB%E7%AB%A0%E3%80%81%E5%B8%A6%E5%9F%BA%E7%BA%BF%E7%9A%84%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<hr />
+<h4 id="基线的引入">1.基线的引入</h4>
+<p>策略梯度定理： <span class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi}(S,A)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 设<span class="math inline">\(b\)</span>为不依赖于动作<span
+class="math inline">\(A\)</span>的任意函数(否则<span
+class="math inline">\(b\)</span>提不出来，无法完成证明），则有： <span
+class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
+\]</span> 其原因在于： <span class="math display">\[
+E_S[E_{A\sim\pi(\cdot|S;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]=0
+\]</span> 本质上是：对于任意的<span
+class="math inline">\(s\)</span>,有<span
+class="math inline">\(E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]=0\)</span></p>
+<p>下面证明：</p>
+<p><strong>证明</strong>： <span class="math display">\[
+E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]\\
+=b\cdot E_{A\sim\pi(\cdot|s;\theta)}[\frac{\partial\
+ln\pi(A|s;\theta)}{\partial\theta}]\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{\partial\
+ln\pi(a|s;\theta)}{\partial\theta}\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{1}{\pi(a|s;\theta)}\cdot\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
+=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
+=b\cdot\frac{\partial}{\partial\theta}\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\\
+=b\cdot\frac{\partial1}{\partial\theta}\\
+=0
+\]</span></p>
+<h4 id="带基线的reinforce算法">2.带基线的REINFORCE算法</h4>
+<p>带基线的策略梯度定理 <span class="math display">\[
+\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]\\
+\]</span> 使用状态价值函数<span
+class="math inline">\(V_\pi(s)\)</span>作为基线，并且对其做蒙特卡罗方法近似：
+<span class="math display">\[
+g(s,a;\theta)=(Q_{\pi}(s,a)-V_\pi(s))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
+\]</span> 带基线的REINFORCE进一步用实际观测的回报<span
+class="math inline">\(u\)</span>代替<span
+class="math inline">\(Q_\pi(s,a)\)</span>,并使用神经网络<span
+class="math inline">\(v(s;w)\)</span>近似<span
+class="math inline">\(V_\pi(s)\)</span>,得到： <span
+class="math display">\[
+\widetilde{g}(s,a;\theta)=(u-v(s;w))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
+\]</span> <strong>REINFORCE with
+baseline训练流程</strong>：策略网络做梯度上升，状态价值网络做梯度下降（不是时序差分）。</p>
+<p>（1）REINFORCE属于同策略，用策略网络<span
+class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
+<span class="math display">\[
+s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
+\]</span> (2) 计算所有回报： <span class="math display">\[
+u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
+\]</span> (3)让价值网络<span
+class="math inline">\(v(s;w)\)</span>做出预测 <span
+class="math display">\[
+\hat{v}_t=v(s_t;w_{now}),\forall t=1,2...,n
+\]</span> (4)计算价值网络的预测和观测到的回报之间的误差： <span
+class="math display">\[
+\delta_t=\hat{v}_t-u_t,\forall t=1,2...,n
+\]</span> (5)用<span
+class="math inline">\(\{s_t\}^n_{t=1}\)</span>作为价值网络的输入，做反向传播计算梯度：
+<span class="math display">\[
+\nabla_{w}v(s_t;w_{now}),\forall t=1,2,...,n.
+\]</span> (6)更新价值网络参数： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\sum\limits_{t=1}^{n}\delta_t\cdot\nabla_wv(s_t;w_{now})
+\]</span> (7)用<span
+class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
+<span class="math display">\[
+\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
+\]</span> (8)做随机梯度上升更新策略网络参数： <span
+class="math display">\[
+\theta_{new}=\theta_{now}-\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
+\delta_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
+\]</span></p>
+<p>减号是因为<span
+class="math inline">\(\delta_t=\hat{v}_t-u_t\)</span>的形式和原策略梯度定理中的形式<span
+class="math inline">\(u_t-\hat{v}_t\)</span>差个负号，其实上式依然是梯度上升。</p>
+<h4 id="advantage-actor-critica2c">4.Advantage Actor-Critic(A2C)</h4>
+<p>(1)观测到当前状态<span
+class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
+class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
+class="math inline">\(a_t\)</span></strong>;</p>
+<p>(2)从环境中观测到新的状态<span
+class="math inline">\(s_{t+1}\)</span>和奖励<span
+class="math inline">\(r_t\)</span>;</p>
+<p>(3)让价值网络打分： <span class="math display">\[
+\hat{v}_t=v(s_t;w_{now}),\hat{v}_{t+1}=v(s_{t+1};w_{now})
+\]</span> (4)计算TD目标和TD误差： <span class="math display">\[
+\hat{y}_t=r_t+\gamma\cdot \hat{v}_{t+1},\delta_t=\hat{v}_t-\hat{y}_t
+\]</span> (6)更新价值网络： <span class="math display">\[
+w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wv(s_t;w_{now})
+\]</span> (7)更新策略网络： <span class="math display">\[
+\theta_{new}=\theta_{now}-\beta\cdot\delta_t\cdot\nabla_\theta
+ln\pi(a_t|s_t;\theta_{now})
+\]</span> 注：A2C的价值网络存在自举问题，对于<span
+class="math inline">\(\hat{v}_{t+1}\)</span>，可通过目标网络<span
+class="math inline">\(v(s;w^-)\)</span>近似；</p>
+]]></content>
+      <categories>
+        <category>深度强化学习读书笔记</category>
+      </categories>
+      <tags>
+        <tag>强化学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第六章、价值学习高级技巧</title>
     <url>/2024/04/12/%E7%AC%AC%E5%85%AD%E7%AB%A0%E3%80%81%E4%BB%B7%E5%80%BC%E5%AD%A6%E4%B9%A0%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<hr />
@@ -2560,7 +2984,7 @@ class="math inline">\((s_t,a_t)\)</span>;多步TD介于两者之间；</p>
 <p>DQN、SARSA都属于价值学习，本章介绍价值学习的高级技巧，它们可以应用于多种价值学习和策略学习方法中以提升算法的效果。</p>
 <h4 id="经验回放">1.经验回放</h4>
 <ul>
-<li><strong>经验回放</strong>是指把智能体与环境交互的记录（即经验）<span
+<li><strong>经验回放</strong>是指把智能体与环境交互的记录（即经验），如<span
 class="math inline">\([(s_t,a_t,r_t,s_{t+1}),(s_{t+1},a_{t+1},r_{t+1},s_{t+2}),...]\)</span>存储到一个缓存里，事后反复利用这些经验训练智能体，这个缓存就是<strong>经验回放缓存</strong>;</li>
 <li>缓存的大小b是个超参数，需要人为指定，缓存中只保留最近b条数据，当缓存存满之后，删除最旧的数据，补充新的数据。在实践中，要等到回放缓存中有足够多的四元组时，才开始做经验回放更新DQN；</li>
 <li>经验回放的优点：（1）每次更新从缓存中随机抽取一个四元组，消除了相关性；（2）重复利用经验，减小所需的样本数量；</li>
@@ -2618,7 +3042,7 @@ s\in\mathcal{S}\)</span></p>
 <p><strong>最优优势函数</strong>：<span
 class="math inline">\(D_*(s,a)=Q_*(s,a)-V_*(s)\)</span></p>
 <p><strong>最优优势函数定理</strong>：<span
-class="math inline">\(Q_*(s,a)=V_*(s)+D_*(s,a)-\underset{a\in\mathcal{A}}{max}D_*(s,a),\forall
+class="math inline">\(Q_*(s,a)=V_*(s)+D_*(s,a)(-\underset{a\in\mathcal{A}}{max}D_*(s,a)),\forall
 s\in\mathcal{S},a\in\mathcal{A}\)</span>,其中最后一项恒等于0；</p>
 <hr />
 <p><strong>对决网络的结构</strong>：</p>
@@ -2688,114 +3112,12 @@ class="math inline">\(Q(s,a;\mu)\)</span>做决策即可。</p></li>
       </tags>
   </entry>
   <entry>
-    <title>第八章、带基线的策略梯度方法</title>
-    <url>/2024/04/15/%E7%AC%AC%E5%85%AB%E7%AB%A0%E3%80%81%E5%B8%A6%E5%9F%BA%E7%BA%BF%E7%9A%84%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<hr />
-<h4 id="基线的引入">1.基线的引入</h4>
-<p>策略梯度定理： <span class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi}(S,A)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
-\]</span> 设<span class="math inline">\(b\)</span>为不依赖于动作<span
-class="math inline">\(A\)</span>的任意函数，则有： <span
-class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
-\]</span> 其原因在于： <span class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]=0
-\]</span> 本质上是：对于任意的<span
-class="math inline">\(s\)</span>,有<span
-class="math inline">\(E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]=0\)</span></p>
-<p>下面证明：</p>
-<p><strong>证明</strong>： <span class="math display">\[
-E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]\\
-=b\cdot E_{A\sim\pi(\cdot|s;\theta)}[\frac{\partial\
-ln\pi(A|s;\theta)}{\partial\theta}]\\
-=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{\partial\
-ln\pi(A|s;\theta)}{\partial\theta}\\
-=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{1}{\pi(a|s;\theta)}\cdot\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
-=b\cdot\sum\limits_{a\in\mathcal{A}}^{}\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
-=b\cdot\frac{\partial}{\partial\theta}\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\\
-=b\cdot\frac{\partial1}{\partial\theta}\\
-=0
-\]</span></p>
-<h4 id="带基线的reinforce算法">2.带基线的REINFORCE算法</h4>
-<p>带基线的策略梯度定理 <span class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]\\
-\]</span> 使用状态价值函数<span
-class="math inline">\(V_\pi(s)\)</span>作为基线，并且对其做蒙特卡罗方法近似：
-<span class="math display">\[
-g(s,a;\theta)=(Q_{\pi}(s,a)-V_\pi(s))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
-\]</span> 带基线的REINFORCE进一步用实际观测的回报<span
-class="math inline">\(u\)</span>代替<span
-class="math inline">\(Q_\pi(s,a)\)</span>,并使用神经网络<span
-class="math inline">\(v(s;w)\)</span>近似<span
-class="math inline">\(V_\pi(s)\)</span>,得到： <span
-class="math display">\[
-\widetilde{g}(s,a;\theta)=(u-v(s;w))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
-\]</span> <strong>REINFORCE with baseline训练流程</strong>：</p>
-<p>（1）REINFORCE属于同策略，用策略网络<span
-class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
-<span class="math display">\[
-s_1,a_1,r_1,s_2,a_2,r_2,...,s_n,a_n,r_n
-\]</span> (2) 计算所有回报： <span class="math display">\[
-u_t=\sum\limits_{k=t}^{n}\gamma^{k-t}\cdot r_k,\forall t=1,2...,n
-\]</span> (3)让价值网络<span
-class="math inline">\(v(s;w)\)</span>做出预测 <span
-class="math display">\[
-\hat{v}_t=v(s_t;w_{now}),\forall t=1,2...,n
-\]</span> (4)计算价值网络的预测和观测到的回报之间的误差： <span
-class="math display">\[
-\delta_t=\hat{v}_t-u_t,\forall t=1,2...,n
-\]</span> (5)用<span
-class="math inline">\(\{s_t\}^n_{t=1}\)</span>作为价值网络的输入，做反向传播计算梯度：
-<span class="math display">\[
-\nabla_{w}v(s_t;w_{now}),\forall t=1,2,...,n.
-\]</span> (6)更新价值网络参数： <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot\sum\limits_{t=1}^{n}\delta_t\cdot\nabla_wv(s_t;w_{now})
-\]</span> (7)用<span
-class="math inline">\(\{(s_t,a_t)\}_{t=1}^{n}\)</span>作为数据，做反向传播计算：
-<span class="math display">\[
-\nabla_\theta ln\pi(a_t|s_t;\theta_{now}),\forall t=1,2...n
-\]</span> (8)做随机梯度上升更新策略网络参数： <span
-class="math display">\[
-\theta_{new}=\theta_{now}-\beta\cdot\sum\limits_{t=1}^{n}\gamma^{t-1}\cdot
-\delta_t\cdot\nabla_\theta ln\pi(a_t|s_t;\theta_{now})
-\]</span></p>
-<p>减号是因为<span
-class="math inline">\(\delta_t=\hat{v}_t-u_t\)</span>的形式和原策略梯度定理中的形式<span
-class="math inline">\(u_t-\hat{v}_t\)</span>差个负号，其实上式依然是随机梯度上升。</p>
-<h4 id="advantage-actor-critica2c">4.advantage actor-critic(A2C)</h4>
-<p>(1)观测到当前状态<span
-class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
-class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
-class="math inline">\(a_t\)</span></strong>;</p>
-<p>(2)从环境中观测到新的状态<span
-class="math inline">\(s_{t+1}\)</span>和奖励<span
-class="math inline">\(r_t\)</span>;</p>
-<p>(3)让价值网络打分： <span class="math display">\[
-\hat{v}_t=v(s_t;w_{now}),\hat{v}_{t+1}=v(s_{t+1};w_{now})
-\]</span> (4)计算TD目标和TD误差： <span class="math display">\[
-\hat{y}_t=r_t+\gamma\cdot \hat{v}_{t+1},\delta_t=\hat{v}_t-\hat{y}_t
-\]</span> (6)更新价值网络： <span class="math display">\[
-w_{new}=w_{now}-\alpha\cdot\delta_t\cdot\nabla_wv(s_t;w_{now})
-\]</span> (7)更新策略网络： <span class="math display">\[
-\theta_{new}=\theta_{now}-\beta\cdot\delta_t\cdot\nabla_\theta
-ln\pi(a_t|s_t;\theta_{now})
-\]</span> 注：A2C的价值网络存在自举问题，对于<span
-class="math inline">\(\hat{v}_{t+1}\)</span>，可通过目标网络<span
-class="math inline">\(v(s;w^-)\)</span>近似；</p>
-]]></content>
-      <categories>
-        <category>深度强化学习读书笔记</category>
-      </categories>
-      <tags>
-        <tag>强化学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>第四章、DQN与Q学习</title>
     <url>/2024/04/06/%E7%AC%AC%E5%9B%9B%E7%AB%A0%E3%80%81DQN%E4%B8%8EQ%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<hr />
 <p>前面我们知道最优动作价值函数<span
-class="math inline">\(Q_*(s_t,a_t)\)</span>可以预知选取<span
+class="math inline">\(Q_*(s_t,a_t)\)</span>可以预知在状态<span
+class="math inline">\(s_t\)</span>选取<span
 class="math inline">\(a_t\)</span>这个动作后回报<span
 class="math inline">\(U_t\)</span>的期望的上限，但在实践中我们并不知道<span
 class="math inline">\(Q_*\)</span>的函数表达式，因此DQN使用神经网络对其进行近似。</p>
@@ -2958,7 +3280,7 @@ class="math inline">\((s_j,a_j)\)</span>位置上的元素： <span
 class="math display">\[
 \widetilde{Q}_{new}(s_j,a_j)=(1-\alpha)\cdot\widetilde{Q}_{now}(s_j,a_j)+\alpha\cdot\hat{y_j}=\widetilde{Q}_{now}(s_j,a_j)-\alpha\cdot\delta_{j}
 \]</span>
-可以看到传统的表格形式的Q学习在算出各个值之后就直接以简单的比例形式去更新Q值，这种简单的更新方法的效果注定比较一般。</p>
+可以看到传统的表格形式的Q学习在算出各个值之后就直接以简单的比例形式去更新Q值，这种简单的更新方法的效果在状态、动作空间较大时注定比较一般。</p>
 <h4
 id="同策略on-policy与异策略off-policy">同策略(on-policy)与异策略(off-policy)</h4>
 <ul>
@@ -2971,7 +3293,7 @@ a_t=\underset{a}{argmax}\ Q(s_t,a;w)
 \]</span></p></li>
 </ul>
 <h4 id="经验回放">经验回放</h4>
-<p>将智能体与环境交互的记录暂时保存，然后从中采样和学习的训练方式称为<strong>经验回放</strong>，需要注意的是，经验回放只适用于异策略，如DQN；不适用于同策略，为什么呢，这就像是尝试在当前的工作项目上使用你几年前旧工作的解决方案。</p>
+<p>将智能体与环境交互的记录暂时保存，然后从中采样和学习的训练方式称为<strong>经验回放</strong>，需要注意的是，经验回放只适用于异策略，如DQN；不适用于同策略，为什么呢，这就像是尝试在当前的工作项目上使用你几年前的工作经验。</p>
 <p><a href="https://Acoder123wew.github.io/">DQN代码实现</a></p>
 ]]></content>
       <categories>
@@ -3050,84 +3372,6 @@ class="math inline">\(O(1)\)</span>;</p>
       </categories>
       <tags>
         <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>《应用非线性控制》第一章概论</title>
-    <url>/2024/08/30/%E3%80%8A%E5%BA%94%E7%94%A8%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%8E%A7%E5%88%B6%E3%80%8B%E7%AC%AC%E4%B8%80%E7%AB%A0%E6%A6%82%E8%AE%BA/</url>
-    <content><![CDATA[<h3 id="chap1-引论">chap1 引论</h3>
-<h4 id="非线性控制的重要作用">1.非线性控制的重要作用：</h4>
-<ul>
-<li>现有的控制系统的改进</li>
-<li>硬非线性特性分析</li>
-<li>模型不确定性的处理</li>
-<li>设计的简化</li>
-</ul>
-<h4 id="非线性系统的性态">2. 非线性系统的性态</h4>
-<p>非线性系统使用非线性常微分方程描述，线性系统使用线性常微分方程描述</p>
-<h5 id="线性系统之时不变线性控制系统">2.1
-线性系统之时不变线性控制系统</h5>
-<p><span class="math display">\[
-\dot{x}=Ax
-\]</span></p>
-<p>其中，<span class="math inline">\(x\)</span>表示状态向量，<span
-class="math inline">\(A\)</span>是系统矩阵；</p>
-<ul>
-<li>当矩阵<span class="math inline">\(A\)</span>非奇异时，即<span
-class="math inline">\(|A|\ne0\)</span>时，方程<span
-class="math inline">\(Ax=0\)</span>有唯一零解，此时线性系统具有唯一的<strong>平衡点</strong>；</li>
-<li>如果<span class="math inline">\(A\)</span>有特征值<span
-class="math inline">\(\omega+\lambda j\)</span>,<span
-class="math inline">\(\omega&lt;0\)</span>,则平衡点<strong>稳定</strong>，他与初值无关；</li>
-<li>当存在外部输入<span class="math inline">\(u(t)\)</span>时,变为<span
-class="math inline">\(\dot{x}=Ax+Bu\)</span></li>
-</ul>
-<h5 id="非线性系统的例子">2.2 非线性系统的例子</h5>
-<p><span class="math display">\[
-\dot{v}+|v|v=u
-\]</span></p>
-<p>其中<span class="math inline">\(v\)</span>表示状态即车速，<span
-class="math inline">\(u\)</span>表示控制输入即推力</p>
-<p>假设到达匀速运动状态时，当<span
-class="math inline">\(u=1\)</span>时，<span
-class="math inline">\(0+|v_s|v_s=1\Rightarrow v_s=1\)</span>;当<span
-class="math inline">\(u=10\)</span>时，<span
-class="math inline">\(0+|v_s|v_s=10\Rightarrow
-v_s=\sqrt{10}\)</span>,可见非线性系统的状态对输入的影响，具有明显的非线性特征；</p>
-<h5 id="一些常见非线性系统的性态">2.4 一些常见非线性系统的性态</h5>
-<ul>
-<li>非线性系统通常具有一个以上的平衡点（平衡点：系统可以停留在一处，然后永远不动的一个点）</li>
-</ul>
-<p>对于非线性系统<span
-class="math inline">\(\dot{x}=-x+x^2,x(0)=x_0\)</span>，将其线性化（简单讲就是将高于一阶以上的项删除）得到线性系统<span
-class="math inline">\(\dot{x}=-x\)</span>，这个线性系统的精确解为<span
-class="math inline">\(x(t)=x_0e^{-t}\)</span>，对于任何初值<span
-class="math inline">\(x_0\)</span>，当<span
-class="math inline">\(t\to+\infty\)</span>时，该线性系统只有一个平衡点<span
-class="math inline">\(x=0\)</span>;而对于原非线性系统，其精确解可通过<span
-class="math inline">\(\dot{x}=\frac{dx}{dt}=-x+x^2\Rightarrow
-\frac{dx}{-x+x^2}=dt\)</span>然后等式两边同时积分得到非线性系统的精确解为</p>
-<p><span
-class="math inline">\(x(t)=\frac{1}{1-(1-\frac{1}{x_0})e^t}\)</span>，可知当初值<span
-class="math inline">\(x(0)&lt;1\)</span>时，则轨线收敛到平衡点0，当初值<span
-class="math inline">\(x(0)&gt;1\)</span>时，它在有限时间趋于无穷大，在无穷时间趋于0；这说明非线性系统的平衡点依赖于初值</p>
-<ul>
-<li><p>非线性系统的平衡点也依赖于输入值，如<span
-class="math inline">\(\dot{x}=xu\)</span>,若输入<span
-class="math inline">\(u=-1\)</span>时，则<span
-class="math inline">\(x=x_0e^{-t}\)</span>,平衡点为0;若输入<span
-class="math inline">\(u=1\)</span>时，<span
-class="math inline">\(x=x_0e^t\)</span>，平衡点为<span
-class="math inline">\(+\infty\)</span></p></li>
-<li><p>极限环：在没有外部激励的情况下非线性系统表现的固定值及固定周期的简谐振动，从能量角度就是，周期性地向环境释放能量和从环境中吸收能量；极限环不易受到参数变化的影响，临界稳定的线性系统的谐振则对系统参数改变十分敏感；</p></li>
-<li><p>混沌：混沌的基本特征是系统输出不可预测性，系统的输出对初始条件极为敏感；</p></li>
-</ul>
-]]></content>
-      <categories>
-        <category>《应用非线性控制》</category>
-      </categories>
-      <tags>
-        <tag>控制理论</tag>
       </tags>
   </entry>
 </search>

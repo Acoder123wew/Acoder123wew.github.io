@@ -27,7 +27,7 @@
 <meta property="og:description" content="王树森《深度强化学习》第八章、带基线的策略梯度方法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-15T02:05:03.000Z">
-<meta property="article:modified_time" content="2024-06-17T08:12:55.427Z">
+<meta property="article:modified_time" content="2024-09-26T10:34:10.318Z">
 <meta property="article:author" content="Well">
 <meta property="article:tag" content="强化学习">
 <meta name="twitter:card" content="summary">
@@ -140,7 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%BA%BF%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">1.基线的引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E5%9F%BA%E7%BA%BF%E7%9A%84reinforce%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.带基线的REINFORCE算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#advantage-actor-critica2c"><span class="nav-number">3.</span> <span class="nav-text">4.advantage actor-critic(A2C)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%BA%BF%E7%9A%84%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">1.基线的引入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%A6%E5%9F%BA%E7%BA%BF%E7%9A%84reinforce%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">2.带基线的REINFORCE算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#advantage-actor-critica2c"><span class="nav-number">3.</span> <span class="nav-text">4.Advantage Actor-Critic(A2C)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -155,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -229,7 +229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-06-17 16:12:55" itemprop="dateModified" datetime="2024-06-17T16:12:55+08:00">2024-06-17</time>
+      <time title="修改时间：2024-09-26 18:34:10" itemprop="dateModified" datetime="2024-09-26T18:34:10+08:00">2024-09-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -263,11 +263,12 @@
 <p>策略梯度定理： <span class="math display">\[
 \nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[Q_{\pi}(S,A)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
 \]</span> 设<span class="math inline">\(b\)</span>为不依赖于动作<span
-class="math inline">\(A\)</span>的任意函数，则有： <span
+class="math inline">\(A\)</span>的任意函数(否则<span
+class="math inline">\(b\)</span>提不出来，无法完成证明），则有： <span
 class="math display">\[
 \nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[(Q_{\pi}(S,A)-b)\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]
 \]</span> 其原因在于： <span class="math display">\[
-\nabla_{\theta}J(\theta)=E_S[E_{A\sim\pi(\cdot|S;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]=0
+E_S[E_{A\sim\pi(\cdot|S;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|S;\theta)]]=0
 \]</span> 本质上是：对于任意的<span
 class="math inline">\(s\)</span>,有<span
 class="math inline">\(E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]=0\)</span></p>
@@ -277,7 +278,7 @@ E_{A\sim\pi(\cdot|s;\theta)}[b\cdot\nabla_{\theta}ln\pi(A|s;\theta)]\\
 =b\cdot E_{A\sim\pi(\cdot|s;\theta)}[\frac{\partial\
 ln\pi(A|s;\theta)}{\partial\theta}]\\
 =b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{\partial\
-ln\pi(A|s;\theta)}{\partial\theta}\\
+ln\pi(a|s;\theta)}{\partial\theta}\\
 =b\cdot\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\cdot\frac{1}{\pi(a|s;\theta)}\cdot\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
 =b\cdot\sum\limits_{a\in\mathcal{A}}^{}\frac{\partial\pi(a|s;\theta)}{\partial\theta}\\
 =b\cdot\frac{\partial}{\partial\theta}\sum\limits_{a\in\mathcal{A}}^{}\pi(a|s;\theta)\\
@@ -298,7 +299,8 @@ class="math inline">\(v(s;w)\)</span>近似<span
 class="math inline">\(V_\pi(s)\)</span>,得到： <span
 class="math display">\[
 \widetilde{g}(s,a;\theta)=(u-v(s;w))\cdot\nabla_{\theta}ln\pi(a|s;\theta)
-\]</span> <strong>REINFORCE with baseline训练流程</strong>：</p>
+\]</span> <strong>REINFORCE with
+baseline训练流程</strong>：策略网络做梯度上升，状态价值网络做梯度下降（不是时序差分）。</p>
 <p>（1）REINFORCE属于同策略，用策略网络<span
 class="math inline">\(\pi(\cdot|S;\theta_{now})\)</span>控制智能体从头开始一个回合，收集得到训练数据：
 <span class="math display">\[
@@ -329,8 +331,8 @@ class="math display">\[
 \]</span></p>
 <p>减号是因为<span
 class="math inline">\(\delta_t=\hat{v}_t-u_t\)</span>的形式和原策略梯度定理中的形式<span
-class="math inline">\(u_t-\hat{v}_t\)</span>差个负号，其实上式依然是随机梯度上升。</p>
-<h4 id="advantage-actor-critica2c">4.advantage actor-critic(A2C)</h4>
+class="math inline">\(u_t-\hat{v}_t\)</span>差个负号，其实上式依然是梯度上升。</p>
+<h4 id="advantage-actor-critica2c">4.Advantage Actor-Critic(A2C)</h4>
 <p>(1)观测到当前状态<span
 class="math inline">\(s_t\)</span>,根据策略网络做决策：<span
 class="math inline">\(a_t\sim\pi(\cdot|s_t;\theta_{now})\)</span>,<strong>并让智能体执行动作<span
